@@ -1,0 +1,113 @@
+body {
+  background: linear-gradient(135deg, #ffe4cc, #fff3e6);
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 80px auto;
+  background: #fffaf0;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.login-container input {
+  width: 90%;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.login-container button {
+  background-color: #c94c4c;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background-color: #a83737;
+}
+
+.admin-content {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-add {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-add:hover {
+  background-color: #3e9141;
+}
+
+.btn-logout {
+  background-color: #c94c4c;
+  color: white;
+}
+
+.btn-logout:hover {
+  background-color: #a83737;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.admin-table th, .admin-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-table th {
+  background-color: #f3dfc1;
+  color: #4e382a;
+}
+
+.admin-table img.thumb {
+  height: 50px;
+  border-radius: 6px;
+}
+
+form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+form input, form select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-content">
+    <h1>Доступные туры</h1>
+
+    <div class="table-wrapper">
+        <table class="tours-table">
+            <thead>
+                <tr>
+                    <th>Город</th>
+                    <th>Страна</th>
+                    <th>Отель</th>
+                    <th>Ночей</th>
+                    <th>Питание</th>
+                    <th>Цена</th>
+                    <th>Места</th>
+                    <th>Фото</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tour in tours %}
+                <tr>
+                    <td>{{ tour.city }}</td>
+                    <td>{{ tour.country }}</td>
+                    <td>{{ tour.hotel }}</td>
+                    <td>{{ tour.nights }}</td>
+                    <td>{{ tour.food }}</td>
+                    <td>{{ tour.price }}</td>
+                    <td>{{ tour.seats }}</td>
+                    <td><img src="{{ url_for('static', filename='img/' + tour.image) }}" class="thumb"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
