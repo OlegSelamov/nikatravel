@@ -9,6 +9,9 @@
 <body>
     <div class="login-container">
         <h2>Добро пожаловать в админку Nika Travel</h2>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
         <form method="POST">
             <input type="password" name="password" placeholder="Введите пароль" required>
             <button type="submit">Войти</button>

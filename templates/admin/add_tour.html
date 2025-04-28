@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить тур</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Добавить новый тур</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="text" name="city" placeholder="Город отправления" required><br>
+            <input type="text" name="country" placeholder="Страна назначения" required><br>
+            <input type="text" name="hotel" placeholder="Название отеля" required><br>
+            <input type="number" name="nights" placeholder="Количество ночей" required><br>
+            <input type="text" name="meal" placeholder="Питание (AL, BB и т.д.)" required><br>
+            <input type="number" name="price" placeholder="Цена" required><br>
+            <input type="text" name="seats" placeholder="Наличие мест (Есть/Нет/Мало)" required><br>
+            <input type="file" name="image" required><br>
+            <button type="submit">Добавить тур</button>
+        </form>
+    </div>
+</body>
+</html>

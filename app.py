@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, session
 import os
 import json
 from werkzeug.utils import secure_filename
@@ -6,135 +6,138 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
-# Пути
-STATIC_FOLDER = os.path.join(os.path.dirname(__file__), 'static')
+UPLOAD_FOLDER = os.path.join('static', 'img')
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 DATA_FOLDER = os.path.join(os.path.dirname(__file__), 'data')
-IMAGE_FOLDER = os.path.join(STATIC_FOLDER, 'img')
 FILTER_FILE = os.path.join(DATA_FOLDER, 'filter.json')
 
-# Загрузка туров
 def load_tours():
     if os.path.exists(FILTER_FILE):
         with open(FILTER_FILE, 'r', encoding='utf-8') as f:
             return json.load(f)
-    else:
-        return []
+    return []
 
-# Сохранение туров
 def save_tours(tours):
     with open(FILTER_FILE, 'w', encoding='utf-8') as f:
         json.dump(tours, f, ensure_ascii=False, indent=2)
 
-# ===========================
-# МАРШРУТЫ ОСНОВНОГО САЙТА
-# ===========================
-
 @app.route('/')
 def index():
-    return render_template('frontend/index.html')
-
-@app.route('/about')
-def about():
-    return render_template('frontend/about.html')
-
-@app.route('/contacts')
-def contacts():
-    return render_template('frontend/contacts.html')
+    tours = load_tours()
+    return render_template('frontend/index.html', tours=tours)
 
 @app.route('/filter')
 def filter_page():
     tours = load_tours()
     return render_template('frontend/filter.html', tours=tours)
 
-# ===========================
-# МАРШРУТЫ АДМИНКИ
-# ===========================
+# ================== АДМИНКА ==================
 
 @app.route('/admin/login', methods=['GET', 'POST'])
 def admin_login():
     if request.method == 'POST':
-        if request.form.get('password') == '12345':
-            session['admin'] = True
-            return redirect(url_for('filter_admin'))
+        password = request.form.get('password')
+        if password == 'admin':
+            session['logged_in'] = True
+            return redirect(url_for('admin_filter'))
+        else:
+            return render_template('admin/admin_login.html', error='Неверный пароль')
     return render_template('admin/admin_login.html')
 
 @app.route('/admin/logout')
 def admin_logout():
-    session.pop('admin', None)
+    session.pop('logged_in', None)
     return redirect(url_for('admin_login'))
 
 @app.route('/admin/filter')
-def filter_admin():
-    if not session.get('admin'):
+def admin_filter():
+    if not session.get('logged_in'):
         return redirect(url_for('admin_login'))
     tours = load_tours()
     return render_template('admin/filter_admin.html', tours=tours)
 
-@app.route('/admin/filter/add', methods=['GET', 'POST'])
-def add_tour():
-    if not session.get('admin'):
+@app.route('/admin/add', methods=['GET', 'POST'])
+def admin_add_tour():
+    if not session.get('logged_in'):
         return redirect(url_for('admin_login'))
+
     if request.method == 'POST':
-        tours = load_tours()
-        image_file = request.files['image']
-        image_name = secure_filename(image_file.filename) if image_file.filename else ""
-        if image_name:
-            image_file.save(os.path.join(IMAGE_FOLDER, image_name))
-        tour = {
-            "city": request.form['city'],
-            "country": request.form['country'],
-            "hotel": request.form['hotel'],
-            "nights": int(request.form['nights']),
-            "food": request.form['food'],
-            "price": int(request.form['price']),
-            "seats": request.form['seats'],
-            "image": image_name
+        file = request.files.get('image')
+        filename = ''
+
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        new_tour = {
+            "city": request.form.get('city'),
+            "country": request.form.get('country'),
+            "hotel": request.form.get('hotel'),
+            "nights": request.form.get('nights'),
+            "meal": request.form.get('meal'),
+            "price": request.form.get('price'),
+            "seats": request.form.get('seats'),
+            "image": filename if filename else ""
         }
-        tours.append(tour)
+        tours = load_tours()
+        tours.append(new_tour)
         save_tours(tours)
-        return redirect(url_for('filter_admin'))
-    return render_template('admin/add_edit_filter.html', edit=False, tour={})
+        return redirect(url_for('admin_filter'))
 
-@app.route('/admin/filter/edit/<int:index>', methods=['GET', 'POST'])
-def edit_tour(index):
-    if not session.get('admin'):
+    return render_template('admin/add_tour.html')
+
+@app.route('/admin/edit/<int:id>', methods=['GET', 'POST'])
+def edit_tour(id):
+    if not session.get('logged_in'):
         return redirect(url_for('admin_login'))
+
     tours = load_tours()
-    tour = tours[index]
+
+    if id < 0 or id >= len(tours):
+        return "Тур не найден", 404
+
     if request.method == 'POST':
-        image_file = request.files['image']
-        image_name = tour['image']
-        if image_file.filename:
-            image_name = secure_filename(image_file.filename)
-            image_file.save(os.path.join(IMAGE_FOLDER, image_name))
-        tour.update({
-            "city": request.form['city'],
-            "country": request.form['country'],
-            "hotel": request.form['hotel'],
-            "nights": int(request.form['nights']),
-            "food": request.form['food'],
-            "price": int(request.form['price']),
-            "seats": request.form['seats'],
-            "image": image_name
-        })
-        save_tours(tours)
-        return redirect(url_for('filter_admin'))
-    return render_template('admin/add_edit_filter.html', edit=True, tour=tour)
+        file = request.files.get('image')
+        filename = tours[id]['image']  # старое фото, если новое не загружаем
 
-@app.route('/admin/filter/delete/<int:index>')
-def delete_tour(index):
-    if not session.get('admin'):
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        tours[id] = {
+            "city": request.form.get('city'),
+            "country": request.form.get('country'),
+            "hotel": request.form.get('hotel'),
+            "nights": request.form.get('nights'),
+            "meal": request.form.get('meal'),
+            "price": request.form.get('price'),
+            "seats": request.form.get('seats'),
+            "image": filename
+        }
+        save_tours(tours)
+        return redirect(url_for('admin_filter'))
+
+    tour = tours[id]
+    return render_template('admin/edit_tour.html', tour=tour, id=id)
+
+@app.route('/admin/delete/<int:id>')
+def delete_tour(id):
+    if not session.get('logged_in'):
         return redirect(url_for('admin_login'))
+
     tours = load_tours()
-    if 0 <= index < len(tours):
-        del tours[index]
+    if 0 <= id < len(tours):
+        deleted = tours.pop(id)
         save_tours(tours)
-    return redirect(url_for('filter_admin'))
+        print(f"Удалён тур: {deleted['hotel']}")
 
-# ===========================
-# Запуск
-# ===========================
+    return redirect(url_for('admin_filter'))
+
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
-
+    app.run(debug=True)

@@ -1,12 +1,22 @@
 [
   {
-    "city": "Алматы",
-    "country": "Мальдивы",
+    "city": "Алматы ",
+    "country": "ОАЭ ",
     "hotel": "Istanbul Grand",
     "nights": 5,
     "food": "Всё включено",
     "price": 1500000,
     "seats": "Есть",
-    "image": "01mbf1qoo6d2at5fob26eqvc6lt0xdnt.jpg"
+    "image": "ib6tbv2552a9voefz7sr3al8620pymxl.jpeg"
+  },
+  {
+    "city": "Караганда",
+    "country": "Мальдивы",
+    "hotel": "Istanbul Grand",
+    "nights": "5",
+    "meal": "AL",
+    "price": "1500000",
+    "seats": "Есть",
+    "image": "012_1.jpg"
   }
 ]

@@ -7,18 +7,22 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/frontend.css') }}">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}">Главная</a></li>
-                <li><a href="{{ url_for('about') }}">О нас</a></li>
-                <li><a href="{{ url_for('contacts') }}">Контакты</a></li>
-                <li><a href="{{ url_for('filter_page') }}">Поиск туров</a></li>
-            </ul>
-        </nav>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="/static/img/logo.png" alt="Nika Travel Logo">
+            </div>
+            <nav class="nav">
+                <a href="/" class="nav-link">Главная</a>
+                <a href="/about" class="nav-link">О нас</a>
+                <a href="/contacts" class="nav-link">Контакты</a>
+                <a href="/filter" class="nav-link">Поиск тура</a>
+            </nav>
+        </div>
     </header>
 
     {% block content %}
     {% endblock %}
 </body>
 </html>
+

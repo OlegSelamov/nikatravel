@@ -1,15 +1,27 @@
-{% extends 'base.html' %}
-{% block content %}
-<div class="admin-content">
-    <h1>Фильтр туров</h1>
-
-    <div class="button-wrapper">
-        <a href="{{ url_for('add_tour') }}" class="btn btn-add">Добавить тур</a>
-        <a href="{{ url_for('admin_logout') }}" class="btn btn-logout">Выйти</a>
-    </div>
-
-    <div class="table-wrapper">
-        <table class="admin-table">
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админка — Список туров</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <style>
+        .thumb-img {
+            width: 60px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h2>Список туров</h2>
+        <div class="top-actions">
+            <a href="{{ url_for('admin_add_tour') }}" class="btn-add">Добавить тур</a>
+            <a href="{{ url_for('admin_logout') }}" class="btn-logout">Выйти</a>
+        </div>
+        <table class="tours-table">
             <thead>
                 <tr>
                     <th>Город</th>
@@ -30,18 +42,24 @@
                     <td>{{ tour.country }}</td>
                     <td>{{ tour.hotel }}</td>
                     <td>{{ tour.nights }}</td>
-                    <td>{{ tour.food }}</td>
+                    <td>{{ tour.meal }}</td>
                     <td>{{ tour.price }}</td>
                     <td>{{ tour.seats }}</td>
-                    <td><img src="{{ url_for('static', filename='img/' + tour.image) }}" class="thumb"></td>
                     <td>
-                        <a href="{{ url_for('edit_tour', index=loop.index0) }}" class="btn btn-edit">Редактировать</a>
-                        <a href="{{ url_for('delete_tour', index=loop.index0) }}" class="btn btn-delete">Удалить</a>
+                        {% if tour.image %}
+                            <img src="{{ url_for('static', filename='img/' + tour.image) }}" class="thumb-img">
+                        {% else %}
+                            Нет фото
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('edit_tour', id=loop.index0) }}" class="btn-edit">Редактировать</a>
+                        <a href="{{ url_for('delete_tour', id=loop.index0) }}" class="btn-delete">Удалить</a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-</div>
-{% endblock %}
+</body>
+</html>

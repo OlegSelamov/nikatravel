@@ -1,71 +1,95 @@
 body {
-  background: linear-gradient(135deg, #ffe4cc, #fff3e6);
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
+    background: linear-gradient(135deg, #ffe4cc, #fff3e6);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-top: 100px; /* Учитываем фиксированный хедер */
 }
 
-header {
-  background-color: #d9b98d;
-  padding: 20px 0;
+/* Хедер */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #f5e6c5, #f2e2bf); /* Мягкий градиент сверху вниз */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Лёгкая тень */
+    border-radius: 0 0 12px 12px; /* Скруглённые нижние углы */
+    z-index: 1000;
+    height: 70px;
+    display: flex;
+    align-items: center;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  padding: 0;
-  margin: 0;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
-nav ul li {
-  display: inline;
+.logo img {
+    height: 150px;
+    max-height: 150px;
+    width: auto;
+    object-fit: contain;
 }
 
-nav ul li a {
-  text-decoration: none;
-  color: #4e382a;
-  font-weight: bold;
-  font-size: 18px;
+.nav {
+    display: flex;
+    gap: 25px;
 }
 
-nav ul li a:hover {
-  text-decoration: underline;
+.nav-link {
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    color: #5c4326;
+    font-weight: 600;
+    font-size: 19px;
+    transition: color 0.3s ease;
 }
 
+.nav-link:hover {
+    color: #a57236;
+}
+
+/* Контент страницы */
 .page-content {
-  padding: 40px;
-  text-align: center;
+    padding: 40px;
+    text-align: center;
 }
 
+/* Таблица туров */
 .table-wrapper {
-  margin-top: 30px;
-  overflow-x: auto;
+    margin-top: 30px;
+    overflow-x: auto;
 }
 
 .tours-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .tours-table th, .tours-table td {
-  padding: 12px;
-  text-align: center;
-  border-bottom: 1px solid #eee;
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
 }
 
 .tours-table th {
-  background-color: #f3dfc1;
-  color: #4e382a;
+    background-color: #f3dfc1;
+    color: #4e382a;
 }
 
+/* Картинки в таблице */
 .thumb {
-  height: 50px;
-  border-radius: 6px;
+    height: 50px;
+    border-radius: 6px;
 }

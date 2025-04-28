@@ -27,7 +27,13 @@
                     <td>{{ tour.food }}</td>
                     <td>{{ tour.price }}</td>
                     <td>{{ tour.seats }}</td>
-                    <td><img src="{{ url_for('static', filename='img/' + tour.image) }}" class="thumb"></td>
+                    <td>
+                        {% if tour.image %}
+                            <img src="{{ url_for('static', filename='img/' + tour.image) }}" class="thumb">
+                        {% else %}
+                            Нет фото
+                        {% endif %}
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -1,34 +1,34 @@
-{% extends 'base.html' %}
-{% block content %}
-<div class="admin-content">
-    <h1>{% if edit %}Редактировать{% else %}Добавить{% endif %} тур</h1>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать тур</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Редактировать тур</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="text" name="city" value="{{ tour.city }}" placeholder="Город отправления" required><br>
+            <input type="text" name="country" value="{{ tour.country }}" placeholder="Страна назначения" required><br>
+            <input type="text" name="hotel" value="{{ tour.hotel }}" placeholder="Название отеля" required><br>
+            <input type="number" name="nights" value="{{ tour.nights }}" placeholder="Количество ночей" required><br>
+            <input type="text" name="meal" value="{{ tour.meal }}" placeholder="Питание" required><br>
+            <input type="number" name="price" value="{{ tour.price }}" placeholder="Цена" required><br>
+            <input type="text" name="seats" value="{{ tour.seats }}" placeholder="Места" required><br>
 
-    <form method="POST" enctype="multipart/form-data">
-        <label for="city">Город</label>
-        <input type="text" id="city" name="city" value="{{ tour.city if edit else '' }}" required>
+            <p>Текущее фото:</p>
+            {% if tour.image %}
+                <img src="{{ url_for('static', filename='img/' + tour.image) }}" style="width:100px; height:auto; margin-bottom:10px;">
+            {% else %}
+                <p>Нет фото</p>
+            {% endif %}
 
-        <label for="country">Страна</label>
-        <input type="text" id="country" name="country" value="{{ tour.country if edit else '' }}" required>
+            <input type="file" name="image"><br>  <!-- Новое поле для выбора файла -->
 
-        <label for="hotel">Отель</label>
-        <input type="text" id="hotel" name="hotel" value="{{ tour.hotel if edit else '' }}" required>
-
-        <label for="nights">Ночей</label>
-        <input type="number" id="nights" name="nights" value="{{ tour.nights if edit else '' }}" required>
-
-        <label for="food">Питание</label>
-        <input type="text" id="food" name="food" value="{{ tour.food if edit else '' }}" required>
-
-        <label for="price">Цена</label>
-        <input type="number" id="price" name="price" value="{{ tour.price if edit else '' }}" required>
-
-        <label for="seats">Места</label>
-        <input type="text" id="seats" name="seats" value="{{ tour.seats if edit else '' }}" required>
-
-        <label for="image">Изображение</label>
-        <input type="file" id="image" name="image">
-
-        <button type="submit">{% if edit %}Обновить{% else %}Добавить{% endif %}</button>
-    </form>
-</div>
-{% endblock %}
+            <button type="submit">Сохранить изменения</button>
+        </form>
+    </div>
+</body>
+</html>
