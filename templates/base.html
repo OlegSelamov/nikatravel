@@ -10,7 +10,7 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <img src="/static/img/logo.png" alt="Nika Travel Logo">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Nika Travel Logo" class="logo-img">
             </div>
             <nav class="nav">
                 <a href="/" class="nav-link">Главная</a>
@@ -20,9 +20,11 @@
             </nav>
         </div>
     </header>
-
-    {% block content %}
-    {% endblock %}
+{% block content %}
+<footer class="footer">
+    Nika Travel © 2025
+</footer>
+{% endblock %}
 </body>
 </html>
 

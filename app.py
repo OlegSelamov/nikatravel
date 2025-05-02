@@ -32,6 +32,14 @@ def index():
     tours = load_tours()
     return render_template('frontend/index.html', tours=tours)
 
+@app.route('/about')
+def about():
+    return render_template('frontend/about.html')
+
+@app.route('/contacts')
+def contacts():
+    return render_template('frontend/contacts.html')
+
 @app.route('/filter')
 def filter_page():
     tours = load_tours()
