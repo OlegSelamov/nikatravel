@@ -225,12 +225,14 @@ body {
     width: 100%;
     height: 400px;
     margin-bottom: 40px;
+    display: flex; /* Добавляем это свойство для расположения слайдов в ряд */
 }
 
 .banner-slide {
     min-width: 100%;
     height: 100%;
     transition: transform 0.5s ease;
+    flex-shrink: 0; /* Запрещаем сжать слайды */
 }
 
 .banner-slide img {
@@ -268,4 +270,15 @@ body {
     height: auto;
     border-radius: 10px;
     margin-bottom: 20px;
+}
+
+.tours-table tr {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.tours-table tr:hover {
+    background-color: #f9e8d2; /* светлый песочный */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
 }

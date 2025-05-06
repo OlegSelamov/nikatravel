@@ -44,13 +44,35 @@ button:hover {
 .tours-table {
     width: 105%;
     border-collapse: collapse;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
-.tours-table th, .tours-table td {
-    padding: 1px;
-    text-align:center ;
-    border-bottom: 1px solid #ddd;
+.banners-table td, .banners-table th,
+.places-table td, .places-table th,
+.news-table td, .news-table th,
+.hotels-table td, .hotels-table th {
+    padding: 8px 10px;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Миниатюры картинок только для этих разделов */
+.banners-table .table-thumb,
+.places-table .table-thumb,
+.news-table .table-thumb,
+.hotels-table .table-thumb {
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 }
 
 .tours-table th {
@@ -92,3 +114,37 @@ button:hover {
     justify-content: flex-end;
     margin-bottom: 5px;
 }
+
+.btn-banner {
+    display: inline-block;
+    padding: 12px 20px;
+    margin: 10px 0;
+    background-color: #28a745; /* зелёный */
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-banner:hover {
+    background-color: #218838; /* тёмно-зелёный при наведении */
+}
+
+.thumb-img {
+    width: 100px !important;
+    height: 40px !important;
+    max-width: 100px !important;
+    max-height: 70px !important;
+    object-fit: cover !important;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 0 auto;
+}
+
+
+
+
