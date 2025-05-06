@@ -19,21 +19,21 @@
             </thead>
             <tbody>
                 {% for tour in tours %}
-                <tr>
-                    <td>{{ tour.city }}</td>
-                    <td>{{ tour.country }}</td>
-                    <td>{{ tour.hotel }}</td>
-                    <td>{{ tour.nights }}</td>
-                    <td>{{ tour.food }}</td>
-                    <td>{{ tour.price }}</td>
-                    <td>{{ tour.seats }}</td>
-                    <td>
-                        {% if tour.image %}
-                            <img src="{{ url_for('static', filename='img/' + tour.image) }}" class="thumb">
-                        {% else %}
-                            Нет фото
-                        {% endif %}
-                    </td>
+                <tr onclick="window.location.href='/tour/{{ loop.index0 }}'">
+    <td>{{ tour.city }}</td>
+    <td>{{ tour.country }}</td>
+    <td>{{ tour.hotel }}</td>
+    <td>{{ tour.nights }}</td>
+    <td>{{ tour.meal }}</td>
+    <td>{{ tour.price }}</td>
+    <td>{{ tour.seats }}</td>
+    <td>
+        {% if tour.image %}
+            <img src="{{ url_for('static', filename='img/' + tour.image) }}" class="thumb">
+        {% else %}
+            Нет фото
+        {% endif %}
+    </td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -20,11 +20,78 @@
             </nav>
         </div>
     </header>
-{% block content %}
-<footer class="footer">
-    Nika Travel © 2025
-</footer>
-{% endblock %}
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer">
+        Nika Travel © 2025
+    </footer>
+
+    <!-- JS для слайдера -->
+    <script>
+        const sliderContainer = document.querySelector('.slider-container');
+        const slides = document.querySelectorAll('.gallery-image');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+
+        let currentIndex = 0;
+
+        function updateSlider() {
+            if (sliderContainer) {
+                sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+        }
+
+        if (sliderContainer) {
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateSlider();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateSlider();
+            });
+        }
+    </script>
+	
+	<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const sliders = document.querySelectorAll('.news-slider, .hotels-slider');
+
+    sliders.forEach(slider => {
+        let scrollAmount = 0;
+        const slideTimer = setInterval(() => {
+            slider.scrollBy({
+                left: 260, // ширина карточки + gap
+                behavior: 'smooth'
+            });
+            scrollAmount += 260;
+            if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
+                slider.scrollTo({ left: 0, behavior: 'smooth' });
+                scrollAmount = 0;
+            }
+        }, 3000); // каждые 3 секунды
+    });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const bannerSlider = document.querySelector('.banner-slider');
+    const banners = document.querySelectorAll('.banner-slide');
+    let currentIndex = 0;
+
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % banners.length;
+        banners.forEach((slide, index) => {
+            slide.style.transform = `translateX(-${currentIndex * 100}%)`;
+        });
+    }, 4000); // каждые 4 секунды
+});
+</script>
+
 </body>
 </html>
+
 

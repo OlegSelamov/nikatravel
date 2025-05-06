@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
 </head>
 <body>
-    <div class="form-container">
         <h2>Редактировать тур</h2>
         <form method="POST" enctype="multipart/form-data">
             <input type="text" name="city" value="{{ tour.city }}" placeholder="Город отправления" required><br>
@@ -17,6 +16,8 @@
             <input type="text" name="meal" value="{{ tour.meal }}" placeholder="Питание" required><br>
             <input type="number" name="price" value="{{ tour.price }}" placeholder="Цена" required><br>
             <input type="text" name="seats" value="{{ tour.seats }}" placeholder="Места" required><br>
+			<textarea name="description" placeholder="Описание тура">{{ tour.description if tour else '' }}</textarea><br>
+            <input type="file" name="gallery_images" multiple><br>
 
             <p>Текущее фото:</p>
             {% if tour.image %}
@@ -29,6 +30,5 @@
 
             <button type="submit">Сохранить изменения</button>
         </form>
-    </div>
 </body>
 </html>

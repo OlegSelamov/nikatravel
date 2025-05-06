@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать новость</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <h2>Редактировать новость</h2>
+    <form method="POST" enctype="multipart/form-data" class="form-wrapper">
+        <input type="text" name="title" value="{{ news.title }}" required>
+        {% if news.image %}
+            <p>Текущее фото:</p>
+            <img src="{{ url_for('static', filename='img/' + news.image) }}" class="thumb-img">
+        {% endif %}
+        <input type="file" name="image">
+        <button type="submit" class="btn-submit">Сохранить изменения</button>
+    </form>
+</body>
+</html>

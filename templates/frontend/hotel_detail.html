@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="detail-container">
+    <h1>{{ hotel.name }}</h1>
+    {% if hotel.image %}
+        <img src="{{ url_for('static', filename='img/' + hotel.image) }}" alt="{{ hotel.name }}" class="detail-image">
+    {% endif %}
+    <p>{{ hotel.description }}</p>
+    <p><strong>Цена:</strong> {{ hotel.price }}</p>
+</div>
+
+{% endblock %}

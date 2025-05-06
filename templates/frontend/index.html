@@ -1,27 +1,61 @@
 {% extends 'base.html' %}
 {% block content %}
+
+<div class="banner-slider">
+    {% for banner in banners %}
+    <div class="banner-slide">
+        <img src="{{ url_for('static', filename='img/' + banner.image) }}" alt="{{ banner.title }}">
+    </div>
+    {% endfor %}
+</div>
 <div class="page-content">
     <h1>Добро пожаловать в Nika Travel</h1>
-    <p>Добро пожаловать в Nika Travel – ваш проводник по лучшим уголкам планеты! 🌎
+	<section class="places-section">
+	
+    <h2>Места, которые стоит посетить</h2>
+    <div class="places-grid">
+    {% for place in places %}
+    <a href="{{ url_for('place_detail', id=loop.index0) }}" class="place-card">
+        {% if place.image %}
+            <img src="{{ url_for('static', filename='img/' + place.image) }}" alt="{{ place.title }}">
+        {% endif %}
+        <h3>{{ place.title }}</h3>
+    </a>
+    {% endfor %}
+    </div>
+</section>
 
-Хотите отдыхать без забот? Мы поможем вам выбрать идеальный тур, чтобы каждая поездка стала незабываемой! Мальдивы, Турция, ОАЭ, Вьетнам, Таиланд, Шри-Ланка и другие направления ждут вас.
+<section class="news-section">
+    <h2>Главные Новости</h2>
+    <div class="news-slider">
+    {% for n in news %}
+    <a href="{{ url_for('news_detail', id=loop.index0) }}" class="news-slide">
+        {% if n.image %}
+            <img src="{{ url_for('static', filename='img/' + n.image) }}" alt="{{ n.title }}">
+        {% endif %}
+        <h3>{{ n.title }}</h3>
+    </a>
+    {% endfor %}
+    </div>
 
-✅ Готовые туры по выгодным ценам
-✅ Полное сопровождение от начала до конца
-✅ Оформление виз, страховок и всех необходимых документов
-✅ Индивидуальный подход к каждому клиенту
+</section>
 
-Почему выбирают нас?
+<section class="hotels-section">
+    <h2>Рекомендуемые Отели</h2>
+    <div class="hotels-slider">
+    {% for hotel in hotels %}
+    <a href="{{ url_for('hotel_detail', id=loop.index0) }}" class="hotel-card">
+        {% if hotel.image %}
+            <img src="{{ url_for('static', filename='img/' + hotel.image) }}" alt="{{ hotel.name }}">
+        {% endif %}
+        <h3>{{ hotel.name }}</h3>
+        <p>Цена: {{ hotel.price }}</p>
+    </a>
+    {% endfor %}
+    </div>
 
-Только проверенные партнёры и надёжные перелёты
-
-Рассрочка без переплат
-
-Оперативная поддержка 24/7
-
-Подарки и бонусы для постоянных клиентов
-
-🌴 Nika Travel – с нами отдыхать легко и приятно!
-Не знаете, с чего начать? Просто оставьте заявку, и мы подберём тур вашей мечты.</p>
+</section>
 </div>
 {% endblock %}
+
+

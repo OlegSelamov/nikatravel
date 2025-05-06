@@ -7,7 +7,7 @@ body {
 
 h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
 .login-container, .form-container, .admin-container {
@@ -16,11 +16,11 @@ h2 {
     background: #fff;
     padding: 50px;
     border-radius: 70px;
-    box-shadow: 0 4px 150px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 input, button {
-    display: block;
+    display: black;
     width: 100%;
     margin-bottom: 15px;
     padding: 5px;
@@ -33,7 +33,7 @@ button {
     color: #4e382a;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 50px;
     transition: background 0.3s ease;
 }
 
@@ -42,13 +42,13 @@ button:hover {
 }
 
 .tours-table {
-    width: 100%;
+    width: 105%;
     border-collapse: collapse;
     margin-top: 30px;
 }
 
 .tours-table th, .tours-table td {
-    padding: 5px;
+    padding: 1px;
     text-align:center ;
     border-bottom: 1px solid #ddd;
 }
@@ -90,5 +90,5 @@ button:hover {
 .top-actions {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
