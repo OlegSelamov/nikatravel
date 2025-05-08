@@ -164,6 +164,7 @@ def add_tour():
         return redirect(url_for('admin_login'))
 
     if request.method == 'POST':
+        departure_date = request.form['departure_date']
         city = request.form.get('city')
         country = request.form.get('country')
         hotel = request.form.get('hotel')
@@ -191,6 +192,7 @@ def add_tour():
 
         tours = load_tours()
         new_tour = {
+            "departure_date": departure_date,
             "city": city,
             "country": country,
             "hotel": hotel,

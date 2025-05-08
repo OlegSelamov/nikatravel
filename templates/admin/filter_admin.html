@@ -28,6 +28,7 @@
         <table class="tours-table">
             <thead>
                 <tr>
+				    <th>Дата вылета</th>
                     <th>Город</th>
                     <th>Страна</th>
                     <th>Отель</th>
@@ -42,6 +43,7 @@
             <tbody>
                 {% for tour in tours %}
                 <tr>
+				    <td>{{ tour.departure_date or '—' }}</td>
                     <td>{{ tour.city }}</td>
                     <td>{{ tour.country }}</td>
                     <td>{{ tour.hotel }}</td>

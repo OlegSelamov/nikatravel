@@ -5,38 +5,40 @@
 
     <div class="table-wrapper">
         <table class="tours-table">
-            <thead>
-                <tr>
-                    <th>Город</th>
-                    <th>Страна</th>
-                    <th>Отель</th>
-                    <th>Ночей</th>
-                    <th>Питание</th>
-                    <th>Цена</th>
-                    <th>Места</th>
-                    <th>Фото</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for tour in tours %}
-                <tr onclick="window.location.href='/tour/{{ loop.index0 }}'">
-    <td>{{ tour.city }}</td>
-    <td>{{ tour.country }}</td>
-    <td>{{ tour.hotel }}</td>
-    <td>{{ tour.nights }}</td>
-    <td>{{ tour.meal }}</td>
-    <td>{{ tour.price }}</td>
-    <td>{{ tour.seats }}</td>
-    <td>
-        {% if tour.image %}
-            <img src="{{ url_for('static', filename='img/' + tour.image) }}" class="thumb">
-        {% else %}
+<thead>
+    <tr>
+	    <th>Дата вылета</th>
+        <th>Город отправления</th>
+        <th>Страна</th>
+        <th>Отель</th>
+        <th>Ночей</th>
+        <th>Питание</th>
+        <th>Цена</th>
+        <th>Места</th>
+        <th>Фото</th>
+    </tr>
+</thead>
+<tbody>
+    {% for tour in tours %}
+    <tr onclick="window.location.href='/tour/{{ loop.index0 }}'">
+	    <td>{{ tour.departure_date }}</td>
+        <td>{{ tour.city }}</td>
+        <td>{{ tour.country }}</td>
+        <td>{{ tour.hotel }}</td>
+        <td>{{ tour.nights }}</td>
+        <td>{{ tour.meal }}</td>
+        <td>{{ tour.price }}</td>
+        <td>{{ tour.seats }}</td>
+        <td>
+            {% if tour.image %}
+            <img src="{{ url_for('static', filename='img/' + tour.image) }}" class="thumb-img">
+            {% else %}
             Нет фото
-        {% endif %}
-    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
         </table>
     </div>
 </div>

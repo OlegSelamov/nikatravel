@@ -145,6 +145,57 @@ button:hover {
     margin: 0 auto;
 }
 
+.form-wrapper {
+    max-width: 600px;
+    margin: 30px auto;
+    background: #fff8ed;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.form-wrapper h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #5c4326;
+}
+
+.form-wrapper label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #5c4326;
+}
+
+.form-wrapper input,
+.form-wrapper select,
+.form-wrapper textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #d1b58f;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.form-wrapper button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 14px;
+    background: #5c4326;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.form-wrapper button:hover {
+    background: #a57236;
+}
+
 
 
 
