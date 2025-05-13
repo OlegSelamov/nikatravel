@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
+<head
     <meta charset="UTF-8">
     <title>Управление отелями</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
@@ -8,6 +8,7 @@
 <body>
     <h2>Рекомендуемые отели</h2>
     <div class="top-actions">
+	    <a href="{{ url_for('admin_filter') }}" class="admin-back-link">Назад в управление сайтом</a>
         <a href="{{ url_for('add_hotel') }}" class="btn-add">Добавить отель</a>
         <a href="{{ url_for('admin_logout') }}" class="btn-logout">Выйти</a>
     </div>
@@ -23,14 +24,13 @@
         <tbody>
             {% for hotel in hotels %}
             <tr>
-                <td>{{ hotel.name }}</td>
+                <td>{{ hotel.title }}</td>
                 <td>{{ hotel.price }}</td>
                 <td>
-                    {% if hotel.image %}
-                        <img src="{{ url_for('static', filename='img/' + hotel.image) }}" class="thumb-img">
-                    {% else %}
-                        Нет фото
-                    {% endif %}
+            {% if hotel.images %}
+                <img src="{{ url_for('static', filename='img/' + hotel.images[0]) }}" style="width:80px; height:80px; object-fit:cover;">
+            {% endif %}
+
                 </td>
                 <td>
                     <a href="{{ url_for('edit_hotel', id=loop.index0) }}" class="btn-edit">Редактировать</a>
@@ -41,4 +41,4 @@
         </tbody>
     </table>
 </body>
-</html>
+</html> 

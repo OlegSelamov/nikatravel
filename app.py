@@ -7,6 +7,9 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
+app.config['UPLOAD_FOLDER'] = os.path.join('static', 'img')
+
+
 # Пути
 STATIC_FOLDER = os.path.join(os.path.dirname(__file__), 'static')
 DATA_FOLDER = os.path.join(os.path.dirname(__file__), 'data')
@@ -384,18 +387,44 @@ def admin_hotels():
 def add_hotel():
     if not session.get('admin_logged_in'):
         return redirect(url_for('admin_login'))
+
     if request.method == 'POST':
-        name = request.form.get('name')
+        title = request.form.get('title')
+        description = request.form.get('description')
         price = request.form.get('price')
-        image_file = request.files.get('image')
-        filename = ''
-        if image_file and image_file.filename:
-            filename = secure_filename(image_file.filename)
-            image_file.save(os.path.join(IMAGE_FOLDER, filename))
-        hotels = load_json(HOTELS_FILE)
-        hotels.append({'name': name, 'price': price, 'image': filename})
-        save_json(HOTELS_FILE, hotels)
+        images = request.files.getlist('images')
+
+        saved_imgs = []
+        for img in images:
+            if img and img.filename:
+                filename = secure_filename(img.filename)
+                img.save(os.path.join('static/img', filename))  # сохраняем в static/img
+                saved_imgs.append(filename)
+
+        # Загружаем существующие отели
+        if not os.path.exists(HOTELS_FILE):
+            hotels = []
+        else:
+            with open(HOTELS_FILE, 'r', encoding='utf-8') as f:
+                try:
+                    hotels = json.load(f)
+                except json.JSONDecodeError:
+                    hotels = []
+
+        new_hotel = {
+            "title": title,
+            "description": description,
+            "price": price,
+            "images": saved_imgs
+        }
+
+        hotels.append(new_hotel)
+
+        with open(HOTELS_FILE, 'w', encoding='utf-8') as f:
+            json.dump(hotels, f, ensure_ascii=False, indent=2)
+
         return redirect(url_for('admin_hotels'))
+
     return render_template('admin/add_hotel.html')
 
 @app.route('/admin/edit_hotel/<int:id>', methods=['GET', 'POST'])
@@ -467,6 +496,15 @@ def delete_banner(id):
         banners.pop(id)
         save_json(BANNERS_FILE, banners)
     return redirect(url_for('admin_banners'))
+    
+@app.route('/hotel/<int:index>')
+def hotel_detail_page(index):
+    with open('data/hotels.json', 'r', encoding='utf-8') as f:
+        hotels = json.load(f)
+    return render_template('hotel_details.html', hotel=hotels[index])
+    
+    if __name__ == '__main__':
+        app.run(debug=True)
 
 # ===========================
 # Запуск

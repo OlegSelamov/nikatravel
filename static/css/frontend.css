@@ -20,7 +20,7 @@ body {
 }
 
 body {
-    padding-top: 100px; /* чтобы контент не прилипал к хедеру */
+    padding-top: 50px; /* чтобы контент не прилипал к хедеру */
 }
 
 .container {
@@ -121,21 +121,25 @@ body {
 
 .slider-container {
     display: flex;
-    transition: transform 0.4s ease;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    height: 220px; /* высота фиксирована */
+    border-radius: 12px;
 }
-
 .gallery-image {
-    min-width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 10px;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    object-fit: cover; /* ВАЖНО: обрезает, но не тянет */
+    border-radius: 12px;
 }
 
 .prev-btn, .next-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
     border: none;
     color: white;
     font-size: 30px;
@@ -172,9 +176,9 @@ body {
 
 .place-card img, .news-slide img, .hotel-card img {
     width: 100%;
-    height: 150px;
+    height: 200px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 10px;
     margin-bottom: 10px;
 }
 
@@ -230,7 +234,7 @@ body {
 
 .banner-slide {
     min-width: 100%;
-    height: 100%;
+    height: 70%;
     transition: transform 0.5s ease;
     flex-shrink: 0; /* Запрещаем сжать слайды */
 }
@@ -291,3 +295,89 @@ body {
     display: block;
     margin: 0 auto;
 }
+
+.welcome-section {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.welcome-section h1 {
+	margin-top: 0;
+	font-size: 32px;
+	color: #3d2c1c;
+}
+
+.welcome-section h2 {
+	margin-top: 10px;
+	font-size: 20px;
+	color: #6a5037;
+}
+
+.cards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.card {
+  width: 280px;
+  background: #fffefc;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+  overflow: hidden;
+  text-align: center;
+  padding: 10px;
+  transition: transform 0.2s ease;
+  margin: 0;        /* ← обязательно убрать */
+  padding: 10px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    background: #f8f8f8;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.card-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 12px;
+  background: #f0a500;
+  color: white;
+  font-size: 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.card-button:hover {
+  background: #d98e00;
+}
+
+.swiper {
+  padding: 20px 0;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .gallery-image {
+    height: 160px;
+  }
+}
+

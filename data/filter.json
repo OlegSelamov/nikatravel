@@ -1,1 +1,28 @@
-[]
+[
+  {
+    "departure_date": "2025-06-15",
+    "city": "Москва",
+    "country": "Таиланд",
+    "hotel": "Sunshine Resort",
+    "nights": "5",
+    "meal": "BB",
+    "price": "500000",
+    "seats": "Есть",
+    "image": "JPG",
+    "description": "амвамав авмуамау аумавма мвыамыва мвыамывам фымвыамы ывмывамыау ывмвыам ывмвыа ывмывам ымывам ывмвыамук",
+    "gallery": [
+      "Aleenta_Phuket-Phang_Nga_Resort__Spa_5.JPG",
+      "Anantara_Bangkok_Riverside_5.JPG",
+      "Anantara_Desaru_Coast_Resort__Villas_5.JPG",
+      "Andaz_Pattaya_Jomtien_Beach_5.JPG",
+      "Baglioni_Resort_Maldives_5.JPG",
+      "Buahan_a_Banyan_Tree_Escape_5.JPG",
+      "Constace_Lemuria_Resort_Praslin_Seychelles_5.JPG",
+      "Baglioni_Resort_Maldives_5.JPG",
+      "Buahan_a_Banyan_Tree_Escape_5_.JPG",
+      "Buahan_a_Banyan_Tree_Escape_5.JPG",
+      "Constace_Lemuria_Resort_Praslin_Seychelles_5.JPG",
+      "Constance_Ephelia_5.JPG"
+    ]
+  }
+]

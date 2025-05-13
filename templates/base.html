@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nika Travel</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/frontend.css') }}">
+	{% if request.path.startswith('/admin') %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endif %}
 </head>
 <body>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+{% if not request.path.startswith('/admin') %}
     <header class="header">
         <div class="container">
             <div class="logo">
@@ -20,6 +25,7 @@
             </nav>
         </div>
     </header>
+{% endif %}
 
     {% block content %}{% endblock %}
 
@@ -63,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let scrollAmount = 0;
         const slideTimer = setInterval(() => {
             slider.scrollBy({
-                left: 260, // ширина карточки + gap
+                left: 250, // ширина карточки + gap
                 behavior: 'smooth'
             });
             scrollAmount += 260;
@@ -90,8 +96,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 4000); // каждые 4 секунды
 });
 </script>
-
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+  new Swiper('.places-swiper', {
+    slidesPerView: 3,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 }
+    }
+  });
+</script>
 </body>
 </html>
+
 
 

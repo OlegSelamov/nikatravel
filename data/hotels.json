@@ -1,22 +1,61 @@
 [
   {
-    "name": "ИП КЛИМОВ",
+    "title": "Rihos",
+    "description": "fdbgfgnhnhmhjmjhmjhmjmjhmhjmhjmjmhjmhjmhgmjghmjghmjhgmjgmjgmjgmgmgmjghmjmgjmgjmgmjgmjgmjghmjghmghmghmgmjghmjghmjgmghmgmghmghmgh",
     "price": "200000",
-    "image": "kPDMmt9808s.jpg"
+    "images": [
+      "Aleenta_Phuket-Phang_Nga_Resort__Spa_5_.JPG",
+      "Anantara_Bangkok_Riverside_5_.JPG",
+      "Anantara_Desaru_Coast_Resort__Villas_5_.JPG",
+      "Baglioni_Resort_Maldives_5_.JPG",
+      "Buahan_a_Banyan_Tree_Escape_5_.JPG",
+      "Constace_Lemuria_Resort_Praslin_Seychelles_5_.JPG"
+    ],
+    "name": "Rihos"
   },
   {
-    "name": "уауау",
-    "price": "1500000",
-    "image": "01mbf1qoo6d2at5fob26eqvc6lt0xdnt.jpg"
+    "title": "kjneurghyr",
+    "description": "ijnvehivnehvneh",
+    "price": "8445448",
+    "images": [
+      "Begonya_Hotel_2.JPG",
+      "Begonya_Hotel_3.JPG",
+      "Begonya_Hotel_4.JPG",
+      "Begonya_Hotel_8.JPG"
+    ]
   },
   {
-    "name": "уауау",
-    "price": "250000",
-    "image": "pyramidy-egipta.jpg"
+    "title": "апререноено",
+    "description": "апреренонеононгогнлонг",
+    "price": "67567567",
+    "images": [
+      "Begonya_Hotel_5.JPG",
+      "Begonya_Hotel_6.JPG",
+      "Begonya_Hotel_7.JPG",
+      "Begonya_Hotel_9.JPG"
+    ]
   },
   {
-    "name": "Точка",
-    "price": "500000",
-    "image": "kPDMmt9808s.jpg"
+    "title": "тпрроблбюшщюшщ",
+    "description": "кенеекрен",
+    "price": "5646654654KZT",
+    "images": [
+      "Begonya_Hotel_1._.JPG",
+      "Begonya_Hotel_6_.JPG",
+      "Begonya_Hotel_7_.JPG"
+    ]
+  },
+  {
+    "title": "hgjnhnghn",
+    "description": "hnfhnhfnhfnf",
+    "price": "563563634",
+    "images": [
+      "Begonya_Hotel_1._.JPG",
+      "Begonya_Hotel_1..JPG",
+      "Begonya_Hotel_2.JPG",
+      "Begonya_Hotel_3.JPG",
+      "Begonya_Hotel_5.JPG",
+      "Begonya_Hotel_6_.JPG"
+    ]
   }
 ]

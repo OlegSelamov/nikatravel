@@ -196,6 +196,110 @@ button:hover {
     background: #a57236;
 }
 
+.admin-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fffefc;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  font-family: Arial, sans-serif;
+}
+
+.admin-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.admin-form input,
+.admin-form textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.admin-button {
+  padding: 12px;
+  background: #f0a500;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.admin-button:hover {
+  background: #d98e00;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+  margin: auto;
+  background: #fffefc;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.admin-form label {
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.admin-form input,
+.admin-form textarea {
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.admin-button {
+  padding: 12px;
+  background: #f0a500;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.admin-button:hover {
+  background: #d98e00;
+}
+
+.admin-back-link {
+  display: inline-block;
+  padding: 8px 14px;
+  background: #3498db;
+  color: white;
+  font-size: 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-bottom: 15px;
+  transition: background 0.2s ease;
+}
+
+.admin-back-link:hover {
+  background: #2c80c8;
+}
+
+
+
 
 
 

@@ -8,8 +8,8 @@
 <body>
     <h2>Список баннеров</h2>
     <div class="top-actions">
+	    <a href="{{ url_for('admin_filter') }}" class="admin-back-link">Назад в управление сайтом</a>
         <a href="{{ url_for('add_banner') }}" class="btn-add">Добавить баннер</a>
-        <a href="{{ url_for('admin_filter') }}" class="btn-back">Назад</a>
     </div>
     <table class="banners-table">
         <thead>

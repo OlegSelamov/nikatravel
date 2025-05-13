@@ -8,7 +8,9 @@
     <div class="button-row">
         <a href="{{ url_for('filter_page') }}" class="btn-back">← Назад к поиску тура</a>
     </div>
-
+       <div class="info-item">
+            <strong>Дата вылета:</strong> {{ tour.departure_date }}
+        </div>
     <div class="tour-info">
         <div class="info-item">
             <strong>Ночей:</strong> {{ tour.nights }}
@@ -63,41 +65,53 @@
     </div>
 </div>
 
+
 <!-- Скрипты -->
 <script>
-document.getElementById('showBookingBtn').addEventListener('click', function() {
+document.getElementById('showBookingBtn').addEventListener('click', function () {
     const form = document.getElementById('bookingForm');
     form.classList.toggle('hidden');
     this.style.display = 'none';
 });
 
-// Автопрокрутка галереи
+// Слайдер логика
 const slider = document.getElementById('slider');
-let scrollAmount = 0;
-const slideTimer = setInterval(() => {
-    if (slider.scrollWidth - slider.clientWidth === scrollAmount) {
-        scrollAmount = 0;
-    } else {
-        scrollAmount += 800;
+const slides = slider.querySelectorAll('.gallery-image');
+const slideWidth = slides[0].clientWidth;
+let currentIndex = 0;
+
+document.querySelector('.next-btn').addEventListener('click', () => {
+    if (currentIndex < slides.length - 1) {
+        currentIndex++;
+        slider.scrollTo({
+            left: slideWidth * currentIndex,
+            behavior: 'smooth'
+        });
     }
-    slider.scrollTo({
-        left: scrollAmount,
-        behavior: 'smooth'
-    });
-}, 3000);
+});
 
 document.querySelector('.prev-btn').addEventListener('click', () => {
-    slider.scrollBy({
-        left: -300,
+    if (currentIndex > 0) {
+        currentIndex--;
+        slider.scrollTo({
+            left: slideWidth * currentIndex,
+            behavior: 'smooth'
+        });
+    }
+});
+
+// Автопрокрутка (оставляем если нужно)
+setInterval(() => {
+    if (currentIndex < slides.length - 1) {
+        currentIndex++;
+    } else {
+        currentIndex = 0;
+    }
+    slider.scrollTo({
+        left: slideWidth * currentIndex,
         behavior: 'smooth'
     });
-});
-document.querySelector('.next-btn').addEventListener('click', () => {
-    slider.scrollBy({
-        left: 300,
-        behavior: 'smooth'
-    });
-});
+}, 4000);
 </script>
 
 <style>
@@ -154,10 +168,12 @@ document.querySelector('.next-btn').addEventListener('click', () => {
 
 .info-item {
     flex: 1 1 45%;
-    background: #f9e8d2;
+    background: #fdf3e6;
     padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    font-size: 15px;
+    color: #4a3b28;
 }
 
 .tour-description {
@@ -176,31 +192,33 @@ document.querySelector('.next-btn').addEventListener('click', () => {
 
 .slider-container {
     display: flex;
+    overflow-x: hidden;
     scroll-behavior: smooth;
-    overflow-x: auto;
-    scrollbar-width: none;
+    height: 300px; /* высота фиксирована */
+    border-radius: 12px;
 }
 
 .gallery-image {
     flex: 0 0 auto;
-    width: 100%;
+    width: 50%;
     max-width: 800px;
-    height: auto;
-    object-fit: cover;
-    border-radius: 10px;
+    height: 100%;
+    object-fit: cover; /* ВАЖНО: обрезает, но не тянет */
+    border-radius: 12px;
 }
 
 .prev-btn, .next-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.4);
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
     font-size: 24px;
     border-radius: 50%;
+	z-index: 10;
 }
 
 .prev-btn { left: 10px; }

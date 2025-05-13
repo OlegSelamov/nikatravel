@@ -8,6 +8,7 @@
 <body>
     <h2>Места, которые стоит посетить</h2>
     <div class="top-actions">
+	    <a href="{{ url_for('admin_filter') }}" class="admin-back-link">← Назад в управление сайтом</a>
         <a href="{{ url_for('add_place') }}" class="btn-add">Добавить место</a>
         <a href="{{ url_for('admin_logout') }}" class="btn-logout">Выйти</a>
     </div>

@@ -8,21 +8,26 @@
     </div>
     {% endfor %}
 </div>
-<div class="page-content">
+<div class="welcome-section">
     <h1>Добро пожаловать в Nika Travel</h1>
-	<section class="places-section">
-	
-    <h2>Места, которые стоит посетить</h2>
-    <div class="places-grid">
-    {% for place in places %}
-    <a href="{{ url_for('place_detail', id=loop.index0) }}" class="place-card">
-        {% if place.image %}
-            <img src="{{ url_for('static', filename='img/' + place.image) }}" alt="{{ place.title }}">
-        {% endif %}
-        <h3>{{ place.title }}</h3>
-    </a>
-    {% endfor %}
+<section class="places-section">
+  <h2>Места, которые стоит посетить</h2>
+
+  <div class="swiper places-swiper">
+    <div class="swiper-wrapper">
+      {% for place in places %}
+      <div class="swiper-slide">
+        <div class="card">
+          <img src="{{ url_for('static', filename='img/' + place.image) }}" alt="{{ place.title }}">
+          <h3>{{ place.title }}</h3>
+          <a href="{{ url_for('place_detail', id=loop.index0) }}" class="card-button">Подробнее</a>
+        </div>
+      </div>
+      {% endfor %}
     </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
 </section>
 
 <section class="news-section">
@@ -45,17 +50,16 @@
     <div class="hotels-slider">
     {% for hotel in hotels %}
     <a href="{{ url_for('hotel_detail', id=loop.index0) }}" class="hotel-card">
-        {% if hotel.image %}
-            <img src="{{ url_for('static', filename='img/' + hotel.image) }}" alt="{{ hotel.name }}">
+        {% if hotel.images %}
+            <img src="{{ url_for('static', filename='img/' + hotel.images[0]) }}" alt="{{ hotel.title }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
         {% endif %}
-        <h3>{{ hotel.name }}</h3>
-        <p>Цена: {{ hotel.price }}</p>
+        <h3>{{ hotel.title }}</h3>
+        <p>Цена: {{ hotel.price }} ₸</p>
     </a>
     {% endfor %}
     </div>
-
 </section>
-</div>
 {% endblock %}
+
 
 
