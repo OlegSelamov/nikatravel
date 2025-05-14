@@ -41,5 +41,20 @@
 </tbody>
         </table>
     </div>
+	<div class="tour-cards-mobile">
+  {% for tour in tours %}
+  <a href="/tour/{{ loop.index0 }}" class="tour-card-link">
+    <div class="tour-card">
+      <p><strong>Дата:</strong> {{ tour.departure_date }}</p>
+      <p><strong>Город:</strong> {{ tour.city }}</p>
+      <p><strong>Страна:</strong> {{ tour.country }}</p>
+      <p><strong>Отель:</strong> {{ tour.hotel }}</p>
+      <p><strong>Ночей:</strong> {{ tour.nights }}</p>
+      <p><strong>Питание:</strong> {{ tour.meal }}</p>
+      <p><strong>Цена:</strong> {{ tour.price }} ₸</p>
+      <p><strong>Места:</strong> {{ tour.seats }}</p>
+    </div>
+  </a>
+  {% endfor %}
 </div>
 {% endblock %}
