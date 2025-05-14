@@ -98,19 +98,24 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
-  new Swiper('.places-swiper', {
-    slidesPerView: 3,
-    spaceBetween: 20,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+new Swiper('.places-swiper', {
+  spaceBetween: 10,
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  breakpoints: {
+    0: {
+      slidesPerView: 1
     },
-    breakpoints: {
-      0: { slidesPerView: 1 },
-      768: { slidesPerView: 2 },
-      1024: { slidesPerView: 3 }
+    600: {
+      slidesPerView: 2
+    },
+    1024: {
+      slidesPerView: 3
     }
-  });
+  }
+});
 </script>
 </body>
 </html>

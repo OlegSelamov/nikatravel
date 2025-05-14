@@ -381,3 +381,41 @@ body {
   }
 }
 
+.card {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .card img {
+    height: 180px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+  }
+
+  .card-button {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}
+
+.tour-detail-container, .admin-container, .places-section {
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .tour-detail-container {
+    padding: 15px 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none;
+  }
+}
+
