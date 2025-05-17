@@ -173,16 +173,24 @@ def add_tour():
         hotel = request.form.get('hotel')
         nights = request.form.get('nights')
         meal = request.form.get('meal')
-        price = request.form.get('price')
         seats = request.form.get('seats')
         description = request.form.get('description')
+        price = request.form.get("price")
+        old_price = request.form.get("old_price")
+        discount_percent = request.form.get("discount_percent")
+        price_per_month = request.form.get("price_per_month")
+        installment_months = request.form.get("installment_months")
+        image = request.form.get("image") or ""
+
+
 
         # Главное фото
+        image_filename = ""
         image_file = request.files.get('image')
-        image_filename = None
         if image_file and image_file.filename:
             image_filename = secure_filename(image_file.filename)
             image_file.save(os.path.join(IMAGE_FOLDER, image_filename))
+
 
         # Галерея (много фото)
         gallery_files = request.files.getlist('gallery_images')
@@ -195,18 +203,22 @@ def add_tour():
 
         tours = load_tours()
         new_tour = {
-            "departure_date": departure_date,
-            "city": city,
-            "country": country,
-            "hotel": hotel,
-            "nights": nights,
-            "meal": meal,
-            "price": price,
-            "seats": seats,
-            "image": image_filename,
-            "description": description,
-            "gallery": gallery_filenames
-        }
+    "departure_date": departure_date,
+    "city": city,
+    "country": country,
+    "hotel": hotel,
+    "nights": nights,
+    "meal": meal,
+    "seats": seats,
+    "description": description,
+    "price": price,
+    "old_price": old_price,
+    "discount_percent": discount_percent,
+    "price_per_month": price_per_month,
+    "installment_months": installment_months,
+    "image": image_filename if image_filename else "",
+}
+        
         tours.append(new_tour)
         save_tours(tours)
         return redirect(url_for('admin_filter'))

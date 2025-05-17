@@ -12,19 +12,20 @@
 <body>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 {% if not request.path.startswith('/admin') %}
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Nika Travel Logo" class="logo-img">
-            </div>
-            <nav>
-                  <a href="/">Главная</a>
-                  <a href="/about">О нас</a>
-                  <a href="/filter">Доступные туры</a>
-                  <a href="/contacts">Контакты</a>
-            </nav>
-        </div>
-    </header>
+<div class="header">
+  <a href="{{ url_for('index') }}" class="header-logo">Nika Travel</a>
+
+  <div class="burger" onclick="toggleMenu()">
+    <div></div><div></div><div></div>
+  </div>
+
+  <div class="nav-links" id="navMenu">
+    <a href="{{ url_for('index') }}">Главная</a>
+    <a href="{{ url_for('about') }}">О нас</a>
+    <a href="{{ url_for('filter_page') }}">Доступные туры</a>
+    <a href="{{ url_for('contacts') }}">Контакты</a>
+  </div>
+</div>
 {% endif %}
 
     {% block content %}{% endblock %}
@@ -116,6 +117,12 @@ new Swiper('.places-swiper', {
     }
   }
 });
+</script>
+<script>
+function toggleMenu() {
+  const menu = document.getElementById('navMenu');
+  menu.classList.toggle('show');
+}
 </script>
 </body>
 </html>

@@ -2,11 +2,11 @@
 {% block content %}
 
 <div class="banner-slider">
-    {% for banner in banners %}
+  {% for banner in banners %}
     <div class="banner-slide">
-        <img src="{{ url_for('static', filename='img/' + banner.image) }}" alt="{{ banner.title }}">
+      <img src="{{ url_for('static', filename='img/' + banner.image) }}" alt="">
     </div>
-    {% endfor %}
+  {% endfor %}
 </div>
 <div class="welcome-section">
     <h1>Добро пожаловать в Nika Travel</h1>
