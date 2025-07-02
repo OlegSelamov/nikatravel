@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 {% block content %}
 
@@ -95,58 +96,23 @@ function toggleDateForm() {
 }
 
 function applyDates() {
-  const people = document.getElementById("tourists").value;
-  const nights = document.getElementById("nights-select").value;
+  const people = parseInt(document.getElementById("tourists").value) || 1;
+  const nights = parseInt(document.getElementById("nights-select").value) || 1;
+  const basePrice = {{ tour.price }};
+  const baseNights = {{ tour.nights }};
+  const pricePerNight = basePrice / baseNights;
+  const total = Math.round(pricePerNight * people * nights);
 
   document.getElementById("formTourists").value = people;
   document.getElementById("formNights").value = nights;
-
-  const total = {{ tour.price }};
-
   document.getElementById("formPrice").value = total;
-
   document.getElementById("bookButton").innerText = `Забронировать тур за ${total.toLocaleString()} ₸`;
-
   document.querySelector(".tour-date-selector").innerText = `${people} турист(а), ${nights} ночей`;
 
   document.getElementById("dateForm").classList.add("hidden");
 }
 </script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('bookForm');
-  const touristsInput = document.getElementById('formTourists');
-  const nightsInput = document.getElementById('formNights');
-  const priceInput = document.getElementById('formPrice');
-  const button = document.getElementById('bookButton');
-  const basePrice = parseInt(priceInput.value);
-
-  function updatePrice() {
-    const tourists = parseInt(touristsInput.value) || 1;
-    const nights = parseInt(nightsInput.value) || 1;
-    const total = basePrice * tourists * nights;
-    priceInput.value = total;
-    button.innerHTML = `Забронировать тур за ${total} ₸`;
-  }
-
-  nightsInput.addEventListener('change', updatePrice);
-  touristsInput.addEventListener('change', updatePrice);
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const tourists = touristsInput.value;
-    const nights = nightsInput.value;
-    const total = priceInput.value;
-    const tourId = {{ tour_id }};
-    window.location.href = `/confirmation/${tourId}?tourists=${tourists}&nights=${nights}&total_price=${total}`;
-  });
-
-  updatePrice();
-});
-</script>
-
-<!-- Стили -->
 <style>
   .tour-detail-wrapper { max-width: 900px; margin: 0 auto 80px; padding: 20px; font-family: 'Segoe UI', sans-serif; }
   .tour-date-selector { font-size: 16px; color: #3498db; cursor: pointer; margin-bottom: 10px; }
