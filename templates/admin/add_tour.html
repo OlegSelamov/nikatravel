@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить тур</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+<div class="form-wrapper">
+        <h2>Добавить новый тур</h2>
+        <form method="POST" enctype="multipart/form-data">
+    <label>Город отправления:</label>
+    <select name="city" required>
+        <option value="">Выберите город</option>
+        <option>Алматы</option>
+        <option>Нур-Султан</option>
+        <option>Шымкент</option>
+        <option>Бишкек</option>
+        <option>Ташкент</option>
+        <option>Москва</option>
+        <option>Питер</option>
+        <!-- Добавь другие нужные города -->
+    </select>
+
+    <label>Страна назначения:</label>
+    <select name="country" required>
+        <option value="">Выберите страну</option>
+        <option>ОАЭ</option>
+        <option>Турция</option>
+        <option>Египет</option>
+        <option>Таиланд</option>
+        <option>Мальдивы</option>
+        <!-- Добавь другие страны -->
+    </select>
+
+    <label>Отель:</label>
+    <input type="text" name="hotel" required>
+
+    <label>Дата вылета:</label>
+    <input type="date" name="departure_date" required>
+
+    <label>Количество ночей:</label>
+    <input type="number" name="nights" min="1" required>
+
+    <label>Питание:</label>
+    <select name="meal" required>
+        <option value="">Выберите тип</option>
+        <option>BB</option>
+        <option>HB</option>
+        <option>FB</option>
+        <option>AI</option>
+        <option>UAI</option>
+    </select>
+
+	<label>Цена (₸):</label>
+    <input type="number" name="price" id="price" required>
+
+    <label>Скидка (%):</label>
+    <input type="number" name="discount_percent" id="discount_percent" placeholder="Например: 20">
+
+    <label>Старая цена (₸):</label>
+    <input type="number" name="old_price" id="old_price" readonly>
+
+    <label>Рассрочка:</label>
+<select id="installment_months" name="installment_months">
+  <option value="6">0-0-6</option>
+  <option value="12" selected>0-0-12</option>
+  <option value="24">0-0-24</option>
+</select>
+
+<label>Сумма в месяц (₸):</label>
+<input type="text" name="price_per_month" id="price_per_month" readonly>
+
+
+    <label>Места:</label>
+    <input type="text" name="seats" required>
+
+    <label>Описание:</label>
+    <textarea name="description" rows="4"></textarea>
+
+    <label>Фото:</label>
+    <input type="file" name="image">
+
+    <button type="submit" class="btn-submit">Добавить тур</button>
+<script>
+  function updatePrices() {
+    const price = parseFloat(document.getElementById('price').value);
+    const discount = parseFloat(document.getElementById('discount_percent').value);
+    const months = parseInt(document.getElementById('installment_months').value);
+
+    if (!isNaN(price)) {
+      const oldPrice = discount ? Math.round(price / (1 - discount / 100)) : price;
+      const monthly = Math.round(price / months);
+
+      document.getElementById('old_price').value = oldPrice;
+      document.getElementById('price_per_month').value = monthly;
+    }
+  }
+
+  document.getElementById('price').addEventListener('input', updatePrices);
+  document.getElementById('discount_percent').addEventListener('input', updatePrices);
+  document.getElementById('installment_months').addEventListener('change', updatePrices);
+</script>
+
+</form>
+</div>
+</body>
+</html>

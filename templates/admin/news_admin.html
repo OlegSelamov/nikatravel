@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Управление новостями</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <h2>Главные новости</h2>
+    <div class="top-actions">
+	    <a href="{{ url_for('admin_filter') }}" class="admin-back-link"> ← Назад в управление сайтом</a>
+        <a href="{{ url_for('add_news') }}" class="btn-add">Добавить новость</a>
+        <a href="{{ url_for('admin_logout') }}" class="btn-logout">Выйти</a>
+    </div>
+    <table class="news-table">
+        <thead>
+            <tr>
+                <th>Заголовок</th>
+                <th>Фото</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for n in news %}
+            <tr>
+                <td>{{ n.title }}</td>
+                <td>
+                    {% if n.image %}
+                        <img src="{{ url_for('static', filename='img/' + n.image) }}" class="thumb-img">
+                    {% else %}
+                        Нет фото
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ url_for('edit_news', id=loop.index0) }}" class="btn-edit">Редактировать</a>
+                    <a href="{{ url_for('delete_news', id=loop.index0) }}" class="btn-delete">Удалить</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

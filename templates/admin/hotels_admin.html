@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head
+    <meta charset="UTF-8">
+    <title>Управление отелями</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <h2>Рекомендуемые отели</h2>
+    <div class="top-actions">
+	    <a href="{{ url_for('admin_filter') }}" class="admin-back-link">Назад в управление сайтом</a>
+        <a href="{{ url_for('add_hotel') }}" class="btn-add">Добавить отель</a>
+        <a href="{{ url_for('admin_logout') }}" class="btn-logout">Выйти</a>
+    </div>
+    <table class="hotels-table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Цена</th>
+                <th>Фото</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hotel in hotels %}
+            <tr>
+                <td>{{ hotel.title }}</td>
+                <td>{{ hotel.price }}</td>
+                <td>
+            {% if hotel.images %}
+                <img src="{{ url_for('static', filename='img/' + hotel.images[0]) }}" style="width:80px; height:80px; object-fit:cover;">
+            {% endif %}
+
+                </td>
+                <td>
+                    <a href="{{ url_for('edit_hotel', id=loop.index0) }}" class="btn-edit">Редактировать</a>
+                    <a href="{{ url_for('delete_hotel', id=loop.index0) }}" class="btn-delete">Удалить</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html> 

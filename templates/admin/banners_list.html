@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Баннеры — Админка</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <h2>Список баннеров</h2>
+    <div class="top-actions">
+	    <a href="{{ url_for('admin_filter') }}" class="admin-back-link">Назад в управление сайтом</a>
+        <a href="{{ url_for('add_banner') }}" class="btn-add">Добавить баннер</a>
+    </div>
+    <table class="banners-table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Изображение</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for banner in banners %}
+            <tr>
+                <td>{{ banner.title }}</td>
+                <td>
+                    {% if banner.image %}
+                        <img src="{{ url_for('static', filename='img/' + banner.image) }}" class="thumb-img">
+                    {% else %}
+                        Нет фото
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ url_for('delete_banner', id=loop.index0) }}" class="btn-delete">Удалить</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

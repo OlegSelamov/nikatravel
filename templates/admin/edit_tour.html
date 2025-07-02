@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать тур</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+        <h2>Редактировать тур</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="text" name="city" value="{{ tour.city }}" placeholder="Город отправления" required><br>
+            <input type="text" name="country" value="{{ tour.country }}" placeholder="Страна назначения" required><br>
+            <input type="text" name="hotel" value="{{ tour.hotel }}" placeholder="Название отеля" required><br>
+            <input type="number" name="nights" value="{{ tour.nights }}" placeholder="Количество ночей" required><br>
+            <input type="text" name="meal" value="{{ tour.meal }}" placeholder="Питание" required><br>
+            <input type="number" name="price" value="{{ tour.price }}" placeholder="Цена" required><br>
+            <input type="text" name="seats" value="{{ tour.seats }}" placeholder="Места" required><br>
+			<textarea name="description" placeholder="Описание тура">{{ tour.description if tour else '' }}</textarea><br>
+            <input type="file" name="gallery_images" multiple><br>
+
+            <p>Текущее фото:</p>
+            {% if tour.image %}
+                <img src="{{ url_for('static', filename='img/' + tour.image) }}" style="width:100px; height:auto; margin-bottom:10px;">
+            {% else %}
+                <p>Нет фото</p>
+            {% endif %}
+
+            <input type="file" name="image"><br>  <!-- Новое поле для выбора файла -->
+
+            <button type="submit">Сохранить изменения</button>
+        </form>
+</body>
+</html>

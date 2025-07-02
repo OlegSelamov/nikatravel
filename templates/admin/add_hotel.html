@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<a href="{{ url_for('admin_hotels') }}" style="text-decoration: none; color: #3498db; font-size: 14px;">← Назад к списку отелей</a>
+
+<h2 class="admin-title">Добавить отель</h2>
+
+<form method="POST" enctype="multipart/form-data" class="admin-form">
+  <label>Название отеля:</label>
+  <input type="text" name="title" required>
+
+  <label>Описание:</label>
+  <textarea name="description" rows="4" required></textarea>
+
+  <label>Цена (₸):</label>
+  <input type="text" name="price" required>
+
+  <label>Фото (можно выбрать несколько):</label>
+  <input type="file" name="images" multiple required>
+
+  <button type="submit" class="admin-button">Сохранить</button>
+</form>
+
+{% endblock %}

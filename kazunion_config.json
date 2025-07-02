@@ -1,0 +1,13 @@
+{
+  "city": "Алматы",
+  "country": "ОАЭ",
+  "departure_date": "дата_ошибка",
+  "nights": [
+    6
+  ],
+  "meal": [
+    "AL"
+  ],
+  "currency": "KZT",
+  "limit": 15
+}

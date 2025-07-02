@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-content">
+    <h2>Спасибо, {{ name }}!</h2>
+    <p>Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время для подтверждения брони.</p>
+    <a href="{{ url_for('filter_page') }}" class="btn-back">← Вернуться к поиску тура</a>
+</div>
+{% endblock %}

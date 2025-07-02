@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить новость</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <h2>Добавить новость</h2>
+    <form method="POST" enctype="multipart/form-data" class="form-wrapper">
+        <input type="text" name="title" placeholder="Заголовок новости" required>
+        <input type="file" name="image">
+        <button type="submit" class="btn-submit">Сохранить</button>
+    </form>
+</body>
+</html>

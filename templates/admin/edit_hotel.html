@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<a href="{{ url_for('admin_hotels') }}" style="text-decoration: none; color: #3498db; font-size: 14px; display: inline-block; margin-bottom: 15px;">
+  ← Назад к списку отелей
+</a>
+
+    <meta charset="UTF-8">
+    <title>Редактировать отель</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <h2>Редактировать отель</h2>
+    <form method="POST" enctype="multipart/form-data" class="form-wrapper">
+        <input type="text" name="name" value="{{ hotel.name }}" required>
+        <input type="text" name="price" value="{{ hotel.price }}" required>
+        {% if hotel.image %}
+            <p>Текущее фото:</p>
+            <img src="{{ url_for('static', filename='img/' + hotel.image) }}" class="thumb-img">
+        {% endif %}
+        <input type="file" name="image">
+        <button type="submit" class="btn-submit">Сохранить изменения</button>
+    </form>
+</body
+</html>

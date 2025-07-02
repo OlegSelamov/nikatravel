@@ -1,0 +1,84 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
+
+def find_booking_link_duckduckgo(hotel_name):
+    options = Options()
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_argument("start-maximized")
+    options.add_argument("disable-infobars")
+    options.add_argument("disable-popup-blocking")
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
+
+    driver = webdriver.Chrome(options=options)
+    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+
+    try:
+        search_url = f"https://www.booking.com/searchresults.html?ss={hotel_name.replace(' ', '+')}"
+        print(f"🔍 Открываем Booking: {search_url}")
+        driver.get(search_url)
+
+        WebDriverWait(driver, 15).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "div[data-testid='property-card']"))
+        )
+
+        cards = driver.find_elements(By.CSS_SELECTOR, "div[data-testid='property-card']")
+        if not cards:
+            raise Exception("❌ Карточки отелей не найдены")
+
+        first_card = cards[0]
+        link_element = first_card.find_element(By.CSS_SELECTOR, "a")
+        print("👆 Кликаем по карточке...")
+
+        original_tabs = driver.window_handles
+        driver.execute_script("arguments[0].click();", link_element)
+
+        # ⏳ Ждём открытия новой вкладки
+        WebDriverWait(driver, 10).until(lambda d: len(d.window_handles) > len(original_tabs))
+        new_tabs = driver.window_handles
+        new_tab = [tab for tab in new_tabs if tab not in original_tabs][0]
+        driver.switch_to.window(new_tab)
+
+        WebDriverWait(driver, 10).until(lambda d: "/hotel/" in d.current_url)
+        time.sleep(2)
+
+        final_url = driver.current_url
+
+        # Гарантируем русский язык:
+        if "?lang=" not in final_url:
+            if "?" in final_url:
+                final_url += "&lang=ru"
+            else:
+                final_url += "?lang=ru"
+
+        print(f"✅ Финальный URL: {final_url}")
+        return final_url
+
+    except Exception as e:
+        print(f"❌ Ошибка при переходе: {e}")
+        with open("booking_debug.html", "w", encoding="utf-8") as f:
+            f.write(driver.page_source)
+        return None
+   
+from duckduckgo_search import DDGS
+
+def get_booking_url_by_hotel_name(hotel_name):
+    query = f"{hotel_name} site:booking.com"
+    with DDGS() as ddgs:
+        results = ddgs.text(query, max_results=5)
+        for result in results:
+            booking_url = result["href"]
+
+            if "?lang=" not in booking_url:
+                if "?" in booking_url:
+                    booking_url += "&lang=ru"
+                else:
+                    booking_url += "?lang=ru"
+
+            return booking_url
+

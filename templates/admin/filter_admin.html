@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Фильтр туров</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body { font-family: sans-serif; background-color: #fffaf0; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f4e2d8; text-align: left; }
+        .btn { padding: 10px 20px; background-color: #f4a261; color: white; border: none; cursor: pointer; border-radius: 5px; }
+        .btn:hover { background-color: #e76f51; }
+        .form-block { margin-bottom: 20px; }
+        .navbar { margin-bottom: 20px; }
+        .navbar a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{{ url_for('admin_filter') }}">Туры</a>
+        <a href="{{ url_for('admin_hotels') }}">Отели</a>
+        <a href="{{ url_for('admin_places') }}">Места</a>
+        <a href="{{ url_for('admin_news') }}">Новости</a>
+        <a href="{{ url_for('admin_logout') }}">Выход</a>
+    </div>
+
+    <h2>Фильтр Туров Kazunion</h2>
+	
+	    <!-- Одна форма — Сохранить и запустить парсинг -->
+    <form method="post">
+        <div class="form-block">
+            <label>Город отправления:</label>
+            <select name="city_code" required>
+            <option value="68" {% if config.city_code == "68" %}selected{% endif %}>Актау</option>
+            <option value="95" {% if config.city_code == "95" %}selected{% endif %}>Актобе</option>
+            <option value="57" {% if config.city_code == "57" %}selected{% endif %}>Алматы</option>
+            <option value="7" {% if config.city_code == "7" %}selected{% endif %}>Астана</option>
+            <option value="8" {% if config.city_code == "8" %}selected{% endif %}>Атырау</option>
+            <option value="82" {% if config.city_code == "82" %}selected{% endif %}>Караганда</option>
+            <option value="121" {% if config.city_code == "121" %}selected{% endif %}>Костанай</option>
+            <option value="196" {% if config.city_code == "196" %}selected{% endif %}>Туркестан</option>
+            <option value="5" {% if config.city_code == "5" %}selected{% endif %}>Уральск</option>
+            <option value="90" {% if config.city_code == "90" %}selected{% endif %}>Усть-Каменогорск</option>
+            <option value="94" {% if config.city_code == "94" %}selected{% endif %}>Шымкент</option>
+            <option value="207" {% if config.city_code == "207" %}selected{% endif %}>Екатеринбург</option>
+            <option value="2" {% if config.city_code == "2" %}selected{% endif %}>Москва</option>
+            <option value="613" {% if config.city_code == "613" %}selected{% endif %}>Санкт-Петербург</option>
+            <option value="86" {% if config.city_code == "86" %}selected{% endif %}>Бишкек</option>
+            <option value="839" {% if config.city_code == "839" %}selected{% endif %}>Ташкент</option>
+            <option value="573" {% if config.city_code == "573" %}selected{% endif %}>Тбилиси</option>
+            <option value="849" {% if config.city_code == "849" %}selected{% endif %}>Баку</option>
+            </select>
+        </div>
+
+        <div class="form-block">
+            <label>Страна:</label>
+            <select name="country_code" required>
+            <option value="48" {% if config.country_code == "48" %}selected{% endif %}>Азербайджан</option>
+            <option value="22" {% if config.country_code == "22" %}selected{% endif %}>Вьетнам</option>
+            <option value="43" {% if config.country_code == "43" %}selected{% endif %}>Грузия</option>
+            <option value="14" {% if config.country_code == "14" %}selected{% endif %}>Индонезия</option>
+            <option value="95" {% if config.country_code == "95" %}selected{% endif %}>Катар</option>
+            <option value="13" {% if config.country_code == "13" %}selected{% endif %}>Малайзия</option>
+            <option value="33" {% if config.country_code == "33" %}selected{% endif %}>Мальдивы</option>
+            <option value="11" {% if config.country_code == "11" %}selected{% endif %}>ОАЭ</option>
+            <option value="42" {% if config.country_code == "42" %}selected{% endif %}>Сингапур</option>
+            <option value="73" {% if config.country_code == "73" %}selected{% endif %}>Словения</option>
+            <option value="12" {% if config.country_code == "12" %}selected{% endif %}>Таиланд</option>
+            <option value="6" {% if config.country_code == "6" %}selected{% endif %}>Турция</option>
+            <option value="69" {% if config.country_code == "69" %}selected{% endif %}>Черногория</option>
+            <option value="31" {% if config.country_code == "31" %}selected{% endif %}>Чехия</option>
+            <option value="20" {% if config.country_code == "20" %}selected{% endif %}>Шри-Ланка</option>
+            <option value="64" {% if config.country_code == "64" %}selected{% endif %}>Южная Корея</option>
+            </select>
+        </div>
+
+        <div class="form-block">
+            <label>Дата вылета:</label>
+            <input type="text" name="departure_date"
+      			   placeholder="ДД.ММ.ГГГГ" 
+				   pattern="\d{2}\.\d{2}\.\d{4}" 
+				   required>
+        </div>
+
+        <div class="form-block">
+            <label>Ночей:</label>
+            <input type="number" name="nights" min="1" max="21" value="{{ config.nights[0] if config.nights else '' }}" required>
+        </div>
+
+        <div class="form-block">
+            <label>Питание:</label><br>
+            <label><input type="checkbox" name="meal" value="AL" {% if "AL" in config.get("meal", []) %}checked{% endif %}> AL</label>
+            <label><input type="checkbox" name="meal" value="BB" {% if "BB" in config.get("meal", []) %}checked{% endif %}> BB</label>
+        </div>
+		
+		<div class="form-block">
+            <label>Количество взрослых:</label>
+            <select name="ADULT">
+                {% for i in range(1, 14) %}
+                    <option value="{{ i }}" {% if config.ADULT == i|string %}selected{% endif %}>{{ i }}</option>
+                {% endfor %}
+            </select>
+        </div>
+		
+		<div class="form-block">
+            <label>Звёздность:</label><br>
+            <label><input type="checkbox" name="STARS" value="10003" {% if "10003" in config.get("STARS", []) %}checked{% endif %}> 3*</label>
+            <label><input type="checkbox" name="STARS" value="10004" {% if "10004" in config.get("STARS", []) %}checked{% endif %}> 4*</label>
+            <label><input type="checkbox" name="STARS" value="10001" {% if "10001" in config.get("STARS", []) %}checked{% endif %}> 5*</label>
+        </div>
+		
+        <div class="form-block">
+            <label>Валюта:</label>
+            <select name="currency">
+                <option value="KZT" {% if config.currency == "KZT" %}selected{% endif %}>KZT</option>
+                <option value="USD" {% if config.currency == "USD" %}selected{% endif %}>USD</option>
+            </select>
+        </div>
+
+        <div class="form-block">
+            <label>Лимит туров:</label>
+            <input type="number" name="limit" min="1" max="50" value="{{ config.limit or 10 }}">
+        </div>
+
+        <button type="submit" class="btn">💾 Сохранить и 🚀 Начать парсинг</button>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="flash {{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <!-- Таблица туров -->
+    <table>
+        <thead>
+            <tr>
+                <th>Дата вылета</th>
+                <th>Город</th>
+                <th>Страна</th>
+                <th>Отель</th>
+                <th>Ночей</th>
+                <th>Питание</th>
+                <th>Мест</th>
+                <th>Цена</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tour in tours %}
+            <tr>
+                <td>{{ tour.departure_date }}</td>
+                <td>{{ tour.city }}</td>
+                <td>{{ tour.country }}</td>
+                <td>{{ tour.hotel }}</td>
+                <td>{{ tour.nights }}</td>
+                <td>{{ tour.meal }}</td>
+                <td>{{ tour.seats }}</td>
+                <td>{{ tour.price }} {{ tour.currency or 'KZT' }}</td>
+                <td>
+                    <a href="{{ url_for('edit_filter_tour', index=loop.index0) }}">✏️</a>
+                    <a href="{{ url_for('delete_filter_tour', index=loop.index0) }}">❌</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

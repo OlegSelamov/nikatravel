@@ -1,0 +1,77 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="booking-confirm-wrapper">
+
+  <h1>Подтверждение бронирования</h1>
+
+  <div class="booking-details">
+    <p><strong>Направление:</strong> {{ tour.city }} — {{ tour.country }}</p>
+    <p><strong>Отель:</strong> {{ tour.hotel }}</p>
+    <p><strong>Дата вылета:</strong> {{ tour.departure_date }}</p>
+    <p><strong>Количество туристов:</strong> {{ tourists }}</p>
+    <p><strong>Количество ночей:</strong> {{ nights }}</p>
+    <p><strong>Итоговая сумма:</strong> {{ total_price }} ₸</p>
+  </div>
+
+  <form method="POST" action="{{ url_for('confirm_booking') }}" class="booking-form">
+    <input type="hidden" name="hotel" value="{{ tour.hotel }}">
+    <input type="hidden" name="city" value="{{ tour.city }}">
+    <input type="hidden" name="country" value="{{ tour.country }}">
+    <input type="hidden" name="departure_date" value="{{ tour.departure_date }}">
+    <input type="hidden" name="tourists" value="{{ tourists }}">
+    <input type="hidden" name="nights" value="{{ nights }}">
+    <input type="hidden" name="total_price" value="{{ total_price }}">
+
+    <label>Ваше имя:</label>
+    <input type="text" name="name" required>
+
+    <label>Номер телефона:</label>
+    <input type="tel" name="phone" required>
+
+    <label>Email (необязательно):</label>
+    <input type="email" name="email">
+
+    <button type="submit">Подтвердить бронирование</button>
+  </form>
+
+</div>
+
+<style>
+.booking-confirm-wrapper {
+  max-width: 700px;
+  margin: 30px auto;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 20px;
+}
+.booking-details {
+  background: #f7f7f7;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+.booking-form {
+  display: flex;
+  flex-direction: column;
+}
+.booking-form input {
+  margin-bottom: 12px;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+.booking-form button {
+  background: #27ae60;
+  color: white;
+  font-size: 16px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+</style>
+
+{% endblock %}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nika Travel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/frontend.css') }}">
+	{% if request.path.startswith('/admin') %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endif %}
+</head>
+<body>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+{% if not request.path.startswith('/admin') %}
+<div class="header">
+  <a href="{{ url_for('index') }}" class="header-logo">Nika Travel</a>
+
+  <div class="burger" onclick="toggleMenu()">
+    <div></div><div></div><div></div>
+  </div>
+
+  <div class="nav-links" id="navMenu">
+    <a href="{{ url_for('index') }}">Главная</a>
+    <a href="{{ url_for('about') }}">О нас</a>
+    <a href="{{ url_for('filter_page') }}">Доступные туры</a>
+    <a href="{{ url_for('contacts') }}">Контакты</a>
+  </div>
+</div>
+{% endif %}
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer">
+        Nika Travel © 2025
+    </footer>
+
+    <!-- JS для слайдера -->
+    <script>
+        const sliderContainer = document.querySelector('.slider-container');
+        const slides = document.querySelectorAll('.gallery-image');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+
+        let currentIndex = 0;
+
+        function updateSlider() {
+            if (sliderContainer) {
+                sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+        }
+
+        if (sliderContainer) {
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateSlider();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateSlider();
+            });
+        }
+    </script>
+	
+	<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const sliders = document.querySelectorAll('.news-slider, .hotels-slider');
+
+    sliders.forEach(slider => {
+        let scrollAmount = 0;
+        const slideTimer = setInterval(() => {
+            slider.scrollBy({
+                left: 250, // ширина карточки + gap
+                behavior: 'smooth'
+            });
+            scrollAmount += 260;
+            if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
+                slider.scrollTo({ left: 0, behavior: 'smooth' });
+                scrollAmount = 0;
+            }
+        }, 3000); // каждые 3 секунды
+    });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const bannerSlider = document.querySelector('.banner-slider');
+    const banners = document.querySelectorAll('.banner-slide');
+    let currentIndex = 0;
+
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % banners.length;
+        banners.forEach((slide, index) => {
+            slide.style.transform = `translateX(-${currentIndex * 100}%)`;
+        });
+    }, 4000); // каждые 4 секунды
+});
+</script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+new Swiper('.places-swiper', {
+  spaceBetween: 10,
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  breakpoints: {
+    0: {
+      slidesPerView: 1
+    },
+    600: {
+      slidesPerView: 2
+    },
+    1024: {
+      slidesPerView: 3
+    }
+  }
+});
+</script>
+<script>
+function toggleMenu() {
+  const menu = document.getElementById('navMenu');
+  menu.classList.toggle('show');
+}
+</script>
+</body>
+</html>
+
+
+

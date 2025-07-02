@@ -1,0 +1,305 @@
+body {
+    background: linear-gradient(135deg, #ffe4cc, #fff3e6);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 50px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.login-container, .form-container, .admin-container {
+    max-width: 600px;
+    margin: 5 auto;
+    background: #fff;
+    padding: 50px;
+    border-radius: 70px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+input, button {
+    display: black;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #f0c674;
+    border: none;
+    color: #4e382a;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #e4b65e;
+}
+
+.tours-table {
+    width: 105%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.banners-table td, .banners-table th,
+.places-table td, .places-table th,
+.news-table td, .news-table th,
+.hotels-table td, .hotels-table th {
+    padding: 8px 10px;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Миниатюры картинок только для этих разделов */
+.banners-table .table-thumb,
+.places-table .table-thumb,
+.news-table .table-thumb,
+.hotels-table .table-thumb {
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+}
+
+.tours-table th {
+    background-color: #f3dfc1;
+    color: #4e382a;
+}
+
+.btn-add, .btn-logout, .btn-edit, .btn-delete {
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 5px 5px 0;
+}
+
+.btn-add {
+    background-color: #4caf50;
+    color: white;
+}
+
+.btn-logout {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-edit {
+    background-color: #2196f3;
+    color: white;
+}
+
+.btn-delete {
+    background-color: #e91e63;
+    color: white;
+}
+
+.top-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+}
+
+.btn-banner {
+    display: inline-block;
+    padding: 12px 20px;
+    margin: 10px 0;
+    background-color: #28a745; /* зелёный */
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-banner:hover {
+    background-color: #218838; /* тёмно-зелёный при наведении */
+}
+
+.thumb-img {
+    width: 100px !important;
+    height: 40px !important;
+    max-width: 100px !important;
+    max-height: 70px !important;
+    object-fit: cover !important;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 0 auto;
+}
+
+.form-wrapper {
+    max-width: 600px;
+    margin: 30px auto;
+    background: #fff8ed;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.form-wrapper h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #5c4326;
+}
+
+.form-wrapper label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #5c4326;
+}
+
+.form-wrapper input,
+.form-wrapper select,
+.form-wrapper textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #d1b58f;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.form-wrapper button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 14px;
+    background: #5c4326;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.form-wrapper button:hover {
+    background: #a57236;
+}
+
+.admin-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fffefc;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  font-family: Arial, sans-serif;
+}
+
+.admin-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.admin-form input,
+.admin-form textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.admin-button {
+  padding: 12px;
+  background: #f0a500;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.admin-button:hover {
+  background: #d98e00;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+  margin: auto;
+  background: #fffefc;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.admin-form label {
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.admin-form input,
+.admin-form textarea {
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.admin-button {
+  padding: 12px;
+  background: #f0a500;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.admin-button:hover {
+  background: #d98e00;
+}
+
+.admin-back-link {
+  display: inline-block;
+  padding: 8px 14px;
+  background: #3498db;
+  color: white;
+  font-size: 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-bottom: 15px;
+  transition: background 0.2s ease;
+}
+
+.admin-back-link:hover {
+  background: #2c80c8;
+}
+
+
+
+
+
+
