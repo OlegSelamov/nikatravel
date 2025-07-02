@@ -74,11 +74,9 @@
   </div>
 </form>
 
-<!-- Swiper CSS & JS -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-<!-- Логика -->
 <script>
 new Swiper('.swiper', {
   slidesPerView: 3,
@@ -111,6 +109,13 @@ function applyDates() {
 
   document.getElementById("dateForm").classList.add("hidden");
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('bookForm');
+  form.addEventListener('submit', function() {
+    // просто отправляем форму без window.location.href
+  });
+});
 </script>
 
 <style>
