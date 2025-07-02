@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "kazunion-ocr",
+  "private_key_id": "021351b3f609f5c0405242a055ea10c4b18e3ce3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCycLb2WmtiJF5Q\nJ7voE6GLXvN7rwW4WGW/Js3sJwrN0fMQBqohDQNa97l1SCdUr9MiShUBUd/W11m4\nyyYlFEnaQaBh5H76GObGBPUhNZw8l7f1W8HCgAAzomqZU02TSIColHS3mPf+SOrX\n7erFLulv8VM/pw/lg2n1qepVpFAPiYaqLqCM7MB9yDQx7YZv/eHFoiY/zh0JeJNu\n6qFjsvpgjFLV1JP8OL4ZQcEOIkZiKveUF/GhlayMTgvb6B+GxfRKbpMtIMm4Jh06\nkHjrvXgawnE88Wo1J3p71EPAc1NwfdY6VDfQ1QKnOrf8F7gzSWMe6IgQO2nmUM0M\nwbwxaTJLAgMBAAECggEAG20ZognJwX7nhBhnWEdUKBDDCbqf/XKQyO2U7vwdO/9O\nBaOQmJ3gayXyOmWJrgmMQRPz4I0OA358Ctwmk8Jni4VUulcdcSFMrxjp+F2+Es4a\n9zpQMK3t2gHXspNMNBwLsl2HBwUa8NmSRvgJgp8wQAVujzUFS3iEW77vBpTHvWtb\nMstQD//TRZx28E2LVwi0mvCnXCWM8biRXo35vB56WnqNXGK0HBD0OnuTEBXBdkLd\nQw4HbuumD89yGJX3qOovC0dCytdmUonKdAsaI2OtEIbMK2Lp77MfxC9eMHWhXKsP\njHhltoHRMTui8yMCUxYNdySVMPhECJ2fYKmHy70CMQKBgQDZDrRaqoC0DGW1VoiK\nTl3PSRj42P27ChdnYWsaB0UXrxta8ULVccA+jtGR3x6q+YLO1hhAjbVQC5gSOWW9\nlGD3yucb/NqIt/mJUPoe6b1tlpjHNphJxlLKHHttXQmPQp0YDfaGL1Tp5L/4Gf1K\nz49qKoT3uTq96XQsIetqO1Rl2QKBgQDSdFoNEz8B3AFScDwaIZLDomWW5vS/pJyJ\nujTHBZulHW4GOmrzAJH0vcFLH3CLhjskpwrJEffexAVYz6tRr0DflxSkJOjGeqTD\nVw8KUimBhu+6FQKbjOuGVDzLt/jAsJlmH8MER/olCJo1QMXwGAHUoeRuoE/P+kc+\nEr2BBaPOwwKBgQCgV9F5jKzI1MOposP4z41THB+bbMh7DChf0UJKFwa+STe/Baym\neoJWdDByPs2r5efwnY2K2mQPPpFXHRmAY4UCZ9wz+6UADFAFVVF/1pF9zBsORtFW\n5m+wKDwxfOIb90yPQXlUhNCIe9goEiLfydaaydAyI542Pqf4FhKPBkcBeQKBgHPC\n/nmsuX67VprTE6xIBWPJI1pTJhN4Z4a2vysuYYP8YTXZ0lRiXuahrf41iAGnT0cE\n/0DEunR1nH9Sk+j1npiekQMNLmFmutScQbCqqxwNbjYMMof/hto34c0pIBJV0btE\nA1CKiwTt620ZeQdtHSyp9G4Jjn1XLPLu+gBLauRjAoGAUOi7fqcWH/dxjmXEuJ7R\nWyVKcb7HqqLD6WL8cbLd0/bsf7HXMFau68b5Bwp470UXJe+EkPLR+4jsZbXc8Yhk\niJ0Lma4kW1+qlJsYemk16FbKR9D0z8+QAbAayv1IXkZ5FgMMjpNp/3sUsHqrKaA6\nniX3JfFF4KMml/43UaAIxhE=\n-----END PRIVATE KEY-----\n",
+  "client_email": "vision-reader@kazunion-ocr.iam.gserviceaccount.com",
+  "client_id": "116442013800758791804",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vision-reader%40kazunion-ocr.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
