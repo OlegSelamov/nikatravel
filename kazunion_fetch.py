@@ -92,24 +92,30 @@ def run():
             page.evaluate("document.querySelector(\"select[name='CURRENCY']\").style.opacity = '1'")
             page.select_option("select[name='CURRENCY']", currency)
             print("💱 Валюта выбрана")
-
-            # Питание
+            
+            #питание
             try:
+            # Кликаем чекбокс "любое питание", чтобы отобразились варианты
                 page.locator("input[name='MEALS_ANY']").click()
-                page.wait_for_selector(".MEALS input[type='checkbox']", timeout=5000)
-                for meal_code in meals:
-                    try:
-                        checkbox = page.locator(f".MEALS input[type='checkbox'][value='{meal_code}']")
-                        checkbox.wait_for(timeout=3000)
-                        if checkbox.is_visible() and not checkbox.is_checked():
-                            checkbox.check(force=True)
-                            print(f"✅ Питание {meal_code} включено")
-                        else:
-                            print(f"ℹ️ Питание {meal_code} уже выбрано или не видно")
-                    except Exception as inner_e:
-                        print(f"⚠️ Питание {meal_code} не найдено или скрыто: {inner_e}")
-            except Exception as e:
-                print(f"⚠️ Не удалось открыть блок питания: {e}")
+    
+            # Дожидаемся появления блока MEALS
+                page.wait_for_selector(".MEALS", timeout=5000)
+                page.wait_for_timeout(1000)  # небольшой тайм-аут на подгрузку чекбоксов
+
+    for meal_code in meals:
+        try:
+            checkbox = page.locator(f".MEALS input[type='checkbox'][value='{meal_code}']")
+            checkbox.wait_for(timeout=3000)
+            if checkbox.is_visible() and not checkbox.is_checked():
+                checkbox.check(force=True)
+                print(f"✅ Питание {meal_code} включено")
+            else:
+                print(f"ℹ️ Питание {meal_code} уже выбрано или не видно")
+        except Exception as inner_e:
+            print(f"⚠️ Питание {meal_code} не найдено или скрыто: {inner_e}")
+except Exception as e:
+    print(f"⚠️ Не удалось открыть блок питания: {e}")
+
 
             # Звезды
             print("⏳ Ждём блок звёзд...")
