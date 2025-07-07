@@ -82,8 +82,15 @@ def extract_description(url, folder_path):
         service = Service(executable_path=chromedriver_path)
         driver = webdriver.Chrome(service=service, options=chrome_options)
         driver.set_page_load_timeout(60)
-        driver.get(url)
+        if "?lang=" not in url:
+            if "?" in url:
+                url += "&lang=ru"
+            else:
+                url += "?lang=ru"
 
+        print("🌐 Итоговый URL:", url)
+        driver.get(url)
+        
         os.makedirs(folder_path, exist_ok=True)
 
         try:
@@ -150,9 +157,6 @@ def extract_description(url, folder_path):
 
     except Exception as e:
         print(f"⚠️ Ошибка при вытаскивании описания: {e}")
-        
+
     if __name__ == "__main__": 
-        return        
-
-
-
+        return

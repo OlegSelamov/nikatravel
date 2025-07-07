@@ -1,3 +1,4 @@
+
 import os
 import json
 import shutil
@@ -44,11 +45,11 @@ def get_image_score(image_path):
         contrast = sum(stat.stddev) / 3
 
         r, g, b = stat.mean
-        blue_ratio = b / max(r + g + 1, 1)  # защита от деления на 0
+        blue_ratio = b / max(r + g + 1, 1)
 
         score = brightness + contrast
-        if blue_ratio > 0.6:  # если преобладает синий
-            score *= 1.5  # усиливаем приоритет
+        if blue_ratio > 0.6:
+            score *= 1.5
 
         return score
     except Exception:
@@ -62,6 +63,7 @@ def is_tour_filled(tour):
     )
 
 def main():
+    print("🚀 START: auto_booking_scraper запускается...")
     with open(FILTER_JSON, "r", encoding="utf-8") as f:
         tours = json.load(f)
 
@@ -73,7 +75,7 @@ def main():
             continue
 
         hotel_name = tour["hotel"]
-        print(f"\n🔍 [{i}] Ищем Booking для: {hotel_name}")
+        print(f"🔍 [{i}] Ищем Booking для: {hotel_name}")
         url = get_booking_url_by_hotel_name(hotel_name)
         if not url:
             print(f"❌ Booking не найден: {hotel_name}")
@@ -123,16 +125,17 @@ def main():
         if os.path.exists(desc_file):
             with open(desc_file, "r", encoding="utf-8") as f:
                 tour["description"] = f.read().strip()
-
+             
         tours[i] = tour
         updated += 1
-
-        with open(FILTER_JSON, "w", encoding="utf-8") as f:
-            json.dump(tours, f, ensure_ascii=False, indent=2)
-
         print(f"✅ [{i}] Обновлено: {hotel_name}")
 
-    print(f"\n📦 Всего обновлено туров: {updated}")
+    # 💾 Сохраняем JSON один раз в конце
+    with open(FILTER_JSON, "w", encoding="utf-8") as f:
+        json.dump(tours, f, ensure_ascii=False, indent=2)
+    print("💾 filter.json сохранён после обработки всех туров")
+
+    print(f"📦 Всего обновлено туров: {updated}")
     missing = [t["hotel"] for t in tours if not is_tour_filled(t)]
     if missing:
         print("🛑 Пропущены:")
@@ -140,4 +143,7 @@ def main():
             print("  —", name)
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        print(f"💥 ОШИБКА auto_booking_scraper: {e}")

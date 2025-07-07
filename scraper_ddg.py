@@ -4,6 +4,9 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import unquote
 
 def find_booking_link_duckduckgo(hotel_name):
     options = Options()
@@ -68,17 +71,31 @@ def find_booking_link_duckduckgo(hotel_name):
 from duckduckgo_search import DDGS
 
 def get_booking_url_by_hotel_name(hotel_name):
-    query = f"{hotel_name} site:booking.com"
-    with DDGS() as ddgs:
-        results = ddgs.text(query, max_results=5)
-        for result in results:
-            booking_url = result["href"]
+    try:
+        query = f"{hotel_name} site:booking.com"
+        search_url = f"https://html.duckduckgo.com/html/?q={query.replace(' ', '+')}"
+        headers = {
+            "User-Agent": "Mozilla/5.0"
+        }
 
-            if "?lang=" not in booking_url:
-                if "?" in booking_url:
-                    booking_url += "&lang=ru"
-                else:
-                    booking_url += "?lang=ru"
+        time.sleep(5)
 
-            return booking_url
+        response = requests.get(search_url, headers=headers, timeout=10)
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, "html.parser")
+            links = soup.find_all("a", href=True)
+            for link in links:
+                href = link["href"]
+                if "booking.com" in href:
+                    # Если ссылка обёрнута DuckDuckGo, вытаскиваем настоящий адрес
+                    if "uddg=" in href:
+                        url = href.split("uddg=")[-1]
+                        return unquote(url).split("&")[0]
+                    return href
+        else:
+            print(f"⚠️ Ошибка запроса DuckDuckGo: {response.status_code}")
+    except Exception as e:
+        print(f"❌ Ошибка при поиске отеля: {e}")
+
+    return None
 
