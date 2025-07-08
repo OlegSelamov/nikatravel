@@ -1,0 +1,1 @@
+worker: python kazunion_fetch.py

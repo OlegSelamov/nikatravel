@@ -1,3 +1,7 @@
-Flask
-gunicorn
+beautifulsoup4
 requests
+pillow
+imagehash
+selenium
+playwright
+duckduckgo-search
