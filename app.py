@@ -1,3 +1,9 @@
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
+from threading import Thread
+import kazunion_fetch
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import os
 import json
@@ -189,7 +195,7 @@ def confirm_booking():
     phone = request.form.get('phone')
     email = request.form.get('email')
 
-    message = f"🔥 Новое бронирование!\\ Тур: {hotel}\\ Город: {city}\\ Страна: {country}\\ Дата вылета: {departure_date}\\ Туристов: {tourists}\\ Ночей: {nights}\\ Цена: {total_price} ₸\\ Имя: {name}\\ Телефон: {phone}\\ Email: {email}"
+    message = f"🔥 Новое бронирование!\ Тур: {hotel}\ Город: {city}\ Страна: {country}\ Дата вылета: {departure_date}\ Туристов: {tourists}\ Ночей: {nights}\ Цена: {total_price} ₸\ Имя: {name}\ Телефон: {phone}\ Email: {email}"
 
     requests.post(
         f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
@@ -232,6 +238,9 @@ def admin_logout():
     session.pop('admin_logged_in', None)
     return redirect(url_for('admin_login'))
 
+from threading import Thread
+import kazunion_fetch
+
 @app.route('/admin/filter', methods=['GET', 'POST'])
 def admin_filter():
     config_path = os.path.join('data', 'kazunion_config.json')
@@ -255,15 +264,19 @@ def admin_filter():
         config['ADULT'] = request.form.get('ADULT')
         config['STARS'] = request.form.getlist('STARS')
 
-        # Сохраняем
+        # Сохраняем конфиг
         with open(config_path, 'w', encoding='utf-8') as f:
             json.dump(config, f, ensure_ascii=False, indent=2)
 
-        try:
-            subprocess.run(['python', 'pipeline.py'], check=True)
-            flash('✅ Парсинг успешно запущен!', 'success')
-        except subprocess.CalledProcessError as e:
-            flash(f'❌ Ошибка при запуске pipeline.py: {e}', 'danger')
+        # Запускаем парсинг в фоне
+        def run_parser():
+            try:
+                kazunion_fetch.run()
+            except Exception as e:
+                print(f"❌ Ошибка в казюнион парсинге: {e}")
+
+        Thread(target=run_parser).start()
+        flash('✅ Парсинг запущен в фоне!', 'success')
 
         return redirect(url_for('admin_filter'))
 

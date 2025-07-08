@@ -62,11 +62,11 @@
 
 </div>
 
-<!-- Фиксированная кнопка -->
-<form action="{{ url_for('booking_confirm', tour_id=tour_id) }}" method="post" id="bookForm">
+<!-- Форма перехода на подтверждение -->
+<form action="{{ url_for('confirmation_page', tour_id=tour_id) }}" method="get" id="bookForm">
   <input type="hidden" name="tourists" id="formTourists" value="1">
   <input type="hidden" name="nights" id="formNights" value="{{ tour.nights }}">
-  <input type="hidden" name="price" id="formPrice" value="{{ tour.price }}">
+  <input type="hidden" name="total_price" id="formPrice" value="{{ tour.price }}">
   <div class="tour-fixed-buttons">
     <button type="submit" id="bookButton" class="btn-book">
       Забронировать тур за {{ tour.price | default(0) }} ₸
@@ -109,13 +109,6 @@ function applyDates() {
 
   document.getElementById("dateForm").classList.add("hidden");
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('bookForm');
-  form.addEventListener('submit', function() {
-    // просто отправляем форму без window.location.href
-  });
-});
 </script>
 
 <style>
