@@ -6,4 +6,5 @@ selenium
 playwright
 duckduckgo-search
 gunicorn
+flask
 
