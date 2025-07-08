@@ -40,7 +40,7 @@ def run():
     currency = config.get("currency", "KZT")
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
+        browser = p.chromium.launch(headless=True)
         page = browser.new_page()
         print("🔄 Открываем Kazunion...")
         page.goto("https://online.kazunion.com/search_tour", timeout=60000, wait_until="domcontentloaded")
