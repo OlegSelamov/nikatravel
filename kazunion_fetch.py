@@ -1,3 +1,6 @@
+import subprocess
+import datetime
+import os
 import time
 import json
 import os
@@ -196,9 +199,22 @@ def run():
         finally:
             browser.close()
 
+def auto_push():
+    import subprocess, datetime, os
+
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    subprocess.run(['git', 'config', '--global', 'user.name', 'RailwayBot'])
+    subprocess.run(['git', 'config', '--global', 'user.email', 'railway@bot.com'])
+    subprocess.run(['git', 'add', 'data/filter.json'])
+    subprocess.run(['git', 'commit', '-m', f'Автообновление туров от {now}'])
+    subprocess.run(['git', 'push', 'origin', 'main'])
+
 if __name__ == "__main__":
     try:
         run()
+        auto_push()
     except Exception as e:
         print(f"❌ Ошибка выполнения скрипта: {e}")
+
+
 
