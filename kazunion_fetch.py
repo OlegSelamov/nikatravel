@@ -216,5 +216,20 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"❌ Ошибка выполнения скрипта: {e}")
 
+# === Auto git push to GitHub ===
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+if GITHUB_TOKEN:
+    repo_url = "https://{token}@github.com/OlegSelamov/nikatravel.git".format(token=GITHUB_TOKEN)
+    try:
+        subprocess.run(["git", "config", "--global", "user.email", "parser@nikatravel.kz"], check=True)
+        subprocess.run(["git", "config", "--global", "user.name", "NikaTravel Parser"], check=True)
+        subprocess.run(["git", "remote", "set-url", "origin", repo_url], check=True)
 
-
+        subprocess.run(["git", "add", "."], check=True)
+        subprocess.run(["git", "commit", "-m", f"Автообновление: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"], check=True)
+        subprocess.run(["git", "push", "origin", "main"], check=True)
+        print("✅ Автоматический push в GitHub выполнен.")
+    except subprocess.CalledProcessError as e:
+        print("❌ Ошибка при push в GitHub:", e)
+else:
+    print("⚠️ Переменная GITHUB_TOKEN не установлена — git push пропущен.")
