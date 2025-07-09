@@ -1,5 +1,18 @@
 from bs4 import BeautifulSoup
 import json
+import sys
+import io
+import logging
+
+logger = logging.getLogger("parser_logger")
+logger.setLevel(logging.INFO)
+
+file_handler = logging.FileHandler("parser.log", encoding="utf-8")
+formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+file_handler.setFormatter(formatter)
+
+if not logger.hasHandlers():
+    logger.addHandler(file_handler)
 
 # Читаем лимит из конфигурации
 try:
@@ -79,7 +92,7 @@ for row in rows:
             tour["installment_months"] = "12"
             tour["price_per_month"] = str(price_per_month)
         except Exception as e:
-            print(f"⚠️ Ошибка при расчёте цены: {e}")
+            logger.info(f"⚠️ Ошибка при расчёте цены: {e}")
 
     except Exception:
         continue
@@ -114,5 +127,4 @@ existing.extend(results)
 with open("data/filter.json", "w", encoding="utf-8") as f:
     json.dump(existing, f, indent=2, ensure_ascii=False)
 
-print(f"✅ Добавлено {len(results)} новых записей. Всего теперь: {len(existing)}")
-
+logger.info(f"✅ Добавлено {len(results)} новых записей. Всего теперь: {len(existing)}")

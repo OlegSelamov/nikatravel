@@ -7,6 +7,8 @@ import time
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import unquote
+import sys
+import io
 
 def find_booking_link_duckduckgo(hotel_name):
     options = Options()
@@ -23,7 +25,7 @@ def find_booking_link_duckduckgo(hotel_name):
 
     try:
         search_url = f"https://www.booking.com/searchresults.html?ss={hotel_name.replace(' ', '+')}"
-        print(f"🔍 Открываем Booking: {search_url}")
+        logger.info(f"🔍 Открываем Booking: {search_url}")
         driver.get(search_url)
 
         WebDriverWait(driver, 15).until(
@@ -36,7 +38,7 @@ def find_booking_link_duckduckgo(hotel_name):
 
         first_card = cards[0]
         link_element = first_card.find_element(By.CSS_SELECTOR, "a")
-        print("👆 Кликаем по карточке...")
+        logger.info("👆 Кликаем по карточке...")
 
         original_tabs = driver.window_handles
         driver.execute_script("arguments[0].click();", link_element)
@@ -59,16 +61,27 @@ def find_booking_link_duckduckgo(hotel_name):
             else:
                 final_url += "?lang=ru"
 
-        print(f"✅ Финальный URL: {final_url}")
+        logger.info(f"✅ Финальный URL: {final_url}")
         return final_url
 
     except Exception as e:
-        print(f"❌ Ошибка при переходе: {e}")
+        logger.info(f"❌ Ошибка при переходе: {e}")
         with open("booking_debug.html", "w", encoding="utf-8") as f:
             f.write(driver.page_source)
         return None
    
 from duckduckgo_search import DDGS
+import logging
+
+logger = logging.getLogger("parser_logger")
+logger.setLevel(logging.INFO)
+
+file_handler = logging.FileHandler("parser.log", encoding="utf-8")
+formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+file_handler.setFormatter(formatter)
+
+if not logger.hasHandlers():
+    logger.addHandler(file_handler)
 
 def get_booking_url_by_hotel_name(hotel_name):
     try:
@@ -93,9 +106,8 @@ def get_booking_url_by_hotel_name(hotel_name):
                         return unquote(url).split("&")[0]
                     return href
         else:
-            print(f"⚠️ Ошибка запроса DuckDuckGo: {response.status_code}")
+            logger.info(f"⚠️ Ошибка запроса DuckDuckGo: {response.status_code}")
     except Exception as e:
-        print(f"❌ Ошибка при поиске отеля: {e}")
+        logger.info(f"❌ Ошибка при поиске отеля: {e}")
 
     return None
-

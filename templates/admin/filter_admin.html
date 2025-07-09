@@ -31,8 +31,11 @@
     </div>
 
     <h2>Фильтр Туров Kazunion</h2>
-	
-	    <!-- Одна форма — Сохранить и запустить парсинг -->
+	 	  <!-- Одна форма — Сохранить и запустить парсинг -->
+<div style="display: flex; gap: 40px; align-items: flex-start;">
+  <!-- Левая часть: фильтр -->
+  <div style="flex: 1;">
+    <form method="post">
     <form method="post">
         <div class="form-block">
             <label>Город отправления:</label>
@@ -129,7 +132,35 @@
         </div>
 
         <button type="submit" class="btn">💾 Сохранить и 🚀 Начать парсинг</button>
-    </form>
+        </form>
+      </div>
+	
+  <!-- Правая часть: лог -->
+  <div style="width: 500px;">
+    <h3>Логи выполнения:</h3>
+    <div id="log-box" style="
+      background: #fff;
+      color: #333;
+      border: 1px solid #ccc;
+      padding: 5px;
+      height: 350px;
+      overflow-y: auto;
+      border-radius: 10px;
+      font-family: monospace;
+      font-size: 13px;
+      white-space: pre-wrap;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    ">
+    </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          <div class="log-message log-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endwith %}
+    </div>
+  </div>
+</div>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -175,5 +206,20 @@
             {% endfor %}
         </tbody>
     </table>
+<!-- Автообновление логов -->
+<script>
+  function updateLog() {
+    fetch('/admin/log_text')
+      .then(response => response.text())
+      .then(data => {
+        const logBox = document.getElementById('log-box');
+        logBox.textContent = data;
+        logBox.scrollTop = logBox.scrollHeight;
+      });
+  }
+
+  updateLog();
+  setInterval(updateLog, 5000);
+</script>
 </body>
 </html>

@@ -1,4 +1,5 @@
-
+import subprocess
+import datetime
 import os
 import json
 import shutil
@@ -7,6 +8,19 @@ import imagehash
 
 from scraper_ddg import get_booking_url_by_hotel_name
 from booking_scraper_vlite_plus import scrape_booking_vlite_plus, extract_description
+import sys
+import io
+import logging
+
+logger = logging.getLogger("parser_logger")
+logger.setLevel(logging.INFO)
+
+file_handler = logging.FileHandler("parser.log", encoding="utf-8")
+formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+file_handler.setFormatter(formatter)
+
+if not logger.hasHandlers():
+    logger.addHandler(file_handler)
 
 FILTER_JSON = "data/filter.json"
 IMG_FOLDER = "static/img"
@@ -63,7 +77,7 @@ def is_tour_filled(tour):
     )
 
 def main():
-    print("🚀 START: auto_booking_scraper запускается...")
+    logger.info("🚀 START: auto_booking_scraper запускается...")
     with open(FILTER_JSON, "r", encoding="utf-8") as f:
         tours = json.load(f)
 
@@ -71,24 +85,24 @@ def main():
 
     for i, tour in enumerate(tours):
         if is_tour_filled(tour):
-            print(f"⏭ Уже заполнен: {tour['hotel']} — пропускаем")
+            logger.info(f"⏭ Уже заполнен: {tour['hotel']} — пропускаем")
             continue
 
         hotel_name = tour["hotel"]
-        print(f"🔍 [{i}] Ищем Booking для: {hotel_name}")
+        logger.info(f"🔍 [{i}] Ищем Booking для: {hotel_name}")
         url = get_booking_url_by_hotel_name(hotel_name)
         if not url:
-            print(f"❌ Booking не найден: {hotel_name}")
+            logger.info(f"❌ Booking не найден: {hotel_name}")
             continue
 
-        print(f"✅ Booking найден: {url}")
+        logger.info(f"✅ Booking найден: {url}")
 
         folder_name = hotel_name.replace(" ", "_").replace("*", "").replace("/", "_")
         folder_path = f"data/{folder_name}"
 
         scrape_booking_vlite_plus(url, folder_path)
         if not os.path.isdir(folder_path):
-            print(f"❌ Папка не найдена: {folder_path}")
+            logger.info(f"❌ Папка не найдена: {folder_path}")
             continue
 
         image_files = [
@@ -99,7 +113,7 @@ def main():
 
         valid_images = [f for f in image_files if is_valid_image(f)]
         if not valid_images:
-            print(f"❌ Нет подходящих фото для {hotel_name}")
+            logger.info(f"❌ Нет подходящих фото для {hotel_name}")
             continue
 
         unique_images = remove_similar_images(valid_images)
@@ -128,22 +142,32 @@ def main():
              
         tours[i] = tour
         updated += 1
-        print(f"✅ [{i}] Обновлено: {hotel_name}")
+        logger.info(f"✅ [{i}] Обновлено: {hotel_name}")
 
     # 💾 Сохраняем JSON один раз в конце
     with open(FILTER_JSON, "w", encoding="utf-8") as f:
         json.dump(tours, f, ensure_ascii=False, indent=2)
-    print("💾 filter.json сохранён после обработки всех туров")
+    logger.info("💾 filter.json сохранён после обработки всех туров")
 
-    print(f"📦 Всего обновлено туров: {updated}")
+    logger.info(f"📦 Всего обновлено туров: {updated}")
     missing = [t["hotel"] for t in tours if not is_tour_filled(t)]
     if missing:
-        print("🛑 Пропущены:")
+        logger.info("🛑 Пропущены:")
         for name in missing:
-            print("  —", name)
+            logger.info("  —", name)
 
 if __name__ == "__main__":
     try:
         main()
     except Exception as e:
-        print(f"💥 ОШИБКА auto_booking_scraper: {e}")
+        logger.info(f"💥 ОШИБКА auto_booking_scraper: {e}")
+
+def auto_push():
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    subprocess.run(['git', 'config', '--global', 'user.name', 'RailwayBot'])
+    subprocess.run(['git', 'config', '--global', 'user.email', 'railway@bot.com'])
+    subprocess.run(['git', 'add', '.'])
+    subprocess.run(['git', 'commit', '-m', f'Автообновление туров после обработки Booking от {now}'])
+    subprocess.run(['git', 'push', 'origin', 'main'])
+
+auto_push()

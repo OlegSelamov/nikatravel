@@ -10,6 +10,19 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import sys
+import io
+import logging
+
+logger = logging.getLogger("parser_logger")
+logger.setLevel(logging.INFO)
+
+file_handler = logging.FileHandler("parser.log", encoding="utf-8")
+formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+file_handler.setFormatter(formatter)
+
+if not logger.hasHandlers():
+    logger.addHandler(file_handler)
 
 def download_image(src, path):
     try:
@@ -19,7 +32,7 @@ def download_image(src, path):
                 f.write(r.content)
             return True
     except Exception as e:
-        print(f"Ошибка загрузки {src}: {e}")
+        logger.info(f"Ошибка загрузки {src}: {e}")
     return False
 
 def extract_hd_images_from_json(html):
@@ -50,23 +63,23 @@ def scrape_booking_vlite_plus(url, folder_name="downloaded_images_plus"):
     headers = {"User-Agent": "Mozilla/5.0"}
     r = requests.get(url, headers=headers)
     if r.status_code != 200:
-        print("❌ Не удалось загрузить страницу.")
+        logger.info("❌ Не удалось загрузить страницу.")
         return
 
     urls = extract_hd_images_from_json(r.text)
 
     if not urls:
-        print("⚠️ HD-фотографии в JSON не найдены.")
+        logger.info("⚠️ HD-фотографии в JSON не найдены.")
         return
 
     count = 0
     for i, src in enumerate(urls):
         filename = os.path.join(folder_name, f"photo_{i+1}.jpg")
         if download_image(src, filename):
-            print(f"✅ Скачано: {filename}")
+            logger.info(f"✅ Скачано: {filename}")
             count += 1
 
-    print(f"📦 Всего скачано: {count} изображений")
+    logger.info(f"📦 Всего скачано: {count} изображений")
 
 def extract_description(url, folder_path):
     try:
@@ -88,7 +101,7 @@ def extract_description(url, folder_path):
             else:
                 url += "?lang=ru"
 
-        print("🌐 Итоговый URL:", url)
+        logger.info("🌐 Итоговый URL:", url)
         driver.get(url)
         
         os.makedirs(folder_path, exist_ok=True)
@@ -102,13 +115,13 @@ def extract_description(url, folder_path):
             description = element.text.strip()
 
             if not description:
-                print("⚠️ Описание пустое — не сохраняем в JSON.")
+                logger.info("⚠️ Описание пустое — не сохраняем в JSON.")
             else:
                 with open(os.path.join(folder_path, "description.txt"), "w", encoding="utf-8") as f:
                     f.write(description)
 
-                print("📄 Описание успешно сохранено через Selenium (element.text)")
-                print("📌 Вставляемое описание:", description[:100], "...")
+                logger.info("📄 Описание успешно сохранено через Selenium (element.text)")
+                logger.info("📌 Вставляемое описание:", description[:100], "...")
 
             # Добавляем в filter.json
             script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -124,15 +137,15 @@ def extract_description(url, folder_path):
 
                 for entry in data:
                     entry_name = normalize(entry.get("hotel", ""))
-                    print("📌 hotel_key:", hotel_key)
-                    print("🔍 Сравниваем с:", entry_name)
-                    print("🔍 Проверяем:", entry.get("hotel", "NO HOTEL"))
+                    logger.info("📌 hotel_key:", hotel_key)
+                    logger.info("🔍 Сравниваем с:", entry_name)
+                    logger.info("🔍 Проверяем:", entry.get("hotel", "NO HOTEL"))
 
                     if hotel_key in entry_name or entry_name in hotel_key:
-                        print("💾 Записываем в JSON:", description[:100], "...")
+                        logger.info("💾 Записываем в JSON:", description[:100], "...")
                         entry["description"] = description
-                        print("📋 Старая строка JSON:", entry)
-                        print("✅ Найден отель и обновлён:", entry["hotel"])
+                        logger.info("📋 Старая строка JSON:", entry)
+                        logger.info("✅ Найден отель и обновлён:", entry["hotel"])
                         updated = True
                         break
 
@@ -142,21 +155,21 @@ def extract_description(url, folder_path):
                         f.flush()
                         os.fsync(f.fileno())
                         f.close()
-                        print("📁 Записали filter.json — открой и проверь вручную.")
-                        print("✅ Описание обновлено в filter.json")
+                        logger.info("📁 Записали filter.json — открой и проверь вручную.")
+                        logger.info("✅ Описание обновлено в filter.json")
                 else:
-                    print(f"⚠️ Отель не найден в filter.json. Проверь имя папки и отеля.")
+                    logger.info(f"⚠️ Отель не найден в filter.json. Проверь имя папки и отеля.")
             else:
-                print("⚠️ Файл filter.json не найден по пути data/filter.json")
+                logger.info("⚠️ Файл filter.json не найден по пути data/filter.json")
 
 
         except:
-            print("❌ Блок data-testid='property-description' не найден даже после ожидания")
+            logger.info("❌ Блок data-testid='property-description' не найден даже после ожидания")
 
         driver.quit()
 
     except Exception as e:
-        print(f"⚠️ Ошибка при вытаскивании описания: {e}")
+        logger.info(f"⚠️ Ошибка при вытаскивании описания: {e}")
 
     if __name__ == "__main__": 
         return

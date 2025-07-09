@@ -195,7 +195,17 @@ def confirm_booking():
     phone = request.form.get('phone')
     email = request.form.get('email')
 
-    message = f"🔥 Новое бронирование!\ Тур: {hotel}\ Город: {city}\ Страна: {country}\ Дата вылета: {departure_date}\ Туристов: {tourists}\ Ночей: {nights}\ Цена: {total_price} ₸\ Имя: {name}\ Телефон: {phone}\ Email: {email}"
+    message = f"""🔥 Новое бронирование!
+    Тур: {hotel}
+    Город: {city}
+    Страна: {country}
+    Дата вылета: {departure_date}
+    Туристов: {tourists}
+    Ночей: {nights}
+    Цена: {total_price} ₸
+    Имя: {name}
+    Телефон: {phone}
+    Email: {email}"""
 
     requests.post(
         f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
@@ -284,6 +294,15 @@ def admin_filter():
     tours = load_tours()
     return render_template('admin/filter_admin.html', config=config, tours=tours)
     
+@app.route('/admin/log_text')
+def admin_log_text():
+    try:
+        with open('parser.log', 'r', encoding='utf-8') as f:
+            lines = f.readlines()[-300:]  # последние 300 строк
+        return ''.join(lines)
+    except:
+        return 'Лог-файл не найден или пуст.'
+
 @app.route('/admin')
 def admin_dashboard():
     return render_template('admin/dashboard.html')

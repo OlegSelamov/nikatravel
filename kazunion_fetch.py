@@ -1,11 +1,21 @@
-import subprocess
-import datetime
 import os
 import time
 import json
-import os
+import datetime
+import subprocess
+import logging
 from pathlib import Path
 from playwright.sync_api import sync_playwright
+
+
+logger = logging.getLogger("parser_logger")
+logger.setLevel(logging.INFO)
+
+file_handler = logging.FileHandler("parser.log", encoding='utf-8')
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(formatter)
+
+logger.addHandler(file_handler)
 
 CONFIG_PATH = "data/kazunion_config.json"
 
@@ -19,20 +29,20 @@ def safe_check(page, selector):
         checkbox.wait_for(timeout=5000)
         if checkbox.is_visible() and not checkbox.is_checked():
             checkbox.check(force=True)
-            print(f"✅ Чекбокс {selector} включен")
+            logger.info(f"✅ Чекбокс {selector} включен")
         else:
-            print(f"ℹ️ Чекбокс {selector} уже включён или скрыт")
+            logger.info(f"ℹ️ Чекбокс {selector} уже включён или скрыт")
     except Exception as e:
-        print(f"⚠️ Не удалось поставить галочку {selector}: {e}")
+        logger.warning(f"⚠️ Не удалось поставить галочку {selector}: {e}")
 
 def wait_for_loader(page):
     try:
-        print("⏳ Ждём загрузку...")
+        logger.info("⏳ Ждём загрузку...")
         page.wait_for_selector("div.loader", state="attached", timeout=3000)
         page.wait_for_selector("div.loader", state="detached", timeout=15000)
-        print("✅ Загрузка завершена")
+        logger.info("✅ Загрузка завершена")
     except:
-        print("⚠️ Спиннер не обнаружен — продолжаем")
+        logger.warning("⚠️ Спиннер не обнаружен — продолжаем")
 
 def run():
     config = read_config()
@@ -45,7 +55,7 @@ def run():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
-        print("🔄 Открываем Kazunion...")
+        logger.info("🔄 Открываем Kazunion...")
         page.goto("https://online.kazunion.com/search_tour", timeout=60000, wait_until="domcontentloaded")
         page.wait_for_timeout(5000)
 
@@ -53,19 +63,19 @@ def run():
             # Город
             page.evaluate("document.querySelector(\"select[name='TOWNFROMINC']\").style.display = 'block'")
             page.select_option("select[name='TOWNFROMINC']", config["city_code"])
-            print(f"🏙 Город отправления выбран: {config['city_code']}")
+            logger.info(f"🏙 Город отправления выбран: {config['city_code']}")
             wait_for_loader(page)
 
             # Страна
-            print("⏳ Ждём появление страны...")
+            logger.info("⏳ Ждём появление страны...")
             for _ in range(30):
                 display = page.evaluate("getComputedStyle(document.querySelector(\"select[name='STATEINC']\")).display")
                 if display != "none":
-                    print("✅ Страна стала видимой")
+                    logger.info("✅ Страна стала видимой")
                     break
                 time.sleep(0.5)
             else:
-                print("⚠️ Страна не появилась — пробуем разблокировать вручную")
+                logger.warning("⚠️ Страна не появилась — пробуем разблокировать вручную")
                 page.evaluate("document.querySelector(\"select[name='STATEINC']\").style.display = 'block'")
                 page.evaluate("document.querySelector(\"select[name='STATEINC']\").style.opacity = '1'")
                 time.sleep(1)
@@ -77,11 +87,11 @@ def run():
             )
 
             if config["country_code"] not in available_values:
-                print(f"❌ Страна с кодом {config['country_code']} недоступна для этого города!")
+                logger.error(f"❌ Страна с кодом {config['country_code']} недоступна для этого города!")
                 return
 
             page.select_option("select[name='STATEINC']", config["country_code"])
-            print(f"🌍 Страна выбрана: {config['country_code']}")
+            logger.info(f"🌍 Страна выбрана: {config['country_code']}")
             wait_for_loader(page)
 
             # Дата
@@ -91,10 +101,10 @@ def run():
             page.keyboard.press("Enter")
             page.mouse.click(100, 100)  # клик, чтобы закрыть календарь
             page.wait_for_timeout(1000)
-            print(f"📅 Установлена дата вылета: {config['departure_date']}")
+            logger.info(f"📅 Установлена дата вылета: {config['departure_date']}")
 
             # Ночи — умное ожидание
-            print("⏳ Ждём поле 'Ночей'...")
+            logger.info("⏳ Ждём поле 'Ночей'...")
 
             # Максимум 20 попыток (10 сек)
             for _ in range(20):
@@ -110,15 +120,15 @@ def run():
                     }
                 """)
                 if ready:
-                    print("🌙 Поле 'Ночей' активировано")
+                    logger.info("🌙 Поле 'Ночей' активировано")
                     break
                 time.sleep(0.5)
             else:
-                print("❌ Поле 'Ночей' так и не стало доступным — прерываем")
+                logger.error("❌ Поле 'Ночей' так и не стало доступным — прерываем")
                 return
 
             page.select_option("select[name='NIGHTS_FROM']", nights)
-            print(f"🌙 Кол-во ночей установлено: {nights}")
+            logger.info(f"🌙 Кол-во ночей установлено: {nights}")
 
             # Взрослые
             try:
@@ -128,18 +138,18 @@ def run():
                 for i in range(options.count()):
                     if options.nth(i).inner_text().strip() == adults:
                         options.nth(i).click(force=True)
-                        print(f"👥 Взрослых: {adults}")
+                        logger.info(f"👥 Взрослых: {adults}")
                         break
             except Exception as e:
-                print(f"❌ Ошибка при выборе взрослых: {e}")
+                logger.error(f"❌ Ошибка при выборе взрослых: {e}")
 
             # Валюта
             try:
                 page.evaluate("document.querySelector(\"select[name='CURRENCY']\").style.display = 'block'")
                 page.select_option("select[name='CURRENCY']", currency)
-                print(f"💱 Валюта: {currency}")
+                logger.info(f"💱 Валюта: {currency}")
             except Exception as e:
-                print(f"❌ Не удалось выбрать валюту: {e}")
+                logger.error(f"❌ Не удалось выбрать валюту: {e}")
 
             # Питание
             try:
@@ -150,9 +160,9 @@ def run():
                     checkbox.wait_for(state="visible", timeout=3000)
                     if not checkbox.is_checked():
                         checkbox.check(force=True)
-                        print(f"✅ Питание {meal_code} включено")
+                        logger.info(f"✅ Питание {meal_code} включено")
             except Exception as e:
-                print(f"⚠️ Проблема с питанием: {e}")
+                logger.warning(f"⚠️ Проблема с питанием: {e}")
 
             # Звезды
             try:
@@ -161,9 +171,9 @@ def run():
                     locator = page.locator(f".STARS input[type='checkbox'][value='{star}']")
                     if locator.is_visible() and not locator.is_checked():
                         locator.check(force=True)
-                        print(f"⭐ Звезда {star} включена")
+                        logger.info(f"⭐ Звезда {star} включена")
             except Exception as e:
-                print(f"❌ Ошибка при установке звёзд: {e}")
+                logger.error(f"❌ Ошибка при установке звёзд: {e}")
 
             # Фильтры
             safe_check(page, "input[name='FREIGHT']")
@@ -176,9 +186,9 @@ def run():
                 page.click("button.load.right")
                 page.wait_for_timeout(3000)
                 page.click("button.load.right")
-                print("🔍 Поиск запущен")
+                logger.info("🔍 Поиск запущен")
             except Exception as e:
-                print(f"❌ Кнопка 'Искать' не сработала: {e}")
+                logger.error(f"❌ Кнопка 'Искать' не сработала: {e}")
 
             # Сохраняем
             try:
@@ -189,18 +199,25 @@ def run():
                 with open("data/kazunion_result.html", "w", encoding="utf-8") as f:
                     f.write(html)
                 page.screenshot(path="data/debug_table.png", full_page=True)
-                print("📥 HTML и скриншот сохранены")
+                logger.info("📥 HTML и скриншот сохранены")
 
-                os.system("python parserhtml.py")
-                os.system("python auto_booking_scraper.py")
+                run_and_log("python parserhtml.py")
+                run_and_log("python auto_booking_scraper.py")
             except Exception as e:
-                print(f"❌ Ошибка при сохранении или парсинге: {e}")
+                logger.error(f"❌ Ошибка при сохранении или парсинге: {e}")
 
         finally:
             browser.close()
 
-def auto_push():
-    import subprocess, datetime, os
+def run_and_log(command):
+    logger.info(f"🚀 Запускаем: {command}")
+    try:
+        result = subprocess.run(command, capture_output=True, text=True, shell=True)
+        logger.info(result.stdout)
+        if result.stderr:
+            logger.error(result.stderr)
+    except Exception as e:
+        logger.error(f"❌ Ошибка при запуске {command}: {e}"), datetime, os
 
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     subprocess.run(['git', 'config', '--global', 'user.name', 'RailwayBot'])
@@ -214,22 +231,4 @@ if __name__ == "__main__":
         run()
         auto_push()
     except Exception as e:
-        print(f"❌ Ошибка выполнения скрипта: {e}")
-
-# === Auto git push to GitHub ===
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-if GITHUB_TOKEN:
-    repo_url = "https://{token}@github.com/OlegSelamov/nikatravel.git".format(token=GITHUB_TOKEN)
-    try:
-        subprocess.run(["git", "config", "--global", "user.email", "parser@nikatravel.kz"], check=True)
-        subprocess.run(["git", "config", "--global", "user.name", "NikaTravel Parser"], check=True)
-        subprocess.run(["git", "remote", "set-url", "origin", repo_url], check=True)
-
-        subprocess.run(["git", "add", "."], check=True)
-        subprocess.run(["git", "commit", "-m", f"Автообновление: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"], check=True)
-        subprocess.run(["git", "push", "origin", "main"], check=True)
-        print("✅ Автоматический push в GitHub выполнен.")
-    except subprocess.CalledProcessError as e:
-        print("❌ Ошибка при push в GitHub:", e)
-else:
-    print("⚠️ Переменная GITHUB_TOKEN не установлена — git push пропущен.")
+        logger.error(f"❌ Ошибка выполнения скрипта: {e}")
