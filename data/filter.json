@@ -689,5 +689,22 @@
     "image": "",
     "gallery": [],
     "description": ""
+  },
+  {
+    "departure_date": "25.08.2025",
+    "city": "Алматы (GDS: AirAstana, прилет в Тбилиси)",
+    "country": "Грузия",
+    "hotel": "Hotel Sapphire Bakuriani 5* (Бакуриани)",
+    "nights": "7",
+    "meal": "BB",
+    "seats": "-",
+    "price": "501072",
+    "old_price": "626340",
+    "discount_percent": "20",
+    "price_per_month": "46767",
+    "installment_months": "12",
+    "image": "",
+    "gallery": [],
+    "description": ""
   }
 ]
