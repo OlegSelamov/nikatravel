@@ -797,5 +797,22 @@
       "Hotel_Sapphire_Bakuriani_5_(Бакуриани)_45.jpg"
     ],
     "description": ""
+  },
+  {
+    "departure_date": "08.08.2025",
+    "city": "Алматы (GDS: AirAstana, прилет в Тбилиси)",
+    "country": "Грузия",
+    "hotel": "Panorama Lisi Grand Hotel 5* (Тбилиси)",
+    "nights": "7",
+    "meal": "BB",
+    "seats": "-",
+    "price": "521136",
+    "old_price": "651420",
+    "discount_percent": "20",
+    "price_per_month": "48639",
+    "installment_months": "12",
+    "image": "",
+    "gallery": [],
+    "description": ""
   }
 ]
