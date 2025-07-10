@@ -3,6 +3,7 @@ requests
 pillow
 imagehash
 selenium
+playwright
 duckduckgo-search
 gunicorn
 flask
