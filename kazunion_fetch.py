@@ -209,26 +209,9 @@ def run():
         finally:
             browser.close()
 
-def run_and_log(command):
-    logger.info(f"🚀 Запускаем: {command}")
-    try:
-        result = subprocess.run(command, capture_output=True, text=True, shell=True)
-        logger.info(result.stdout)
-        if result.stderr:
-            logger.error(result.stderr)
-    except Exception as e:
-        logger.error(f"❌ Ошибка при запуске {command}: {e}"), datetime, os
-
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    subprocess.run(['git', 'config', '--global', 'user.name', 'RailwayBot'])
-    subprocess.run(['git', 'config', '--global', 'user.email', 'railway@bot.com'])
-    subprocess.run(['git', 'add', 'data/filter.json'])
-    subprocess.run(['git', 'commit', '-m', f'Автообновление туров от {now}'])
-    subprocess.run(['git', 'push', 'origin', 'main'])
-
 if __name__ == "__main__":
     try:
         run()
-        auto_push()
     except Exception as e:
         logger.error(f"❌ Ошибка выполнения скрипта: {e}")
+

@@ -10,26 +10,22 @@ html, body {
 }
 
 body {
-    background: linear-gradient(135deg, #ffe4cc, #fff3e6);
-    font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 0;
+    background-image: url("/static/img/background_pattern_sand.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: sans-serif;
     padding-top: 0px; /* Учитываем фиксированный хедер */
 }
 
 /* Хедер */
-.header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: linear-gradient(to bottom, #f4d8a8, #e0be8c);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    height: 50px;
-    display: flex;
-    align-items: center;
-	max-width: 100%;
-    box-sizing: border-box;
+header {
+  background: rgba(255, 255, 255, 0.7); /* полупрозрачный */
+  backdrop-filter: blur(8px); /* эффект стекла */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 body {
@@ -57,13 +53,19 @@ body {
 }
 
 .nav-link {
-    text-decoration: none;
-    color: #4e382a;
-    font-weight: bold;
-    font-size: 18px;
-    padding: 8px 14px;
-    border-radius: 8px;
-    transition: background 0.3s, color 0.3s;
+  background: rgba(255, 255, 255, 0.8); /* стекло с лёгкой прозрачностью */
+  backdrop-filter: blur(10px);         /* размытие фона */
+  padding: 14px 32px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  margin: 20px auto;
+  width: fit-content;
+  font-size: 16px;
+  z-index: 999;
 }
 
 .nav-link:hover {
@@ -434,11 +436,9 @@ body {
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.7); /* полупрозрачный */
+  backdrop-filter: blur(8px); /* эффект стекла */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 nav {
@@ -454,10 +454,21 @@ nav {
     align-items: flex-start;
   }
 
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+header {
+  background: rgba(255, 255, 255, 0.8); /* стекло с лёгкой прозрачностью */
+  backdrop-filter: blur(10px);         /* размытие фона */
+  padding: 14px 32px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  margin: 20px auto;
+  width: fit-content;
+  font-size: 16px;
+  z-index: 999;
+}
 
   .logo {
     font-size: 20px;
@@ -1071,6 +1082,8 @@ nav#main-menu {
   margin-top: 0 !important;
   margin-bottom: 10px;
 }
+
+
 
 
 

@@ -6,14 +6,13 @@
     <title>Вход в админку Nika Travel</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
 </head>
-<body>
-        <h2> Администратор Nika Travel</h2>
-        {% if error %}
-            <p style="color: red;">{{ error }}</p>
-        {% endif %}
-        <form method="POST">
-            <input type="password" name="password" placeholder="Введите пароль" required>
-            <button type="submit">Войти</button>
-        </form>
-</body>
+<div class="login-wrapper">
+  <div class="login-box">
+    <img src="/static/img/nika_logo.png" alt="Nika Travel" class="logo">
+    <form method="POST" action="/admin/login">
+      <input type="password" name="password" placeholder="Пароль" required>
+      <button type="submit">Войти</button>
+    </form>
+  </div>
+</div>
 </html>

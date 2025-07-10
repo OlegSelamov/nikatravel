@@ -1,8 +1,11 @@
 body {
-    background: linear-gradient(135deg, #ffe4cc, #fff3e6);
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    padding: 50px;
+    font-family: sans-serif;
+    background-color: #fffaf0;
+    background-image: url('/static/img/background_pattern_sand.jpeg');
+    background-repeat: repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 h2 {
@@ -298,6 +301,56 @@ button:hover {
   background: #2c80c8;
 }
 
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-box {
+  background: rgba(255, 255, 255, 0.4);
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 350px;
+  width: 100%;
+}
+
+.logo {
+  width: 250px;
+  margin-bottom: 0px;
+}
+
+.login-box h1 {
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.login-box input {
+  width: 75%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.login-box button {
+  background-color: #f4a261;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 82%;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.login-box button:hover {
+  background-color: #e76f51;
+}
 
 
 
