@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Фильтр туров</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
     <style>
         body { font-family: sans-serif; background-color: #fffaf0; margin: 20px; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
@@ -130,7 +130,7 @@
             <input type="number" name="limit" min="1" max="50" value="{{ config.limit or 10 }}">
         </div>
 
-        <button type="submit" class="btn">💾 Сохранить и 🚀 Начать парсинг</button>
+         <button type="submit" name="start_parser" class="btn">Запустить парсинг</button>
     </form>
 </div>
 	
