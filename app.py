@@ -248,9 +248,6 @@ def admin_logout():
     session.pop('admin_logged_in', None)
     return redirect(url_for('admin_login'))
 
-from threading import Thread
-import kazunion_fetch
-
 @app.route('/admin/filter', methods=['GET', 'POST'])
 def admin_filter():
     config_path = os.path.join('data', 'kazunion_config.json')
@@ -694,23 +691,6 @@ def hotel_detail_page(index):
     with open('data/hotels.json', 'r', encoding='utf-8') as f:
         hotels = json.load(f)
     return render_template('hotel_details.html', hotel=hotels[index])
-    
-    import subprocess
-
-import subprocess
-
-@app.route('/admin/parse')
-def admin_parse():
-    if not session.get('admin_logged_in'):
-        return redirect(url_for('admin_login'))
-
-    try:
-        subprocess.run(['python', 'pipeline.py'], check=True)
-        message = "✅ Парсинг завершён успешно!"
-    except subprocess.CalledProcessError as e:
-        message = f"❌ Ошибка при выполнении: {e}"
-
-    return f"<h2>{message}</h2><a href='{url_for('admin_filter')}'>← Назад</a>"
     
     if __name__ == '__main__':
         app.run(debug=True)
