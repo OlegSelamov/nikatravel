@@ -291,6 +291,19 @@ def admin_filter():
     tours = load_tours()
     return render_template('admin/filter_admin.html', config=config, tours=tours)
     
+@app.route('/update', methods=['POST'])
+def update_data():
+    auth = request.headers.get("Authorization")
+    if auth != f"Bearer {os.getenv('RENDER_SECRET_KEY')}"):
+        return "Unauthorized", 403
+
+    data = request.json
+    with open('data/filter.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+    print("✅ Обновлён filter.json с данными от Railway")
+    return "OK", 200
+
 @app.route('/admin/log_text')
 def admin_log_text():
     try:

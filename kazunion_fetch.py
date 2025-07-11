@@ -209,6 +209,33 @@ def run():
         finally:
             browser.close()
 
+def send_to_render():
+    import requests
+
+    json_path = "data/filter.json"
+    if not os.path.exists(json_path):
+        logger.error("❌ Файл filter.json не найден, нечего отправлять.")
+        return
+
+    with open(json_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    url = os.getenv("RENDER_API_URL")
+    secret = os.getenv("RENDER_SECRET_KEY")
+
+    if not url or not secret:
+        logger.error("❌ Переменные RENDER_API_URL или RENDER_SECRET_KEY не заданы.")
+        return
+
+    headers = {"Authorization": f"Bearer {secret}"}
+
+    try:
+        response = requests.post(url, json=data, headers=headers)
+        logger.info(f"✅ Данные отправлены на сайт: {response.status_code} {response.text}")
+    except Exception as e:
+        logger.error(f"❌ Ошибка при отправке на сайт: {e}")
+
+send_to_render()
 if __name__ == "__main__":
     try:
         run()
