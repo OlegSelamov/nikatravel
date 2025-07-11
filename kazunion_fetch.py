@@ -3,6 +3,7 @@ import time
 import json
 import datetime
 import subprocess
+import requests
 import logging
 from pathlib import Path
 from playwright.sync_api import sync_playwright
@@ -211,8 +212,6 @@ def run():
             browser.close()
 
 def send_to_render():
-    import requests
-
     json_path = "data/filter.json"
     if not os.path.exists(json_path):
         logger.error("❌ Файл filter.json не найден, нечего отправлять.")

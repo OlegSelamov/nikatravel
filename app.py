@@ -294,6 +294,8 @@ def admin_filter():
     
 @app.route('/update', methods=['POST'])
 def update_data():
+    print("🚨 /update вызван")
+
     auth = request.headers.get("Authorization")
     secret = os.getenv('RENDER_SECRET_KEY')
 
