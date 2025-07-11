@@ -294,7 +294,7 @@ def admin_filter():
 @app.route('/update', methods=['POST'])
 def update_data():
     auth = request.headers.get("Authorization")
-    if auth != f"Bearer {os.getenv('RENDER_SECRET_KEY')}"):
+    if auth != f"Bearer {os.getenv('RENDER_SECRET_KEY')}":
         return "Unauthorized", 403
 
     data = request.json
