@@ -238,10 +238,10 @@ def send_to_render():
     except Exception as e:
         logger.error(f"❌ Ошибка при отправке на сайт: {e}")
 
-send_to_render()
 if __name__ == "__main__":
     try:
         run()
+        send_to_render()
     except Exception as e:
         logger.error(f"❌ Ошибка выполнения скрипта: {e}")
 
