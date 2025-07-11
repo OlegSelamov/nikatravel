@@ -1,15 +1,17 @@
-# Используем готовый образ от Microsoft с Chromium
-FROM mcr.microsoft.com/playwright/python:v1.53.1-jammy
+# Используем рабочий официальный образ Playwright
+FROM mcr.microsoft.com/playwright/python:v1.41.1-focal
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Копируем проект
+COPY . .
 
 # Устанавливаем зависимости
-WORKDIR /app
-COPY . /app
-
-# Устанавливаем Python-зависимости
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Открываем порт (если нужно)
+# Открываем порт
 EXPOSE 10000
 
-# Запускаем твой парсер
+# Запускаем парсер
 CMD ["python", "kazunion_fetch.py"]
