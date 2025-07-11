@@ -212,35 +212,34 @@ def run():
             browser.close()
 
 def send_to_render():
-    json_path = "data/filter.json"
-    if not os.path.exists(json_path):
-        logger.error("❌ Файл filter.json не найден, нечего отправлять.")
-        return
-
-    with open(json_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-
-    url = os.getenv("RENDER_API_URL")
-    secret = os.getenv("RENDER_SECRET_KEY")
-
-    print("✅ DEBUG URL:", url)
-    print("✅ DEBUG SECRET:", secret)
-
-    if not url or not secret:
-        logger.error("❌ Переменные RENDER_API_URL или RENDER_SECRET_KEY не заданы.")
-        return
-
-    headers = {"Authorization": f"Bearer {secret}"}
+    logger.info("📦 send_to_render() вызвана")
 
     try:
-        response = requests.post(url, json=data, headers=headers)
-        logger.info(f"✅ Данные отправлены на сайт: {response.status_code} {response.text}")
-    except Exception as e:
-        logger.error(f"❌ Ошибка при отправке на сайт: {e}")
+        json_path = "data/filter.json"
+        if not os.path.exists(json_path):
+            logger.error("❌ filter.json не найден")
+            return
 
+        with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        url = os.getenv("RENDER_API_URL")
+        secret = os.getenv("RENDER_SECRET_KEY")
+
+        logger.info(f"🔗 URL: {url}")
+        logger.info(f"🔐 SECRET: {secret}")
+
+        headers = {"Authorization": f"Bearer {secret}"}
+        response = requests.post(url, json=data, headers=headers)
+
+        logger.info(f"📬 Ответ от Render: {response.status_code} - {response.text}")
+    except Exception as e:
+        logger.error(f"🔥 Ошибка в send_to_render(): {e}")
+        
 if __name__ == "__main__":
     try:
         run()
+        logger.info("🏁 run() завершена")
         send_to_render()
         logger.info("📤 Отправляем JSON на nikatravel.kz/update")
     except Exception as e:
