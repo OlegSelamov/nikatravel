@@ -45,6 +45,7 @@ def wait_for_loader(page):
         logger.warning("⚠️ Спиннер не обнаружен — продолжаем")
 
 def run():
+    logger.info("🚀 kazunion_fetch.run() запущен")
     config = read_config()
     nights = str(config.get("nights", [5])[0])
     adults = str(config.get("ADULT", 2))
@@ -242,6 +243,7 @@ if __name__ == "__main__":
     try:
         run()
         send_to_render()
+        logger.info("📤 Отправляем JSON на nikatravel.kz/update")
     except Exception as e:
         logger.error(f"❌ Ошибка выполнения скрипта: {e}")
 

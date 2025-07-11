@@ -279,6 +279,7 @@ def admin_filter():
         def run_parser():
             try:
                 kazunion_fetch.run()
+                print("⚙️ Вызван kazunion_fetch.run()")
             except Exception as e:
                 print(f"❌ Ошибка в казюнион парсинге: {e}")
 
