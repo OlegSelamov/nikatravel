@@ -297,6 +297,11 @@ def update_data():
     auth = request.headers.get("Authorization")
     if auth != f"Bearer {os.getenv('RENDER_SECRET_KEY')}":
         return "Unauthorized", 403
+            print("AUTH:", auth)
+            print("SECRET:", secret)
+
+    if auth != f"Bearer {secret}":
+        return f"Unauthorized: {auth} ≠ Bearer {secret}", 403
 
     data = request.json
     with open('data/filter.json', 'w', encoding='utf-8') as f:
