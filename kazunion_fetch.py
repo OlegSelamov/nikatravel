@@ -223,6 +223,9 @@ def send_to_render():
     url = os.getenv("RENDER_API_URL")
     secret = os.getenv("RENDER_SECRET_KEY")
 
+    print("✅ DEBUG URL:", url)
+    print("✅ DEBUG SECRET:", secret)
+
     if not url or not secret:
         logger.error("❌ Переменные RENDER_API_URL или RENDER_SECRET_KEY не заданы.")
         return
