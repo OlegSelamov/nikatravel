@@ -53,6 +53,8 @@ def run():
     meals = config.get("meal", [])
     stars = config.get("STARS", [])
     currency = config.get("currency", "KZT")
+    
+    logger.info("📦 Конфиг загружен успешно")
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -239,9 +241,9 @@ def send_to_render():
 if __name__ == "__main__":
     try:
         run()
-        logger.info("🏁 run() завершена")
+        logger.info("🏁 Парсинг завершён, вызываем send_to_render()")
         send_to_render()
         logger.info("📤 Отправляем JSON на nikatravel.kz/update")
     except Exception as e:
-        logger.error(f"❌ Ошибка выполнения скрипта: {e}")
+        logger.error(f"💥 Ошибка в run(): {e}")
 
