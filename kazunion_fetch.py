@@ -205,8 +205,8 @@ def run():
                 page.screenshot(path="data/debug_table.png", full_page=True)
                 logger.info("📥 HTML и скриншот сохранены")
 
-                # run_and_log("python parserhtml.py")
-                # run_and_log("python auto_booking_scraper.py")
+                run_and_log("python parserhtml.py")
+                run_and_log("python auto_booking_scraper.py")
 
             except Exception as e:
                 logger.error(f"❌ Ошибка при сохранении или парсинге: {e}")

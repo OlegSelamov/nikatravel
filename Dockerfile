@@ -1,20 +1,15 @@
-
-# Используем официальный образ Playwright с Python
-FROM mcr.microsoft.com/playwright/python:v1.44.0-jammy
-
-# Устанавливаем рабочую директорию
-WORKDIR /app
-
-# Копируем все файлы проекта
-COPY . /app
+# Используем готовый образ от Microsoft с Chromium
+FROM mcr.microsoft.com/playwright/python:v1.53.1-jammy
 
 # Устанавливаем зависимости
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt && \
-    playwright install
+WORKDIR /app
+COPY . /app
 
-# Указываем порт (если ты запускаешь Flask-сервер)
-EXPOSE 5000
+# Устанавливаем Python-зависимости
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Запуск приложения
-CMD ["python", "app.py"]
+# Открываем порт (если нужно)
+EXPOSE 10000
+
+# Запускаем твой парсер
+CMD ["python", "kazunion_fetch.py"]
