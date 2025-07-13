@@ -1,72 +1,72 @@
+
 import os
 import json
 import logging
 import requests
+from datetime import datetime
 
-# Настройка логирования
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
+def generate_test_json():
+    logger.info("📦 Тестовая заглушка. Создаём filter.json")
+    test_data = [{
+        "departure_date": datetime.now().strftime("%Y-%m-%d"),
+        "city": "Алматы",
+        "country": "Турция",
+        "hotel": "Test Hotel",
+        "nights": "7",
+        "meal": "AI",
+        "seats": "Есть",
+        "price": "500000",
+        "description": "Тестовый тур для отладки.",
+        "image": "test.jpg",
+        "old_price": "600000",
+        "discount_percent": "17",
+        "price_per_month": "20833",
+        "installment_months": "24"
+    }]
+    Path("data").mkdir(exist_ok=True)
+    with open("data/filter.json", "w", encoding="utf-8") as f:
+        json.dump(test_data, f, ensure_ascii=False, indent=2)
+
 def send_to_render():
-    logger.info("📬 Подготовка к отправке filter.json")
-
-    render_url = os.getenv("RENDER_API_URL")
-    secret_key = os.getenv("RENDER_SECRET_KEY")
-
-    logger.info(f"🔗 URL: {render_url}")
-    logger.info(f"🔐 SECRET: {secret_key}")
-
-    if not render_url or not secret_key:
-        logger.error("❌ RENDER_API_URL или RENDER_SECRET_KEY не заданы")
-        return
-
+    logger.info("📤 Вызываем send_to_render()")
     try:
+        logger.info("📬 Подготовка к отправке filter.json")
+        url = os.getenv("RENDER_API_URL")
+        secret = os.getenv("RENDER_SECRET_KEY")
+
+        logger.info(f"🔗 URL: {url}")
+        logger.info(f"🔐 SECRET: {secret}")
+
+        if not url or not secret:
+            logger.error("❌ RENDER_API_URL или RENDER_SECRET_KEY не заданы")
+            return
+
         with open("data/filter.json", "r", encoding="utf-8") as f:
-            data = json.load(f)
+            json_data = f.read()
 
-        response = requests.post(
-            render_url,
-            headers={"Authorization": f"Bearer {secret_key}"},
-            json=data,
-            timeout=20
-        )
-
-        logger.info(f"✅ Отправка завершена: {response.status_code} — {response.text}")
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {secret}"
+        }
+        response = requests.post(url, data=json_data.encode("utf-8"), headers=headers)
+        logger.info(f"✅ Отправка завершена: {response.status_code} — {response.reason}")
     except Exception as e:
-        logger.error(f"❌ Ошибка при отправке на сайт: {e}")
+        logger.exception(f"❌ Ошибка в send_to_render(): {e}")
+    finally:
+        logger.info("✅ send_to_render() завершилась")
 
 def run():
     logger.info("🚀 kazunion_fetch.run() запущен")
-    try:
-        logger.info("📦 Тестовая заглушка. Создаём filter.json")
+    generate_test_json()
 
-        test_data = [{
-            "image": "default.jpg",
-            "hotel": "Test Hotel",
-            "country": "Тестляндия",
-            "price": "100000",
-            "old_price": "120000",
-            "discount_percent": "17",
-            "price_per_month": "4166",
-            "installment_months": "24",
-            "departure_date": "2025-08-01",
-            "city": "Алматы",
-            "nights": "7",
-            "meal": "AI",
-            "seats": "Есть",
-            "description": "Тестовый тур"
-        }]
-
-        os.makedirs("data", exist_ok=True)
-        with open("data/filter.json", "w", encoding="utf-8") as f:
-            json.dump(test_data, f, ensure_ascii=False, indent=2)
-
-        logger.info("📤 Вызываем send_to_render()")
+    # Вызов только если мы точно в Railway
+    if os.getenv("PLATFORM") == "railway":
         send_to_render()
-        logger.info("✅ send_to_render() завершилась")
-
-    except Exception as e:
-        logger.error(f"💥 Ошибка в run(): {e}")
+    else:
+        logger.info("⛔ send_to_render() не вызван — не Railway")
 
 if __name__ == "__main__":
     run()
