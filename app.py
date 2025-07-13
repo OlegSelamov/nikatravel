@@ -297,7 +297,7 @@ def update_data():
     print("🚨 /update вызван")
 
     auth = request.headers.get("Authorization")
-    secret = os.getenv('RENDER_SECRET_KEY')
+    secret = os.getenv('RENDER_SECRET_ACTUAL')
 
     print("🔐 AUTH:", auth)
     print("🔐 SECRET:", secret)
@@ -345,7 +345,6 @@ def add_tour():
         price_per_month = request.form.get("price_per_month")
         installment_months = request.form.get("installment_months")
         image = request.form.get("image") or ""
-
 
 
         # Главное фото
@@ -421,7 +420,8 @@ def edit_tour(id):
         gallery_files = request.files.getlist('gallery_images')
         for file in gallery_files:
             if file and file.filename:
-                filename = secure_filename(file.filename)
+                filename = sec             
+                ure_filename(file.filename)
                 file.save(os.path.join(IMAGE_FOLDER, filename))
                 if 'gallery' not in tour:
                     tour['gallery'] = []
