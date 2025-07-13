@@ -50,8 +50,7 @@ def send_to_render():
 
         headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {secret}"
-        }
+            "Authorization": f"Bearer {secret}"}
         response = requests.post(url, data=json_data.encode("utf-8"), headers=headers)
         logger.info(f"✅ Отправка завершена: {response.status_code} — {response.reason}")
     except Exception as e:
