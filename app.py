@@ -320,16 +320,6 @@ def update_filter():
         logging.error(f"\u274C Ошибка при сохранении filter.json: {e}")
         return "Ошибка", 500
 
-# ==================== ОТОБРАЖЕНИЕ filter.json НА САЙТЕ ====================
-@app.route('/filter')
-def filter_page():
-    try:
-        with open("data/filter.json", encoding="utf-8") as f:
-            tours = json.load(f)
-    except:
-        tours = []
-    return render_template("frontend/filter.html", tours=tours)
-
 # ==================== ТРИГГЕР С RENDER НА RAILWAY ====================
 def call_railway():
     import requests
