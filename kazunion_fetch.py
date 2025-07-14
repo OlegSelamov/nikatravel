@@ -14,9 +14,6 @@ logging.basicConfig(
     level=logging.INFO
 )
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
-logger = logging.getLogger(__name__)
-
 def generate_test_json():
     logging.info("📦 Тестовая заглушка. Создаём filter.json")
     test_data = [{
