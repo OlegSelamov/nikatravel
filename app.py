@@ -299,17 +299,6 @@ def admin_filter():
     tours = load_tours()
     return render_template('admin/filter_admin.html', config=config, tours=tours)
     
-    # ==================== РОУТ ДЛЯ КНОПКИ В РЕНДЕРЕ ====================
-@app.route('/admin/filter', methods=['POST'])
-def start_parsing():
-    logging.info("\U0001F680 kazunion_fetch.run() запущен")
-    try:
-        run_kazunion()  # Запуск парсинга
-        return redirect(url_for('filter_page'))
-    except Exception as e:
-        logging.error(f"\u274C Ошибка запуска: {e}")
-        return jsonify({"error": str(e)}), 500
-
 # ==================== РОУТ, КУДА ПРИХОДИТ filter.json С RAILWAY ====================
 @app.route('/update', methods=['POST'])
 def update_filter():
