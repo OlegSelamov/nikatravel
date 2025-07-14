@@ -10,6 +10,8 @@ import json
 import requests
 import subprocess
 from werkzeug.utils import secure_filename
+import logging
+from flask import request
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
@@ -320,6 +322,24 @@ def admin_log_text():
         return ''.join(lines)
     except:
         return 'Лог-файл не найден или пуст.'
+        
+@app.route('/update', methods=['POST'])
+def update_filter():
+    auth = request.headers.get('Authorization', '')
+    expected = f"Bearer {os.getenv('RENDER_SECRET_KEY')}"
+    if auth != expected:
+        logging.error(f"❌ Неверный секрет. Пришло: {auth}, ожидалось: {expected}")
+        return "Unauthorized", 403
+
+    try:
+        with open("data/filter.json", "wb") as f:
+            f.write(request.data)
+        logging.info("✅ filter.json успешно обновлён от Railway")
+        return "OK", 200
+    except Exception as e:
+        logging.error(f"💥 Ошибка при сохранении filter.json: {e}")
+        return "Ошибка сервера", 500
+  
 
 @app.route('/admin')
 def admin_dashboard():

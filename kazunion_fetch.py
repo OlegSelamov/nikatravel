@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 def generate_test_json():
-    logger.info("📦 Тестовая заглушка. Создаём filter.json")
+    logging.info("📦 Тестовая заглушка. Создаём filter.json")
     test_data = [{
         "departure_date": datetime.now().strftime("%Y-%m-%d"),
         "city": "Алматы",
@@ -32,41 +32,35 @@ def generate_test_json():
         json.dump(test_data, f, ensure_ascii=False, indent=2)
 
 def send_to_render():
-    logger.info("📤 Вызываем send_to_render()")
+    import requests, os, logging
+    url = os.getenv("RENDER_API_URL")
+    secret = os.getenv("RENDER_SECRET_KEY")
+    
+    logging.info(f"📬 Подготовка к отправке filter.json")
+    logging.info(f"🔗 URL: {url}")
+    logging.info(f"🔐 SECRET: {secret}")
+    
+    if not url or not secret:
+        logging.error("❌ RENDER_API_URL или RENDER_SECRET_KEY не заданы")
+        return
+
+    headers = {"Authorization": f"Bearer {secret}"}
     try:
-        logger.info("📬 Подготовка к отправке filter.json")
-        url = os.getenv("RENDER_API_URL")
-        secret = os.getenv("RENDER_SECRET_KEY")
-
-        logger.info(f"🔗 URL: {url}")
-        logger.info(f"🔐 SECRET: {secret}")
-
-        if not url or not secret:
-            logger.error("❌ RENDER_API_URL или RENDER_SECRET_KEY не заданы")
-            return
-
-        with open("data/filter.json", "r", encoding="utf-8") as f:
-            json_data = f.read()
-
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {secret}"}
-        response = requests.post(url, data=json_data.encode("utf-8"), headers=headers)
-        logger.info(f"✅ Отправка завершена: {response.status_code} — {response.reason}")
+        with open("data/filter.json", "rb") as f:
+            response = requests.post(url, data=f, headers=headers)
+        logging.info(f"✅ Отправка завершена: {response.status_code} — {response.text}")
     except Exception as e:
-        logger.exception(f"❌ Ошибка в send_to_render(): {e}")
-    finally:
-        logger.info("✅ send_to_render() завершилась")
+        logging.error(f"💥 Ошибка при отправке: {e}")
 
 def run():
-    logger.info("🚀 kazunion_fetch.run() запущен")
+    logging.info("🚀 kazunion_fetch.run() запущен")
     generate_test_json()
 
     # Вызов только если мы точно в Railway
     if os.getenv("PLATFORM") == "railway":
         send_to_render()
     else:
-        logger.info("⛔ send_to_render() не вызван — не Railway")
+        logging.info("⛔ send_to_render() не вызван — не Railway")
 
 if __name__ == "__main__":
     run()
