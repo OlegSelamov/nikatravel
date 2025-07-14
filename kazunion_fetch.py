@@ -1,10 +1,18 @@
-
+import subprocess
 import os
 import json
 import logging
 import requests,os
+import threading
+from flask import Flask, request
 from datetime import datetime
 from pathlib import Path
+
+logging.basicConfig(
+    filename="log_text.txt",
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    level=logging.INFO
+)
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -65,5 +73,23 @@ def run():
     else:
         logging.info("⛔ send_to_render() не вызван — не Railway")
 
+app = Flask(__name__)
+
+@app.route('/run', methods=['POST'])
+def remote_trigger():
+    auth = request.headers.get("Authorization")
+    if auth != f"Bearer {os.getenv('RAILWAY_SECRET')}":
+        logging.warning("⛔ Неверный токен доступа к /run")
+        return "Forbidden", 403
+
+    def background_task():
+        logging.info("🚀 kazunion_fetch.run() запущен удалённо")
+        subprocess.run(["python", "kazunion_fetch.py"])
+
+    threading.Thread(target=background_task).start()
+    return "Парсинг запущен", 200
+
+
 if __name__ == "__main__":
-    run()
+    app.run(host="0.0.0.0", port=8080)
+
