@@ -18,6 +18,11 @@ app.secret_key = 'supersecretkey'
 
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'img')
 
+# ==================== НАСТРОЙКА ЛОГГЕРА ====================
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 # Пути
 STATIC_FOLDER = os.path.join(os.path.dirname(__file__), 'static')
@@ -294,25 +299,64 @@ def admin_filter():
     tours = load_tours()
     return render_template('admin/filter_admin.html', config=config, tours=tours)
     
+    # ==================== РОУТ ДЛЯ КНОПКИ В РЕНДЕРЕ ====================
+@app.route('/admin/filter', methods=['POST'])
+def start_parsing():
+    logging.info("\U0001F680 kazunion_fetch.run() запущен")
+    try:
+        run_kazunion()  # Запуск парсинга
+        return redirect(url_for('filter_page'))
+    except Exception as e:
+        logging.error(f"\u274C Ошибка запуска: {e}")
+        return jsonify({"error": str(e)}), 500
+
+# ==================== РОУТ, КУДА ПРИХОДИТ filter.json С RAILWAY ====================
 @app.route('/update', methods=['POST'])
-def update_data():
-    print("🚨 /update вызван")
+def update_filter():
+    secret_header = request.headers.get("Authorization")
+    expected_secret = os.environ.get("RENDER_SECRET_KEY")
 
-    auth = request.headers.get("Authorization")
-    secret = os.getenv('RENDER_SECRET_ACTUAL')
+    if secret_header != f"Bearer {expected_secret}":
+        logging.warning("\u26d4 Неверный токен авторизации")
+        return "Forbidden", 403
 
-    print("🔐 AUTH:", auth)
-    print("🔐 SECRET:", secret)
+    try:
+        data = request.get_json()
+        os.makedirs("data", exist_ok=True)
+        with open("data/filter.json", "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        logging.info("\u2705 filter.json успешно обновлён!")
+        return "OK", 200
+    except Exception as e:
+        logging.error(f"\u274C Ошибка при сохранении filter.json: {e}")
+        return "Ошибка", 500
 
-    if auth != f"Bearer {secret}":
-        return f"Unauthorized: {auth} ≠ Bearer {secret}", 403
+# ==================== ОТОБРАЖЕНИЕ filter.json НА САЙТЕ ====================
+@app.route('/filter')
+def filter_page():
+    try:
+        with open("data/filter.json", encoding="utf-8") as f:
+            tours = json.load(f)
+    except:
+        tours = []
+    return render_template("frontend/filter.html", tours=tours)
 
-    data = request.json
-    with open('data/filter.json', 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+# ==================== ТРИГГЕР С RENDER НА RAILWAY ====================
+def call_railway():
+    import requests
+    url = os.environ.get("RAILWAY_TRIGGER_URL")
+    secret = os.environ.get("RAILWAY_SECRET_KEY")
 
-    print("✅ Обновлён filter.json с данными от Railway")
-    return "OK", 200
+    if not url or not secret:
+        logging.error("\u274C Нет переменных RAILWAY_TRIGGER_URL или RAILWAY_SECRET_KEY")
+        return
+
+    headers = {"Authorization": f"Bearer {secret}"}
+    try:
+        res = requests.post(url, headers=headers)
+        logging.info(f"\u2705 POST в Railway завершён: {res.status_code}")
+    except Exception as e:
+        logging.error(f"\u274C Ошибка вызова Railway: {e}")
 
 @app.route('/admin/log_text')
 def admin_log_text():
@@ -322,25 +366,7 @@ def admin_log_text():
         return ''.join(lines)
     except:
         return 'Лог-файл не найден или пуст.'
-        
-@app.route('/update', methods=['POST'])
-def update_filter():
-    auth = request.headers.get('Authorization', '')
-    expected = f"Bearer {os.getenv('RENDER_SECRET_KEY')}"
-    if auth != expected:
-        logging.error(f"❌ Неверный секрет. Пришло: {auth}, ожидалось: {expected}")
-        return "Unauthorized", 403
-
-    try:
-        with open("data/filter.json", "wb") as f:
-            f.write(request.data)
-        logging.info("✅ filter.json успешно обновлён от Railway")
-        return "OK", 200
-    except Exception as e:
-        logging.error(f"💥 Ошибка при сохранении filter.json: {e}")
-        return "Ошибка сервера", 500
   
-
 @app.route('/admin')
 def admin_dashboard():
     return render_template('admin/dashboard.html')
