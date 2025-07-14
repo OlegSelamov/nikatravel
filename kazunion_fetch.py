@@ -2,7 +2,7 @@
 import os
 import json
 import logging
-import requests
+import requests,os
 from datetime import datetime
 from pathlib import Path
 
@@ -32,25 +32,28 @@ def generate_test_json():
         json.dump(test_data, f, ensure_ascii=False, indent=2)
 
 def send_to_render():
-    import requests, os, logging
     url = os.getenv("RENDER_API_URL")
     secret = os.getenv("RENDER_SECRET_KEY")
-    
-    logging.info(f"📬 Подготовка к отправке filter.json")
-    logging.info(f"🔗 URL: {url}")
-    logging.info(f"🔐 SECRET: {secret}")
-    
+
     if not url or not secret:
         logging.error("❌ RENDER_API_URL или RENDER_SECRET_KEY не заданы")
         return
 
-    headers = {"Authorization": f"Bearer {secret}"}
     try:
-        with open("data/filter.json", "rb") as f:
-            response = requests.post(url, data=f, headers=headers)
+        with open("data/filter.json", "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        headers = {
+            "Authorization": f"Bearer {secret}",
+            "Content-Type": "application/json"
+        }
+
+        response = requests.post(url, headers=headers, json=data)
+
         logging.info(f"✅ Отправка завершена: {response.status_code} — {response.text}")
+
     except Exception as e:
-        logging.error(f"💥 Ошибка при отправке: {e}")
+        logging.error(f"❌ Ошибка при отправке в Render: {e}")
 
 def run():
     logging.info("🚀 kazunion_fetch.run() запущен")
