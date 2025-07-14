@@ -302,22 +302,15 @@ def admin_filter():
 # ==================== РОУТ, КУДА ПРИХОДИТ filter.json С RAILWAY ====================
 @app.route('/update', methods=['POST'])
 def update_filter():
-    secret_header = request.headers.get("Authorization")
-    expected_secret = os.environ.get("RENDER_SECRET_KEY")
-
-    if secret_header != f"Bearer {expected_secret}":
-        logging.warning("\u26d4 Неверный токен авторизации")
-        return "Forbidden", 403
-
     try:
         data = request.get_json()
         os.makedirs("data", exist_ok=True)
         with open("data/filter.json", "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        logging.info("\u2705 filter.json успешно обновлён!")
+        logging.info("✅ filter.json успешно обновлён без проверки токена!")
         return "OK", 200
     except Exception as e:
-        logging.error(f"\u274C Ошибка при сохранении filter.json: {e}")
+        logging.error(f"❌ Ошибка при сохранении filter.json: {e}")
         return "Ошибка", 500
 
 # ==================== ТРИГГЕР С RENDER НА RAILWAY ====================
