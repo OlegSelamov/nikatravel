@@ -291,7 +291,7 @@ def admin_filter():
             logging.error(f"❌ Ошибка при вызове call_railway(): {e}")
 
         flash('✅ Парсинг запущен на сервере Railway!', 'success')
-        return redirect(url_for('admin_filter')))
+        return redirect(url_for('admin_filter'))
 
         # GET-запрос — вернуть фильтр
         tours = load_tours()
