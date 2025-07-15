@@ -20,7 +20,7 @@ app.config['UPLOAD_FOLDER'] = os.path.join('static', 'img')
 
 # ==================== НАСТРОЙКА ЛОГГЕРА ====================
 logging.basicConfig(
-    filename="log_text.txt",
+    filename="parser.log",
     format="%(asctime)s - %(levelname)s - %(message)s",
     level=logging.INFO
 )

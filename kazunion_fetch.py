@@ -8,6 +8,13 @@ from flask import Flask, request
 from datetime import datetime
 from pathlib import Path
 
+# Настройка логов — лог-файл общий
+logging.basicConfig(
+    filename="parser.log",
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    level=logging.INFO
+)
+
 def generate_test_json():
     logging.info("📦 Тестовая заглушка. Создаём filter.json")
     test_data = [{
