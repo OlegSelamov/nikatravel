@@ -2,7 +2,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
-from threading import Thread
+from threading import Thread 
 import kazunion_fetch
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import os
@@ -735,4 +735,4 @@ def hotel_detail_page(index):
 # ===========================
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=10000)
