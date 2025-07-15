@@ -3,6 +3,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from threading import Thread
+from your_script_name import call_railway
 import kazunion_fetch
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import os
@@ -283,22 +284,18 @@ def admin_filter():
         with open(config_path, 'w', encoding='utf-8') as f:
             json.dump(config, f, ensure_ascii=False, indent=2)
 
-        # Запускаем парсинг в фоне
-        def run_parser():
-            try:
-                kazunion_fetch.run()
-                print("⚙️ Вызван kazunion_fetch.run()")
-            except Exception as e:
-                print(f"❌ Ошибка в казюнион парсинге: {e}")
+        try:
+            call_railway()
+            logging.info("🚀 call_railway() успешно вызван из админки")
+        except Exception as e:
+            logging.error(f"❌ Ошибка при вызове call_railway(): {e}")
 
-        Thread(target=run_parser).start()
-        flash('✅ Парсинг запущен в фоне!', 'success')
+        flash('✅ Парсинг запущен на сервере Railway!', 'success')
+        return redirect(url_for('admin_filter')))
 
-        return redirect(url_for('admin_filter'))
-
-    # GET-запрос — вернуть фильтр
-    tours = load_tours()
-    return render_template('admin/filter_admin.html', config=config, tours=tours)
+        # GET-запрос — вернуть фильтр
+        tours = load_tours()
+        return render_template('admin/filter_admin.html', config=config, tours=tours)
     
 # ==================== РОУТ, КУДА ПРИХОДИТ filter.json С RAILWAY ====================
 @app.route('/update', methods=['POST'])
@@ -316,7 +313,6 @@ def update_filter():
 
 # ==================== ТРИГГЕР С RENDER НА RAILWAY ====================
 def call_railway():
-    import requests
     url = os.environ.get("RAILWAY_TRIGGER_URL")
     secret = os.environ.get("RAILWAY_SECRET_KEY")
 
