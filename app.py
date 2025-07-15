@@ -11,7 +11,6 @@ import requests
 import subprocess
 from werkzeug.utils import secure_filename
 import logging
-from flask import request
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
