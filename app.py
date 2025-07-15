@@ -726,9 +726,6 @@ def hotel_detail_page(index):
     with open('data/hotels.json', 'r', encoding='utf-8') as f:
         hotels = json.load(f)
     return render_template('hotel_details.html', hotel=hotels[index])
-    
-    if __name__ == '__main__':
-        app.run(debug=True)
 
 # ===========================
 # Запуск
