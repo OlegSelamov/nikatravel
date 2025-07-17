@@ -3,7 +3,6 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from threading import Thread 
-import kazunion_fetch
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import os
 import json
