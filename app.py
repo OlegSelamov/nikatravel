@@ -292,8 +292,8 @@ def admin_filter():
         return redirect(url_for('admin_filter'))
 
         # GET-запрос — вернуть фильтр
-        tours = load_tours()
-        return render_template('admin/filter_admin.html', config=config, tours=tours)
+    tours = load_tours()
+    return render_template('admin/filter_admin.html', config=config, tours=tours)
     
 # ==================== РОУТ, КУДА ПРИХОДИТ filter.json С RAILWAY ====================
 @app.route('/update', methods=['POST'])
