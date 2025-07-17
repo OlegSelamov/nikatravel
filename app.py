@@ -1,5 +1,4 @@
 import smtplib
-from call_railway import call_railway
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
