@@ -76,11 +76,11 @@ def run():
         logging.info(f"RENDER_API_URL = {os.environ.get('RENDER_API_URL')}")
         logging.info(f"RENDER_SECRET_KEY = {os.environ.get('RENDER_SECRET_KEY')}")
         
+app = Flask(__name__)
+
 @app.route('/')
 def home():
     return "Kazunion Fetch OK", 200
-
-app = Flask(__name__)
 
 @app.route('/run', methods=['POST'])
 def remote_trigger():
