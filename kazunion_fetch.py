@@ -69,7 +69,12 @@ def run():
     if os.getenv("PLATFORM") == "railway":
         send_to_render()
     else:
-        logging.info("⛔ send_to_render() не вызван — не Railway")
+        logging.info("⛔ send_to_render() не вызван — не Railway")   
+        logging.info("🔥 kazunion_fetch.py стартует...")
+        logging.info(f"PORT = {os.environ.get('PORT')}")
+        logging.info(f"RAILWAY_SECRET = {os.environ.get('RAILWAY_SECRET')}")
+        logging.info(f"RENDER_API_URL = {os.environ.get('RENDER_API_URL')}")
+        logging.info(f"RENDER_SECRET_KEY = {os.environ.get('RENDER_SECRET_KEY')}")
 
 app = Flask(__name__)
 
