@@ -1,3 +1,3 @@
 web: python app.py
-worker: python kazunion_fetch.py
+web: python kazunion_fetch.py
 
