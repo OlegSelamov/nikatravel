@@ -75,6 +75,10 @@ def run():
         logging.info(f"RAILWAY_SECRET = {os.environ.get('RAILWAY_SECRET')}")
         logging.info(f"RENDER_API_URL = {os.environ.get('RENDER_API_URL')}")
         logging.info(f"RENDER_SECRET_KEY = {os.environ.get('RENDER_SECRET_KEY')}")
+        
+@app.route('/')
+def home():
+    return "Kazunion Fetch OK", 200
 
 app = Flask(__name__)
 
