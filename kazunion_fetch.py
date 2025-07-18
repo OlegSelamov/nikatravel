@@ -80,7 +80,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Kazunion Fetch OK", 200
+    return "Kazunion Fetch is running!", 200
 
 @app.route('/run', methods=['POST'])
 def remote_trigger():
