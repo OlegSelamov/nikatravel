@@ -1,3 +1,19 @@
+
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
+from threading import Thread
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+import os
+import json
+import requests
+import logging
+from werkzeug.utils import secure_filename
+
+# Подключаем парсер
+import kazunion_fetch
+
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -309,22 +325,6 @@ def update_filter():
         return "Ошибка", 500
 
 # ==================== ТРИГГЕР С RENDER НА RAILWAY ====================
-def call_railway():
-    url = os.environ.get("RAILWAY_TRIGGER_URL")
-    secret = os.environ.get("RAILWAY_SECRET_KEY")
-
-    if not url or not secret:
-        logging.error("\u274C Нет переменных RAILWAY_TRIGGER_URL или RAILWAY_SECRET_KEY")
-        return
-
-    headers = {"Authorization": f"Bearer {secret}"}
-    try:
-        res = requests.post(url, headers=headers)
-        logging.info(f"\u2705 POST в Railway завершён: {res.status_code}")
-    except Exception as e:
-        logging.error(f"\u274C Ошибка вызова Railway: {e}")
-
-@app.route('/admin/log_text')
 def admin_log_text():
     try:
         with open('parser.log', 'r', encoding='utf-8') as f:
@@ -724,6 +724,19 @@ def hotel_detail_page(index):
     with open('data/hotels.json', 'r', encoding='utf-8') as f:
         hotels = json.load(f)
     return render_template('hotel_details.html', hotel=hotels[index])
+
+
+@app.route('/run_parser', methods=['POST', 'GET'])
+def run_parser():
+    try:
+        logging.info("🚀 Запуск kazunion_fetch.run() из /run_parser")
+        kazunion_fetch.run()
+        flash("Парсинг успешно выполнен!", "success")
+    except Exception as e:
+        logging.error(f"❌ Ошибка при запуске парсера: {e}")
+        flash(f"Ошибка парсинга: {e}", "error")
+    return redirect(url_for('admin_filter'))
+
 
 # ===========================
 # Запуск
