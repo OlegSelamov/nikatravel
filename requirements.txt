@@ -3,7 +3,7 @@ requests
 pillow
 imagehash
 selenium
-playwright==1.41.1
+playwright
 duckduckgo-search
 gunicorn
 flask
