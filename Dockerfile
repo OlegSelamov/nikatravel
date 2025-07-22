@@ -1,17 +1,10 @@
-# Используем рабочий официальный образ Playwright
-FROM mcr.microsoft.com/playwright/python:v1.41.1-focal
+FROM mcr.microsoft.com/playwright/python:v1.46.0-focal
 
-# Устанавливаем рабочую директорию
 WORKDIR /app
+COPY . /app
 
-# Копируем проект
-COPY . .
-
-# Устанавливаем зависимости
 RUN pip install --no-cache-dir -r requirements.txt
+RUN playwright install chromium
 
-# Открываем порт
-EXPOSE 10000
+CMD ["gunicorn", "-b", "0.0.0.0:${PORT}", "app:app"]
 
-# Запускаем парсер
-CMD ["python", "kazunion_fetch.py"]
