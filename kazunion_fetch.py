@@ -1,101 +1,250 @@
-import subprocess
 import os
+import time
 import json
+import datetime
+import subprocess
+import requests
 import logging
-import requests,os
-import threading
-from flask import Flask, request
-from datetime import datetime
 from pathlib import Path
+from playwright.sync_api import sync_playwright
 
-# Настройка логов — лог-файл общий
-logging.basicConfig(
-    filename="parser.log",
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    level=logging.INFO
-)
 
-def generate_test_json():
-    logging.info("📦 Тестовая заглушка. Создаём filter.json")
-    test_data = [{
-        "departure_date": datetime.now().strftime("%Y-%m-%d"),
-        "city": "Алматы",
-        "country": "Турция",
-        "hotel": "Test Hotel",
-        "nights": "7",
-        "meal": "AI",
-        "seats": "Есть",
-        "price": "500000",
-        "description": "Тестовый тур для отладки.",
-        "image": "test.jpg",
-        "old_price": "600000",
-        "discount_percent": "17",
-        "price_per_month": "20833",
-        "installment_months": "24"
-    }]
-    Path("data").mkdir(exist_ok=True)
-    with open("data/filter.json", "w", encoding="utf-8") as f:
-        json.dump(test_data, f, ensure_ascii=False, indent=2)
+logger = logging.getLogger("parser_logger")
+logger.setLevel(logging.INFO)
 
-def send_to_render():
-    url = os.getenv("RENDER_API_URL")
-    secret = os.getenv("RENDER_SECRET_KEY")
+file_handler = logging.FileHandler("parser.log", encoding='utf-8')
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(formatter)
 
-    if not url or not secret:
-        logging.error("❌ RENDER_API_URL или RENDER_SECRET_KEY не заданы")
-        return
+logger.addHandler(file_handler)
 
+CONFIG_PATH = "data/kazunion_config.json"
+
+def read_config():
+    with open(CONFIG_PATH, 'r', encoding="utf-8") as f:
+        return json.load(f)
+
+def safe_check(page, selector):
     try:
-        with open("data/filter.json", "r", encoding="utf-8") as f:
-            data = json.load(f)
-
-        headers = {
-            "Authorization": f"Bearer {secret}",
-            "Content-Type": "application/json"
-        }
-
-        response = requests.post(url, headers=headers, json=data)
-
-        logging.info(f"✅ Отправка завершена: {response.status_code} — {response.text}")
-
+        checkbox = page.locator(selector)
+        checkbox.wait_for(timeout=5000)
+        if checkbox.is_visible() and not checkbox.is_checked():
+            checkbox.check(force=True)
+            logger.info(f"✅ Чекбокс {selector} включен")
+        else:
+            logger.info(f"ℹ️ Чекбокс {selector} уже включён или скрыт")
     except Exception as e:
-        logging.error(f"❌ Ошибка при отправке в Render: {e}")
+        logger.warning(f"⚠️ Не удалось поставить галочку {selector}: {e}")
+
+def wait_for_loader(page):
+    try:
+        logger.info("⏳ Ждём загрузку...")
+        page.wait_for_selector("div.loader", state="attached", timeout=3000)
+        page.wait_for_selector("div.loader", state="detached", timeout=15000)
+        logger.info("✅ Загрузка завершена")
+    except:
+        logger.warning("⚠️ Спиннер не обнаружен — продолжаем")
 
 def run():
-    logging.info("🚀 kazunion_fetch.run() запущен")
-    generate_test_json()
+    logger.info("🚀 kazunion_fetch.run() запущен")
+    config = read_config()
+    nights = str(config.get("nights", [5])[0])
+    adults = str(config.get("ADULT", 2))
+    meals = config.get("meal", [])
+    stars = config.get("STARS", [])
+    currency = config.get("currency", "KZT")
+    
+    logger.info("📦 Конфиг загружен успешно")
 
-    # Вызов только если мы точно в Railway
-    if os.getenv("PLATFORM") == "railway":
-        send_to_render()
-    else:
-        logging.info("⛔ send_to_render() не вызван — не Railway")   
-        logging.info("🔥 kazunion_fetch.py стартует...")
-        logging.info(f"PORT = {os.environ.get('PORT')}")
-        logging.info(f"RAILWAY_SECRET = {os.environ.get('RAILWAY_SECRET')}")
-        logging.info(f"RENDER_API_URL = {os.environ.get('RENDER_API_URL')}")
-        logging.info(f"RENDER_SECRET_KEY = {os.environ.get('RENDER_SECRET_KEY')}")
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        logger.info("🔄 Открываем Kazunion...")
+        page.goto("https://online.kazunion.com/search_tour", timeout=60000, wait_until="domcontentloaded")
+        page.wait_for_timeout(5000)
+
+        try:
+            # Город
+            page.evaluate("document.querySelector(\"select[name='TOWNFROMINC']\").style.display = 'block'")
+            page.select_option("select[name='TOWNFROMINC']", config["city_code"])
+            logger.info(f"🏙 Город отправления выбран: {config['city_code']}")
+            wait_for_loader(page)
+
+            # Страна
+            logger.info("⏳ Ждём появление страны...")
+            for _ in range(30):
+                display = page.evaluate("getComputedStyle(document.querySelector(\"select[name='STATEINC']\")).display")
+                if display != "none":
+                    logger.info("✅ Страна стала видимой")
+                    break
+                time.sleep(0.5)
+            else:
+                logger.warning("⚠️ Страна не появилась — пробуем разблокировать вручную")
+                page.evaluate("document.querySelector(\"select[name='STATEINC']\").style.display = 'block'")
+                page.evaluate("document.querySelector(\"select[name='STATEINC']\").style.opacity = '1'")
+                time.sleep(1)
+
+            # Проверяем, доступен ли код страны
+            available_values = page.eval_on_selector_all(
+                "select[name='STATEINC'] option",
+                "opts => opts.map(opt => opt.value)"
+            )
+
+            if config["country_code"] not in available_values:
+                logger.error(f"❌ Страна с кодом {config['country_code']} недоступна для этого города!")
+                return
+
+            page.select_option("select[name='STATEINC']", config["country_code"])
+            logger.info(f"🌍 Страна выбрана: {config['country_code']}")
+            wait_for_loader(page)
+
+            # Дата
+            page.click("input[name='CHECKIN_BEG']", force=True)
+            page.fill("input[name='CHECKIN_BEG']", "")
+            page.fill("input[name='CHECKIN_BEG']", config["departure_date"])
+            page.keyboard.press("Enter")
+            page.mouse.click(100, 100)  # клик, чтобы закрыть календарь
+            page.wait_for_timeout(1000)
+            logger.info(f"📅 Установлена дата вылета: {config['departure_date']}")
+
+            # Ночи — умное ожидание
+            logger.info("⏳ Ждём поле 'Ночей'...")
+
+            # Максимум 20 попыток (10 сек)
+            for _ in range(20):
+                ready = page.evaluate("""
+                    () => {
+                        const el = document.querySelector("select[name='NIGHTS_FROM']");
+                        if (!el) return false;
+                        if (el.disabled || getComputedStyle(el).display === 'none') {
+                            el.style.display = 'block';
+                            el.disabled = false;
+                        }
+                        return !el.disabled && getComputedStyle(el).display !== 'none';
+                    }
+                """)
+                if ready:
+                    logger.info("🌙 Поле 'Ночей' активировано")
+                    break
+                time.sleep(0.5)
+            else:
+                logger.error("❌ Поле 'Ночей' так и не стало доступным — прерываем")
+                return
+
+            page.select_option("select[name='NIGHTS_FROM']", nights)
+            logger.info(f"🌙 Кол-во ночей установлено: {nights}")
+
+            # Взрослые
+            try:
+                page.click(".ADULT_chosen .chosen-single", force=True)
+                page.wait_for_timeout(500)
+                options = page.locator(".ADULT_chosen .chosen-drop ul li")
+                for i in range(options.count()):
+                    if options.nth(i).inner_text().strip() == adults:
+                        options.nth(i).click(force=True)
+                        logger.info(f"👥 Взрослых: {adults}")
+                        break
+            except Exception as e:
+                logger.error(f"❌ Ошибка при выборе взрослых: {e}")
+
+            # Валюта
+            try:
+                page.evaluate("document.querySelector(\"select[name='CURRENCY']\").style.display = 'block'")
+                page.select_option("select[name='CURRENCY']", currency)
+                logger.info(f"💱 Валюта: {currency}")
+            except Exception as e:
+                logger.error(f"❌ Не удалось выбрать валюту: {e}")
+
+            # Питание
+            try:
+                page.locator("input[name='MEALS_ANY']").click()
+                page.wait_for_selector(".MEALS input[type='checkbox']", timeout=7000)
+                for meal_code in meals:
+                    checkbox = page.locator(f".MEALS input[type='checkbox'][value='{meal_code}']")
+                    checkbox.wait_for(state="visible", timeout=3000)
+                    if not checkbox.is_checked():
+                        checkbox.check(force=True)
+                        logger.info(f"✅ Питание {meal_code} включено")
+            except Exception as e:
+                logger.warning(f"⚠️ Проблема с питанием: {e}")
+
+            # Звезды
+            try:
+                page.wait_for_selector(".STARS", timeout=10000)
+                for star in stars:
+                    locator = page.locator(f".STARS input[type='checkbox'][value='{star}']")
+                    if locator.is_visible() and not locator.is_checked():
+                        locator.check(force=True)
+                        logger.info(f"⭐ Звезда {star} включена")
+            except Exception as e:
+                logger.error(f"❌ Ошибка при установке звёзд: {e}")
+
+            # Фильтры
+            safe_check(page, "input[name='FREIGHT']")
+            safe_check(page, "input[name='FILTER']")
+            safe_check(page, "input[name='PARTITION_PRICE']")
+
+            # Поиск
+            try:
+                page.wait_for_selector("button.load.right:not([disabled])", timeout=10000)
+                page.click("button.load.right")
+                page.wait_for_timeout(3000)
+                page.click("button.load.right")
+                logger.info("🔍 Поиск запущен")
+            except Exception as e:
+                logger.error(f"❌ Кнопка 'Искать' не сработала: {e}")
+
+            # Сохраняем
+            try:
+                page.evaluate("window.scrollBy(0, document.body.scrollHeight)")
+                page.wait_for_timeout(3000)
+                html = page.content()
+                Path("data").mkdir(exist_ok=True)
+                with open("data/kazunion_result.html", "w", encoding="utf-8") as f:
+                    f.write(html)
+                page.screenshot(path="data/debug_table.png", full_page=True)
+                logger.info("📥 HTML и скриншот сохранены")
+
+                run_and_log("python parserhtml.py")
+                run_and_log("python auto_booking_scraper.py")
+
+            except Exception as e:
+                logger.error(f"❌ Ошибка при сохранении или парсинге: {e}")
+
+        finally:
+            browser.close()
+
+def send_to_render():
+    logger.info("📦 send_to_render() вызвана")
+
+    try:
+        json_path = "data/filter.json"
+        if not os.path.exists(json_path):
+            logger.error("❌ filter.json не найден")
+            return
+
+        with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        url = os.getenv("RENDER_API_URL")
+        secret = os.getenv("RENDER_SECRET_KEY")
+
+        logger.info(f"🔗 URL: {url}")
+        logger.info(f"🔐 SECRET: {secret}")
+
+        headers = {"Authorization": f"Bearer {secret}"}
+        response = requests.post(url, json=data, headers=headers)
+
+        logger.info(f"📬 Ответ от Render: {response.status_code} - {response.text}")
+    except Exception as e:
+        logger.error(f"🔥 Ошибка в send_to_render(): {e}")
         
-app = Flask(__name__)
+if __name__ == "__main__":
+    try:
+        run()
+        logger.info("🏁 Парсинг завершён, вызываем send_to_render()")
+        send_to_render()
+        logger.info("📤 Отправляем JSON на nikatravel.kz/update")
+    except Exception as e:
+        logger.error(f"💥 Ошибка в run(): {e}")
 
-@app.route('/')
-def home():
-    return "Kazunion Fetch is running!", 200
-
-@app.route('/run', methods=['POST'])
-def remote_trigger():
-    auth = request.headers.get("Authorization")
-    if auth != f"Bearer {os.getenv('RAILWAY_SECRET')}":
-        logging.warning("⛔ Неверный токен доступа к /run")
-        return "Forbidden", 403
-
-    def background_task():
-        logging.info("🚀 kazunion_fetch.run() запущен удалённо")
-        subprocess.run(["python", "kazunion_fetch.py"])
-
-    threading.Thread(target=background_task).start()
-    return "Парсинг запущен", 200
-
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host="0.0.0.0", port=port)

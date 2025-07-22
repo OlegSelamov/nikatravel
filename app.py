@@ -1,19 +1,3 @@
-
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.application import MIMEApplication
-from threading import Thread
-from flask import Flask, render_template, request, redirect, url_for, session, flash
-import os
-import json
-import requests
-import logging
-from werkzeug.utils import secure_filename
-
-# Подключаем парсер
-import kazunion_fetch
-
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -296,35 +280,23 @@ def admin_filter():
         # Сохраняем конфиг
         with open(config_path, 'w', encoding='utf-8') as f:
             json.dump(config, f, ensure_ascii=False, indent=2)
+            
+        def run_parser_in_background():
+            try:
+                run()  # Запуск парсинга
+                send_to_render()  # Отправка данных на сайт
+            except Exception as e:
+                logging.error(f"Ошибка парсера: {e}")
 
-        try:
-            call_railway()
-            logging.info("🚀 call_railway() успешно вызван из админки")
-        except Exception as e:
-            logging.error(f"❌ Ошибка при вызове call_railway(): {e}")
-
-        flash('✅ Парсинг запущен на сервере Railway!', 'success')
+        threading.Thread(target=run_parser_in_background).start()
+        flash('🚀 Парсинг запущен на Render!', 'success')
         return redirect(url_for('admin_filter'))
 
         # GET-запрос — вернуть фильтр
     tours = load_tours()
     return render_template('admin/filter_admin.html', config=config, tours=tours)
     
-# ==================== РОУТ, КУДА ПРИХОДИТ filter.json С RAILWAY ====================
-@app.route('/update', methods=['POST'])
-def update_filter():
-    try:
-        data = request.get_json()
-        os.makedirs("data", exist_ok=True)
-        with open("data/filter.json", "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-        logging.info("✅ filter.json успешно обновлён без проверки токена!")
-        return "OK", 200
-    except Exception as e:
-        logging.error(f"❌ Ошибка при сохранении filter.json: {e}")
-        return "Ошибка", 500
-
-# ==================== ТРИГГЕР С RENDER НА RAILWAY ====================
+@app.route('/admin/log_text')
 def admin_log_text():
     try:
         with open('parser.log', 'r', encoding='utf-8') as f:
@@ -724,19 +696,6 @@ def hotel_detail_page(index):
     with open('data/hotels.json', 'r', encoding='utf-8') as f:
         hotels = json.load(f)
     return render_template('hotel_details.html', hotel=hotels[index])
-
-
-@app.route('/run_parser', methods=['POST', 'GET'])
-def run_parser():
-    try:
-        logging.info("🚀 Запуск kazunion_fetch.run() из /run_parser")
-        kazunion_fetch.run()
-        flash("Парсинг успешно выполнен!", "success")
-    except Exception as e:
-        logging.error(f"❌ Ошибка при запуске парсера: {e}")
-        flash(f"Ошибка парсинга: {e}", "error")
-    return redirect(url_for('admin_filter'))
-
 
 # ===========================
 # Запуск
