@@ -1,13 +1,20 @@
 FROM mcr.microsoft.com/playwright/python:v1.46.0-focal
 
 WORKDIR /app
+
+# Копируем все файлы проекта
 COPY . /app
 
-# Устанавливаем зависимости Python
+# Устанавливаем Python-зависимости
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Ставим браузеры Playwright
+# Устанавливаем Chromium для Playwright
 RUN playwright install chromium
 
-# Запуск приложения через Gunicorn с подстановкой $PORT
+# Убедимся, что важные папки скопированы
+COPY templates /app/templates
+COPY static /app/static
+COPY data /app/data
+
+# Запускаем Flask напрямую для проверки
 CMD ["python", "app.py"]
