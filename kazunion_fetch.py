@@ -58,25 +58,7 @@ def run():
     logger.info("📦 Конфиг загружен успешно")
 
     with sync_playwright() as p:
-        def get_chromium_path():
-            possible_paths = [
-                "/opt/render/.cache/ms-playwright/chromium-*/chrome-linux/chrome",
-                "/opt/render/.cache/ms-playwright/chromium-*/chrome-linux/headless_shell",
-                shutil.which("chromium-browser"),
-                shutil.which("chromium"),
-                shutil.which("google-chrome"),
-            ]
-            for path in possible_paths:
-                if path and os.path.exists(path):
-                    return path
-            return None
-
-        chrome_path = get_chromium_path()
-        if not chrome_path:
-            logger.error("❌ Chromium не найден! Попробуй выполнить 'playwright install chromium'")
-            raise FileNotFoundError("Chromium executable not found")
-
-        browser = p.chromium.launch(headless=True, executable_path=chrome_path)
+        browser = p.chromium.launch(headless=True)
         page = browser.new_page()
         logger.info("🔄 Открываем Kazunion...")
         page.goto("https://online.kazunion.com/search_tour", timeout=60000, wait_until="domcontentloaded")
