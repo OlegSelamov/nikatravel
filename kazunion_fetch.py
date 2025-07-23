@@ -187,18 +187,26 @@ def run():
 
             # Поиск
             try:
-                page.wait_for_selector("button.load.right:not([disabled])", timeout=10000)
+                logger.info("⏳ Ожидаем кнопку 'Искать'...")
+                page.wait_for_selector("button.load.right:not([disabled])", timeout=15000)
+
+                logger.info("▶ Первый клик по кнопке 'Искать'")
                 page.click("button.load.right")
-                page.wait_for_timeout(5000)
+                page.wait_for_timeout(5000)  # ждём 5 секунд
+
+                logger.info("▶ Второй клик по кнопке 'Искать'")
                 page.click("button.load.right")
-                logger.info("🔍 Поиск запущен")
+                page.wait_for_timeout(8000)  # ждём загрузки таблицы
+
+                # Проверяем наличие таблицы
+                if page.query_selector("table"):
+                    logger.info("✅ Таблица с турами загружена")
+                else:
+                    logger.warning("⚠️ Таблица не появилась после двойного клика")
+
+                logger.info("🔍 Поиск запущен (двойной клик)")
             except Exception as e:
                 logger.error(f"❌ Кнопка 'Искать' не сработала: {e}")
-                
-                if not page.query_selector("table"):
-                    logger.warning("⚠️ Таблица не появилась после поиска!")
-                else:
-                    logger.info("✅ Таблица с турами загружена")
 
             # Сохраняем
             try:
