@@ -206,6 +206,14 @@ def run():
                 page.screenshot(path="data/debug_table.png", full_page=True)
                 logger.info("📥 HTML и скриншот сохранены")
 
+                def run_and_log(cmd):
+                    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+                    if result.stdout:
+                        logger.info(result.stdout)
+                    if result.stderr:
+                        logger.error(result.stderr)
+
+                # Используем вместо subprocess.run:
                 run_and_log("python parserhtml.py")
                 run_and_log("python auto_booking_scraper.py")
 
@@ -214,29 +222,4 @@ def run():
 
         finally:
             browser.close()
-
-def send_to_render():
-    logger.info("📦 send_to_render() вызвана")
-
-    try:
-        json_path = "data/filter.json"
-        if not os.path.exists(json_path):
-            logger.error("❌ filter.json не найден")
-            return
-
-        with open(json_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-
-        url = os.getenv("RENDER_API_URL")
-        secret = os.getenv("RENDER_SECRET_KEY")
-
-        logger.info(f"🔗 URL: {url}")
-        logger.info(f"🔐 SECRET: {secret}")
-
-        headers = {"Authorization": f"Bearer {secret}"}
-        response = requests.post(url, json=data, headers=headers)
-
-        logger.info(f"📬 Ответ от Render: {response.status_code} - {response.text}")
-    except Exception as e:
-        logger.error(f"🔥 Ошибка в send_to_render(): {e}")
         
