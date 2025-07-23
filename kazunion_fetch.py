@@ -240,12 +240,3 @@ def send_to_render():
     except Exception as e:
         logger.error(f"🔥 Ошибка в send_to_render(): {e}")
         
-if __name__ == "__main__":
-    try:
-        run()
-        logger.info("🏁 Парсинг завершён, вызываем send_to_render()")
-        send_to_render()
-        logger.info("📤 Отправляем JSON на nikatravel.kz/update")
-    except Exception as e:
-        logger.error(f"💥 Ошибка в run(): {e}")
-
