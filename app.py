@@ -4,7 +4,7 @@ from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from threading import Thread 
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-from kazunion_fetch import run, send_to_render
+from kazunion_fetch import run
 import threading
 import os
 import json
@@ -282,17 +282,6 @@ def admin_filter():
         # Сохраняем конфиг
         with open(config_path, 'w', encoding='utf-8') as f:
             json.dump(config, f, ensure_ascii=False, indent=2)
-            
-        def run_parser_in_background():
-            try:
-                run()  # Запуск парсинга
-                send_to_render()  # Отправка данных на сайт
-            except Exception as e:
-                logging.error(f"Ошибка парсера: {e}")
-
-        threading.Thread(target=run_parser_in_background).start()
-        flash('🚀 Парсинг запущен на Render!', 'success')
-        return redirect(url_for('admin_filter'))
 
         # GET-запрос — вернуть фильтр
     tours = load_tours()
