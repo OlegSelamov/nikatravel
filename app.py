@@ -283,15 +283,15 @@ def admin_filter():
         with open(config_path, 'w', encoding='utf-8') as f:
             json.dump(config, f, ensure_ascii=False, indent=2)
             
-    def run_parser_in_background():
-        try:
-            run()  # запуск kazunion_fetch.run()
-        except Exception as e:
-            logging.error(f"Ошибка парсера: {e}")
+        def run_parser_in_background():
+            try:
+                run()  # запуск kazunion_fetch.run()
+            except Exception as e:
+                logging.error(f"Ошибка парсера: {e}")
 
-    threading.Thread(target=run_parser_in_background).start()
-    flash('🚀 Парсинг запущен!', 'success')
-    return redirect(url_for('admin_filter'))          
+        threading.Thread(target=run_parser_in_background).start()
+        flash('🚀 Парсинг запущен!', 'success')
+        return redirect(url_for('admin_filter'))          
 
         # GET-запрос — вернуть фильтр
     tours = load_tours()
