@@ -189,11 +189,16 @@ def run():
             try:
                 page.wait_for_selector("button.load.right:not([disabled])", timeout=10000)
                 page.click("button.load.right")
-                page.wait_for_timeout(3000)
+                page.wait_for_timeout(5000)
                 page.click("button.load.right")
                 logger.info("🔍 Поиск запущен")
             except Exception as e:
                 logger.error(f"❌ Кнопка 'Искать' не сработала: {e}")
+                
+                if not page.query_selector("table"):
+                    logger.warning("⚠️ Таблица не появилась после поиска!")
+                else:
+                    logger.info("✅ Таблица с турами загружена")
 
             # Сохраняем
             try:
