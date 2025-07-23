@@ -169,11 +169,4 @@ if __name__ == "__main__":
     except Exception as e:
         logger.info(f"💥 ОШИБКА auto_booking_scraper: {e}")
 
-def :
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-#     subprocess.run(['git', 'config', '--global', 'user.name', 'RailwayBot'])
-#     subprocess.run(['git', 'config', '--global', 'user.email', 'railway@bot.com'])
-#     subprocess.run(['git', 'add', '.'])
-#     subprocess.run(['git', 'commit', '-m', f'Автообновление туров после обработки Booking от {now}'])
-#     subprocess.run(['git', 'push', 'origin', 'main'])
 
