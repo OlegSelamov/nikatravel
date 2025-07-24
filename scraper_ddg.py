@@ -87,30 +87,32 @@ if not logger.hasHandlers():
     logger.addHandler(file_handler)
 
 def get_booking_url_by_hotel_name(hotel_name):
+    search_url = f"https://duckduckgo.com/html/?q=site:booking.com {hotel_name.replace(' ', '+')}"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+    }
+
+    for attempt in range(3):
+        try:
+            time.sleep(2)  # пауза между запросами
+            response = requests.get(search_url, headers=headers, timeout=15)
+
+            if response.status_code == 200:
+                soup = BeautifulSoup(response.text, "html.parser")
+                result = soup.find("a", href=True)
+                if result and "booking.com" in result["href"]:
+                    logger.info(f"🔗 Найдена ссылка через DuckDuckGo: {result['href']}")
+                    return result["href"]
+                else:
+                    logger.warning(f"⚠️ Ссылка на Booking не найдена на попытке {attempt + 1}.")
+            else:
+                logger.warning(f"⚠️ Ошибка запроса DuckDuckGo: {response.status_code}")
+        except Exception as e:
+            logger.error(f"❌ Ошибка при запросе DuckDuckGo: {e}")
+
+    logger.info("⏳ Переключаемся на Selenium...")
     try:
-        query = f"{hotel_name} site:booking.com"
-        search_url = f"https://html.duckduckgo.com/html/?q={query.replace(' ', '+')}"
-        headers = {
-            "User-Agent": "Mozilla/5.0"
-        }
-
-        time.sleep(5)
-
-        response = requests.get(search_url, headers=headers, timeout=10)
-        if response.status_code == 200:
-            soup = BeautifulSoup(response.text, "html.parser")
-            links = soup.find_all("a", href=True)
-            for link in links:
-                href = link["href"]
-                if "booking.com" in href:
-                    # Если ссылка обёрнута DuckDuckGo, вытаскиваем настоящий адрес
-                    if "uddg=" in href:
-                        url = href.split("uddg=")[-1]
-                        return unquote(url).split("&")[0]
-                    return href
-        else:
-            logger.info(f"⚠️ Ошибка запроса DuckDuckGo: {response.status_code}")
+        return find_booking_link_duckduckgo(hotel_name)
     except Exception as e:
-        logger.info(f"❌ Ошибка при поиске отеля: {e}")
-
-    return None
+        logger.error(f"❌ Ошибка поиска через Selenium: {e}")
+        return None
