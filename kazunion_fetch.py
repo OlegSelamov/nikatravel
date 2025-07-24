@@ -9,11 +9,13 @@ import logging
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LOG_FILE = os.path.join(BASE_DIR, "parser.log")
 
 logger = logging.getLogger("parser_logger")
 logger.setLevel(logging.INFO)
 
-file_handler = logging.FileHandler("parser.log", encoding='utf-8')
+file_handler = logging.FileHandler(LOG_FILE, encoding='utf-8')
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 file_handler.setFormatter(formatter)
 

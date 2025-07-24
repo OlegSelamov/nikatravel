@@ -3,12 +3,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from duckduckgo_search import DDGS
+import logging
 import time
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import unquote
 import sys
 import io
+import os
 
 def find_booking_link_duckduckgo(hotel_name):
     options = Options()
@@ -70,13 +73,13 @@ def find_booking_link_duckduckgo(hotel_name):
             f.write(driver.page_source)
         return None
    
-from duckduckgo_search import DDGS
-import logging
-
 logger = logging.getLogger("parser_logger")
 logger.setLevel(logging.INFO)
 
-file_handler = logging.FileHandler("parser.log", encoding="utf-8")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LOG_FILE = os.path.join(BASE_DIR, "parser.log")
+
+file_handler = logging.FileHandler(LOG_FILE, encoding="utf-8")
 formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 file_handler.setFormatter(formatter)
 

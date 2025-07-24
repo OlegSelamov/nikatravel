@@ -19,8 +19,10 @@ app.secret_key = 'supersecretkey'
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'img')
 
 # ==================== НАСТРОЙКА ЛОГГЕРА ====================
+LOG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "parser.log")
+
 logging.basicConfig(
-    filename="parser.log",
+    filename=LOG_FILE,
     format="%(asctime)s - %(levelname)s - %(message)s",
     level=logging.INFO
 )
@@ -300,11 +302,11 @@ def admin_filter():
 @app.route('/admin/log_text')
 def admin_log_text():
     try:
-        with open('parser.log', 'r', encoding='utf-8') as f:
-            lines = f.readlines()[-300:]  # последние 300 строк
+        with open(LOG_FILE, 'r', encoding='utf-8', errors='ignore') as f:
+            lines = f.readlines()[-300:]
         return ''.join(lines)
-    except:
-        return 'Лог-файл не найден или пуст.'
+    except Exception as e:
+        return f'Лог-файл не найден или пуст. Ошибка: {e}'
   
 @app.route('/admin')
 def admin_dashboard():
