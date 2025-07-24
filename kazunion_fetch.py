@@ -60,7 +60,7 @@ def run():
     logger.info("📦 Конфиг загружен успешно")
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False, slow_mo=200)
+        browser = p.chromium.launch(headless=True)
         page = browser.new_page()
         logger.info("🔄 Открываем Kazunion...")
         page.goto("https://online.kazunion.com/search_tour", timeout=60000, wait_until="domcontentloaded")
