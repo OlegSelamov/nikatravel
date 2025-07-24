@@ -110,9 +110,11 @@ def get_booking_url_by_hotel_name(hotel_name):
         except Exception as e:
             logger.error(f"❌ Ошибка при запросе DuckDuckGo: {e}")
 
-    logger.info("⏳ Переключаемся на Selenium...")
-    try:
-        return find_booking_link_duckduckgo(hotel_name)
-    except Exception as e:
-        logger.error(f"❌ Ошибка поиска через Selenium: {e}")
-        return None
+        logger.info(f"▶ Запуск Selenium для {hotel_name}...")
+
+        link = find_booking_link_duckduckgo(hotel_name)
+
+        if link:
+            logger.info(f"✅ Selenium нашёл ссылку: {link}")
+        else:
+            logger.warning("⚠️ Selenium не смог найти ссылку.")

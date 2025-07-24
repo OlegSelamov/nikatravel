@@ -151,14 +151,6 @@ def main():
     with open(FILTER_JSON, "w", encoding="utf-8") as f:
         json.dump(tours, f, ensure_ascii=False, indent=2)
     logger.info("💾 filter.json сохранён после обработки всех туров")
-# ✅ Автопуш после сохранения фильтра
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    subprocess.run(['git', 'config', '--global', 'user.name', 'RailwayBot'])
-    subprocess.run(['git', 'config', '--global', 'user.email', 'railway@bot.com'])
-    subprocess.run(['git', 'add', '.'])
-    subprocess.run(['git', 'commit', '-m', f'Автообновление туров после обработки Booking от {now}'])
-    subprocess.run(['git', 'push', 'origin', 'main'])
-
     logger.info(f"📦 Всего обновлено туров: {updated}")
     missing = [t["hotel"] for t in tours if not is_tour_filled(t)]
     if missing:
