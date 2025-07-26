@@ -51,6 +51,11 @@ def wait_for_loader(page):
 def run():
     logger.info("🚀 kazunion_fetch.run() запущен")
     config = read_config()
+    country = config.get("country_code", "ALL")
+    timestamp = time.strftime("%Y-%m-%d_%H-%M-%S")
+    session_folder = Path(f"data/html_{country}_{timestamp}")
+    session_folder.mkdir(parents=True, exist_ok=True)
+    logger.info(f"📂 Папка для HTML сохранена: {session_folder}")
     nights = str(config.get("nights", [5])[0])
     adults = str(config.get("ADULT", 2))
     meals = config.get("meal", [])
@@ -60,7 +65,7 @@ def run():
     logger.info("📦 Конфиг загружен успешно")
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(headless=False, slow_mo=200)
         page = browser.new_page()
         logger.info("🔄 Открываем Kazunion...")
         page.goto("https://online.kazunion.com/search_tour", timeout=60000, wait_until="domcontentloaded")
@@ -99,7 +104,7 @@ def run():
 
             page.select_option("select[name='STATEINC']", config["country_code"])
             logger.info(f"🌍 Страна выбрана: {config['country_code']}")
-            wait_for_loader(page)
+            wait_for_loader(page)           
 
             # Дата
             page.click("input[name='CHECKIN_BEG']", force=True)
@@ -109,6 +114,15 @@ def run():
             page.mouse.click(100, 100)  # клик, чтобы закрыть календарь
             page.wait_for_timeout(1000)
             logger.info(f"📅 Установлена дата вылета: {config['departure_date']}")
+            
+            # Дата окончания
+            page.click("input[name='CHECKIN_END']", force=True)
+            page.fill("input[name='CHECKIN_END']", "")
+            page.fill("input[name='CHECKIN_END']", config["departure_end"])
+            page.keyboard.press("Enter")
+            page.mouse.click(100, 100)
+            page.wait_for_timeout(1000)
+            logger.info(f"📅 Установлена дата окончания: {config['departure_end']}")
 
             # Ночи — умное ожидание
             logger.info("⏳ Ждём поле 'Ночей'...")
@@ -209,32 +223,41 @@ def run():
                 logger.info("🔍 Поиск запущен (двойной клик)")
             except Exception as e:
                 logger.error(f"❌ Кнопка 'Искать' не сработала: {e}")
-
-            # Сохраняем
-            try:
-                page.evaluate("window.scrollBy(0, document.body.scrollHeight)")
-                page.wait_for_timeout(3000)
+                
+            # Листаем страницы и сохраняем каждую
+            page_num = 1
+            Path("data/html").mkdir(parents=True, exist_ok=True)
+            while True:
                 html = page.content()
-                Path("data").mkdir(exist_ok=True)
-                with open("data/kazunion_result.html", "w", encoding="utf-8") as f:
+                file_path = session_folder / f"kazunion_page_{page_num}.html"
+                with open(file_path, "w", encoding="utf-8") as f:
                     f.write(html)
-                page.screenshot(path="data/debug_table.png", full_page=True)
-                logger.info("📥 HTML и скриншот сохранены")
+                logger.info(f"📥 Страница {page_num} сохранена: {file_path}")
 
-                def run_and_log(cmd):
-                    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-                    if result.stdout:
-                        logger.info(result.stdout)
-                    if result.stderr:
-                        logger.error(result.stderr)
-
-                # Используем вместо subprocess.run:
-                run_and_log("python parserhtml.py")
-                run_and_log("python auto_booking_scraper.py")
-
-            except Exception as e:
-                logger.error(f"❌ Ошибка при сохранении или парсинге: {e}")
-
-        finally:
-            browser.close()
+                next_page_selector = f".pager span.page[data-page='{page_num + 1}']"
+                if page.query_selector(next_page_selector):
+                    page.click(next_page_selector)
+                    wait_for_loader(page)
+                    page.wait_for_timeout(2000)
+                    page_num += 1
+                else:
+                    logger.info("🚩 Последняя страница достигнута.")
+                    break
         
+        except Exception as e:
+            logger.error(f"❌ Ошибка при парсинге: {e}")
+            
+        finally:
+            browser.close()            
+
+        # Функция запуска команд
+        def run_and_log(cmd):
+            result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+            if result.stdout:
+                logger.info(result.stdout)
+            if result.stderr:
+                logger.error(result.stderr)
+
+        # Запускаем парсеры
+        run_and_log("python parserhtml.py")
+        run_and_log("python auto_booking_scraper.py")

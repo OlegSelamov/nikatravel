@@ -105,9 +105,9 @@ def extract_description(url, folder_path):
             else:
                 url += "?lang=ru"
 
-        logger.info("🌐 Итоговый URL:", url)
+        logger.info(f"🌐 Итоговый URL: {url}")
         driver.get(url)
-        
+
         os.makedirs(folder_path, exist_ok=True)
 
         try:
@@ -125,50 +125,54 @@ def extract_description(url, folder_path):
                     f.write(description)
 
                 logger.info("📄 Описание успешно сохранено через Selenium (element.text)")
-                logger.info("📌 Вставляемое описание:", description[:100], "...")
+                logger.info(f"📌 Вставляемое описание: {description[:100]}...")
 
-            # Добавляем в filter.json
+            # Обновляем filter.json
             script_dir = os.path.dirname(os.path.abspath(__file__))
             filter_path = os.path.join(script_dir, "data", "filter.json")
 
+            data = []
             if os.path.exists(filter_path):
-                with open(filter_path, "r", encoding="utf-8") as f:
-                    data = json.load(f)
+                try:
+                    with open(filter_path, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                except Exception as e:
+                    logger.info(f"⚠️ Ошибка чтения filter.json: {e}")
 
-                hotel_name = os.path.basename(folder_path)
-                hotel_key = normalize(hotel_name)
-                updated = False
+            hotel_name = os.path.basename(folder_path)
+            hotel_key = normalize(hotel_name)
+            updated = False
 
-                for entry in data:
-                    entry_name = normalize(entry.get("hotel", ""))
-                    logger.info("📌 hotel_key:", hotel_key)
-                    logger.info("🔍 Сравниваем с:", entry_name)
-                    logger.info("🔍 Проверяем:", entry.get("hotel", "NO HOTEL"))
+            for entry in data:
+                entry_name = normalize(entry.get("hotel", ""))
+                logger.info(f"📌 hotel_key: {hotel_key}")
+                logger.info(f"🔍 Сравниваем с: {entry_name}")
+                logger.info(f"🔍 Проверяем: {entry.get('hotel', 'NO HOTEL')}")
 
-                    if hotel_key in entry_name or entry_name in hotel_key:
-                        logger.info("💾 Записываем в JSON:", description[:100], "...")
-                        entry["description"] = description
-                        logger.info("📋 Старая строка JSON:", entry)
-                        logger.info("✅ Найден отель и обновлён:", entry["hotel"])
-                        updated = True
-                        break
+                if hotel_key in entry_name or entry_name in hotel_key:
+                    logger.info(f"💾 Записываем в JSON: {description[:100]}...")
+                    entry["description"] = description
+                    logger.info(f"📋 Старая строка JSON: {entry}")
+                    logger.info(f"✅ Найден отель и обновлён: {entry['hotel']}")
+                    updated = True
+                    break
 
-                if updated:
-                    with open(filter_path, "w", encoding="utf-8") as f:
-                        json.dump(data, f, ensure_ascii=False, indent=2)
-                        f.flush()
-                        os.fsync(f.fileno())
-                        f.close()
-                        logger.info("📁 Записали filter.json — открой и проверь вручную.")
-                        logger.info("✅ Описание обновлено в filter.json")
-                else:
-                    logger.info(f"⚠️ Отель не найден в filter.json. Проверь имя папки и отеля.")
-            else:
-                logger.info("⚠️ Файл filter.json не найден по пути data/filter.json")
+            if not updated:
+                new_entry = {"hotel": hotel_name, "description": description}
+                data.append(new_entry)
+                logger.info(f"➕ Добавлен новый отель: {hotel_name}")
 
+            try:
+                with open(filter_path, "w", encoding="utf-8") as f:
+                    json.dump(data, f, ensure_ascii=False, indent=2)
+                    f.flush()
+                    os.fsync(f.fileno())
+                logger.info("📁 filter.json успешно обновлён.")
+            except Exception as e:
+                logger.info(f"⚠️ Ошибка записи filter.json: {e}")
 
-        except:
-            logger.info("❌ Блок data-testid='property-description' не найден даже после ожидания")
+        except Exception as e:
+            logger.info(f"❌ Блок property-description не найден: {e}")
 
         driver.quit()
 

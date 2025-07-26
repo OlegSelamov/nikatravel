@@ -13,6 +13,10 @@ import subprocess
 from werkzeug.utils import secure_filename
 import logging
 
+# Отключаем стандартные логи Flask/Werkzeug
+log = logging.getLogger('werkzeug')
+log.disabled = True
+
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
@@ -274,6 +278,7 @@ def admin_filter():
         config['city_code'] = request.form.get('city_code')
         config['country_code'] = request.form.get('country_code')
         config['departure_date'] = request.form.get('departure_date')
+        config["departure_end"] = request.form.get("departure_end")
         config['nights'] = [int(request.form.get('nights') or 7)]
         config['meal'] = request.form.getlist('meal')
         config['currency'] = request.form.get('currency')

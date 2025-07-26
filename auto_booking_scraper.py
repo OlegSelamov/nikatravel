@@ -1,3 +1,4 @@
+from booking_scraper_vlite_plus import normalize
 import subprocess
 import datetime
 import os
@@ -5,12 +6,18 @@ import json
 import shutil
 from PIL import Image, ImageStat
 import imagehash
-
+import re
 from scraper_ddg import get_booking_url_by_hotel_name
 from booking_scraper_vlite_plus import scrape_booking_vlite_plus, extract_description
 import sys
 import io
 import logging
+
+# Настройка UTF-8 для stdout
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+except:
+    pass
 
 logger = logging.getLogger("parser_logger")
 logger.setLevel(logging.INFO)
@@ -19,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_FILE = os.path.join(BASE_DIR, "parser.log")
 
 file_handler = logging.FileHandler(LOG_FILE, encoding="utf-8")
-formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 file_handler.setFormatter(formatter)
 
 if not logger.hasHandlers():
@@ -80,7 +87,7 @@ def is_tour_filled(tour):
     )
 
 def main():
-    logger.info("🚀 START: auto_booking_scraper запускается...")
+    logger.info("START: auto_booking_scraper запускается...")
     with open(FILTER_JSON, "r", encoding="utf-8") as f:
         tours = json.load(f)
 
@@ -88,24 +95,24 @@ def main():
 
     for i, tour in enumerate(tours):
         if is_tour_filled(tour):
-            logger.info(f"⏭ Уже заполнен: {tour['hotel']} — пропускаем")
+            logger.info(f"[{i}] Уже заполнен: {tour['hotel']} — пропускаем")
             continue
 
         hotel_name = tour["hotel"]
-        logger.info(f"🔍 [{i}] Ищем Booking для: {hotel_name}")
+        logger.info(f"[{i}] Ищем Booking для: {hotel_name}")
         url = get_booking_url_by_hotel_name(hotel_name)
         if not url:
-            logger.info(f"❌ Booking не найден: {hotel_name}")
+            logger.info(f"Booking не найден: {hotel_name}")
             continue
 
-        logger.info(f"✅ Booking найден: {url}")
+        logger.info(f"Booking найден: {url}")
 
         folder_name = hotel_name.replace(" ", "_").replace("*", "").replace("/", "_")
         folder_path = f"data/{folder_name}"
 
         scrape_booking_vlite_plus(url, folder_path)
         if not os.path.isdir(folder_path):
-            logger.info(f"❌ Папка не найдена: {folder_path}")
+            logger.info(f"Папка не найдена: {folder_path}")
             continue
 
         image_files = [
@@ -116,7 +123,7 @@ def main():
 
         valid_images = [f for f in image_files if is_valid_image(f)]
         if not valid_images:
-            logger.info(f"❌ Нет подходящих фото для {hotel_name}")
+            logger.info(f"Нет подходящих фото для {hotel_name}")
             continue
 
         unique_images = remove_similar_images(valid_images)
@@ -142,26 +149,46 @@ def main():
         if os.path.exists(desc_file):
             with open(desc_file, "r", encoding="utf-8") as f:
                 tour["description"] = f.read().strip()
-             
+
         tours[i] = tour
         updated += 1
-        logger.info(f"✅ [{i}] Обновлено: {hotel_name}")
+        logger.info(f"[{i}] Обновлено: {hotel_name}")
 
-    # 💾 Сохраняем JSON один раз в конце
-    with open(FILTER_JSON, "w", encoding="utf-8") as f:
-        json.dump(tours, f, ensure_ascii=False, indent=2)
-    logger.info("💾 filter.json сохранён после обработки всех туров")
-    logger.info(f"📦 Всего обновлено туров: {updated}")
-    missing = [t["hotel"] for t in tours if not is_tour_filled(t)]
-    if missing:
-        logger.info("🛑 Пропущены:")
-        for name in missing:
-            logger.info(f"  — {name}")
+        # Сохраняем JSON один раз в конце
+        existing_data = []
+        if os.path.exists(FILTER_JSON):
+            try:
+                with open(FILTER_JSON, "r", encoding="utf-8") as existing_file:
+                    existing_data = json.load(existing_file)
+            except Exception as e:
+                logger.info(f"⚠️ Ошибка чтения filter.json: {e}")
+
+        # Объединяем данные
+        def normalize(text):
+            return re.sub(r"[\\s\\*\\-\\(\\)_]", "", text.lower())
+
+        existing_hotels = {normalize(t.get("hotel", "")): t for t in existing_data}
+        for tour in tours:
+            key = normalize(tour.get("hotel", ""))
+            existing_hotels[key] = tour
+
+        final_tours = list(existing_hotels.values())
+
+        try:
+            with open(FILTER_JSON, "w", encoding="utf-8") as f:
+                json.dump(final_tours, f, ensure_ascii=False, indent=2)
+            logger.info("filter.json сохранён после обработки всех туров (с объединением)")
+            logger.info(f"Всего обновлено туров: {updated}")
+        except Exception as e:
+            logger.info(f"Ошибка при сохранении filter.json: {e}")
+            missing = [t["hotel"] for t in tours if not is_tour_filled(t)]
+            if missing:
+                logger.info("Пропущены:")
+                for name in missing:
+                    logger.info(f"  — {name}")
 
 if __name__ == "__main__":
     try:
         main()
     except Exception as e:
-        logger.info(f"💥 ОШИБКА auto_booking_scraper: {e}")
-
-
+        logger.info(f"ОШИБКА auto_booking_scraper: {e}")

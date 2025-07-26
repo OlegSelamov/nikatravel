@@ -89,6 +89,15 @@
 				   pattern="\d{2}\.\d{2}\.\d{4}" 
 				   required>
         </div>
+		
+		<div class="form-block">				
+            <label>Дата окончания:</label>
+            <input type="text" name="departure_end"
+                   placeholder="ДД.ММ.ГГГГ"
+                   pattern="\d{2}\.\d{2}\.\d{4}"
+                   value="{{ config.departure_end if config.departure_end else '' }}"
+                   required>
+        </div>
 
         <div class="form-block">
             <label>Ночей:</label>
