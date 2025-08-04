@@ -11,6 +11,7 @@ import json
 import requests
 import subprocess
 from werkzeug.utils import secure_filename
+from flask import send_from_directory
 import logging
 
 # Отключаем стандартные логи Flask/Werkzeug
@@ -125,14 +126,33 @@ def filter_page():
     tours = load_tours()
     return render_template('frontend/filter.html', tours=tours)
 
-@app.route('/tour/<int:tour_id>')
+@app.route("/tour/<int:tour_id>")
 def tour_detail(tour_id):
-    tours = load_tours()
-    if 0 <= tour_id < len(tours):
-        return render_template('frontend/tour_detail.html', tour=tours[tour_id], tour_id=tour_id)
-    else:
-        return "Тур не найден", 404
+    # Получаем дату вылета из URL ?departure_date=...
+    departure_date = request.args.get("departure_date", "")
 
+    with open('data/filter.json', "r", encoding="utf-8") as f:
+        tours = json.load(f)
+
+    if tour_id < 0 or tour_id >= len(tours):
+        abort(404)
+
+    tour = tours[tour_id]
+
+    # Если в URL есть дата, заменим на неё
+    if departure_date:
+        tour["departure_date"] = departure_date
+
+    # Гарантируем наличие галереи
+    if "gallery" not in tour or not tour["gallery"]:
+        if "image" in tour and tour["image"]:
+            tour["gallery"] = [tour["image"]]
+        else:
+            tour["gallery"] = []
+
+    # Передаём дату и в шаблон
+    return render_template("frontend/tour_detail.html", tour=tour, tour_id=tour_id)
+    
 # Обработка бронирования тура
 @app.route('/confirmation/<int:tour_id>')
 def confirmation_page(tour_id):
@@ -243,6 +263,11 @@ def confirm_booking():
             print(f"Mail error: {e}")
 
     return render_template('frontend/thank_you.html')  
+    
+# Маршрут для отдачи filter.json
+@app.route('/data/<path:filename>')
+def serve_data(filename):
+    return send_from_directory('data', filename)
 
 # ===========================
 # Админка

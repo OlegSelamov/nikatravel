@@ -88,17 +88,27 @@ def scrape_booking_vlite_plus(url, folder_name="downloaded_images_plus"):
 def extract_description(url, folder_path):
     try:
         chrome_options = Options()
+        chrome_options.page_load_strategy = "eager"  # ускоряем загрузку
         chrome_options.add_argument("--headless=new")
         chrome_options.add_argument("--disable-blink-features=AutomationControlled")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--window-size=1280,1024")
-        chrome_options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+        chrome_options.add_argument("--disable-notifications")
+        chrome_options.add_argument("--disable-extensions")
+        chrome_options.add_argument(
+            "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        )
 
         chromedriver_path = os.path.join(os.path.dirname(__file__), "chromedriver.exe")
         service = Service(executable_path=chromedriver_path)
         driver = webdriver.Chrome(service=service, options=chrome_options)
         driver.set_page_load_timeout(60)
+
+        # Гарантируем русский язык
         if "?lang=" not in url:
             if "?" in url:
                 url += "&lang=ru"
@@ -109,23 +119,27 @@ def extract_description(url, folder_path):
         driver.get(url)
 
         os.makedirs(folder_path, exist_ok=True)
+        description = "Описание недоступно"
 
         try:
-            WebDriverWait(driver, 15).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, '[data-testid="property-description"]'))
+            # Ждём именно <p data-testid="property-description">
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, "p[data-testid='property-description']"))
             )
-            element = driver.find_element(By.CSS_SELECTOR, '[data-testid="property-description"]')
+            element = driver.find_element(By.CSS_SELECTOR, "p[data-testid='property-description']")
             driver.execute_script("arguments[0].scrollIntoView(true);", element)
-            description = element.text.strip()
+            tmp_text = element.text.strip()
 
-            if not description:
-                logger.info("⚠️ Описание пустое — не сохраняем в JSON.")
+            if tmp_text:
+                description = tmp_text
+                logger.info("✅ Описание найдено и загружено.")
             else:
-                with open(os.path.join(folder_path, "description.txt"), "w", encoding="utf-8") as f:
-                    f.write(description)
+                logger.warning("⚠ Описание пустое — сохраняем как 'Описание недоступно'.")
 
-                logger.info("📄 Описание успешно сохранено через Selenium (element.text)")
-                logger.info(f"📌 Вставляемое описание: {description[:100]}...")
+            # Сохраняем в файл description.txt
+            with open(os.path.join(folder_path, "description.txt"), "w", encoding="utf-8") as f:
+                f.write(description)
+            logger.info(f"💾 Описание сохранено: {os.path.join(folder_path, 'description.txt')}")
 
             # Обновляем filter.json
             script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -137,7 +151,7 @@ def extract_description(url, folder_path):
                     with open(filter_path, "r", encoding="utf-8") as f:
                         data = json.load(f)
                 except Exception as e:
-                    logger.info(f"⚠️ Ошибка чтения filter.json: {e}")
+                    logger.info(f"⚠ Ошибка чтения filter.json: {e}")
 
             hotel_name = os.path.basename(folder_path)
             hotel_key = normalize(hotel_name)
@@ -145,39 +159,33 @@ def extract_description(url, folder_path):
 
             for entry in data:
                 entry_name = normalize(entry.get("hotel", ""))
-                logger.info(f"📌 hotel_key: {hotel_key}")
-                logger.info(f"🔍 Сравниваем с: {entry_name}")
-                logger.info(f"🔍 Проверяем: {entry.get('hotel', 'NO HOTEL')}")
-
                 if hotel_key in entry_name or entry_name in hotel_key:
-                    logger.info(f"💾 Записываем в JSON: {description[:100]}...")
                     entry["description"] = description
-                    logger.info(f"📋 Старая строка JSON: {entry}")
-                    logger.info(f"✅ Найден отель и обновлён: {entry['hotel']}")
+                    logger.info(f"✅ Обновлено описание для отеля: {entry['hotel']}")
                     updated = True
                     break
 
             if not updated:
-                new_entry = {"hotel": hotel_name, "description": description}
-                data.append(new_entry)
+                data.append({"hotel": hotel_name, "description": description})
                 logger.info(f"➕ Добавлен новый отель: {hotel_name}")
 
             try:
                 with open(filter_path, "w", encoding="utf-8") as f:
                     json.dump(data, f, ensure_ascii=False, indent=2)
-                    f.flush()
-                    os.fsync(f.fileno())
                 logger.info("📁 filter.json успешно обновлён.")
             except Exception as e:
-                logger.info(f"⚠️ Ошибка записи filter.json: {e}")
+                logger.info(f"⚠ Ошибка записи filter.json: {e}")
 
         except Exception as e:
-            logger.info(f"❌ Блок property-description не найден: {e}")
+            logger.warning(f"❌ Не удалось найти блок описания: {e}")
+            # Даже если не нашли — создаём пустой файл
+            with open(os.path.join(folder_path, "description.txt"), "w", encoding="utf-8") as f:
+                f.write(description)
 
         driver.quit()
 
     except Exception as e:
-        logger.info(f"⚠️ Ошибка при вытаскивании описания: {e}")
+        logger.info(f"⚠ Ошибка при вытаскивании описания: {e}")
 
     if __name__ == "__main__": 
         return

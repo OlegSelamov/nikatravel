@@ -1,13 +1,13 @@
 {
   "city_code": "57",
-  "country_code": "33",
-  "departure_date": "01.08.2025",
+  "country_code": "12",
+  "departure_date": "05.08.2025",
   "nights": [
     7
   ],
   "meal": [],
   "currency": "KZT",
-  "limit": 5,
+  "limit": 1,
   "ADULT": "1",
   "STARS": [
     "10001"

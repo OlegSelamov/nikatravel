@@ -1,40 +1,261 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="page-content">
-    <h1>Доступные туры</h1>
+<!-- Подключение flatpickr и русской локали -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
 
-<!-- Красивые карточки -->
-<div class="tour-cards-grid">
-  {% for tour in tours %}
-  <a href="/tour/{{ loop.index0 }}" class="tour-card-link">
-  <div class="tour-card-visual">
-    <div class="tour-image-box">
-  {% if tour.installment_months %}
-  <div class="tour-badge-left">0-0-{{ tour.installment_months }}</div>
-  {% endif %}
-
-  {% if tour.discount_percent %}
-  <div class="tour-badge-right">-{{ tour.discount_percent }}%</div>
-  {% endif %}
-
-  <img src="{{ url_for('static', filename='img/' + tour.image) }}" alt="{{ tour.hotel }}">
-  <div class="tour-location">{{ tour.country }}, {{ tour.city }}</div>
+<div class="tour-filter-container">
+  <label>Страна:
+    <select id="countrySelect"></select>
+  </label>
+  <label>Город вылета:
+    <select id="citySelect"></select>
+  </label>
+  <label>Дата вылета:
+    <input type="text" id="dateInput" placeholder="Выберите дату" readonly>
+  </label>
 </div>
-   <div class="tour-info">
-  <h3>{{ tour.hotel }}{% if tour.stars %} {{ tour.stars }}*{% endif %}</h3>
-  <div class="tour-price">{{ tour.price }} ₸</div>
 
-  {% if tour.old_price %}
-  <div class="tour-old-price">{{ tour.old_price }} ₸</div>
-  {% endif %}
+<!-- Блок доступных туров -->
+<div id="available-tours">
+  <h2>Доступные туры</h2>
+  <div id="tours-list" class="tour-cards-grid"></div>
+</div>
 
-  {% if tour.price_per_month %}
-  <div class="tour-monthly">{{ tour.price_per_month }} ₸ x{{ tour.installment_months }}</div>
-  {% endif %}
-</div>
-  </div>
-  {% endfor %}
-</div>
+<script>
+let allTours = [];
+let calendarInstance = null;
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById('available-tours').style.display = 'none';
+  loadData();
+});
+
+async function loadData() {
+  try {
+    const res = await fetch('data/filter.json?t=' + Date.now());
+    allTours = await res.json();
+    console.log("JSON загружен:", allTours);
+    populateCountrySelect();
+    restoreFilterState();
+  } catch (e) {
+    console.error("Ошибка загрузки JSON:", e);
+  }
+}
+
+function populateCountrySelect() {
+  const countrySelect = document.getElementById('countrySelect');
+  const countries = [...new Set(allTours.map(t => t.country.trim().replace(/^-/, '').trim()))].sort();
+  countrySelect.innerHTML = '<option disabled selected>Выберите страну</option>' +
+    countries.map(c => `<option value="${c}">${c}</option>`).join('');
+}
+
+document.getElementById('countrySelect').addEventListener('change', e => {
+  const selected = e.target.value;
+  populateCitySelect(selected);
+});
+
+function populateCitySelect(country, preselectCity = null) {
+  const cities = [...new Set(allTours
+    .filter(t => t.country.trim().replace(/^-/, '').trim() === country.trim().replace(/^-/, '').trim())
+    .map(t => t.city.trim().replace(/^-/, '').trim())
+	)].sort();
+  const citySelect = document.getElementById('citySelect');
+  citySelect.innerHTML = '<option disabled selected>Выберите город</option>' +
+    cities.map(c => `<option value="${c}">${c}</option>`).join('');
+  if (preselectCity) {
+    citySelect.value = preselectCity;
+  }
+  document.getElementById('citySelect').addEventListener('change', updateCalendar);
+}
+
+function updateCalendar(preselectDate = null) {
+  const selectedCountry = document.getElementById('countrySelect').value;
+  const selectedCity = document.getElementById('citySelect').value;
+  const dates = new Set();
+
+  allTours.forEach(t => {
+    if (
+      t.country && t.city && t.dates_prices &&
+      t.country.trim().toLowerCase() === selectedCountry.trim().toLowerCase() &&
+      t.city.trim().toLowerCase() === selectedCity.trim().toLowerCase()
+    ) {
+      t.dates_prices.forEach(dp => {
+        dates.add(dp.date.trim());
+      });
+    }
+  });
+
+  const availableDates = Array.from(dates);
+  console.log("Даты для календаря:", availableDates);
+
+  if (calendarInstance) {
+    calendarInstance.destroy();
+  }
+
+  calendarInstance = flatpickr("#dateInput", {
+    dateFormat: "d.m.Y",
+    enable: availableDates,
+    locale: flatpickr.l10ns.ru,
+    defaultDate: preselectDate || null,
+    onChange: function(selectedDates, dateStr) {
+      console.log("Выбрана дата:", dateStr);
+      filterTours(dateStr);
+    }
+  });
+
+  if (preselectDate) {
+    filterTours(preselectDate);
+  }
+}
+
+// Приведение даты YYYY-MM-DD → DD.MM.YYYY
+function formatDateToDDMMYYYY(dateStr) {
+  if (dateStr && dateStr.includes('-')) {
+    const [y, m, d] = dateStr.split('-');
+    return `${d}.${m}.${y}`;
+  }
+  return dateStr;
+}
+
+function filterTours(selectedDate) {
+  const selectedCountry = document.getElementById('countrySelect').value;
+  const selectedCity = document.getElementById('citySelect').value;
+
+  const result = [];
+
+  allTours.forEach(t => {
+    if (
+      t.country && t.city && t.dates_prices &&
+      t.country.trim().toLowerCase() === selectedCountry.trim().toLowerCase() &&
+      t.city.trim().toLowerCase() === selectedCity.trim().toLowerCase()
+    ) {
+      t.dates_prices.forEach(dp => {
+        if (
+          dp.date.trim() === selectedDate.trim() ||
+          dp.date.trim() === formatDateToDDMMYYYY(selectedDate.trim())
+        ) {
+          result.push({
+            ...t,
+            price: dp.price,
+            date: dp.date
+          });
+        }
+      });
+    }
+  });
+
+  localStorage.setItem('tourFilter', JSON.stringify({
+    country: selectedCountry,
+    city: selectedCity,
+    date: selectedDate
+  }));
+
+  document.getElementById('available-tours').style.display = 'block';
+  renderNativeCards(result);
+  document.getElementById('available-tours').scrollIntoView({ behavior: 'smooth' });
+}
+
+function renderNativeCards(tours) {
+  const container = document.getElementById('tours-list');
+  if (tours.length === 0) {
+    container.innerHTML = '<p>Нет туров на выбранную дату</p>';
+    return;
+  }
+
+  container.innerHTML = tours.map((t, index) => `
+    <a href="/tour/${index}?departure_date=${encodeURIComponent(t.date)}" class="tour-card-link">
+      <div class="tour-card-visual">
+        <div class="tour-image-box">
+          ${t.installment_months ? `<div class="tour-badge-left">0-0-${t.installment_months}</div>` : ''}
+          ${t.discount_percent ? `<div class="tour-badge-right">-${t.discount_percent}%</div>` : ''}
+          ${t.image && t.image.startsWith('http') 
+            ? `<img src="${t.image}" alt="${t.hotel}">`
+            : `<img src="/static/img/${t.image}" alt="${t.hotel}">`}
+          <div class="tour-location">${t.country}, ${t.city}</div>
+        </div>
+        <div class="tour-info">
+          <h3>${t.hotel}${t.stars ? ` ${t.stars}*` : ''}</h3>
+          <div class="tour-price">${t.price} ₸</div>
+          ${t.old_price ? `<div class="tour-old-price">${t.old_price} ₸</div>` : ''}
+          ${t.price_per_month ? `<div class="tour-monthly">${t.price_per_month} ₸ x${t.installment_months}</div>` : ''}
+        </div>
+      </div>
+    </a>
+  `).join('');
+}
+
+function restoreFilterState() {
+  const saved = localStorage.getItem('tourFilter');
+  if (!saved) return;
+
+  const { country, city, date } = JSON.parse(saved);
+
+  document.getElementById('countrySelect').value = country;
+  populateCitySelect(country, city);
+
+  // задержка для гарантии загрузки городов и календаря
+  setTimeout(() => {
+    updateCalendar(date);
+  }, 200);
+}
+</script>
+
+<style>
+.tour-filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  background: #fff8ee;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+.tour-filter-container label {
+  font-size: 14px;
+  color: #6a5037;
+  display: flex;
+  flex-direction: column;
+}
+.tour-filter-container select,
+.tour-filter-container input {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+#available-tours {
+  margin-top: 20px;
+}
+#tours-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  #tours-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  #tours-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  #tours-list {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
 {% endblock %}
 
 
