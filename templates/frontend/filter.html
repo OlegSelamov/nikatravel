@@ -210,10 +210,11 @@ function restoreFilterState() {
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 20px;
-  background: #fff8ee;
+  background: rgba(255, 248, 238, 0.4); /* полупрозрачный фон */;
   padding: 15px;
-  border-radius: 12px;
+  border-radius: 0px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  backdrop-filter: blur(6px); /* лёгкое размытие фона */
 }
 .tour-filter-container label {
   font-size: 14px;
@@ -231,6 +232,12 @@ function restoreFilterState() {
 #available-tours {
   margin-top: 20px;
 }
+#available-tours h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #6a5037;
+}
 #tours-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -245,13 +252,51 @@ function restoreFilterState() {
 
 @media (max-width: 768px) {
   #tours-list {
-    grid-template-columns: repeat(2, 1fr);
+    display: grid;
+    grid-template-columns: repeat(2, calc(50% - 6px));
+    gap: 12px;
+  }
+
+  .tour-card-link {
+    display: block;
+    width: 100%;
+  }
+
+  .tour-card-visual {
+    width: 100%;
+    height: 100%; /* чтобы тянулось */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .tour-image-box {
+    flex: 0 0 140px; /* фиксированная высота блока с картинкой */
+    position: relative;
+  }
+
+  .tour-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .tour-info {
+    flex: 1;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* чтобы цена всегда была внизу */
   }
 }
 
 @media (max-width: 480px) {
+  /* для совсем маленьких экранов можно оставить по одной карточке */
   #tours-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, calc(50% - 6px));
   }
 }
 </style>
