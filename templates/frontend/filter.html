@@ -136,11 +136,19 @@ function filterTours(selectedDate) {
           dp.date.trim() === selectedDate.trim() ||
           dp.date.trim() === formatDateToDDMMYYYY(selectedDate.trim())
         ) {
-          result.push({
-            ...t,
-            price: dp.price,
-            date: dp.date
-          });
+        // считаем старую цену (+20%) и рассрочку (+12% / 12 мес)
+        let oldPrice = Math.round(dp.price * 1.20);
+        let discountPercent = Math.round((oldPrice - dp.price) / oldPrice * 100);
+        let pricePerMonth = Math.round((dp.price * 1.12) / 12);
+
+        result.push({
+          ...t,
+          price: dp.price,
+          date: dp.date,
+          old_price: oldPrice,
+          discount_percent: discountPercent,
+          price_per_month: pricePerMonth
+        });
         }
       });
     }
@@ -165,7 +173,7 @@ function renderNativeCards(tours) {
   }
 
   container.innerHTML = tours.map((t, index) => `
-    <a href="/tour/${index}?departure_date=${encodeURIComponent(t.date)}" class="tour-card-link">
+      <a href="/tour/${index}?departure_date=${encodeURIComponent(t.date)}&price=${t.price}" class="tour-card-link">
       <div class="tour-card-visual">
         <div class="tour-image-box">
           ${t.installment_months ? `<div class="tour-badge-left">0-0-${t.installment_months}</div>` : ''}

@@ -142,6 +142,18 @@ def tour_detail(tour_id):
     # Если в URL есть дата, заменим на неё
     if departure_date:
         tour["departure_date"] = departure_date
+        
+    # Если в URL есть цена — подставим её и пересчитаем старую цену, скидку и рассрочку
+    price_from_url = request.args.get("price")
+    if price_from_url:
+        try:
+            price_val = float(price_from_url)
+            tour["price"] = price_val
+            tour["old_price"] = round(price_val * 1.20)  # +20%
+            tour["discount_percent"] = round((tour["old_price"] - price_val) / tour["old_price"] * 100)
+            tour["price_per_month"] = round((price_val * 1.12) / 12)  # +12% и делим на 12 мес
+        except ValueError:
+            pass   
 
     # Гарантируем наличие галереи
     if "gallery" not in tour or not tour["gallery"]:
@@ -160,14 +172,18 @@ def confirmation_page(tour_id):
         tours = json.load(f)
     tour = tours[tour_id]
 
-    # Получаем из query ?tourists=1&nights=5&total_price=500000
-    tourists = request.args.get('tourists', tour['seats'])
-    nights = request.args.get('nights', tour['nights'])
-    total_price = request.args.get('total_price', tour['price'])
+    # Получаем дату вылета из query или берём из тура
+    departure_date = request.args.get('departure_date', tour.get('departure_date', ''))
+
+    # Получаем остальные данные
+    tourists = request.args.get('tourists', tour.get('seats', ''))
+    nights = request.args.get('nights', tour.get('nights', ''))
+    total_price = request.args.get('total_price', tour.get('price', ''))
 
     return render_template(
         'frontend/booking_confirmation.html',
         tour=tour,
+        departure_date=departure_date,  # передаём дату в шаблон
         tourists=tourists,
         nights=nights,
         total_price=total_price,

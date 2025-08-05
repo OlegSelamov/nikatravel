@@ -9,7 +9,7 @@
   <div class="booking-details">
     <p><strong>Направление:</strong> {{ tour.city }} — {{ tour.country }}</p>
     <p><strong>Отель:</strong> {{ tour.hotel }}</p>
-    <p><strong>Дата вылета:</strong> {{ tour.departure_date }}</p>
+    <p><strong>Дата вылета:</strong> {{ departure_date }}</p>
     <p><strong>Количество туристов:</strong> {{ tourists }}</p>
     <p><strong>Количество ночей:</strong> {{ nights }}</p>
     <p><strong>Итоговая сумма:</strong> {{ total_price }} ₸</p>
@@ -19,7 +19,7 @@
     <input type="hidden" name="hotel" value="{{ tour.hotel }}">
     <input type="hidden" name="city" value="{{ tour.city }}">
     <input type="hidden" name="country" value="{{ tour.country }}">
-    <input type="hidden" name="departure_date" value="{{ tour.departure_date }}">
+    <input type="hidden" name="departure_date" value="{{ departure_date }}">
     <input type="hidden" name="tourists" value="{{ tourists }}">
     <input type="hidden" name="nights" value="{{ nights }}">
     <input type="hidden" name="total_price" value="{{ total_price }}">

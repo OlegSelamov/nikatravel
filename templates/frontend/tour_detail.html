@@ -84,6 +84,7 @@
 
 <!-- Форма перехода на подтверждение -->
 <form action="{{ url_for('confirmation_page', tour_id=tour_id) }}" method="get" id="bookForm">
+  <input type="hidden" name="departure_date" value="{{ tour.departure_date }}">
   <input type="hidden" name="tourists" id="formTourists" value="1">
   <input type="hidden" name="nights" id="formNights" value="{{ tour.nights }}">
   <input type="hidden" name="total_price" id="formPrice" value="{{ tour.price }}">

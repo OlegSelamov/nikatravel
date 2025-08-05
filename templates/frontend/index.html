@@ -1,6 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<style>
+.banner-slider {
+    width: 100%;
+    overflow: hidden;
+}
+
+.banner-slide {
+    width: 100%;
+}
+
+.banner-slide img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+    .banner-slide img {
+        max-height: 250px;
+    }
+}
+</style>
+
 <div class="banner-slider">
   {% for banner in banners %}
     <div class="banner-slide">
@@ -8,8 +33,7 @@
     </div>
   {% endfor %}
 </div>
-<div class="welcome-section">
-    <h1>Добро пожаловать в Nika Travel</h1>
+
 <section class="places-section">
   <h2>Места, которые стоит посетить</h2>
 
@@ -42,7 +66,6 @@
     </a>
     {% endfor %}
     </div>
-
 </section>
 
 <section class="hotels-section">
@@ -59,6 +82,7 @@
     {% endfor %}
     </div>
 </section>
+
 {% endblock %}
 
 
