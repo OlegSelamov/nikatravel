@@ -6,15 +6,17 @@
 .banner-slider {
     width: 100%;
     overflow: hidden;
+	height: auto !important;
 }
 
 .banner-slide {
     width: 100%;
+	height: auto !important;
 }
 
 .banner-slide img {
     width: 100%;
-    height: auto;
+    height: auto !important;
     object-fit: cover;
     display: block;
 }
@@ -62,12 +64,36 @@ section {
 .places-section, .news-section, .hotels-section {
     padding: 0 15px;
 }
+
+.banner-slide {
+    position: relative;
+}
+
+.banner-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(106, 80, 55, 0.85); /* твой фирменный песочно-коричневый */
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.banner-btn:hover {
+    background: rgba(85, 64, 44, 0.95);
+    transform: translateY(-2px);
+}
 </style>
 
 <div class="banner-slider">
   {% for banner in banners %}
     <div class="banner-slide">
       <img src="{{ url_for('static', filename='img/' + banner.image) }}" alt="">
+      <a href="#" class="banner-btn">Поиск Тура</a>
     </div>
   {% endfor %}
 </div>
