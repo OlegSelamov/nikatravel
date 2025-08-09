@@ -31,17 +31,17 @@
   <!-- Галерея -->
   {% if tour.gallery %}
   <div style="margin-bottom: 15px;">
-    <div class="swiper main-swiper" style="width: 100%; height: 400px; border-radius: 12px; overflow: hidden;">
+    <div class="swiper main-swiper" style="width: 100%; height: 200px; border-radius: 12px; overflow: hidden;">
       <div class="swiper-wrapper">
         {% for img in tour.gallery %}
         <div class="swiper-slide">
           {% if img.startswith('http') %}
             <a href="{{ img }}" class="glightbox" data-gallery="tour-gallery">
-              <img src="{{ img }}" style="width: 100%; height: 450px; object-fit: cover;">
+              <img src="{{ img }}" style="width: 100%; height: 250px; object-fit: contain;">
             </a>
           {% else %}
             <a href="{{ url_for('static', filename='img/' + img) }}" class="glightbox" data-gallery="tour-gallery">
-              <img src="{{ url_for('static', filename='img/' + img) }}" style="width: 100%; height: 250px; object-fit: cover;">
+              <img src="{{ url_for('static', filename='img/' + img) }}" style="width: 100%; height: 500px; object-fit: cover;">
             </a>
           {% endif %}
         </div>
@@ -152,18 +152,35 @@ function applyDates() {
           768: { slidesPerView: 8 }
       }
   });
-// Основной слайдер
-  const mainSwiper = new Swiper('.main-swiper', {
-      spaceBetween: 10,
-      navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
-      },
-      loop: true,
-      thumbs: {
-          swiper: thumbSwiper
-      }
-  });
+    // Основной слайдер
+const mainSwiper = new Swiper('.main-swiper', {
+    slidesPerView: 3,
+    slidesPerGroup: 3,
+    spaceBetween: 10,
+    loop: true,
+    loopFillGroupWithBlank: true, // 🛠️ важно для корректной прокрутки
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+    },
+    thumbs: {
+        swiper: thumbSwiper
+    },
+    breakpoints: {
+        0: {
+            slidesPerView: 1,
+            slidesPerGroup: 1
+        },
+        640: {
+            slidesPerView: 2,
+            slidesPerGroup: 2
+        },
+        1024: {
+            slidesPerView: 3,
+            slidesPerGroup: 3
+        }
+    }
+});
 
   // Лайтбокс
   const lightbox = GLightbox({

@@ -134,10 +134,9 @@ def tour_detail(tour_id):
     with open('data/filter.json', "r", encoding="utf-8") as f:
         tours = json.load(f)
 
-    if tour_id < 0 or tour_id >= len(tours):
-        abort(404)
-
-    tour = tours[tour_id]
+    tour = next((t for t in tours if t.get("id") == tour_id), None)
+    if not tour:
+        return "Тур не найден", 404
 
     # Если в URL есть дата, заменим на неё
     if departure_date:
@@ -170,7 +169,9 @@ def tour_detail(tour_id):
 def confirmation_page(tour_id):
     with open('data/filter.json', encoding='utf-8') as f:
         tours = json.load(f)
-    tour = tours[tour_id]
+    tour = next((t for t in tours if t.get("id") == tour_id), None)
+    if not tour:
+        return "Тур не найден", 404
 
     # Получаем дату вылета из query или берём из тура
     departure_date = request.args.get('departure_date', tour.get('departure_date', ''))
@@ -199,7 +200,7 @@ def booking_confirm(tour_id):
     comment = request.form.get('comment', '')
 
     tours = load_tours()
-    tour = tours[tour_id] if 0 <= tour_id < len(tours) else None
+    tour = next((t for t in tours if t.get("id") == tour_id), None)
 
     if tour:
         message = f"🔥 Новая заявка на тур!\n" \

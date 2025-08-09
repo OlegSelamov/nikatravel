@@ -173,7 +173,7 @@ function renderNativeCards(tours) {
   }
 
   container.innerHTML = tours.map((t, index) => `
-      <a href="/tour/${index}?departure_date=${encodeURIComponent(t.date)}&price=${t.price}" class="tour-card-link">
+      <a href="/tour/${t.id}?departure_date=${encodeURIComponent(t.date)}&price=${t.price}" class="tour-card-link">
       <div class="tour-card-visual">
         <div class="tour-image-box">
           ${t.installment_months ? `<div class="tour-badge-left">0-0-${t.installment_months}</div>` : ''}

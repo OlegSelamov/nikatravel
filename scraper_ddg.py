@@ -1,71 +1,109 @@
-
-import requests
-from bs4 import BeautifulSoup
-from urllib.parse import urlparse, parse_qs, unquote
+import re
+import os
+import logging
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-import time
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-def extract_real_booking_link(raw_link):
-    # Добавляем схему, если отсутствует
-    if raw_link.startswith("//"):
-        raw_link = "https:" + raw_link
-    try:
-        query = urlparse(raw_link).query
-        real_link = unquote(parse_qs(query).get("uddg", [raw_link])[0])
-        return real_link
-    except Exception:
-        return raw_link
+# === ЛОГИРОВАНИЕ ===
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LOG_FILE = os.path.join(BASE_DIR, "parser.log")
+
+logger = logging.getLogger("parser_logger")
+logger.setLevel(logging.INFO)
+file_handler = logging.FileHandler(LOG_FILE, encoding="utf-8")
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(formatter)
+if not logger.hasHandlers():
+    logger.addHandler(file_handler)
+
+def clean_hotel_name(hotel_name):
+    hotel_name = re.sub(r"\([^)]*\)", "", hotel_name)  # убираем скобки
+    hotel_name = re.sub(r"\d\*\s*", "", hotel_name)    # убираем звездность
+    hotel_name = re.sub(r"[,\s]+", " ", hotel_name)    # убираем лишние пробелы/запятые
+    return hotel_name.strip()
 
 def get_booking_url_by_hotel_name(hotel_name):
-    # Попробуем через DuckDuckGo
-    try:
-        query = f"site:booking.com {hotel_name}"
-        ddg_url = f"https://duckduckgo.com/html/?q={query}"
-        response = requests.get(ddg_url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
-        if response.status_code == 200:
-            soup = BeautifulSoup(response.text, "html.parser")
-            links = [a["href"] for a in soup.find_all("a", href=True) if "booking.com" in a["href"]]
-            if links:
-                real_link = extract_real_booking_link(links[0])
-                print(f"✅ Найдена ссылка через DuckDuckGo: {real_link}")
-                return real_link
-            else:
-                print("⚠️ DuckDuckGo не вернул ссылок на Booking.")
-        else:
-            print(f"⚠️ Ошибка запроса DuckDuckGo: {response.status_code}")
-    except Exception as e:
-        print(f"⚠️ Ошибка при поиске через DuckDuckGo: {e}")
+    cleaned_name = clean_hotel_name(hotel_name)
+    logger.info(f"🔎 Ищу напрямую на Booking: {cleaned_name}")
 
-    # Если не нашли - fallback через Selenium
+    options = Options()
+    # Видимый режим (можно вернуть headless при переносе на сервер)
+    options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--window-size=1280,1024")
+
+    driver = webdriver.Chrome(options=options)
+    driver.set_page_load_timeout(25)
+
     try:
-        print("🔄 Пробуем искать напрямую на Booking через Selenium...")
-        options = Options()
-        options.add_argument("--headless")
-        options.add_argument("--disable-gpu")
-        options.add_argument("--no-sandbox")
-        driver = webdriver.Chrome(options=options)
         driver.get("https://www.booking.com")
 
+        # Ждём поле поиска
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.NAME, "ss"))
+        )
+
+        # Вводим название
         search_box = driver.find_element(By.NAME, "ss")
         search_box.clear()
-        search_box.send_keys(hotel_name)
-        search_box.submit()
-        time.sleep(3)
+        search_box.send_keys(cleaned_name)
 
-        # Ищем первый результат
-        first_card = driver.find_element(By.CSS_SELECTOR, "div[data-testid='property-card']")
-        link_element = first_card.find_element(By.CSS_SELECTOR, "a[data-testid='title-link']")
-        booking_url = link_element.get_attribute("href")
-        driver.quit()
-
-        print(f"✅ Найдена ссылка через Booking: {booking_url}")
-        return booking_url
-    except Exception as e:
-        print(f"❌ Не удалось найти ссылку на Booking: {e}")
+        # Ждём и кликаем первую подсказку
         try:
-            driver.quit()
+            WebDriverWait(driver, 5).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, "li[data-i='0']"))
+            )
+            driver.find_element(By.CSS_SELECTOR, "li[data-i='0']").click()
+            logger.info("✅ Кликнул первую подсказку")
         except:
-            pass
+            logger.warning("⚠️ Подсказка не найдена, выполняю поиск напрямую")
+            search_box.submit()
+
+        # Ждём карточки
+        WebDriverWait(driver, 15).until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "div[data-testid='property-card']"))
+        )
+
+        # Берём ссылку из первой карточки
+        first_card = driver.find_element(By.CSS_SELECTOR, "div[data-testid='property-card']")
+        photo_url = first_card.find_element(By.CSS_SELECTOR, "a[data-testid='title-link']").get_attribute("href")
+        clean_url = photo_url.split("?")[0]
+        logger.info(f"📌 Чистый URL для описания: {clean_url}")
+
+        # Переходим на страницу отеля
+        driver.get(clean_url)
+        try:
+            # Пробуем найти старый блок описания
+            WebDriverWait(driver, 5).until(
+                EC.presence_of_element_located((By.ID, "property_description_content"))
+            )
+            description = driver.find_element(By.ID, "property_description_content").text.strip()
+            logger.info(f"✅ Описание найдено (старый блок), длина: {len(description)} символов")
+        except:
+            # Пробуем новый формат
+            try:
+                WebDriverWait(driver, 5).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR, "div[data-capla-component-boundary*='PropertyDescription']"))
+                )
+                description = driver.find_element(By.CSS_SELECTOR, "div[data-capla-component-boundary*='PropertyDescription']").text.strip()
+                logger.info(f"✅ Описание найдено (новый блок), длина: {len(description)} символов")
+            except:
+                logger.warning("❌ Описание не найдено")
+                description = ""
+
+        # Здесь можно сохранить описание, если у тебя есть логика записи
+        # например: save_description_to_json(hotel_name, description)
+
+        # Возвращаем ссылку для фото (как раньше)
+        return photo_url
+
+    except Exception as e:
+        logger.error(f"❌ Ошибка поиска на Booking: {e}")
         return None
+
+    finally:
+        driver.quit()
