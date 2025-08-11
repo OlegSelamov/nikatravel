@@ -3,29 +3,22 @@
 {% block content %}
 <div class="flights-container" style="max-width:1200px;margin:0 auto;padding:20px;">
     <h1 style="text-align:center;margin-bottom:20px;color:#d48b3d;">Поиск авиабилетов</h1>
+	  <div style="background:#fff8f0;padding:20px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+          <script async src="https://tpwdg.com/content?currency=kzt&trs=448848&shmarker=664464&searchUrl=www.aviasales.kz%2Fsearch&locale=ru&powered_by=true&origin=ALA&destination=AUH&one_way=false&only_direct=false&period=year&range=7%2C14&primary=%23B84104ff&color_background=%23FEDD96ff&dark=%23823B02ff&light=%23F8E6D8ff&achieve=%23DD5F07ff&promo_id=4041&campaign_id=100" charset="utf-8"></script>
+      </div>
+</div>
 
-    <!-- Форма поиска -->
-    <form method="POST" style="display:flex;flex-wrap:wrap;gap:15px;background:#fff8f0;padding:20px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-        <div style="flex:1;min-width:180px;">
-            <label>Город вылета:</label>
-            <input type="text" id="origin" name="origin" placeholder="Алматы" required style="width:100%;padding:8px;" autocomplete="off">
-            <div id="origin-list" class="autocomplete-list"></div>
-        </div>
-        <div style="flex:1;min-width:180px;">
-            <label>Город назначения:</label>
-            <input type="text" id="destination" name="destination" placeholder="Дубай" required style="width:100%;padding:8px;" autocomplete="off">
-            <div id="destination-list" class="autocomplete-list"></div>
-        </div>
-        <div style="flex:1;min-width:180px;">
-            <label>Дата вылета:</label>
-            <input type="date" name="depart_date" required style="width:100%;padding:8px;">
-        </div>
-        <div style="align-self:flex-end;">
-            <button type="submit" style="padding:10px 20px;background:#d48b3d;color:white;border:none;border-radius:5px;cursor:pointer;">
-                Найти билеты
-            </button>
-        </div>
-    </form>
+<style>
+.glass-widget {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+</style>
 
     {% if flights %}
     <h2 style="margin-top:30px;color:#d48b3d;">Найденные варианты</h2>
@@ -46,9 +39,9 @@
     <td style="padding:8px;border:1px solid #ddd;" class="rub-price" data-price="{{ f.price }}">{{ f.price }} RUB</td>
     <td style="padding:8px;border:1px solid #ddd;">{{ (f.departure_at or '')[:10] }}</td>
     <td style="padding:8px;border:1px solid #ddd;">
-      <a href="{{ f.link }}" target="_blank"
+      <a href="{{ url_for('avia_frame', origin=origin, destination=destination, depart_date=(f.departure_at or '')[:10]) }}"
          style="color:white;background:#e76f51;padding:6px 12px;border-radius:4px;text-decoration:none;">
-        Забронировать
+          Забронировать
       </a>
     </td>
   </tr>

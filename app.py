@@ -119,8 +119,8 @@ def about():
     return render_template('frontend/about.html')
     
 # ======== АВИАБИЛЕТЫ ========
-AVIASALES_API_TOKEN = "ffd20ef2003810e413ac023a2e9dd5ff"
-AVIASALES_MARKER = "664464"
+API_TOKEN = "ffd20ef2003810e413ac023a2e9dd5ff"
+MARKER = "664464"
 
 def build_aviasales_link(origin: str, destination: str, departure_at: str, adults: int = 1, marker: str = "") -> str:
     if not departure_at or "-" not in departure_at:
@@ -130,62 +130,98 @@ def build_aviasales_link(origin: str, destination: str, departure_at: str, adult
     url = f"https://www.aviasales.kz/search/{search_hash}"
     return f"{url}?marker={marker}" if marker else url
 
-@app.route('/flights', methods=['GET', 'POST'])
+@app.route("/flights", methods=["GET", "POST"])
 def flights():
-    flights_data = None
-    if request.method == 'POST':
-        origin = request.form['origin'].strip().upper()
-        destination = request.form['destination'].strip().upper()
-        depart_date = request.form['depart_date']  # YYYY-MM-DD
-        month_str = depart_date[:7]                # YYYY-MM
+    flights = None
+    origin = destination = depart_date = None
+
+    if request.method == "POST":
+        origin = request.form.get("origin")
+        destination = request.form.get("destination")
+        depart_date = request.form.get("depart_date")
 
         url = "https://api.travelpayouts.com/aviasales/v3/prices_for_dates"
         params = {
             "origin": origin,
             "destination": destination,
-            # можно месяц (YYYY-MM) ИЛИ диапазон 'YYYY-MM-DD:YYYY-MM-DD'
-            "departure_at": month_str,
-            "unique": "false",
-            "sorting": "price",
-            "direct": "false",
-            "cy": "kzt",       # валюта (в v3 параметр называется cy)
-            "limit": 100,
-            "page": 1,
-            "one_way": "true", # если нужно только в одну сторону
-            "token": AVIASALES_API_TOKEN
+            "departure_at": depart_date,
+            "currency": "rub",
+            "token": API_TOKEN
         }
+        r = requests.get(url, params=params)
+        data = r.json()
 
+        if data.get("data"):
+            flights = sorted(data["data"], key=lambda x: x["price"])
+
+            # Добавляем ссылку на бронирование
+            for f in flights:
+                f["link"] = f"https://www.aviasales.kz{f['link']}&marker={MARKER}"
+
+    return render_template("frontend/flights.html",
+                           flights=flights,
+                           origin=origin,
+                           destination=destination,
+                           depart_date=depart_date)
+
+@app.route("/booking")
+def booking():
+    origin = request.args.get("origin", "").strip()
+    destination = request.args.get("destination", "").strip()
+    depart_date = request.args.get("depart_date")
+    adults = request.args.get("adults", "1")
+    children = request.args.get("children", "0")
+    infants = request.args.get("infants", "0")
+    marker = "664464"  # твой партнёрский код Aviasales
+
+    def get_iata(city_name):
+        """Конвертация названия города в IATA-код через API Travelpayouts"""
+        url = f"https://autocomplete.travelpayouts.com/places2?term={city_name}&locale=ru"
         try:
-            r = requests.get(url, params=params, timeout=20)
-            r.raise_for_status()
-            data = r.json().get("data", [])
-            flights_data = []
-            for it in data:
-                dep = (it.get("departure_at") or it.get("depart_date") or "")[:10]
-                if not dep:
-                    continue
-                flights_data.append({
-                    "origin": it.get("origin", origin),
-                    "destination": it.get("destination", destination),
-                    "airline": it.get("airline") or "-",
-                    "price": it.get("price") or it.get("value") or 0,
-                    "departure_at": dep,
-                    "link": build_aviasales_link(
-                        it.get("origin", origin),
-                        it.get("destination", destination),
-                        dep,
-                        adults=1,
-                        marker=AVIASALES_MARKER,
-                    ),
-                })
-            flights_data.sort(key=lambda x: (x["price"] or 10**9, x["departure_at"]))
-            if not flights_data:
-                flights_data = []
-        except Exception as e:
-            print("Aviasales v3 error:", e)
-            flights_data = []
+            r = requests.get(url, timeout=5)
+            data = r.json()
+            if data and "code" in data[0]:
+                return data[0]["code"]
+        except:
+            pass
+        return city_name  # если не нашли код, вернём то, что есть
 
-    return render_template("frontend/flights.html", flights=flights_data, marker=AVIASALES_MARKER)
+    # Конвертируем, если это не код IATA (IATA всегда 3 буквы)
+    if len(origin) != 3:
+        origin = get_iata(origin)
+    if len(destination) != 3:
+        destination = get_iata(destination)
+
+    # Форматируем дату
+    date_obj = datetime.strptime(depart_date, "%Y-%m-%d")
+    depart_str = date_obj.strftime("%d%m")
+
+    # Генерируем ссылку Aviasales
+    avia_url = f"https://www.aviasales.kz/search/{origin}{depart_str}{destination}?adults={adults}&children={children}&infants={infants}&marker={marker}"
+
+    return render_template("frontend/booking.html", 
+                           avia_url=avia_url, 
+                           origin=origin, 
+                           destination=destination, 
+                           depart_date=depart_date)
+                           
+
+MARKER = "664464"
+
+@app.route("/avia_frame")
+def avia_frame():
+    origin = request.args.get("origin")
+    destination = request.args.get("destination")
+    depart_date = request.args.get("depart_date")
+
+    # Форматируем дату для ссылки Aviasales
+    date_obj = datetime.strptime(depart_date, "%Y-%m-%d")
+    depart_str = date_obj.strftime("%d%m")
+
+    avia_url = f"https://www.aviasales.kz/search/{origin}{depart_str}{destination}?marker={MARKER}"
+
+    return render_template("frontend/avia_frame.html", avia_url=avia_url)
+
 
 @app.route('/contacts')
 def contacts():
