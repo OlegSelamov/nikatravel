@@ -4,6 +4,7 @@ from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from threading import Thread 
 from flask import Flask, render_template, request, redirect, url_for, session, flash
+from datetime import datetime, timedelta
 from kazunion_fetch import run
 import threading
 import os
@@ -116,6 +117,75 @@ def index():
 @app.route('/about')
 def about():
     return render_template('frontend/about.html')
+    
+# ======== АВИАБИЛЕТЫ ========
+AVIASALES_API_TOKEN = "ffd20ef2003810e413ac023a2e9dd5ff"
+AVIASALES_MARKER = "664464"
+
+def build_aviasales_link(origin: str, destination: str, departure_at: str, adults: int = 1, marker: str = "") -> str:
+    if not departure_at or "-" not in departure_at:
+        return ""
+    y, m, d = departure_at.split("T")[0].split("-")
+    search_hash = f"{origin}{d}{m}{destination}{adults}"
+    url = f"https://www.aviasales.kz/search/{search_hash}"
+    return f"{url}?marker={marker}" if marker else url
+
+@app.route('/flights', methods=['GET', 'POST'])
+def flights():
+    flights_data = None
+    if request.method == 'POST':
+        origin = request.form['origin'].strip().upper()
+        destination = request.form['destination'].strip().upper()
+        depart_date = request.form['depart_date']  # YYYY-MM-DD
+        month_str = depart_date[:7]                # YYYY-MM
+
+        url = "https://api.travelpayouts.com/aviasales/v3/prices_for_dates"
+        params = {
+            "origin": origin,
+            "destination": destination,
+            # можно месяц (YYYY-MM) ИЛИ диапазон 'YYYY-MM-DD:YYYY-MM-DD'
+            "departure_at": month_str,
+            "unique": "false",
+            "sorting": "price",
+            "direct": "false",
+            "cy": "kzt",       # валюта (в v3 параметр называется cy)
+            "limit": 100,
+            "page": 1,
+            "one_way": "true", # если нужно только в одну сторону
+            "token": AVIASALES_API_TOKEN
+        }
+
+        try:
+            r = requests.get(url, params=params, timeout=20)
+            r.raise_for_status()
+            data = r.json().get("data", [])
+            flights_data = []
+            for it in data:
+                dep = (it.get("departure_at") or it.get("depart_date") or "")[:10]
+                if not dep:
+                    continue
+                flights_data.append({
+                    "origin": it.get("origin", origin),
+                    "destination": it.get("destination", destination),
+                    "airline": it.get("airline") or "-",
+                    "price": it.get("price") or it.get("value") or 0,
+                    "departure_at": dep,
+                    "link": build_aviasales_link(
+                        it.get("origin", origin),
+                        it.get("destination", destination),
+                        dep,
+                        adults=1,
+                        marker=AVIASALES_MARKER,
+                    ),
+                })
+            flights_data.sort(key=lambda x: (x["price"] or 10**9, x["departure_at"]))
+            if not flights_data:
+                flights_data = []
+        except Exception as e:
+            print("Aviasales v3 error:", e)
+            flights_data = []
+
+    return render_template("frontend/flights.html", flights=flights_data, marker=AVIASALES_MARKER)
 
 @app.route('/contacts')
 def contacts():

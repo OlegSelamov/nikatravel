@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flights-container" style="max-width:1200px;margin:0 auto;padding:20px;">
+    <h1 style="text-align:center;margin-bottom:20px;color:#d48b3d;">Поиск авиабилетов</h1>
+
+    <!-- Форма поиска -->
+    <form method="POST" style="display:flex;flex-wrap:wrap;gap:15px;background:#fff8f0;padding:20px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+        <div style="flex:1;min-width:180px;">
+            <label>Город вылета:</label>
+            <input type="text" id="origin" name="origin" placeholder="Алматы" required style="width:100%;padding:8px;" autocomplete="off">
+            <div id="origin-list" class="autocomplete-list"></div>
+        </div>
+        <div style="flex:1;min-width:180px;">
+            <label>Город назначения:</label>
+            <input type="text" id="destination" name="destination" placeholder="Дубай" required style="width:100%;padding:8px;" autocomplete="off">
+            <div id="destination-list" class="autocomplete-list"></div>
+        </div>
+        <div style="flex:1;min-width:180px;">
+            <label>Дата вылета:</label>
+            <input type="date" name="depart_date" required style="width:100%;padding:8px;">
+        </div>
+        <div style="align-self:flex-end;">
+            <button type="submit" style="padding:10px 20px;background:#d48b3d;color:white;border:none;border-radius:5px;cursor:pointer;">
+                Найти билеты
+            </button>
+        </div>
+    </form>
+
+    {% if flights %}
+    <h2 style="margin-top:30px;color:#d48b3d;">Найденные варианты</h2>
+    <div style="overflow-x:auto;margin-top:15px;">
+        <table style="width:100%;border-collapse:collapse;">
+            <thead>
+                <tr style="background:#f4e2d8;">
+                    <th style="padding:10px;border:1px solid #ddd;">Авиакомпания</th>
+                    <th style="padding:10px;border:1px solid #ddd;">Цена</th>
+                    <th style="padding:10px;border:1px solid #ddd;">Дата вылета</th>
+                    <th style="padding:10px;border:1px solid #ddd;">Купить</th>
+                </tr>
+</thead>
+<tbody>
+  {% for f in flights %}
+  <tr>
+    <td style="padding:8px;border:1px solid #ddd;">{{ f.airline or '-' }}</td>
+    <td style="padding:8px;border:1px solid #ddd;" class="rub-price" data-price="{{ f.price }}">{{ f.price }} RUB</td>
+    <td style="padding:8px;border:1px solid #ddd;">{{ (f.departure_at or '')[:10] }}</td>
+    <td style="padding:8px;border:1px solid #ddd;">
+      <a href="{{ f.link }}" target="_blank"
+         style="color:white;background:#e76f51;padding:6px 12px;border-radius:4px;text-decoration:none;">
+        Забронировать
+      </a>
+    </td>
+  </tr>
+  {% endfor %}
+</tbody>
+        </table>
+    </div>
+    {% elif flights is not none %}
+        <p style="margin-top:20px;color:red;">По вашему запросу билетов не найдено.</p>
+    {% endif %}
+</div>
+
+<style>
+.autocomplete-list {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    z-index: 9999;
+    max-height: 200px;
+    overflow-y: auto;
+    width: calc(100% - 20px);
+}
+.autocomplete-list div {
+    padding: 8px;
+    cursor: pointer;
+}
+.autocomplete-list div:hover {
+    background: #f4e2d8;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const fallbackRate = 5.20; // резервный курс RUB→KZT
+
+    fetch("https://api.exchangerate.host/latest?base=RUB&symbols=KZT")
+        .then(res => res.json())
+        .then(data => {
+            const rate = data?.rates?.KZT || fallbackRate;
+            convertPrices(rate);
+        })
+        .catch(() => {
+            convertPrices(fallbackRate);
+        });
+
+    function convertPrices(rate) {
+        document.querySelectorAll(".rub-price").forEach(el => {
+            const rub = parseFloat(el.dataset.price);
+            if (!isNaN(rub)) {
+                const kzt = Math.round(rub * rate).toLocaleString('ru-RU');
+                el.textContent = `${kzt} KZT`;
+            }
+        });
+    }
+});
+</script>
+
+<script>
+function setupAutocomplete(inputId, listId) {
+    const input = document.getElementById(inputId);
+    const list = document.getElementById(listId);
+
+    input.addEventListener("input", function() {
+        const query = this.value.trim();
+        list.innerHTML = "";
+        if (query.length < 2) return;
+
+        fetch(`https://autocomplete.travelpayouts.com/places2?term=${query}&locale=ru`)
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(place => {
+                    const div = document.createElement("div");
+                    div.textContent = `${place.name} (${place.code})`;
+                    div.addEventListener("click", () => {
+                        input.value = place.code;
+                        list.innerHTML = "";
+                    });
+                    list.appendChild(div);
+                });
+            });
+    });
+
+    document.addEventListener("click", function(e) {
+        if (!list.contains(e.target) && e.target !== input) {
+            list.innerHTML = "";
+        }
+    });
+}
+
+setupAutocomplete("origin", "origin-list");
+setupAutocomplete("destination", "destination-list");
+</script>
+{% endblock %}

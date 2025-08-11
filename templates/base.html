@@ -5,9 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nika Travel</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/frontend.css') }}">
-	{% if request.path.startswith('/admin') %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
-{% endif %}
+    {% if request.path.startswith('/admin') %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    {% endif %}
+
+    <!-- Aviasales tracker — только для клиентской части -->
+    {% if not request.path.startswith('/admin') %}
+    <script data-noptimize="1" data-cfasync="false" data-wpfc-render="false">
+      (function () {
+          var script = document.createElement("script");
+          script.async = 1;
+          script.src = 'https://emrld.cc/NDQ4ODQ4.js?t=448848';
+          document.head.appendChild(script);
+      })();
+    </script>
+    {% endif %}
 </head>
 <body>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -23,6 +35,7 @@
     <a href="{{ url_for('index') }}">Главная</a>
     <a href="{{ url_for('about') }}">О нас</a>
     <a href="{{ url_for('filter_page') }}">Доступные туры</a>
+	<a href="{{ url_for('flights') }}">Авиабилеты</a>
     <a href="{{ url_for('contacts') }}">Контакты</a>
   </div>
 </div>
