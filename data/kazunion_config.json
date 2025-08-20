@@ -1,7 +1,7 @@
 {
   "city_code": "57",
-  "country_code": "95",
-  "departure_date": "09.08.2025",
+  "country_code": "33",
+  "departure_date": "13.08.2025",
   "nights": [
     7
   ],
@@ -15,5 +15,5 @@
     "10004",
     "10001"
   ],
-  "departure_end": "30.08.2025"
+  "departure_end": "31.08.2025"
 }
