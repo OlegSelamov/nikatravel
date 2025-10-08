@@ -1,9 +1,150 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<div class="page-content">
-    <h2>Спасибо, {{ name }}!</h2>
-    <p>Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время для подтверждения брони.</p>
+
+<div class="success-container">
+  <div class="success-glass">
+    <h1>Спасибо, {{ name }}!</h1>
+    <p class="lead">
+      Ваша заявка успешно отправлена 💌  
+      Наш менеджер свяжется с вами в ближайшее время для подтверждения бронирования.
+    </p>
+
+    <div class="success-info">
+      <p>Пока вы ждёте звонка, вы можете:</p>
+      <ul>
+        <li>Посмотреть другие туры на сайте</li>
+        <li>Написать нам в WhatsApp или Telegram</li>
+        <li>Подписаться на наш Instagram, чтобы не пропустить акции и скидки 🌴</li>
+      </ul>
+    </div>
+
+    <div class="success-socials">
+      <a href="https://wa.me/77761516231" class="btn wa" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="https://t.me/nikartravel10" class="btn tg" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
+      <a href="https://instagram.com/nikatravel10" class="btn ig" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+    </div>
+
     <a href="{{ url_for('filter_page') }}" class="btn-back">← Вернуться к поиску тура</a>
+  </div>
 </div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body {
+  font-family: "Segoe UI", sans-serif;
+  color: #4b3821;
+  margin: 0;
+  padding: 0;
+}
+
+/* Общий контейнер */
+.success-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+}
+
+/* Стеклянный блок */
+.success-glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px 50px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  text-align: center;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* Заголовок и текст */
+.success-glass h1 {
+  font-size: 2rem;
+  color: #4b3821;
+  margin-bottom: 15px;
+}
+.success-glass .lead {
+  font-size: 17px;
+  color: #5a432b;
+  margin-bottom: 20px;
+}
+.success-info ul {
+  list-style: none;
+  padding: 0;
+}
+.success-info li {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+/* Кнопки соцсетей */
+.success-socials {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0 30px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+.btn i {
+  font-size: 18px;
+}
+.wa { background: #25d366; }
+.wa:hover { background: #1ebe5d; }
+.tg { background: #0088cc; }
+.tg:hover { background: #0077b5; }
+.ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+
+/* Кнопка назад */
+.btn-back {
+  display: inline-block;
+  text-decoration: none;
+  background: #c7934b;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btn-back:hover {
+  background: #b37d3e;
+  transform: translateY(-2px);
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 📱 Адаптив */
+@media (max-width: 768px) {
+  .success-glass {
+    padding: 25px 20px;
+  }
+  .success-glass h1 {
+    font-size: 1.6rem;
+  }
+  .lead {
+    font-size: 15px;
+  }
+}
+</style>
+
 {% endblock %}
+

@@ -60,14 +60,35 @@ def extract_hd_images_from_json(html):
 def normalize(text):
     return re.sub(r"[\s\*\-\(\)_]", "", text.lower())
 
-def scrape_booking_vlite_plus(url, folder_name="downloaded_images_plus"):
+def safe_download(url, path, retries=3, timeout=15):
+    """Скачивание с повторами и таймаутом"""
+    for attempt in range(retries):
+        try:
+            r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, stream=True, timeout=timeout)
+            if r.status_code == 200:
+                with open(path, "wb") as f:
+                    for chunk in r.iter_content(1024):
+                        f.write(chunk)
+                return True
+            else:
+                logger.warning(f"⚠️ {url} вернул {r.status_code}")
+        except Exception as e:
+            logger.warning(f"⚠️ Ошибка скачивания {url} (попытка {attempt+1}): {e}")
+        time.sleep(1)  # пауза между попытками
+    return False
+
+def scrape_booking_vlite_plus(url, folder_name="downloaded_images_plus", limit=180):
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
 
     headers = {"User-Agent": "Mozilla/5.0"}
-    r = requests.get(url, headers=headers)
+    try:
+        r = requests.get(url, headers=headers, timeout=20)
+    except Exception as e:
+        logger.info(f"❌ Не удалось загрузить страницу: {e}")
+        return
     if r.status_code != 200:
-        logger.info("❌ Не удалось загрузить страницу.")
+        logger.info(f"❌ Не удалось загрузить страницу: {r.status_code}")
         return
 
     urls = extract_hd_images_from_json(r.text)
@@ -76,116 +97,78 @@ def scrape_booking_vlite_plus(url, folder_name="downloaded_images_plus"):
         logger.info("⚠️ HD-фотографии в JSON не найдены.")
         return
 
+    # Ограничиваем количество фоток
+    urls = urls[:limit]
+
     count = 0
     for i, src in enumerate(urls):
         filename = os.path.join(folder_name, f"photo_{i+1}.jpg")
-        if download_image(src, filename):
+        if safe_download(src, filename):
             logger.info(f"✅ Скачано: {filename}")
             count += 1
 
-    logger.info(f"📦 Всего скачано: {count} изображений")
+    logger.info(f"📦 Всего скачано: {count} изображений (лимит {limit})")
 
 def extract_description(url, folder_path):
-    try:
-        chrome_options = Options()
-        chrome_options.page_load_strategy = "eager"  # ускоряем загрузку
-        chrome_options.add_argument("--headless=new")
-        chrome_options.add_argument("--disable-blink-features=AutomationControlled")
-        chrome_options.add_argument("--no-sandbox")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_argument("--window-size=1280,1024")
-        chrome_options.add_argument("--disable-gpu")
-        chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
-        chrome_options.add_argument("--disable-notifications")
-        chrome_options.add_argument("--disable-extensions")
-        chrome_options.add_argument(
-            "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-            "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-        )
+    import requests
+    from bs4 import BeautifulSoup
+    import os
 
-        chromedriver_path = os.path.join(os.path.dirname(__file__), "chromedriver.exe")
-        service = Service(executable_path=chromedriver_path)
-        driver = webdriver.Chrome(service=service, options=chrome_options)
-        driver.set_page_load_timeout(60)
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                      "AppleWebKit/537.36 (KHTML, like Gecko) "
+                      "Chrome/120.0.0.0 Safari/537.36",
+        "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"
+    }
 
-        # Гарантируем русский язык
-        if "?lang=" not in url:
-            if "?" in url:
-                url += "&lang=ru"
+    def fetch_description(test_url, lang="ru"):
+        try:
+            resp = requests.get(test_url, headers=headers, timeout=20)
+            if resp.status_code == 200:
+                soup = BeautifulSoup(resp.text, "html.parser")
+                selectors = [
+                    "p[data-testid='property-description']",
+                    "div#property_description_content",
+                    "div[data-capla-component='property-description']",
+                    "section[data-testid='property-description']",
+                ]
+                for sel in selectors:
+                    block = soup.select_one(sel)
+                    if block:
+                        text = block.get_text(" ", strip=True)
+                        if text and len(text) > 30:
+                            logger.info(f"✅ Описание найдено ({lang}) селектором: {sel}")
+                            return text
             else:
-                url += "?lang=ru"
+                logger.warning(f"⚠️ Booking вернул {resp.status_code} для {test_url}")
+        except Exception as e:
+            logger.warning(f"❌ Ошибка при запросе описания ({lang}): {e}")
+        return None
 
-        logger.info(f"🌐 Итоговый URL: {url}")
-        driver.get(url)
+    # 1. пробуем на русском
+    if "?lang=" not in url:
+        url_ru = url + ("&lang=ru" if "?" in url else "?lang=ru")
+    else:
+        url_ru = url
+    description = fetch_description(url_ru, "ru")
 
-        os.makedirs(folder_path, exist_ok=True)
+    # 2. если нет — пробуем английский
+    if not description:
+        url_en = url.split("?")[0] + "?lang=en"
+        description = fetch_description(url_en, "en")
+
+    if not description:
         description = "Описание недоступно"
 
-        try:
-            # Ждём именно <p data-testid="property-description">
-            WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "p[data-testid='property-description']"))
-            )
-            element = driver.find_element(By.CSS_SELECTOR, "p[data-testid='property-description']")
-            driver.execute_script("arguments[0].scrollIntoView(true);", element)
-            tmp_text = element.text.strip()
-
-            if tmp_text:
-                description = tmp_text
-                logger.info("✅ Описание найдено и загружено.")
-            else:
-                logger.warning("⚠ Описание пустое — сохраняем как 'Описание недоступно'.")
-
-            # Сохраняем в файл description.txt
-            with open(os.path.join(folder_path, "description.txt"), "w", encoding="utf-8") as f:
-                f.write(description)
-            logger.info(f"💾 Описание сохранено: {os.path.join(folder_path, 'description.txt')}")
-
-            # Обновляем filter.json
-            script_dir = os.path.dirname(os.path.abspath(__file__))
-            filter_path = os.path.join(script_dir, "data", "filter.json")
-
-            data = []
-            if os.path.exists(filter_path):
-                try:
-                    with open(filter_path, "r", encoding="utf-8") as f:
-                        data = json.load(f)
-                except Exception as e:
-                    logger.info(f"⚠ Ошибка чтения filter.json: {e}")
-
-            hotel_name = os.path.basename(folder_path)
-            hotel_key = normalize(hotel_name)
-            updated = False
-
-            for entry in data:
-                entry_name = normalize(entry.get("hotel", ""))
-                if hotel_key in entry_name or entry_name in hotel_key:
-                    entry["description"] = description
-                    logger.info(f"✅ Обновлено описание для отеля: {entry['hotel']}")
-                    updated = True
-                    break
-
-            if not updated:
-                data.append({"hotel": hotel_name, "description": description})
-                logger.info(f"➕ Добавлен новый отель: {hotel_name}")
-
-            try:
-                with open(filter_path, "w", encoding="utf-8") as f:
-                    json.dump(data, f, ensure_ascii=False, indent=2)
-                logger.info("📁 filter.json успешно обновлён.")
-            except Exception as e:
-                logger.info(f"⚠ Ошибка записи filter.json: {e}")
-
-        except Exception as e:
-            logger.warning(f"❌ Не удалось найти блок описания: {e}")
-            # Даже если не нашли — создаём пустой файл
-            with open(os.path.join(folder_path, "description.txt"), "w", encoding="utf-8") as f:
-                f.write(description)
-
-        driver.quit()
-
+    # сохраняем в файл
+    os.makedirs(folder_path, exist_ok=True)
+    desc_file = os.path.join(folder_path, "description.txt")
+    try:
+        with open(desc_file, "w", encoding="utf-8") as f:
+            f.write(description)
+        logger.info(f"💾 Описание сохранено: {desc_file}")
     except Exception as e:
-        logger.info(f"⚠ Ошибка при вытаскивании описания: {e}")
+        logger.warning(f"⚠️ Ошибка записи description.txt: {e}")
 
-    if __name__ == "__main__": 
-        return
+    return description
+

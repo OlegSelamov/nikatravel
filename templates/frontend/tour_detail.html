@@ -3,107 +3,265 @@
 
 <div class="tour-detail-wrapper">
 
-  <!-- Направление -->
-  <div class="tour-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-    <div style="font-size: 20px; font-weight: 600;">{{ tour.city }} — {{ tour.country }}</div>
-    <div style="background: #f1f1f1; padding: 6px 10px; border-radius: 6px; font-size: 14px; color: #555; margin-left: auto;">
+  <!-- 🌍 Верхний полупрозрачный блок -->
+  <div class="tour-header glass">
+    <div class="tour-header-info">
+      <h1>{{ tour.city }} — {{ tour.country }}</h1>
       <p><strong>Дата вылета:</strong> {{ tour.departure_date }}</p>
     </div>
-    <div class="tour-date-selector" onclick="toggleDateForm()" style="width: 100%; margin-top: 8px;">
-      {{ tour.tourists or 1 }} турист(а), {{ tour.nights }} ночей
-    </div>
-    <div id="dateForm" class="date-form hidden">
+
+    <div class="mini-filter">
       <label>Туристов:</label>
-      <input type="number" id="tourists" min="1" value="{{ tour.tourists or 1 }}" />
+      <input type="number" id="tourists" min="1" value="{{ tour.tourists or 1 }}">
       <label>Ночей:</label>
       <select id="nights-select">
         {% for n in range(2, 21) %}
           <option value="{{ n }}" {% if n == tour.nights %}selected{% endif %}>{{ n }}</option>
         {% endfor %}
       </select>
-      <button type="button" onclick="applyDates()">Применить</button>
+      <button onclick="applyDates()">Применить</button>
     </div>
   </div>
-  
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 
-  <!-- Галерея -->
+  <!-- 🖼 Галерея (возвращена старая структура) -->
   {% if tour.gallery %}
-  <div style="margin-bottom: 15px;">
-    <div class="swiper main-swiper" style="width: 100%; height: 200px; border-radius: 12px; overflow: hidden;">
+  <div class="gallery-block glass">
+    <div class="swiper main-swiper">
       <div class="swiper-wrapper">
         {% for img in tour.gallery %}
         <div class="swiper-slide">
-          {% if img.startswith('http') %}
-            <a href="{{ img }}" class="glightbox" data-gallery="tour-gallery">
-              <img src="{{ img }}" style="width: 100%; height: 250px; object-fit: contain;">
-            </a>
-          {% else %}
-            <a href="{{ url_for('static', filename='img/' + img) }}" class="glightbox" data-gallery="tour-gallery">
-              <img src="{{ url_for('static', filename='img/' + img) }}" style="width: 100%; height: 500px; object-fit: cover;">
-            </a>
-          {% endif %}
+          <a href="{{ img if img.startswith('http') else url_for('static', filename='img/' + img) }}" class="glightbox" data-gallery="tour-gallery">
+            <img src="{{ img if img.startswith('http') else url_for('static', filename='img/' + img) }}" alt="Фото тура">
+          </a>
         </div>
         {% endfor %}
       </div>
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
     </div>
-  </div>
 
-  <!-- Миниатюры -->
-  <div class="swiper thumb-swiper">
-    <div class="swiper-wrapper">
-      {% for img in tour.gallery %}
-      <div class="swiper-slide">
-        {% if img.startswith('http') %}
-          <img src="{{ img }}">
-        {% else %}
-          <img src="{{ url_for('static', filename='img/' + img) }}">
-        {% endif %}
+    <!-- Миниатюры -->
+    <div class="swiper thumb-swiper">
+      <div class="swiper-wrapper">
+        {% for img in tour.gallery %}
+        <div class="swiper-slide">
+          {% if img.startswith('http') %}
+            <img src="{{ img }}">
+          {% else %}
+            <img src="{{ url_for('static', filename='img/' + img) }}">
+          {% endif %}
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
   </div>
   {% endif %}
 
-  <!-- Инфо -->
-  <div class="tour-info-card">
-    <h2>{{ tour.hotel }}</h2>
-    <p><strong>Дата вылета:</strong> {{ tour.departure_date }}</p>
+  <!-- 💬 Описание -->
+  <div class="tour-info-card glass">
     <p>{{ tour.description }}</p>
-    <div style="margin-top: 20px;">
-      <a href="{{ url_for('filter_page') }}" class="back-link">
-        ← Назад к выбору тура
-      </a>
-    </div>
+    <a href="{{ url_for('filter_page') }}" class="back-btn">← Назад к выбору тура</a>
   </div>
 
+  <!-- 🔘 Кнопка бронирования -->
+  <form action="{{ url_for('confirmation_page', tour_id=tour_id) }}" method="get" id="bookForm">
+    <input type="hidden" name="departure_date" value="{{ tour.departure_date }}">
+    <input type="hidden" name="tourists" id="formTourists" value="1">
+    <input type="hidden" name="nights" id="formNights" value="{{ tour.nights }}">
+    <input type="hidden" name="total_price" id="formPrice" value="{{ tour.price }}">
+    <div class="tour-fixed-buttons">
+      <button type="submit" id="bookButton" class="btn-book">
+        Забронировать тур за {{ tour.price | default(0) }} ₸
+      </button>
+    </div>
+  </form>
 </div>
 
-<!-- Форма перехода на подтверждение -->
-<form action="{{ url_for('confirmation_page', tour_id=tour_id) }}" method="get" id="bookForm">
-  <input type="hidden" name="departure_date" value="{{ tour.departure_date }}">
-  <input type="hidden" name="tourists" id="formTourists" value="1">
-  <input type="hidden" name="nights" id="formNights" value="{{ tour.nights }}">
-  <input type="hidden" name="total_price" id="formPrice" value="{{ tour.price }}">
-  <div class="tour-fixed-buttons">
-    <button type="submit" id="bookButton" class="btn-book">
-      Забронировать тур за {{ tour.price | default(0) }} ₸
-    </button>
-  </div>
-</form>
-
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<!-- Подключения -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 
-<script>
-function toggleDateForm() {
-  const el = document.getElementById("dateForm");
-  el.classList.toggle("hidden");
+<style>
+body {
+  font-family: "Segoe UI", sans-serif;
+  color: #4b3821;
+  margin: 0;
+  padding: 0;
 }
 
+/* Основной контейнер */
+.tour-detail-wrapper {
+  max-width: 1100px;
+  margin: 100px auto 80px;
+  padding: 0 20px;
+}
+
+/* Полупрозрачные блоки */
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 20px 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Верхний блок */
+.tour-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.tour-header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+.tour-header p {
+  margin: 0;
+  font-size: 15px;
+}
+
+/* Мини-фильтр */
+.mini-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px;
+}
+.mini-filter input, .mini-filter select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.2);
+  background: rgba(255,255,255,0.7);
+}
+.mini-filter button {
+  background: #c7934b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.mini-filter button:hover {
+  background: #b37d3e;
+  transform: translateY(-1px);
+}
+
+/* Слайдер */
+.gallery-block img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.thumb-swiper {
+  margin-top: 12px;
+  padding: 10px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+.thumb-swiper .swiper-slide {
+  height: 60px;
+  cursor: pointer;
+}
+.thumb-swiper .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 2px solid #fff;
+  transition: transform 0.2s ease;
+}
+.thumb-swiper .swiper-slide img:hover {
+  transform: scale(1.05);
+}
+.swiper-button-next, .swiper-button-prev {
+  color: #c7934b;
+}
+
+/* Описание */
+.tour-info-card p {
+  margin-bottom: 10px;
+}
+.back-btn {
+  display: inline-block;
+  margin-top: 15px;
+  text-decoration: none;
+  background: #c7934b;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+.back-btn:hover {
+  background: #b37d3e;
+}
+
+/* Кнопка бронирования */
+.tour-fixed-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background: rgba(255,255,255,0.3);
+  padding: 12px 20px;
+  box-shadow: 0 -2px 15px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+.btn-book {
+  background: #2ecc71;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+  cursor: pointer;
+}
+.btn-book:hover {
+  background: #27ae60;
+}
+
+/* 📱 адаптация */
+@media (max-width: 768px) {
+  .tour-header { flex-direction: column; align-items: flex-start; }
+  .gallery-block img { height: 240px; }
+}
+</style>
+
+<script>
+/* Swiper */
+const thumbSwiper = new Swiper('.thumb-swiper', {
+  spaceBetween: 8,
+  slidesPerView: 5,
+  watchSlidesProgress: true,
+  breakpoints: { 768: { slidesPerView: 8 } }
+});
+
+const mainSwiper = new Swiper('.main-swiper', {
+  spaceBetween: 10,
+  loop: true,
+  navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+  thumbs: { swiper: thumbSwiper },
+  breakpoints: {
+    0: { slidesPerView: 1 },
+    640: { slidesPerView: 2 },
+    1024: { slidesPerView: 3 }
+  }
+});
+
+/* Lightbox */
+const lightbox = GLightbox({ selector: '.glightbox', loop: true });
+
+/* Мини фильтр */
 function applyDates() {
   const people = parseInt(document.getElementById("tourists").value) || 1;
   const nights = parseInt(document.getElementById("nights-select").value) || 1;
@@ -116,78 +274,7 @@ function applyDates() {
   document.getElementById("formNights").value = nights;
   document.getElementById("formPrice").value = total;
   document.getElementById("bookButton").innerText = `Забронировать тур за ${total.toLocaleString()} ₸`;
-  document.querySelector(".tour-date-selector").innerText = `${people} турист(а), ${nights} ночей`;
-
-  document.getElementById("dateForm").classList.add("hidden");
 }
-</script>
-
-<style>
-  .tour-detail-wrapper { max-width: 1000px; margin: 0 auto 80px; padding: 20px; font-family: 'Segoe UI', sans-serif; }
-  .tour-date-selector { font-size: 16px; color: #3498db; cursor: pointer; margin-bottom: 10px; }
-  .date-form { background: #f9f9f9; padding: 12px; border-radius: 8px; margin-bottom: 20px; }
-  .date-form input, .date-form select { display: block; margin-bottom: 10px; padding: 6px; width: 100%; }
-  .tour-slider { border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
-  .tour-image-slide { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; }
-  .tour-info-card { background: #fff; padding: 16px; border-radius: 12px; box-shadow: 0 0 8px rgba(0,0,0,0.05); font-size: 15px; color: #333; }
-  .tour-info-card h2 { margin-bottom: 6px; font-size: 20px; }
-  .tour-fixed-buttons { position: fixed; bottom: 0; left: 0; right: 0; display: flex; background: #fff; padding: 12px 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.08); z-index: 999; }
-  .btn-book { background: #2ecc71; color: white; font-size: 15px; font-weight: 600; padding: 12px; border: none; border-radius: 10px; width: 100%; cursor: pointer; }
-  .hidden { display: none; }
-  .back-link { text-decoration: none; display: inline-block; background: #eee; color: #333; padding: 8px 14px; border-radius: 8px; font-weight: 500; }
-  .thumb-swiper {background: #fff; padding: 10px; margin-bottom: 25px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-  .thumb-swiper .swiper-slide {height: 60px; cursor: pointer; }
-  .thumb-swiper .swiper-slide img {width: 100%; height: 100%; object-fit: cover; border-radius: 6px; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: transform 0.2s ease; }
-  .thumb-swiper .swiper-slide img:hover {transform: scale(1.05); }
-</style>
-
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-<script>
-  const thumbSwiper = new Swiper('.thumb-swiper', {
-      spaceBetween: 8,
-      slidesPerView: 5,
-      watchSlidesProgress: true,
-      breakpoints: {
-          768: { slidesPerView: 8 }
-      }
-  });
-    // Основной слайдер
-const mainSwiper = new Swiper('.main-swiper', {
-    slidesPerView: 3,
-    slidesPerGroup: 3,
-    spaceBetween: 10,
-    loop: true,
-    loopFillGroupWithBlank: true, // 🛠️ важно для корректной прокрутки
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-    },
-    thumbs: {
-        swiper: thumbSwiper
-    },
-    breakpoints: {
-        0: {
-            slidesPerView: 1,
-            slidesPerGroup: 1
-        },
-        640: {
-            slidesPerView: 2,
-            slidesPerGroup: 2
-        },
-        1024: {
-            slidesPerView: 3,
-            slidesPerGroup: 3
-        }
-    }
-});
-
-  // Лайтбокс
-  const lightbox = GLightbox({
-      selector: '.glightbox',
-      loop: true,
-      touchNavigation: true
-  });
 </script>
 
 {% endblock %}

@@ -1,109 +1,111 @@
-import re
-import os
-import logging
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-# === ЛОГИРОВАНИЕ ===
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-LOG_FILE = os.path.join(BASE_DIR, "parser.log")
+import requests
+from bs4 import BeautifulSoup
+import logging, time, re
+from urllib.parse import quote, urlparse, urlunparse
 
 logger = logging.getLogger("parser_logger")
-logger.setLevel(logging.INFO)
-file_handler = logging.FileHandler(LOG_FILE, encoding="utf-8")
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-file_handler.setFormatter(formatter)
-if not logger.hasHandlers():
-    logger.addHandler(file_handler)
 
-def clean_hotel_name(hotel_name):
-    hotel_name = re.sub(r"\([^)]*\)", "", hotel_name)  # убираем скобки
-    hotel_name = re.sub(r"\d\*\s*", "", hotel_name)    # убираем звездность
-    hotel_name = re.sub(r"[,\s]+", " ", hotel_name)    # убираем лишние пробелы/запятые
-    return hotel_name.strip()
+DESKTOP_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "Referer": "https://www.google.com/"
+}
+MOBILE_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Linux; Android 12; SM-G996B) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "Referer": "https://www.google.com/"
+}
 
-def get_booking_url_by_hotel_name(hotel_name):
-    cleaned_name = clean_hotel_name(hotel_name)
-    logger.info(f"🔎 Ищу напрямую на Booking: {cleaned_name}")
+def clean_hotel_query(hotel_name, country=""):
+    q = f"{hotel_name} {country}".strip()
+    q = re.sub(r"\d+\*", "", q)          # убираем '5*'
+    q = re.sub(r"\(.*?\)", "", q)        # убираем '(город)'
+    # при желании почисти страны:
+    q = re.sub(r"\b(Vietnam|Вьетнам|Turkey|Турция)\b", "", q, flags=re.I).strip()
+    # сжимаем двойные пробелы
+    q = re.sub(r"\s{2,}", " ", q)
+    return q
 
-    options = Options()
-    # Видимый режим (можно вернуть headless при переносе на сервер)
-    options.add_argument("--disable-gpu")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--window-size=1280,1024")
+def _pick_first_hotel_link(html, base):
+    soup = BeautifulSoup(html, "html.parser")
+    # 1) сначала пробуем «новую» разметку десктопа
+    a = soup.select_one('a[data-testid="title-link"]')
+    if a and a.get("href"):
+        href = a["href"]
+        return href if href.startswith("http") else (base + href)
 
-    driver = webdriver.Chrome(options=options)
-    driver.set_page_load_timeout(25)
+    # 2) fallback: находим первую ссылку, где есть /hotel/
+    for tag in soup.find_all("a", href=True):
+        href = tag["href"]
+        if "/hotel/" in href:
+            return href if href.startswith("http") else (base + href)
 
+    return None
+
+def _normalize_booking_url(url):
+    """Делаем URL каноничным и принудительно на русском"""
     try:
-        driver.get("https://www.booking.com")
+        # отрезаем query/фрагмент, оставляем путь
+        parsed = urlparse(url)
+        clean = urlunparse((parsed.scheme or "https", parsed.netloc or "www.booking.com",
+                            parsed.path, "", "", ""))
+        # если нет .ru.html — добавим lang=ru
+        if not clean.endswith(".ru.html"):
+            # некоторые ссылки уже имеют ? — добавим &lang=ru
+            sep = "&" if "?" in url else "?"
+            return clean + sep + "lang=ru"
+        return clean
+    except Exception:
+        return url
 
-        # Ждём поле поиска
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.NAME, "ss"))
-        )
+def get_booking_url_by_hotel_name(hotel_name, country=""):
+    """Ищем отель напрямую на Booking: сначала мобилка, потом десктоп. Без Duck."""
+    query = clean_hotel_query(hotel_name, country)
+    logger.info(f"🔎 Booking поиск (чистый запрос): {query}")
 
-        # Вводим название
-        search_box = driver.find_element(By.NAME, "ss")
-        search_box.clear()
-        search_box.send_keys(cleaned_name)
+    # Пауза, чтобы снизить шанс 202
+    time.sleep(2)
 
-        # Ждём и кликаем первую подсказку
+    # 1) Мобильная выдача — менее «злая»
+    mobile_urls = [
+        f"https://m.booking.com/searchresults.ru.html?ss={quote(query)}",
+        f"https://m.booking.com/search.html?ss={quote(query)}",              # запасной путь мобилки
+    ]
+    for su in mobile_urls:
         try:
-            WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "li[data-i='0']"))
-            )
-            driver.find_element(By.CSS_SELECTOR, "li[data-i='0']").click()
-            logger.info("✅ Кликнул первую подсказку")
-        except:
-            logger.warning("⚠️ Подсказка не найдена, выполняю поиск напрямую")
-            search_box.submit()
+            r = requests.get(su, headers=MOBILE_HEADERS, timeout=20)
+            if r.status_code == 200 and r.text:
+                link = _pick_first_hotel_link(r.text, "https://m.booking.com")
+                if link:
+                    norm = _normalize_booking_url(link.replace("https://m.booking.com", "https://www.booking.com"))
+                    logger.info(f"✅ Найдено через мобилку: {norm}")
+                    return norm
+            else:
+                logger.warning(f"⚠️ Мобилка вернула {r.status_code} для {su}")
+        except Exception as e:
+            logger.warning(f"❗ Ошибка мобилки {su}: {e}")
 
-        # Ждём карточки
-        WebDriverWait(driver, 15).until(
-            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "div[data-testid='property-card']"))
-        )
-
-        # Берём ссылку из первой карточки
-        first_card = driver.find_element(By.CSS_SELECTOR, "div[data-testid='property-card']")
-        photo_url = first_card.find_element(By.CSS_SELECTOR, "a[data-testid='title-link']").get_attribute("href")
-        clean_url = photo_url.split("?")[0]
-        logger.info(f"📌 Чистый URL для описания: {clean_url}")
-
-        # Переходим на страницу отеля
-        driver.get(clean_url)
+    # 2) Десктоп как резерв (может дать 202, но попробуем 1–2 раза c бэкоффом)
+    desktop_url = f"https://www.booking.com/searchresults.ru.html?ss={quote(query)}"
+    for attempt in range(2):
         try:
-            # Пробуем найти старый блок описания
-            WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located((By.ID, "property_description_content"))
-            )
-            description = driver.find_element(By.ID, "property_description_content").text.strip()
-            logger.info(f"✅ Описание найдено (старый блок), длина: {len(description)} символов")
-        except:
-            # Пробуем новый формат
-            try:
-                WebDriverWait(driver, 5).until(
-                    EC.presence_of_element_located((By.CSS_SELECTOR, "div[data-capla-component-boundary*='PropertyDescription']"))
-                )
-                description = driver.find_element(By.CSS_SELECTOR, "div[data-capla-component-boundary*='PropertyDescription']").text.strip()
-                logger.info(f"✅ Описание найдено (новый блок), длина: {len(description)} символов")
-            except:
-                logger.warning("❌ Описание не найдено")
-                description = ""
+            if attempt:
+                time.sleep(2.5 + attempt)  # небольшой бэкофф
+            r = requests.get(desktop_url, headers=DESKTOP_HEADERS, timeout=20)
+            if r.status_code != 200:
+                logger.error(f"❌ Десктоп вернул {r.status_code} (attempt {attempt+1})")
+                continue
+            link = _pick_first_hotel_link(r.text, "https://www.booking.com")
+            if link:
+                norm = _normalize_booking_url(link)
+                logger.info(f"✅ Найдено через десктоп: {norm}")
+                return norm
+        except Exception as e:
+            logger.warning(f"❗ Ошибка десктопа (attempt {attempt+1}): {e}")
 
-        # Здесь можно сохранить описание, если у тебя есть логика записи
-        # например: save_description_to_json(hotel_name, description)
-
-        # Возвращаем ссылку для фото (как раньше)
-        return photo_url
-
-    except Exception as e:
-        logger.error(f"❌ Ошибка поиска на Booking: {e}")
-        return None
-
-    finally:
-        driver.quit()
+    logger.warning("⚠️ Booking не дал ссылку ни через мобилку, ни через десктоп")
+    return None

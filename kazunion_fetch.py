@@ -65,7 +65,7 @@ def run():
     logger.info("📦 Конфиг загружен успешно")
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(headless=False)
         page = browser.new_page()
         logger.info("🔄 Открываем Kazunion...")
         page.goto("https://online.kazunion.com/search_tour", timeout=60000, wait_until="domcontentloaded")
@@ -148,8 +148,18 @@ def run():
                 logger.error("❌ Поле 'Ночей' так и не стало доступным — прерываем")
                 return
 
-            page.select_option("select[name='NIGHTS_FROM']", nights)
-            logger.info(f"🌙 Кол-во ночей установлено: {nights}")
+            try:
+                page.click(".NIGHTS_FROM_chosen .chosen-single", force=True)
+                page.wait_for_timeout(500)
+
+                options = page.locator(".NIGHTS_FROM_chosen .chosen-drop ul li")
+                for i in range(options.count()):
+                    if options.nth(i).inner_text().strip() == nights:
+                        options.nth(i).click(force=True)
+                        logger.info(f"🌙 Кол-во ночей установлено через Chosen: {nights}")
+                        break
+            except Exception as e:
+                logger.error(f"❌ Ошибка при выборе ночей: {e}")
 
             # Взрослые
             try:

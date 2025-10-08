@@ -1,76 +1,143 @@
-
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="booking-confirm-wrapper">
-
+<div class="booking-container">
   <h1>Подтверждение бронирования</h1>
 
-  <div class="booking-details">
+  <!-- Информация о туре -->
+  <div class="booking-details glass">
     <p><strong>Направление:</strong> {{ tour.city }} — {{ tour.country }}</p>
-    <p><strong>Отель:</strong> {{ tour.hotel }}</p>
+	<p><strong>Отель:</strong> {{ tour.hotel }}</p>
     <p><strong>Дата вылета:</strong> {{ departure_date }}</p>
     <p><strong>Количество туристов:</strong> {{ tourists }}</p>
     <p><strong>Количество ночей:</strong> {{ nights }}</p>
-    <p><strong>Итоговая сумма:</strong> {{ total_price }} ₸</p>
+    <p><strong>Итоговая сумма:</strong> <span class="price">{{ total_price }} ₸</span></p>
   </div>
 
-  <form method="POST" action="{{ url_for('confirm_booking') }}" class="booking-form">
-    <input type="hidden" name="hotel" value="{{ tour.hotel }}">
-    <input type="hidden" name="city" value="{{ tour.city }}">
-    <input type="hidden" name="country" value="{{ tour.country }}">
-    <input type="hidden" name="departure_date" value="{{ departure_date }}">
-    <input type="hidden" name="tourists" value="{{ tourists }}">
-    <input type="hidden" name="nights" value="{{ nights }}">
-    <input type="hidden" name="total_price" value="{{ total_price }}">
+  <!-- Форма подтверждения -->
+  <div class="booking-form glass">
+    <form method="POST" action="{{ url_for('confirm_booking') }}">
+      <input type="hidden" name="hotel" value="{{ tour.hotel }}">
+      <input type="hidden" name="city" value="{{ tour.city }}">
+      <input type="hidden" name="country" value="{{ tour.country }}">
+      <input type="hidden" name="departure_date" value="{{ departure_date }}">
+      <input type="hidden" name="tourists" value="{{ tourists }}">
+      <input type="hidden" name="nights" value="{{ nights }}">
+      <input type="hidden" name="total_price" value="{{ total_price }}">
 
-    <label>Ваше имя:</label>
-    <input type="text" name="name" required>
+      <label>Ваше имя*</label>
+      <input type="text" name="name" placeholder="Введите имя" required>
 
-    <label>Номер телефона:</label>
-    <input type="tel" name="phone" required>
+      <label>Номер телефона*</label>
+      <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
 
-    <label>Email (необязательно):</label>
-    <input type="email" name="email">
+      <label>Email (необязательно)</label>
+      <input type="email" name="email" placeholder="example@mail.com">
 
-    <button type="submit">Подтвердить бронирование</button>
-  </form>
-
+      <button type="submit">Подтвердить бронирование</button>
+    </form>
+  </div>
 </div>
 
 <style>
-.booking-confirm-wrapper {
+body {
+  font-family: "Segoe UI", sans-serif;
+  color: #4b3821;
+  margin: 0;
+  padding: 0;
+}
+
+.booking-container {
   max-width: 700px;
-  margin: 30px auto;
-  font-family: 'Segoe UI', sans-serif;
+  margin: 100px auto 60px;
   padding: 20px;
 }
-.booking-details {
-  background: #f7f7f7;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 20px;
+
+.booking-container h1 {
+  text-align: center;
+  font-size: 1.9rem;
+  color: #4b3821;
+  margin-bottom: 25px;
+}
+
+/* Glass-блоки */
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 25px 30px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Инфо о туре */
+.booking-details p {
   font-size: 16px;
+  margin: 6px 0;
 }
-.booking-form {
+.price {
+  color: #c7934b;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+/* Форма */
+.booking-form form {
   display: flex;
   flex-direction: column;
 }
+
+.booking-form label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #4b3821;
+}
+
 .booking-form input {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   padding: 10px;
   font-size: 15px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(255,255,255,0.5);
+  outline: none;
+  transition: border-color 0.3s ease;
 }
+
+.booking-form input:focus {
+  border-color: #c7934b;
+}
+
 .booking-form button {
-  background: #27ae60;
-  color: white;
+  background: #c7934b;
+  color: #fff;
   font-size: 16px;
+  font-weight: 600;
   padding: 12px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.booking-form button:hover {
+  background: #b37d3e;
+  transform: translateY(-2px);
+}
+
+/* 📱 Адаптация */
+@media (max-width: 768px) {
+  .booking-container {
+    margin: 80px 10px 40px;
+    padding: 10px;
+  }
+  .glass {
+    padding: 20px;
+  }
+  .booking-container h1 {
+    font-size: 1.5rem;
+  }
 }
 </style>
 

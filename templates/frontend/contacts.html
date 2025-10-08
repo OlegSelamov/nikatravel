@@ -1,7 +1,193 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="page-content">
-    <h1>Контакты</h1>
-    <p>Свяжитесь с нами: +7 (705) 460-24-93 или n.travel@bk.ru</p>
-</div>
+<div class="contacts-container">
+  <h1>Свяжитесь с нами</h1>
+
+  <div class="contacts-info glass">
+    <p>
+      Мы всегда на связи и готовы помочь вам подобрать идеальный тур.  
+      Задайте вопрос, получите консультацию или оставьте заявку — менеджеры Nika Travel ответят максимально быстро.
+    </p>
+
+    <div class="contact-block">
+      <h3>🏢 Наш офис</h3>
+      <p>г. Усть-Каменогорск, ул. Добролюбова, 34/2 (офис 32)</p>
+      <p><strong>Время работы:</strong> Пн-Сб 10:00 – 19:00</p>
+    </div>
+
+    <div class="contact-block">
+      <h3>📞 Контакты</h3>
+      <p><strong>Телефон:</strong> <a href="tel:+77761516231">+7 776 151 62 31</a></p>
+      <p><strong>Email:</strong> <a href="mailto:nikatravel26@gmail.com">nikatravel26@gmail.com</a></p>
+    </div>
+
+    <div class="contact-block">
+      <h3>🌐 Социальные сети</h3>
+      <div class="social-links">
+        <a href="https://www.instagram.com/nikatravel10" target="_blank" class="social-btn insta">
+          <i class="fab fa-instagram"></i> Instagram
+        </a>
+        <a href="https://t.me/nikartravel10" target="_blank" class="social-btn tg">
+          <i class="fab fa-telegram-plane"></i> Telegram
+        </a>
+        <a href="https://wa.me/77761516231" target="_blank" class="social-btn wa">
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+    <div class="map glass">
+      <h2>📍 Мы на карте</h2>
+      <iframe
+        src="https://yandex.ru/map-widget/v1/?um=constructor%3A0021b1b44c1b5b3b93ed4c9791d8b577ad308eae000b7a81f7bb41114aec1288&amp;source=constructor" 
+        width="100%"
+        height="400"
+        frameborder="0"
+        style="border-radius:16px;"
+        allowfullscreen>
+      </iframe>
+
+      <div class="map-button">
+        <a href="https://yandex.kz/maps/-/CLFCQS4I" target="_blank">Открыть на Яндекс.Картах</a>
+      </div>
+    </div>
+
+<!-- Подключение иконок Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body {
+  font-family: "Segoe UI", sans-serif;
+  color: #5a432b;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+.contacts-container {
+  max-width: 1100px;
+  margin: 100px auto 60px;
+  padding: 20px;
+}
+
+.contacts-container h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  color: #4b3821;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 25px 30px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.contact-block {
+  margin-bottom: 25px;
+}
+
+.contact-block h3 {
+  color: #4b3821;
+  margin-bottom: 8px;
+}
+
+.contact-block p a {
+  color: #c7934b;
+  text-decoration: none;
+}
+
+.contact-block p a:hover {
+  text-decoration: underline;
+}
+
+/* кнопки соцсетей */
+.social-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 12px;
+  padding: 10px 16px;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.social-btn i {
+  font-size: 18px;
+}
+
+/* цвета кнопок */
+.insta {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.tg {
+  background: #0088cc;
+}
+
+.wa {
+  background: #25d366;
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.15);
+}
+
+/* карта */
+.map {
+  text-align: center;
+  padding: 20px;
+}
+
+.map h2 {
+  margin-bottom: 15px;
+  color: #4b3821;
+}
+
+/* 📱 адаптация под мобильные */
+@media (max-width: 768px) {
+  .contacts-container {
+    margin: 80px 10px 40px;
+    padding: 10px;
+  }
+
+  .contacts-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .glass {
+    padding: 18px 15px;
+  }
+
+  .social-links {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .social-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  iframe {
+    height: 300px;
+  }
+}
+</style>
 {% endblock %}
+

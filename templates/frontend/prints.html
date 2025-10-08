@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="editor-wrapper">
+  <h2>Принты на заказ — Nika Wear</h2>
+
+  <div class="editor">
+    <!-- Холст -->
+    <canvas id="mockupCanvas" width="500" height="600"></canvas>
+
+    <!-- Панель управления -->
+    <div class="controls">
+      <label>Загрузить фото:
+        <input type="file" id="uploadImage" accept="image/*">
+      </label>
+
+      <label>Выбрать цвет одежды:
+        <input type="color" id="shirtColor" value="#ffffff">
+      </label>
+
+      <label>Выбрать модель:
+        <select id="modelSelect">
+          <option value="tshirt">Футболка</option>
+          <option value="hoodie">Худи</option>
+          <option value="cap">Кепка</option>
+        </select>
+      </label>
+
+      <button id="saveBtn">💾 Сохранить макет</button>
+      <button id="orderBtn">🛒 Заказать</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.editor-wrapper {
+  text-align: center;
+  padding: 20px;
+}
+
+.editor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  gap: 40px;
+  max-width: 1200px;
+}
+
+canvas {
+  border: 1px solid #ccc;
+  background: #fefefe;
+  cursor: grab;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+button, input[type="color"], input[type="file"], select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #d4a373;
+  color: white;
+}
+</style>
+
+<script>
+const canvas = document.getElementById("mockupCanvas");
+const ctx = canvas.getContext("2d");
+
+let uploadedImg = null;
+let shirtColor = "#ffffff";
+let model = "tshirt";
+
+// Координаты принта
+let imgX = 150, imgY = 180, imgW = 200, imgH = 200;
+let dragging = false, offsetX, offsetY;
+
+// Макеты PNG (прозрачные)
+const mockups = {
+  tshirt: "/static/mockups/tshirt.png",
+  hoodie: "/static/mockups/hoodie.png",
+  cap: "/static/mockups/cap.png"
+};
+
+let mockupImg = new Image();
+mockupImg.src = mockups[model];
+
+// Основная отрисовка
+function drawMockup() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // 1. Красим футболку (multiply)
+  ctx.drawImage(mockupImg, 0, 0, canvas.width, canvas.height);
+  ctx.globalCompositeOperation = "multiply";
+  ctx.fillStyle = shirtColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // 2. Возвращаем нормальный режим
+  ctx.globalCompositeOperation = "source-over";
+
+  // 3. Кладём фото клиента
+  if (uploadedImg) {
+    ctx.drawImage(uploadedImg, imgX, imgY, imgW, imgH);
+  }
+
+  // 4. Макет снова (швы, складки)
+  ctx.drawImage(mockupImg, 0, 0, canvas.width, canvas.height);
+}
+
+// Загрузка фото клиента
+document.getElementById("uploadImage").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    uploadedImg = new Image();
+    uploadedImg.onload = drawMockup;
+    uploadedImg.src = evt.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+// Цвет
+document.getElementById("shirtColor").addEventListener("input", (e) => {
+  shirtColor = e.target.value;
+  drawMockup();
+});
+
+// Модель
+document.getElementById("modelSelect").addEventListener("change", (e) => {
+  model = e.target.value;
+  mockupImg.src = mockups[model];
+  mockupImg.onload = drawMockup;
+});
+
+// Сохранение
+document.getElementById("saveBtn").addEventListener("click", () => {
+  const link = document.createElement("a");
+  link.download = "nika_wear_mockup.png";
+  link.href = canvas.toDataURL();
+  link.click();
+});
+
+// Заказ
+document.getElementById("orderBtn").addEventListener("click", () => {
+  alert("Здесь будет форма заказа 🚀");
+});
+
+// Перетаскивание принта
+canvas.addEventListener("mousedown", (e) => {
+  if (!uploadedImg) return;
+  const rect = canvas.getBoundingClientRect();
+  const mouseX = e.clientX - rect.left;
+  const mouseY = e.clientY - rect.top;
+  if (mouseX >= imgX && mouseX <= imgX+imgW && mouseY >= imgY && mouseY <= imgY+imgH) {
+    dragging = true;
+    offsetX = mouseX - imgX;
+    offsetY = mouseY - imgY;
+    canvas.style.cursor = "grabbing";
+  }
+});
+
+canvas.addEventListener("mousemove", (e) => {
+  if (dragging && uploadedImg) {
+    const rect = canvas.getBoundingClientRect();
+    imgX = e.clientX - rect.left - offsetX;
+    imgY = e.clientY - rect.top - offsetY;
+    drawMockup();
+  }
+});
+
+canvas.addEventListener("mouseup", () => {
+  dragging = false;
+  canvas.style.cursor = "grab";
+});
+
+// Масштаб колесиком
+canvas.addEventListener("wheel", (e) => {
+  if (uploadedImg) {
+    e.preventDefault();
+    const scale = e.deltaY < 0 ? 1.05 : 0.95;
+    imgW *= scale;
+    imgH *= scale;
+    drawMockup();
+  }
+});
+
+mockupImg.onload = drawMockup;
+</script>
+{% endblock %}

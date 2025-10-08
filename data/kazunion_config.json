@@ -1,7 +1,8 @@
 {
   "city_code": "57",
-  "country_code": "33",
-  "departure_date": "13.08.2025",
+  "country_code": "11",
+  "departure_date": "08.10.2025",
+  "departure_end": "30.10.2025",
   "nights": [
     7
   ],
@@ -9,11 +10,9 @@
     "BB"
   ],
   "currency": "KZT",
-  "limit": 1,
   "ADULT": "1",
   "STARS": [
-    "10004",
     "10001"
   ],
-  "departure_end": "31.08.2025"
+  "limit": 50
 }

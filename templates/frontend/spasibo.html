@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="thank-container">
+  <div class="thank-glass">
+    <h2>Спасибо, что обратились в Nika Travel!</h2>
+    <p>Наш консультант свяжется с вами в ближайшее время 💬</p>
+
+    <div class="thank-socials">
+      <a class="wa" href="https://wa.me/77761516231" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a class="ig" href="https://instagram.com/nikatravel10" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+      <a class="tg" href="https://t.me/nikartravel10" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body {
+  font-family: "Segoe UI", sans-serif;
+  color: #5a432b;
+  margin: 0;
+  padding: 0;
+}
+
+.thank-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+}
+
+.thank-glass {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 40px 50px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-align: center;
+  max-width: 500px;
+}
+
+h2 {
+  color: #4b3821;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.thank-socials {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.thank-socials a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.wa { background: #25D366; }
+.wa:hover { background: #1ebe5d; }
+.ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.tg { background: #0088cc; }
+.tg:hover { background: #0077b5; }
+
+.thank-socials a:hover {
+  transform: translateY(-2px);
+}
+</style>
+{% endblock %}

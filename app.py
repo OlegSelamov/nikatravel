@@ -5,7 +5,7 @@ from email.mime.application import MIMEApplication
 from threading import Thread 
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from datetime import datetime, timedelta
-from kazunion_fetch import run
+#from kazunion_fetch import run
 import threading
 import os
 import json
@@ -391,6 +391,43 @@ def confirm_booking():
 @app.route('/data/<path:filename>')
 def serve_data(filename):
     return send_from_directory('data', filename)
+
+@app.route("/zayavka")
+def zayavka():
+    return render_template("frontend/zayavka.html")
+
+@app.route("/consultation", methods=["POST"])
+def consultation():
+    name = request.form.get("name")
+    phone = request.form.get("phone")
+    city = request.form.get("city")
+    destination = request.form.get("destination")
+    budget = request.form.get("budget")
+    departure_date = request.form.get("departure_date")
+    arrival_date = request.form.get("arrival_date")
+    comment = request.form.get("comment")
+
+    message = f"""
+📩 Новая заявка на консультацию:
+👤 Имя: {name}
+📞 Телефон: {phone}
+🏙 Город: {city}
+🌍 Направление: {destination}
+💰 Бюджет: {budget}
+🛫 Дата вылета: {departure_date}
+🛬 Дата прилета: {arrival_date}
+💬 Комментарий: {comment}
+"""
+
+    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+    requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "text": message})
+
+    return redirect(url_for("spasibo"))
+
+
+@app.route("/spasibo")
+def spasibo():
+    return render_template("frontend/spasibo.html")
 
 # ===========================
 # Админка

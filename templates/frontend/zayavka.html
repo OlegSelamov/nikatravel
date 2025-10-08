@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="zayavka-container">
+  <h1>Заявка на бесплатную консультацию</h1>
+
+  <div class="form-glass">
+    <form action="/consultation" method="POST">
+      <label>Ваше имя*</label>
+      <input type="text" name="name" required>
+
+      <label>Номер телефона*</label>
+      <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
+
+      <label>Ваш город*</label>
+      <input type="text" name="city" required>
+
+      <label>Какое направление вас интересует?</label>
+      <input type="text" name="destination">
+
+      <label>Ваш бюджет?</label>
+      <input type="text" name="budget">
+
+      <label>Желаемая дата вылета</label>
+      <input type="date" name="departure_date">
+
+      <label>Желаемая дата прилета</label>
+      <input type="date" name="arrival_date">
+
+      <label>Дополнительные вопросы</label>
+      <textarea name="comment" rows="3"></textarea>
+
+      <button type="submit">Отправить заявку</button>
+    </form>
+  </div>
+</div>
+
+<style>
+body {
+  font-family: "Segoe UI", sans-serif;
+  color: #5a432b;
+  margin: 0;
+  padding: 0;
+}
+
+.zayavka-container {
+  max-width: 600px;
+  margin: 100px auto 60px;
+  padding: 20px;
+}
+
+.zayavka-container h1 {
+  text-align: center;
+  color: #4b3821;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+}
+
+.form-glass {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 30px 35px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+label {
+  display: block;
+  margin: 10px 0 6px;
+  font-weight: 600;
+  color: #4b3821;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  background: rgba(255,255,255,0.5);
+  color: #333;
+}
+
+input:focus, textarea:focus {
+  border-color: #c7934b;
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: #c7934b;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #b37d3e;
+  transform: translateY(-2px);
+}
+
+/* 📱 адаптация */
+@media (max-width: 768px) {
+  .zayavka-container {
+    margin: 80px 10px 40px;
+    padding: 10px;
+  }
+  .form-glass {
+    padding: 20px;
+  }
+}
+</style>
+{% endblock %}
