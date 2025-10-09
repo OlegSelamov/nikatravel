@@ -351,6 +351,14 @@ def confirm_booking():
     name = request.form.get('name')
     phone = request.form.get('phone')
     email = request.form.get('email')
+    
+        # отправка WhatsApp подтверждения
+    if phone:
+        try:
+            send_whatsapp(phone, name)
+        except Exception as e:
+            print("Ошибка WhatsApp:", e)
+
 
     message = f"""🔥 Новое бронирование!
     Тур: {hotel}
@@ -395,7 +403,7 @@ def serve_data(filename):
 @app.route("/zayavka")
 def zayavka():
     return render_template("frontend/zayavka.html")
-
+        
 @app.route("/consultation", methods=["POST"])
 def consultation():
     name = request.form.get("name")
@@ -406,6 +414,13 @@ def consultation():
     departure_date = request.form.get("departure_date")
     arrival_date = request.form.get("arrival_date")
     comment = request.form.get("comment")
+    
+    if phone:
+        try:
+            send_whatsapp(phone, name)
+        except Exception as e:
+            print("Ошибка WhatsApp:", e)
+
 
     message = f"""
 📩 Новая заявка на консультацию:
@@ -423,7 +438,32 @@ def consultation():
     requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "text": message})
 
     return redirect(url_for("spasibo"))
+    
+ID_INSTANCE = "7105339549"           # 🔹 подставь свой idInstance
+API_TOKEN_INSTANCE = "11f19f3d98f0480ebc39e522a98d0df33114cd2c4da6459ca0"    # 🔹 подставь свой apiTokenInstance
 
+def send_whatsapp(phone, name):
+    """
+    Отправка подтверждения клиенту в WhatsApp после бронирования.
+    """
+    # приводим номер к формату 77071234567
+    phone = phone.replace("+", "").replace(" ", "").replace("-", "")
+
+    text = (
+        f"Здравствуйте, {name}! 🌴\n\n"
+        "Спасибо, что обратились в *Nika Travel*.\n"
+        "Мы получили вашу заявку и уже обрабатываем её.\n"
+        "Наш консультант свяжется с вами в ближайшее время ✈️"
+    )
+
+    url = f"https://api.green-api.com/waInstance{ID_INSTANCE}/sendMessage/{API_TOKEN_INSTANCE}"
+    payload = {"chatId": f"{phone}@c.us", "message": text}
+
+    try:
+        r = requests.post(url, json=payload, timeout=10)
+        print("✅ WhatsApp сообщение отправлено:", r.status_code, r.text)
+    except Exception as e:
+        print("❌ Ошибка отправки WhatsApp:", e)    
 
 @app.route("/spasibo")
 def spasibo():
