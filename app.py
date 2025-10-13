@@ -5,7 +5,7 @@ from email.mime.application import MIMEApplication
 from threading import Thread 
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from datetime import datetime, timedelta
-#from kazunion_fetch import run
+from kazunion_fetch import run
 import threading
 import os
 import json
@@ -439,8 +439,8 @@ def consultation():
 
     return redirect(url_for("spasibo"))
     
-ID_INSTANCE = "7105339549"           # 🔹 подставь свой idInstance
-API_TOKEN_INSTANCE = "11f19f3d98f0480ebc39e522a98d0df33114cd2c4da6459ca0"    # 🔹 подставь свой apiTokenInstance
+ID_INSTANCE = "7105340473"           # 🔹 подставь свой idInstance
+API_TOKEN_INSTANCE = "ae4d2f33ec9345d49b56b9bd6a297d566b6bbbfad2304da8a9"    # 🔹 подставь свой apiTokenInstance
 
 def send_whatsapp(phone, name):
     """

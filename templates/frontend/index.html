@@ -2,118 +2,216 @@
 {% block content %}
 
 <style>
-/* Баннеры */
-.banner-slider {
-    width: 100% !important;
-    overflow: hidden;
-	height: auto !important;
+/* === ГЛАВНЫЙ БАННЕР СО СВАЙПОМ === */
+.banner-swiper {
+  width: 100%;
+  height: 80vh; 
+  overflow: hidden;
+  position: relative;
+  border-radius: 16px;
+  margin-bottom: 30px;
 }
 
+/* Слайд */
 .banner-slide {
-    position: relative;
-    width: 100%;
-    height: 570px; /* фиксируем высоту на ПК */
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
+/* Картинка */
 .banner-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: fill; /* растягивает картинку под размеры блока */
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  
+  object-position: center;  /* центрирует изображение */
+  border-radius: 16px;
+  display: block;
 }
 
-@media (max-width: 768px) {
-    .banner-slide {
-        height: auto;
-    }
-    .banner-slide img {
-        width: 100%;
-        height: auto;
-        object-fit: cover; /* на мобилке заполняет блок */
-        max-height: 250px;
-    }
+/* Тёмный градиент снизу, чтобы кнопка лучше читалась */
+.banner-slide::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0));
+  border-radius: 16px;
+  pointer-events: none;
 }
 
-/* Заголовки в едином стиле */
-h1, h2, h3 {
-    text-align: center;
-    font-family: 'Segoe UI', sans-serif;
-    color: #6a5037; /* песочный/коричневый */
-    margin-bottom: 15px;
-}
-
-h1 {
-    font-size: 2.2rem;
-    font-weight: 700;
-}
-
-h2 {
-    font-size: 1.8rem;
-    font-weight: 600;
-}
-
-h3 {
-    font-size: 1.3rem;
-    font-weight: 500;
-}
-
-/* Подписи карточек */
-.card h3, .hotel-card h3, .news-slide h3 {
-    margin-top: 10px;
-    font-size: 1.2rem;
-}
-
-/* Выравнивание секций */
-section {
-    margin-bottom: 40px;
-}
-
-.places-section, .news-section, .hotels-section {
-    padding: 0 15px;
-}
-
-.banner-slide {
-    position: relative;
-}
-
+/* Кнопка */
 .banner-btn {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(106, 80, 55, 0.9); /* фирменный цвет */
-    color: #fff;
-    padding: 14px 28px;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  position: absolute;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(106, 80, 55, 0.9);
+  color: #fff;
+  padding: 14px 30px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  z-index: 2;
 }
 
 .banner-btn:hover {
-    background: rgba(85, 64, 44, 0.95);
-    transform: translateX(-50%) translateY(-2px);
+  background: rgba(85, 64, 44, 0.95);
+  transform: translateX(-50%) translateY(-3px);
+}
+
+/* Кружочки (пагинация) */
+.swiper-pagination {
+  bottom: 12px !important;
+  text-align: center;
+  z-index: 3;
+}
+.swiper-pagination-bullet {
+  background: rgba(255,255,255,0.8);
+  opacity: 1;
+  width: 9px;
+  height: 9px;
+  margin: 0 4px !important;
+  transition: 0.3s;
+}
+.swiper-pagination-bullet-active {
+  background: #d6ae7b;
+  transform: scale(1.25);
+}
+
+/* === АДАПТИВ ДЛЯ МОБИЛЬНЫХ === */
+@media (max-width: 768px) {
+  .banner-swiper {
+    height: auto;
+    max-height: 350px;
+    border-radius: 0;
+  }
+
+  .banner-slide img {
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    border-radius: 0;
+    object-fit: cover;
+  }
+
+  .banner-slide::after {
+    border-radius: 0;
+    height: 45%;
+  }
+
+  .banner-btn {
+    bottom: 25px;
+    font-size: 16px;
+    padding: 10px 24px;
+    border-radius: 8px;
+  }
+
+  .swiper-pagination {
+    bottom: 10px !important;
+  }
+}
+
+/* === СТИЛЬ КАРТОЧЕК === */
+.card, .hotel-card, .news-slide {
+  background: rgba(255,255,255,0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+.card:hover, .hotel-card:hover, .news-slide:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+.card img, .hotel-card img, .news-slide img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.card h3, .hotel-card h3, .news-slide h3 {
+  text-align: center;
+  color: #3b2e20;
+  padding: 10px 12px 18px;
+  font-weight: 600;
+}
+
+/* === ЗАГОЛОВКИ СЕКЦИЙ === */
+section h2 {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 0.5px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.4); /* полупрозрачный фон */
+  backdrop-filter: blur(6px);      /* эффект стекла */
+  padding: 10px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  margin: 30px auto 25px;
+}
+
+/* Вариант для песочного стиля (можно включить вместо чёрного) */
+/*
+section h2 {
+  background: rgba(249, 243, 235, 0.7);
+  color: #5c452c;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+*/
+
+/* Эффект плавного появления при скролле */
+section h2 {
+  opacity: 0;
+  transform: translate(-50%, 20px);
+  transition: all 0.6s ease-out;
+}
+section h2.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* 📱 Мобильная версия */
+@media (max-width: 768px) {
+  section h2 {
+    font-size: 1.4rem;
+    padding: 8px 16px;
+  }
 }
 </style>
 
-<div class="banner-slider">
-  {% for banner in banners %}
-    <div class="banner-slide">
-      <img src="{{ url_for('static', filename='img/' + banner.image) }}" alt="">
-      <a href="{{ url_for('filter_page') }}" class="banner-btn">Поиск Тура</a>
-    </div>
-  {% endfor %}
+<!-- 🔹 БАННЕР -->
+<div class="swiper banner-swiper">
+  <div class="swiper-wrapper">
+    {% for banner in banners %}
+      <div class="swiper-slide banner-slide">
+        <img src="{{ url_for('static', filename='img/' + banner.image) }}" alt="">
+        <a href="{{ url_for('filter_page') }}" class="banner-btn">Поиск Тура</a>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="swiper-pagination"></div>
 </div>
 
+<!-- 🔹 МЕСТА -->
 <section class="places-section">
   <h2>Места, которые стоит посетить</h2>
   <div class="swiper places-swiper">
     <div class="swiper-wrapper">
       {% for place in places %}
-      <div class="swiper-slide">
+      <div class="swiper-slide" data-aos="fade-up">
         <div class="card">
           <img src="{{ url_for('static', filename='img/' + place.image) }}" alt="{{ place.title }}">
           <h3>{{ place.title }}</h3>
@@ -127,36 +225,35 @@ section {
   </div>
 </section>
 
+<!-- 🔹 НОВОСТИ -->
 <section class="news-section">
-    <h2>Главные Новости</h2>
-    <div class="news-slider">
+  <h2>Главные Новости</h2>
+  <div class="news-slider">
     {% for n in news %}
-    <a href="{{ url_for('news_detail', id=loop.index0) }}" class="news-slide">
-        {% if n.image %}
-            <img src="{{ url_for('static', filename='img/' + n.image) }}" alt="{{ n.title }}">
-        {% endif %}
-        <h3>{{ n.title }}</h3>
+    <a href="{{ url_for('news_detail', id=loop.index0) }}" class="news-slide" data-aos="fade-up">
+      {% if n.image %}
+        <img src="{{ url_for('static', filename='img/' + n.image) }}" alt="{{ n.title }}">
+      {% endif %}
+      <h3>{{ n.title }}</h3>
     </a>
     {% endfor %}
-    </div>
+  </div>
 </section>
 
+<!-- 🔹 ОТЕЛИ -->
 <section class="hotels-section">
-    <h2>Рекомендуемые Отели</h2>
-    <div class="hotels-slider">
+  <h2>Рекомендуемые Отели</h2>
+  <div class="hotels-slider">
     {% for hotel in hotels %}
-    <a href="{{ url_for('hotel_detail', id=loop.index0) }}" class="hotel-card">
-        {% if hotel.images %}
-            <img src="{{ url_for('static', filename='img/' + hotel.images[0]) }}" alt="{{ hotel.title }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-        {% endif %}
-        <h3>{{ hotel.title }}</h3>
-        <p style="text-align: center;">Цена: {{ hotel.price }} ₸</p>
+    <a href="{{ url_for('hotel_detail', id=loop.index0) }}" class="hotel-card" data-aos="fade-up">
+      {% if hotel.images %}
+        <img src="{{ url_for('static', filename='img/' + hotel.images[0]) }}" alt="{{ hotel.title }}">
+      {% endif %}
+      <h3>{{ hotel.title }}</h3>
+      <p style="text-align: center;">Цена: {{ hotel.price }} ₸</p>
     </a>
     {% endfor %}
-    </div>
+  </div>
 </section>
 
 {% endblock %}
-
-
-

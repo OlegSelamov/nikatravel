@@ -9,7 +9,127 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
     {% endif %}
 
-    <!-- Aviasales tracker — только для клиентской части -->
+    <!-- 🎨 ВСТРОЕННЫЙ СТИЛЬ САЙТА -->
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background-color: #f9f3eb;
+        color: #2b2b2b;
+      }
+
+      /* 🔝 Хедер */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 40px;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      .header-logo {
+        font-size: 28px;
+        font-weight: 700;
+        text-decoration: none;
+        color: #d6ae7b;
+        transition: 0.3s;
+      }
+      .header-logo:hover {
+        color: #c19668;
+      }
+
+      /* Меню */
+      .nav-links {
+        display: flex;
+        gap: 25px;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        position: relative;
+        transition: color 0.3s;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background: linear-gradient(135deg, #eacda3, #d6ae7b);
+        transition: 0.3s;
+      }
+      .nav-links a:hover {
+        color: #d6ae7b;
+      }
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* Бургер */
+      .burger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+      }
+      .burger div {
+        width: 25px;
+        height: 3px;
+        background: #333;
+        border-radius: 3px;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 40px 20px;
+        font-size: 15px;
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(10px);
+        color: #444;
+        margin-top: 80px;
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      /* 📱 Адаптив */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          background: rgba(255,255,255,0.8);
+          position: absolute;
+          top: 65px;
+          right: 0;
+          width: 100%;
+          padding: 20px;
+          box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        .nav-links.show {
+          display: flex;
+        }
+        .burger {
+          display: flex;
+        }
+      }
+
+      /* 🌴 Анимация появления контента */
+      [data-aos] {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.7s ease;
+      }
+      [data-aos].aos-animate {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+
+    <!-- Aviasales -->
     {% if not request.path.startswith('/admin') %}
     <script data-noptimize="1" data-cfasync="false" data-wpfc-render="false">
       (function () {
@@ -21,6 +141,7 @@
     </script>
     {% endif %}
 </head>
+
 <body>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 {% if not request.path.startswith('/admin') %}
@@ -35,110 +156,84 @@
     <a href="{{ url_for('index') }}">Главная</a>
     <a href="{{ url_for('about') }}">О нас</a>
     <a href="{{ url_for('filter_page') }}">Доступные туры</a>
-	<a href="{{ url_for('flights') }}">Авиабилеты</a>
+    <a href="{{ url_for('flights') }}">Авиабилеты</a>
     <a href="{{ url_for('contacts') }}">Контакты</a>
   </div>
 </div>
 {% endif %}
 
-    {% block content %}{% endblock %}
+{% block content %}{% endblock %}
 
-    <footer class="footer">
-        Nika Travel © 2025
-    </footer>
+<footer class="footer">
+  Nika Travel © 2025
+</footer>
 
-    <!-- JS для слайдера -->
-    <script>
-        const sliderContainer = document.querySelector('.slider-container');
-        const slides = document.querySelectorAll('.gallery-image');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
-
-        let currentIndex = 0;
-
-        function updateSlider() {
-            if (sliderContainer) {
-                sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
-            }
-        }
-
-        if (sliderContainer) {
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-                updateSlider();
-            });
-
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % slides.length;
-                updateSlider();
-            });
-        }
-    </script>
-	
-	<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const sliders = document.querySelectorAll('.news-slider, .hotels-slider');
-
-    sliders.forEach(slider => {
-        let scrollAmount = 0;
-        const slideTimer = setInterval(() => {
-            slider.scrollBy({
-                left: 250, // ширина карточки + gap
-                behavior: 'smooth'
-            });
-            scrollAmount += 260;
-            if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
-                slider.scrollTo({ left: 0, behavior: 'smooth' });
-                scrollAmount = 0;
-            }
-        }, 3000); // каждые 3 секунды
-    });
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const bannerSlider = document.querySelector('.banner-slider');
-    const banners = document.querySelectorAll('.banner-slide');
-    let currentIndex = 0;
-
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % banners.length;
-        banners.forEach((slide, index) => {
-            slide.style.transform = `translateX(-${currentIndex * 100}%)`;
-        });
-    }, 4000); // каждые 4 секунды
-});
-</script>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script>
-new Swiper('.places-swiper', {
-  spaceBetween: 10,
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  breakpoints: {
-    0: {
-      slidesPerView: 1
-    },
-    600: {
-      slidesPerView: 2
-    },
-    1024: {
-      slidesPerView: 3
-    }
-  }
-});
-</script>
 <script>
 function toggleMenu() {
   const menu = document.getElementById('navMenu');
   menu.classList.toggle('show');
 }
 </script>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  new Swiper('.banner-swiper', {
+    loop: true,
+    grabCursor: true, // свайп пальцем или мышкой
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    autoplay: false // ❌ отключаем автопрокрутку
+  });
+});
+</script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script>
+  AOS.init({ duration: 900, once: true });
+</script>
+
+<script>
+document.addEventListener("scroll", () => {
+  document.querySelectorAll("section h2").forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) el.classList.add("visible");
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  /* Баннер */
+  new Swiper('.banner-swiper', {
+    loop: true,
+    grabCursor: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    autoplay: false
+  });
+
+  /* Места, которые стоит посетить */
+  new Swiper('.places-swiper', {
+    loop: false,
+    slidesPerView: 3,       // 👈 показываем 3 карточки
+    spaceBetween: 20,       // 👈 расстояние между ними
+    navigation: {           // стрелочки уже есть в HTML
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {          // адаптив
+      0:   { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024:{ slidesPerView: 3 }
+    }
+  });
+});
+</script>
 </body>
 </html>
-
-
-
