@@ -190,6 +190,67 @@ section h2.visible {
     padding: 8px 16px;
   }
 }
+
+.services-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.service-card {
+  height: 160px;
+  border-radius: 16px;
+
+  background-image: inherit;     /* 🔥 важно */
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-color: transparent; /* 🔥 УБИРАЕТ ПЕРЕБИВКУ */
+
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+
+  overflow: hidden;
+}
+
+.service-card span {
+  background: rgba(0, 0, 0, 0.45); /* лёгкая подложка */
+  padding: 6px 12px;
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+
+  .services-cards {
+    grid-template-columns: repeat(2, 1fr); /* 🔥 2 в ряд */
+    gap: 12px;
+  }
+
+  .service-card {
+    height: 120px; /* 🔥 меньше высота */
+    padding: 8px;
+  }
+
+  .service-card span {
+    font-size: 13px;
+    padding: 5px 10px;
+  }
+
+}
+
 </style>
 
 <!-- 🔹 БАННЕР -->
@@ -205,64 +266,48 @@ section h2.visible {
   <div class="swiper-pagination"></div>
 </div>
 
-<section class="services">
-  <div class="services-cards">
-    <a class="service-card" data-img="aviabilet.png" href="/flights">
-      <span>Авиабилеты</span>
-    </a>
+<section class="services-cards">
 
-    <a class="service-card" data-img="transfer.png" href="/transfer">
-      <span>Трансфер</span>
-    </a>
+  <a class="service-card" href="/flights"
+     style="background-image:url('/static/knopki/avia.png')">
+    <span></span>
+  </a>
 
-    <a class="service-card" data-img="visa.png" href="/visa">
-      <span>Оформление визы</span>
-    </a>
+  <a class="service-card" href="/cruises"
+     style="background-image:url('/static/knopki/cruiz.png')">
+    <span></span>
+  </a>
 
-    <a class="service-card" data-img="tur.png" href="#">
-      <span>Комбинированные туры</span>
-    </a>
+  <a class="service-card" href="/rail"
+     style="background-image:url('/static/knopki/jd.png')">
+    <span></span>
+  </a>
 
-    <a class="service-card" data-img="kazak.png" href="#">
-      <span>Туризм по Казахстану</span>
-    </a>
+  <a class="service-card" href="/hotels"
+     style="background-image:url('/static/knopki/oteli.png')">
+    <span></span>
+  </a>
 
-    <a class="service-card" data-img="more.png" href="#">
-      <span>Море и пляж</span>
-    </a>
+  <a class="service-card" href="/filter"
+     style="background-image:url('/static/knopki/podbor.png')">
+    <span></span>
+  </a>
 
-    <a class="service-card" data-img="ecskurs.png" href="#">
-      <span>Экскурсии</span>
-    </a>
+  <a class="service-card" href="/login"
+     style="background-image:url('/static/knopki/registr.png')">
+    <span></span>
+  </a>
 
-    <a class="service-card" data-img="cruiz.png" href="#">
-      <span>Круизы</span>
-    </a>
+  <a class="service-card" href="/visa"
+     style="background-image:url('/static/knopki/visa.png')">
+    <span></span>
+  </a>
 
-    <a class="service-card" data-img="gorno.png" href="#">
-      <span>Горнолыжные туры</span>
-    </a>
+  <a class="service-card" href="/admin/requests"
+     style="background-image:url('/static/knopki/zayavka.png')">
+    <span></span>
+  </a>
 
-    <a class="service-card" data-img="spa.png" href="#">
-      <span>SPA & Wellness</span>
-    </a>
-
-    <a class="service-card" data-img="semein.png" href="#">
-      <span>Семейный отдых</span>
-    </a>
-
-    <a class="service-card" data-img="delovoi.png" href="#">
-      <span>Деловой туризм</span>
-    </a>
-
-    <a class="service-card" data-img="medic.png" href="#">
-      <span>Медицинский туризм</span>
-    </a>
-
-    <a class="service-card" data-img="extrim.png" href="#">
-      <span>Экстрим-туры</span>
-    </a>
-  </div>
 </section>
 
 <!-- 🔹 МЕСТА -->
