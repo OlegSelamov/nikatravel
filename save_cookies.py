@@ -1,0 +1,2 @@
+from booking_scraper_vlite_plus import login_and_save_cookies
+login_and_save_cookies()

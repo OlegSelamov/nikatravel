@@ -507,7 +507,6 @@ def admin_filter():
         config['nights'] = [int(request.form.get('nights') or 7)]
         config['meal'] = request.form.getlist('meal')
         config['currency'] = request.form.get('currency')
-        config['limit'] = int(request.form.get('limit') or 10)
         config['ADULT'] = request.form.get('ADULT')
         config['STARS'] = request.form.getlist('STARS')
 

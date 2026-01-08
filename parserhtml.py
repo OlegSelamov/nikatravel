@@ -52,6 +52,14 @@ def normalize_date_to_standard(s):
         return date_to_standard_str(parse_date_any(s))
     except Exception:
         return None
+        
+def clean_text_keep_case(x):
+    if x is None:
+        return ""
+    s = str(x)
+    s = s.replace("\n", " ")
+    s = re.sub(r"\s+", " ", s)
+    return s.strip()
 
 def make_key(rec: dict) -> str:
     """Ключ сопоставления тура: страна|город|отель|питание|ночей"""
@@ -82,14 +90,6 @@ if not html_folders:
     raise FileNotFoundError("❌ Не найдена ни одна папка html_*")
 last_folder = max(html_folders, key=os.path.getmtime)
 logger.info(f"📂 Парсим HTML из папки: {last_folder}")
-
-# Лимит
-try:
-    with open(DATA_DIR / "kazunion_config.json", "r", encoding="utf-8") as f:
-        config = json.load(f)
-        limit = int(config.get("limit")) if str(config.get("limit")).isdigit() else None
-except Exception:
-    limit = None
 
 # ----------------------- ЗАГРУЗКА СУЩЕСТВУЮЩИХ ДАННЫХ -----------------------
 
@@ -131,7 +131,6 @@ hotels_parsed = []  # будем складывать свежие записи 
 html_files = sorted(last_folder.glob("kazunion_page_*.html"))
 logger.info(f"🔍 Найдено {len(html_files)} HTML-файлов для парсинга")
 
-count_added_rows = 0
 
 for html_file in html_files:
     logger.info(f"📄 Парсим файл: {html_file}")
@@ -154,7 +153,7 @@ for html_file in html_files:
             else:
                 nights = nights_raw
 
-            hotel_name_raw = tds[4].get_text(strip=True)
+            hotel_name_raw = clean_text_keep_case(tds[4].get_text())
             seats = tds[5].get_text(strip=True)
 
             meal_raw = tds[6].get_text(strip=True).upper()
@@ -336,12 +335,6 @@ for html_file in html_files:
                     logger.info(f"🧹 Удалена папка с фото: {hotel_folder}")
             except Exception as e:
                 logger.warning(f"⚠️ Ошибка при удалении временной папки с фото: {e}")
-            count_added_rows += 1
-            logger.info(f"➕ Отель: {hotel_name_raw} | Дата: {date_std} | Цена: {price}")
-
-            if limit and count_added_rows >= limit:
-                logger.info(f"⛔ Достигнут лимит {limit}, останавливаем парсинг.")
-                break
 
         except Exception as e:
             logger.warning(f"⚠️ Ошибка при обработке строки: {e}")

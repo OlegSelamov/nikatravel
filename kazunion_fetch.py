@@ -235,7 +235,7 @@ def run():
 
             # Фильтры
             safe_check(page, "input[name='FREIGHT']")
-            safe_check(page, "input[name='FILTER']")
+            #safe_check(page, "input[name='FILTER']")
             safe_check(page, "input[name='PARTITION_PRICE']")
 
             # Поиск

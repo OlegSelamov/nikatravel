@@ -1,7 +1,7 @@
 body {
     font-family: sans-serif;
     background-color: #fffaf0;
-    background-image: url('/static/img/background_pattern_sand.jpeg');
+    background-image: url('/static/fon/background_pattern_sand.jpg');
     background-repeat: repeat;
     background-size: cover;
     background-attachment: fixed;
