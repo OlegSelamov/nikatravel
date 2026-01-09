@@ -191,64 +191,164 @@ section h2.visible {
   }
 }
 
+/* === СЕТКА ИКОНОК === */
+
 .services-cards {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(6, 1fr); /* ПК */
+  gap: 24px;
   margin: 30px 0;
 }
 
-.service-card {
-  height: 160px;
-  border-radius: 16px;
+/* === КНОПКА === */
 
-  background-image: inherit;     /* 🔥 важно */
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-color: transparent; /* 🔥 УБИРАЕТ ПЕРЕБИВКУ */
-
+.service-btn {
   display: flex;
-  align-items: flex-end;
-  padding: 12px;
-
-  color: #fff;
-  font-weight: 700;
-  font-size: 15px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   text-decoration: none;
+  color: #3b2e20;
+}
 
+/* === ИКОНКА === */
+
+.service-btn img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;   /* ❗ НЕ РАСТЯГИВАЕТ */
+  transition: transform 0.2s ease;
+}
+
+/* === ТЕКСТ === */
+
+.service-btn span {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* === НАЖАТИЕ / ХОВЕР === */
+
+.service-btn:hover img {
+  transform: scale(1.08);
+}
+
+.service-btn:active img {
+  transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+  .services-cards {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .service-btn img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .service-btn span {
+    font-size: 12px;
+  }
+}
+
+.service-btn {
+  background: rgba(255, 255, 255, 0.30);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border-radius: 16px;
+  padding: 14px 8px;
+
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.service-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+@media (max-width: 768px) {
+  .service-btn {
+    background: rgba(255,255,255,0.30);
+  }
+}
+
+.service-btn {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+
+  display: grid;
+  grid-template-rows: 1fr auto;   /* 🔥 иконка / текст */
+  align-items: center;
+  justify-items: center;
+
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border-radius: 18px;
+  padding: 10px;
+
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  text-decoration: none;
+}
+
+.service-btn img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.service-btn span {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.2;
+
+  max-height: 2.4em;            /* 🔥 максимум 2 строки */
   overflow: hidden;
 }
 
-.service-card span {
-  background: rgba(0, 0, 0, 0.45); /* лёгкая подложка */
-  padding: 6px 12px;
-  border-radius: 8px;
+@media (max-width: 768px) {
+  .services-cards {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+}
 
-  font-size: 14px;
-  font-weight: 600;
-  color: #fff;
-
-  display: inline-block;
+@media (min-width: 769px) {
+  .services-cards {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
 
   .services-cards {
-    grid-template-columns: repeat(2, 1fr); /* 🔥 2 в ряд */
-    gap: 12px;
+    grid-template-columns: repeat(4, minmax(0, 1fr)); /* 🔥 ключ */
+    gap: 8px;                                         /* 🔥 меньше */
+    padding: 0 10px;                                  /* 🔥 уже */
   }
 
-  .service-card {
-    height: 120px; /* 🔥 меньше высота */
-    padding: 8px;
-  }
+}
 
-  .service-card span {
-    font-size: 13px;
-    padding: 5px 10px;
-  }
+.service-btn {
+  border: 1px solid rgba(255,255,255,0.35);
+}
 
+.service-btn:active {
+  transform: scale(0.96);
+}
+
+.service-btn:hover img {
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25));
 }
 
 </style>
@@ -268,44 +368,44 @@ section h2.visible {
 
 <section class="services-cards">
 
-  <a class="service-card" href="/flights"
-     style="background-image:url('/static/knopki/avia.png')">
-    <span></span>
+  <a class="service-btn" href="/filter">
+    <img src="{{ url_for('static', filename='knopki/podbor.png') }}">
+    <span>Подбор туров</span>
   </a>
 
-  <a class="service-card" href="/cruises"
-     style="background-image:url('/static/knopki/cruiz.png')">
-    <span></span>
+  <a class="service-btn" href="/flights">
+    <img src="{{ url_for('static', filename='knopki/avia.png') }}">
+    <span>Авиабилеты</span>
   </a>
 
-  <a class="service-card" href="/rail"
-     style="background-image:url('/static/knopki/jd.png')">
-    <span></span>
+  <a class="service-btn" href="/rail">
+    <img src="{{ url_for('static', filename='knopki/jd.png') }}">
+    <span>ЖД билеты</span>
   </a>
 
-  <a class="service-card" href="/hotels"
-     style="background-image:url('/static/knopki/oteli.png')">
-    <span></span>
+  <a class="service-btn" href="/hotels">
+    <img src="{{ url_for('static', filename='knopki/oteli.png') }}">
+    <span>Отели</span>
   </a>
 
-  <a class="service-card" href="/filter"
-     style="background-image:url('/static/knopki/podbor.png')">
-    <span></span>
+  <a class="service-btn" href="/visa">
+    <img src="{{ url_for('static', filename='knopki/visa.png') }}">
+    <span>Оформление визы</span>
   </a>
 
-  <a class="service-card" href="/login"
-     style="background-image:url('/static/knopki/registr.png')">
-    <span></span>
+  <a class="service-btn" href="/cruises">
+    <img src="{{ url_for('static', filename='knopki/cruiz.png') }}">
+    <span>Круизы</span>
   </a>
 
-  <a class="service-card" href="/visa"
-     style="background-image:url('/static/knopki/visa.png')">
-    <span></span>
+  <a class="service-btn" href="/login">
+    <img src="{{ url_for('static', filename='knopki/registr.png') }}">
+    <span>Войти</span>
   </a>
 
-  <a class="service-card" href="/admin/requests"
-     style="background-image:url('/static/knopki/zayavka.png')">
-    <span></span>
+  <a class="service-btn" href="/admin/requests">
+    <img src="{{ url_for('static', filename='knopki/zayavka.png') }}">
+    <span>Заявки</span>
   </a>
 
 </section>
