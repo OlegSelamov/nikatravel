@@ -7,10 +7,19 @@
 </head>
 <body>
     <h2>Добавить новый баннер</h2>
-    <form method="POST" enctype="multipart/form-data" class="form-container">
-        <input type="text" name="title" placeholder="Название баннера" required>
+    <form method="POST" enctype="multipart/form-data">
+      <div>
+        <label>Картинка баннера</label>
         <input type="file" name="image" required>
-        <button type="submit" class="btn-submit">Сохранить</button>
+      </div>
+
+      <div>
+        <label>Ссылка (куда ведёт баннер)</label>
+        <input type="text" name="link" placeholder="/filter" required>
+      </div>
+
+      <button type="submit">Добавить баннер</button>
     </form>
+
 </body>
 </html>

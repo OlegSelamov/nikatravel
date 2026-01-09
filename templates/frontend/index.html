@@ -351,19 +351,92 @@ section h2.visible {
   filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25));
 }
 
+/* ====== DESKTOP FIX (ПК) ====== */
+@media (min-width: 992px) {
+
+  .services-cards{
+    max-width: 1100px;              /* ограничиваем ширину блока */
+    margin: 30px auto;             /* центрируем */
+    padding: 0 16px;
+
+    grid-template-columns: repeat(6, 1fr);  /* 6 в ряд ок, но в контейнере */
+    gap: 18px;
+  }
+
+  .service-btn{
+    aspect-ratio: 4 / 3;           /* 🔥 главное: не квадрат на ПК */
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .service-btn img{
+    width: 56px;
+    height: 56px;
+  }
+
+  .service-btn span{
+    font-size: 13px;
+  }
+}
+
+/* ===== KASPI STYLE BANNER ===== */
+
+.kaspi-swiper {
+  padding: 10px 0 20px;
+}
+
+.kaspi-slide {
+  width: 85%;                 /* 🔥 видно соседний баннер */
+  max-width: 420px;
+
+  border-radius: 16px;
+  overflow: hidden;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+
+.kaspi-slide img {
+  width: 100%;
+  height: 140px;              /* 🔥 компактно */
+  object-fit: cover;
+  display: block;
+}
+
+/* ПК — чуть больше, но не огромный */
+@media (min-width: 992px) {
+  .kaspi-slide img {
+    height: 180px;
+  }
+}
+
+/* ===== DESKTOP: центрируем и ограничиваем KASPI баннер ===== */
+@media (min-width: 992px) {
+
+  .kaspi-swiper {
+    max-width: 1100px;     /* 🔥 ширина как у кнопок */
+    margin: 0 auto 24px;  /* 🔥 строго по центру */
+    padding: 0 16px;
+  }
+
+  .kaspi-slide {
+    width: 340px;         /* 🔥 фиксированная карточка */
+  }
+
+}
+
 </style>
 
-<!-- 🔹 БАННЕР -->
-<div class="swiper banner-swiper">
+<!-- ===== KASPI STYLE BANNERS ===== -->
+<div class="swiper kaspi-swiper">
   <div class="swiper-wrapper">
+
     {% for banner in banners %}
-      <div class="swiper-slide banner-slide">
-        <img src="{{ url_for('static', filename='img/' + banner.image) }}" alt="">
-        <a href="{{ url_for('filter_page') }}" class="banner-btn">Поиск Тура</a>
-      </div>
+      <a href="{{ banner.link }}" class="swiper-slide kaspi-slide">
+        <img src="{{ url_for('static', filename='banners/' + banner.image) }}" alt="">
+      </a>
     {% endfor %}
+
   </div>
-  <div class="swiper-pagination"></div>
 </div>
 
 <section class="services-cards">

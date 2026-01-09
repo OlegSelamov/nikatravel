@@ -1145,6 +1145,26 @@ nav#main-menu {
   transform: scale(1.05);
 }
 
+.page-empty {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  color: #444;
+}
+
+.page-empty h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.page-empty p {
+  opacity: 0.6;
+}
+
 
 
 

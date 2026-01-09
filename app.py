@@ -44,6 +44,7 @@ NEWS_FILE = os.path.join(DATA_FOLDER, 'news.json')
 HOTELS_FILE = os.path.join(DATA_FOLDER, 'hotels.json')
 IMAGE_FOLDER = 'static/img'
 BANNERS_FILE = os.path.join(DATA_FOLDER, 'banners.json')
+BANNERS_FOLDER = 'static/banners'
 
 def load_json(path):
     if os.path.exists(path):
@@ -112,11 +113,37 @@ def index():
     news = load_json(NEWS_FILE)
     hotels = load_json(HOTELS_FILE)
     banners = load_json(BANNERS_FILE)  # добавляем баннеры
-    return render_template('frontend/index.html', tours=tours, places=places, news=news, hotels=hotels, banners=banners)
+    return render_template('frontend/index.html', tours=tours, places=places, news=news, hotels=hotels, banners=banners, active_page='home')
 
 @app.route('/about')
 def about():
     return render_template('frontend/about.html')
+    
+@app.route('/favorites')
+def favorites():
+    return render_template(
+        'frontend/empty.html',
+        title='Избранное',
+        active_page='favorites'
+    )
+
+
+@app.route('/my-requests')
+def my_requests():
+    return render_template(
+        'frontend/empty.html',
+        title='Мои заявки',
+        active_page='requests'
+    )
+
+
+@app.route('/profile')
+def profile():
+    return render_template(
+        'frontend/empty.html',
+        title='Профиль',
+        active_page='profile'
+    )
     
 # ======== АВИАБИЛЕТЫ ========
 API_TOKEN = "ffd20ef2003810e413ac023a2e9dd5ff"
@@ -893,23 +920,23 @@ def admin_banners():
 
 @app.route('/admin/banners/add', methods=['GET', 'POST'])
 def add_banner():
+    banners = load_json(BANNERS_FILE)
+
     if request.method == 'POST':
-        title = request.form['title']
-        image_file = request.files['image']
+        image = request.files['image']
+        link = request.form['link']
 
-        banners = load_json(BANNERS_FILE)
-
-        if image_file:
-            image_filename = secure_filename(image_file.filename)
-            image_file.save(os.path.join(IMAGE_FOLDER, image_filename))
+        if image and image.filename != "":
+            filename = secure_filename(image.filename)
+            image.save(os.path.join('static/banners', filename))
         else:
-            image_filename = ""
+            filename = ""
 
-        new_banner = {
-            'title': title,
-            'image': image_filename
-        }
-        banners.append(new_banner)
+        banners.append({
+            "image": filename,
+            "link": link
+        })
+
         save_json(BANNERS_FILE, banners)
         return redirect(url_for('admin_banners'))
 

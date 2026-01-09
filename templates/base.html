@@ -95,25 +95,14 @@
         margin-top: 80px;
         border-top: 1px solid rgba(255, 255, 255, 0.3);
       }
+	  
+	  /* ❌ скрыто по умолчанию (ПК) */
+      .mobile-bottom-nav {
+        display: none;
+      }
 
-      /* 📱 Адаптив */
-      @media (max-width: 768px) {
-        .nav-links {
-          display: none;
-          flex-direction: column;
-          background: rgba(255,255,255,0.8);
-          position: absolute;
-          top: 65px;
-          right: 0;
-          width: 100%;
-          padding: 20px;
-          box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        }
-        .nav-links.show {
-          display: flex;
-        }
-        .burger {
-          display: flex;
+        body {
+          padding-bottom: 72px;
         }
       }
 
@@ -127,6 +116,57 @@
         opacity: 1;
         transform: translateY(0);
       }
+	 
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 70px;
+        background: rgba(255, 255, 255, 0.95);
+
+        display: none;                 /* 🔥 ВАЖНО */
+        justify-content: space-around;
+        align-items: center;
+  
+        border-top: 1px solid rgba(0,0,0,0.08);
+        z-index: 1000;
+      }
+
+     .nav-item {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       font-size: 11px;
+       color: #999;
+       text-decoration: none;
+     }
+
+     .nav-item img {
+       width: 26px;
+       height: 26px;
+       margin-bottom: 4px;
+     }
+
+     .nav-item.active span {
+       color: #c89b63; /* песочный фирменный */
+     }
+	 
+     @media (max-width: 768px) {
+       .bottom-nav {
+         display: flex;          /* 👈 включаем ТОЛЬКО НА МОБИЛКЕ */
+         flex-direction: row;    /* 👈 ЯВНО говорим: В РЯД */
+       }
+
+       body {
+         padding-bottom: 80px;
+       }
+
+       .header {
+         display: none !important;
+       }
+     }
+
     </style>
 
     <!-- Aviasales -->
@@ -167,6 +207,31 @@
 <footer class="footer">
   Nika Travel © 2025
 </footer>
+
+<!-- ===== MOBILE BOTTOM NAV ===== -->
+<nav class="bottom-nav">
+
+  <a href="/" class="nav-item {% if active_page == 'home' %}active{% endif %}">
+    <img src="{{ url_for('static', filename='knopki/' + ('home_active.png' if active_page == 'home' else 'home_pasive.png')) }}">
+    <span>Главная</span>
+  </a>
+
+  <a href="/favorites" class="nav-item {% if active_page == 'favorites' %}active{% endif %}">
+    <img src="{{ url_for('static', filename='knopki/' + ('love_active.png' if active_page == 'favorites' else 'love_pasive.png')) }}">
+    <span>Избранное</span>
+  </a>
+
+  <a href="/my-requests" class="nav-item {% if active_page == 'requests' %}active{% endif %}">
+    <img src="{{ url_for('static', filename='knopki/' + ('zayavka_active.png' if active_page == 'requests' else 'zayavka_pasive.png')) }}">
+    <span>Заявки</span>
+  </a>
+
+  <a href="/profile" class="nav-item {% if active_page == 'profile' %}active{% endif %}">
+    <img src="{{ url_for('static', filename='knopki/' + ('login_active.png' if active_page == 'profile' else 'login_pasive.png')) }}">
+    <span>Профиль</span>
+  </a>
+
+</nav>
 
 <script>
 function toggleMenu() {
@@ -217,6 +282,13 @@ document.addEventListener('DOMContentLoaded', function () {
     },
     autoplay: false
   });
+  
+  new Swiper('.kaspi-swiper', {
+    slidesPerView: 'auto',
+    spaceBetween: 14,
+    freeMode: true,
+    grabCursor: true
+  });
 
   /* Места, которые стоит посетить */
   new Swiper('.places-swiper', {
@@ -234,6 +306,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+</script>
+
+<script>
+document.addEventListener('scroll', () => {
+  const home = document.querySelector('.nav-item[href="/"]');
+  if (!home) return;
+  if (window.scrollY < 200) home.classList.add('active');
+  else home.classList.remove('active');
+});
+</script>
+
+<script>
+function toggleFav(id){
+  let fav = JSON.parse(localStorage.getItem('fav')||'[]');
+  fav = fav.includes(id) ? fav.filter(x=>x!==id) : [...fav, id];
+  localStorage.setItem('fav', JSON.stringify(fav));
+}
 </script>
 
 </body>
