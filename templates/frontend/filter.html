@@ -172,8 +172,9 @@ function renderNativeCards(tours) {
     return;
   }
 
-  container.innerHTML = tours.map((t, index) => `
-      <a href="/tour/${t.id}?departure_date=${encodeURIComponent(t.date)}&price=${t.price}" class="tour-card-link">
+container.innerHTML = tours.map((t, index) => `
+  <div class="tour-card">
+    <a href="/tour/${t.id}?departure_date=${encodeURIComponent(t.date)}&price=${t.price}" class="tour-card-link">
       <div class="tour-card-visual">
         <div class="tour-image-box">
           ${t.installment_months ? `<div class="tour-badge-left">0-0-${t.installment_months}</div>` : ''}
@@ -191,7 +192,9 @@ function renderNativeCards(tours) {
         </div>
       </div>
     </a>
-  `).join('');
+  </div>
+`).join('');
+
 }
 
 function restoreFilterState() {
@@ -246,31 +249,121 @@ function restoreFilterState() {
   margin-bottom: 20px;
   color: #6a5037;
 }
+
+/* ================= TOUR CARDS (DESKTOP BASE) ================= */
+
 #tours-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 16px;
 }
 
-  .tour-card-visual {
-    width: 100%;
-    height: 100%; /* чтобы тянулось */
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.7); /* полупрозрачный белый фон */
-	backdrop-filter: blur(10px);            /* размытие фона позади */
-    border-radius: 16px;
-	border: 1px solid rgba(255, 255, 255, 0.3); /* лёгкая белая рамка */
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-  }
+#tours-list > a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
 
-  .tour-card-visual:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
-  }
+.tour-card-visual {
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tour-image-box {
+  position: relative;
+  height: 190px;
+  overflow: hidden;
+}
+
+.tour-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tour-location {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  padding: 4px 10px;
+  font-size: 13px;
+  border-radius: 10px;
+}
+
+.tour-badge-left,
+.tour-badge-right {
+  position: absolute;
+  top: 10px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 10px;
+}
+
+.tour-badge-left {
+  left: 10px;
+  background: #f39c12;
+}
+
+.tour-badge-right {
+  right: 10px;
+  background: #e74c3c;
+}
+
+.tour-info {
+  padding: 14px;
+  text-align: left;
+}
+
+.tour-info h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+  line-height: 1.25;
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+.tour-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: #27ae60;
+}
+
+.tour-old-price {
+  margin-top: 6px;
+  font-size: 13px;
+  text-decoration: line-through;
+  color: #999;
+}
+
+.tour-monthly {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #f39c12;
+}
+
+.tour-card-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ================= ADAPTIVE ================= */
 
 @media (max-width: 1024px) {
   #tours-list {
@@ -280,40 +373,13 @@ function restoreFilterState() {
 
 @media (max-width: 768px) {
   #tours-list {
-    display: grid;
-    grid-template-columns: repeat(2, calc(50% - 6px));
-    gap: 12px;
-  }
-
-  .tour-card-link {
-    display: block;
-    width: 100%;
-  }
-  
-  .tour-image-box {
-    flex: 0 0 140px; /* фиксированная высота блока с картинкой */
-    position: relative;
-  }
-
-  .tour-image-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .tour-info {
-    flex: 1;
-    padding: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* чтобы цена всегда была внизу */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 480px) {
-  /* для совсем маленьких экранов можно оставить по одной карточке */
   #tours-list {
-    grid-template-columns: repeat(2, calc(50% - 6px));
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 </style>

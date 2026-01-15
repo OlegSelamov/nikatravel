@@ -206,15 +206,23 @@ body {
 /* Кнопка бронирования */
 .tour-fixed-buttons {
   position: fixed;
-  bottom: 0;
   left: 0;
   right: 0;
+  bottom: 0;          /* ПК */
   display: flex;
   background: rgba(255,255,255,0.3);
   padding: 12px 20px;
   box-shadow: 0 -2px 15px rgba(0,0,0,0.1);
   z-index: 1000;
 }
+
+/* 📱 мобилка — сдвигаем кнопку ВЫШЕ нижнего меню */
+@media (max-width: 768px) {
+  .tour-fixed-buttons {
+    bottom: var(--bottom-nav-height);
+  }
+}
+
 .btn-book {
   background: #2ecc71;
   color: white;

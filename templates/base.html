@@ -11,6 +11,10 @@
 
     <!-- 🎨 ВСТРОЕННЫЙ СТИЛЬ САЙТА -->
     <style>
+	  :root {
+        --bottom-nav-height: 70px;
+      }
+
       body {
         margin: 0;
         font-family: 'Poppins', sans-serif;
@@ -96,14 +100,16 @@
         border-top: 1px solid rgba(255, 255, 255, 0.3);
       }
 	  
-	  /* ❌ скрыто по умолчанию (ПК) */
+	  /* 📱 скрываем футер на мобилке */
+      @media (max-width: 768px) {
+        .footer {
+          display: none;
+        }
+      }
+	  
+      /* ❌ скрыто по умолчанию (ПК) */
       .mobile-bottom-nav {
         display: none;
-      }
-
-        body {
-          padding-bottom: 72px;
-        }
       }
 
       /* 🌴 Анимация появления контента */
@@ -166,7 +172,7 @@
          display: none !important;
        }
      }
-
+	 
     </style>
 
     <!-- Aviasales -->
