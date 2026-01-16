@@ -1,0 +1,40 @@
+[
+  {
+    "user_id": "+77054602493",
+    "hotel": "Best Western Resort Kuta 4*(Кута)",
+    "city": "Алматы",
+    "country": "Индонезия",
+    "departure_date": "17.12.2025",
+    "nights": "7",
+    "tourists": "1",
+    "price": "1057680.0",
+    "status": "Отправлена",
+    "created_at": "17.01.2026 00:38"
+  },
+  {
+    "id": "7990605d-811b-4f88-beff-e23c08eda622",
+    "user_id": "+77054602493",
+    "hotel": "Grand Copthorne Waterfront 5*(Кларк-Куэй)",
+    "city": "Алматы",
+    "country": "Сингапур",
+    "departure_date": "24.12.2025",
+    "nights": "7",
+    "tourists": "1",
+    "price": "2278333.0",
+    "status": "Отправлена",
+    "created_at": "17.01.2026 01:02"
+  },
+  {
+    "id": "2589d36b-edb1-4245-9ca0-9c30653497b4",
+    "user_id": "87777777777",
+    "hotel": "D’ Resort @ Downtown East 4*(Сингапур)",
+    "city": "Алматы",
+    "country": "Сингапур",
+    "departure_date": "24.12.2025",
+    "nights": "7",
+    "tourists": "1",
+    "price": "1328029.0",
+    "status": "Отправлена",
+    "created_at": "17.01.2026 01:14"
+  }
+]

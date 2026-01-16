@@ -11,6 +11,7 @@ import os
 import json
 import requests
 import subprocess
+import uuid
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 import logging
@@ -65,13 +66,36 @@ SMTP_PORT = 587
 SMTP_LOGIN = "nikatravel26@gmail.com"
 SMTP_PASSWORD = "tjvh vcmo yazi qenn"
 
+REQUESTS_FILE = os.path.join(DATA_FOLDER, 'requests.json')
+
+def load_requests():
+    if os.path.exists(REQUESTS_FILE):
+        with open(REQUESTS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return []
+
+def save_requests(data):
+    with open(REQUESTS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+        
+FAVORITES_FILE = os.path.join(DATA_FOLDER, 'favorites.json')
+
+def load_favorites():
+    if os.path.exists(FAVORITES_FILE):
+        with open(FAVORITES_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return []
+
+def save_favorites(data):
+    with open(FAVORITES_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
 # Загрузка туров
 def load_tours():
     if os.path.exists(FILTER_FILE):
         with open(FILTER_FILE, 'r', encoding='utf-8') as f:
             return json.load(f)
-    else:
-        return []
+    return []
 
 # Сохранение туров
 def save_tours(tours):
@@ -118,33 +142,140 @@ def index():
 @app.route('/about')
 def about():
     return render_template('frontend/about.html')
-    
-@app.route('/favorites')
-def favorites():
-    return render_template(
-        'frontend/empty.html',
-        title='Избранное',
-        active_page='favorites'
-    )
-
-
-@app.route('/my-requests')
-def my_requests():
-    return render_template(
-        'frontend/empty.html',
-        title='Мои заявки',
-        active_page='requests'
-    )
-
 
 @app.route('/profile')
 def profile():
+    if not session.get('user'):
+        return redirect(url_for('login'))
+
+    all_requests = load_requests()
+    user_requests = [
+        r for r in all_requests
+        if r.get('user_id') == session['user']['id']
+    ]
+
+    stats = {
+        "requests": len(user_requests),
+        "active": len([r for r in user_requests if r['status'] != 'Подтверждена']),
+        "completed": len([r for r in user_requests if r['status'] == 'Подтверждена'])
+    }
+
     return render_template(
-        'frontend/empty.html',
-        title='Профиль',
+        'frontend/profile.html',
+        user=session['user'],
+        stats=stats,
         active_page='profile'
     )
     
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        phone = request.form.get('phone')
+
+        # временно — без проверки
+        session['user'] = {
+            "id": phone,
+            "name": "Клиент",
+            "phone": phone
+        }
+
+        return redirect(url_for('profile'))
+
+    return render_template('frontend/login.html')
+
+@app.route('/my-requests')
+def my_requests():
+    if not session.get('user'):
+        return redirect(url_for('login'))
+
+    all_requests = load_requests()
+    user_requests = [
+        r for r in all_requests
+        if r['user_id'] == session['user']['id']
+    ]
+
+    return render_template(
+        'frontend/my_requests.html',
+        requests=user_requests,
+        active_page='requests'
+    )
+
+@app.route('/request/<request_id>')
+def request_detail(request_id):
+    if not session.get('user'):
+        return redirect(url_for('login'))
+
+    all_requests = load_requests()
+
+    request_item = next(
+        (r for r in all_requests if r.get('id') == request_id),
+        None
+    )
+
+    if not request_item:
+        return "Заявка не найдена", 404
+
+    # защита: только владелец
+    if request_item['user_id'] != session['user']['id']:
+        return "Доступ запрещён", 403
+
+    return render_template(
+        'frontend/request_detail.html',
+        order=request_item
+    )
+    
+@app.route('/add-to-favorites/<tour_id>')
+def add_to_favorites(tour_id):
+    if not session.get('user'):
+        return redirect(url_for('login'))
+
+    favorites = load_favorites()
+
+    # защита от дублей
+    exists = any(
+        f['tour_id'] == tour_id and f['user_id'] == session['user']['id']
+        for f in favorites
+    )
+
+    if not exists:
+        favorites.append({
+            "user_id": session['user']['id'],
+            "tour_id": int(tour_id)
+        })
+        save_favorites(favorites)
+
+    return redirect(request.referrer or '/favorites')
+
+@app.route('/favorites')
+def favorites():
+    if not session.get('user'):
+        return redirect(url_for('login'))
+
+    favorites = load_favorites()
+    tours = load_tours()  # 🔥 ВАЖНО
+
+    user_fav_ids = {
+        f['tour_id']
+        for f in favorites
+        if f['user_id'] == session['user']['id']
+    }
+
+    favorite_tours = [
+        t for t in tours
+        if t.get('id') in user_fav_ids
+    ]
+
+    return render_template(
+        'frontend/favorites.html',
+        tours=favorite_tours,
+        active_page='favorites'
+    )
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('login'))
+  
 # ======== АВИАБИЛЕТЫ ========
 API_TOKEN = "ffd20ef2003810e413ac023a2e9dd5ff"
 MARKER = "664464"
@@ -386,7 +517,6 @@ def confirm_booking():
         except Exception as e:
             print("Ошибка WhatsApp:", e)
 
-
     message = f"""🔥 Новое бронирование!
     Тур: {hotel}
     Город: {city}
@@ -419,6 +549,26 @@ def confirm_booking():
             s.quit()
         except Exception as e:
             print(f"Mail error: {e}")
+            
+    # === СОХРАНЯЕМ ЗАЯВКУ ДЛЯ КЛИЕНТА ===
+    if session.get('user'):
+        all_requests = load_requests()
+
+        all_requests.append({
+            "id": str(uuid.uuid4()),
+            "user_id": session['user']['id'],
+            "hotel": hotel,
+            "city": city,
+            "country": country,
+            "departure_date": departure_date,
+            "nights": nights,
+            "tourists": tourists,
+            "price": total_price,
+            "status": "Отправлена",
+            "created_at": datetime.now().strftime("%d.%m.%Y %H:%M")
+        })
+
+        save_requests(all_requests)
 
     return render_template('frontend/thank_you.html')  
     

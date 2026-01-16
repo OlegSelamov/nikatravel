@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+.request-detail {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 14px 80px;
+}
+
+.request-box {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.14);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 14px;
+  text-decoration: none;
+  color: #6a5037;
+  font-weight: 600;
+}
+
+.request-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.request-status {
+  margin-bottom: 16px;
+}
+
+.status {
+  padding: 6px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.status-отправлена {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-в-работе {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-подтверждена {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-отменена {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 20px;
+  font-size: 14px;
+}
+
+.detail-grid div span {
+  display: block;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.price-box {
+  margin-top: 18px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #3b2e20;
+}
+
+@media (max-width: 600px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<div class="request-detail">
+
+  <a href="/my-requests" class="back-link">← Мои заявки</a>
+
+  <div class="request-box">
+
+    <div class="request-title">
+      {{ order.country }}, {{ order.city }}
+    </div>
+
+    <div class="request-status">
+      <span class="status status-{{ request.status|lower }}">
+        {{ order.status }}
+      </span>
+    </div>
+
+    <div class="detail-grid">
+      <div>
+        <span>Отель</span>
+        <strong>{{ order.hotel }}</strong>
+      </div>
+      <div>
+        <span>Дата вылета</span>
+        <strong>{{ order.departure_date }}</strong>
+      </div>
+      <div>
+        <span>Количество ночей</span>
+        <strong>{{ order.nights }}</strong>
+      </div>
+      <div>
+        <span>Туристов</span>
+        <strong>{{ order.tourists }}</strong>
+      </div>
+      <div>
+        <span>Дата создания</span>
+        <strong>{{ order.created_at }}</strong>
+      </div>
+    </div>
+
+    <div class="price-box">
+      {{ order.price }} ₸
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

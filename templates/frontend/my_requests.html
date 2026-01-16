@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+/* ===== СТРАНИЦА МОИХ ЗАЯВОК ===== */
+
+.requests-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px 12px 80px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #3b2e20;
+}
+
+/* ===== ПУСТОЕ СОСТОЯНИЕ ===== */
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.empty-state img {
+  width: 160px;
+  opacity: 0.8;
+  margin-bottom: 16px;
+}
+
+.empty-state h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.empty-state p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 12px;
+  background: #6a5037;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ===== СПИСОК ЗАЯВОК ===== */
+
+.requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===== КАРТОЧКА ЗАЯВКИ ===== */
+
+.request-card {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* --- ХЕДЕР --- */
+
+.request-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.request-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #3b2e20;
+}
+
+/* --- СТАТУС --- */
+
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-отправлена {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-в-работе {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-подтверждена {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-отменена {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* --- ТЕЛО --- */
+
+.request-body {
+  font-size: 13px;
+  color: #4b3a2a;
+}
+
+.request-body .row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.request-body .row span {
+  opacity: 0.8;
+}
+
+.request-body .price {
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* --- ФУТЕР --- */
+
+.request-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.request-footer .date {
+  font-size: 11px;
+  color: #777;
+}
+
+.details-btn {
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #6a5037;
+}
+</style>
+
+<div class="requests-page">
+
+  <h2 class="page-title">Мои заявки</h2>
+
+  {% if requests|length == 0 %}
+    <div class="empty-state">
+      <img src="/static/img/empty.png" alt="">
+      <h3>У вас пока нет заявок</h3>
+      <p>Подберите тур — и он появится здесь</p>
+      <a href="/filter" class="btn-primary">Подобрать тур</a>
+    </div>
+  {% else %}
+    <div class="requests-list">
+      {% for r in requests %}
+        <div class="request-card">
+
+          <div class="request-header">
+            <div class="request-title">
+              {{ r.country }}, {{ r.city }}
+            </div>
+            <span class="status status-{{ r.status|lower }}">
+              {{ r.status }}
+            </span>
+          </div>
+
+          <div class="request-body">
+            <div class="row">
+              <span>Отель</span>
+              <strong>{{ r.hotel }}</strong>
+            </div>
+            <div class="row">
+              <span>Дата вылета</span>
+              <strong>{{ r.departure_date }}</strong>
+            </div>
+            <div class="row">
+              <span>Ночей</span>
+              <strong>{{ r.nights }}</strong>
+            </div>
+            <div class="row">
+              <span>Туристов</span>
+              <strong>{{ r.tourists }}</strong>
+            </div>
+            <div class="row price">
+              <span>Стоимость</span>
+              <strong>{{ r.price }} ₸</strong>
+            </div>
+          </div>
+
+          <div class="request-footer">
+            <span class="date">{{ r.created_at }}</span>
+            <a href="/request/{{ r.id }}" class="details-btn">Подробнее</a>
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+</div>
+
+{% endblock %}

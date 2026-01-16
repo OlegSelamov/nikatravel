@@ -1,8 +1,212 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<div class="page-empty">
-  <h2>Профиль</h2>
-  <p>Личный кабинет пользователя</p>
+
+<style>
+/* ===== СТРАНИЦА ПРОФИЛЯ ===== */
+
+.profile-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 14px 90px;
+}
+
+/* ===== КАРТОЧКА ПРОФИЛЯ ===== */
+
+.profile-card {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(12px);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+  margin-bottom: 20px;
+}
+
+/* ===== ХЕДЕР ПРОФИЛЯ ===== */
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.profile-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7a5a3a, #5a4029);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 26px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.profile-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #3b2e20;
+}
+
+.profile-phone {
+  font-size: 14px;
+  color: #777;
+}
+
+/* ===== СТАТИСТИКА ===== */
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.6);
+  border-radius: 16px;
+  padding: 14px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.stat-card strong {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: #3b2e20;
+}
+
+.stat-card span {
+  font-size: 12px;
+  color: #777;
+}
+
+/* ===== МЕНЮ ПРОФИЛЯ ===== */
+
+.profile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(8px);
+  text-decoration: none;
+  color: #3b2e20;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.14);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.profile-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+}
+
+.profile-link span {
+  font-size: 14px;
+}
+
+.profile-link .arrow {
+  font-size: 18px;
+  opacity: 0.6;
+}
+
+/* ===== КНОПКА ВЫХОДА ===== */
+
+.logout-btn {
+  margin-top: 20px;
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+  border-radius: 18px;
+  background: #f8d7da;
+  color: #721c24;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ===== АДАПТИВ ===== */
+
+@media (max-width: 600px) {
+  .profile-stats {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+</style>
+
+<div class="profile-page">
+
+  <!-- ===== КАРТОЧКА ПРОФИЛЯ ===== -->
+  <div class="profile-card">
+
+    <div class="profile-header">
+      <div class="profile-avatar">
+        {{ session.user.phone[-1] }}
+      </div>
+      <div>
+        <div class="profile-name">
+          Клиент Nika Travel
+        </div>
+        <div class="profile-phone">
+          {{ session.user.phone }}
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== СТАТИСТИКА ===== -->
+    <div class="profile-stats">
+      <div class="stat-card">
+        <strong>{{ stats.requests }}</strong>
+        <span>Заявок</span>
+      </div>
+      <div class="stat-card">
+        <strong>{{ stats.active }}</strong>
+        <span>В работе</span>
+      </div>
+      <div class="stat-card">
+        <strong>{{ stats.completed }}</strong>
+        <span>Завершено</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== МЕНЮ ===== -->
+  <div class="profile-menu">
+
+    <a href="/my-requests" class="profile-link">
+      <span>Мои заявки</span>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="/favorites" class="profile-link">
+      <span>Избранное</span>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="/settings" class="profile-link">
+      <span>Настройки профиля</span>
+      <span class="arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- ===== ВЫХОД ===== -->
+  <a href="/logout" class="logout-btn">
+    Выйти из аккаунта
+  </a>
+
 </div>
+
 {% endblock %}
