@@ -8,9 +8,18 @@
     <div class="tour-header-info">
       <h1>{{ tour.city }} — {{ tour.country }}</h1>
       <p><strong>Дата вылета:</strong> {{ tour.departure_date }}</p>
-      <a href="/add-to-favorites/{{ tour_id }}" class="fav-btn">
-        ❤️ В избранное
-      </a>
+      <button
+        type="button"
+        class="fav-btn add-to-fav-btn"
+        data-tour-id="{{ tour_id }}"
+        onclick="addToFavorites(event, {{ tour_id }}, this)"
+      >
+        <img
+          src="{{ url_for('static', filename='icons/heart-outline.png') }}"
+          class="fav-heart"
+          alt="В избранное"
+        >
+      </button>
     </div>
 
     <div class="mini-filter">

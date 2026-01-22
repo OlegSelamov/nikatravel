@@ -173,6 +173,23 @@
        }
      }
 	 
+	 .fav-btn {
+       background: none;
+       border: none;
+       padding: 0;
+       cursor: pointer;
+     }
+
+     .fav-heart {
+       width: 28px;
+       height: 28px;
+       transition: transform 0.2s ease;
+     }
+
+     .fav-btn:active .fav-heart {
+       transform: scale(0.9);
+     }	 
+	 
     </style>
 
     <!-- Aviasales -->
@@ -222,7 +239,9 @@
     <span>Главная</span>
   </a>
 
-  <a href="/favorites" class="nav-item {% if active_page == 'favorites' %}active{% endif %}">
+  <a href="/favorites"
+     id="favorites-icon"
+     class="nav-item {% if active_page == 'favorites' %}active{% endif %}">
     <img src="{{ url_for('static', filename='knopki/' + ('love_active.png' if active_page == 'favorites' else 'love_pasive.png')) }}">
     <span>Избранное</span>
   </a>
@@ -328,6 +347,56 @@ function toggleFav(id){
   let fav = JSON.parse(localStorage.getItem('fav')||'[]');
   fav = fav.includes(id) ? fav.filter(x=>x!==id) : [...fav, id];
   localStorage.setItem('fav', JSON.stringify(fav));
+}
+</script>
+
+<script>
+function addToFavorites(event, tourId, btn) {
+  event.preventDefault();
+
+  // 🔥 1. Анимация полёта (ОСТАЁТСЯ)
+  flyToFavorites(event);
+
+  // 🔥 2. Меняем сердечко на красное
+  const img = btn.querySelector('.fav-heart');
+  if (img) {
+    img.src = '/static/icons/heart-filled.png';
+  }
+
+  // 🔥 3. Вызываем старую логику (НЕ ЛОМАЕМ)
+  setTimeout(() => {
+    window.location.href = '/add-to-favorites/' + tourId;
+  }, 500);
+}
+</script>
+
+<script>
+function flyToFavorites(event) {
+  const button = event.currentTarget;
+  const target = document.getElementById('favorites-icon');
+  if (!target) return;
+
+  const btnRect = button.getBoundingClientRect();
+  const targetRect = target.getBoundingClientRect();
+
+  const clone = button.cloneNode(true);
+  clone.style.position = 'fixed';
+  clone.style.left = btnRect.left + 'px';
+  clone.style.top = btnRect.top + 'px';
+  clone.style.zIndex = 9999;
+  clone.style.transition = 'all 0.8s ease';
+  clone.style.pointerEvents = 'none';
+
+  document.body.appendChild(clone);
+
+  requestAnimationFrame(() => {
+    clone.style.left = targetRect.left + 'px';
+    clone.style.top = targetRect.top + 'px';
+    clone.style.transform = 'scale(0.2)';
+    clone.style.opacity = '0';
+  });
+
+  setTimeout(() => clone.remove(), 900);
 }
 </script>
 

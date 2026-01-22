@@ -12,6 +12,7 @@ import json
 import requests
 import subprocess
 import uuid
+import time
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 import logging
@@ -275,6 +276,74 @@ def favorites():
 def logout():
     session.pop('user', None)
     return redirect(url_for('login'))
+    
+@app.route('/transfer', methods=['GET', 'POST'])
+def transfer():
+    if 'user' not in session:
+        return redirect('/login')
+
+    if request.method == 'POST':
+        form = request.form
+
+        title = f"Трансфер • {form.get('from')} → {form.get('to')}"
+
+        transfer_request = {
+            "id": f"tr_{int(time.time())}",
+            "type": "transfer",
+            "user_id": session['user']['id'],
+
+            # 🔥 ОБЩИЕ ПОЛЯ
+            "title": title,
+            "image": None,
+            "price": None,
+            "currency": "USD",
+            "status": "Новый",
+            "created_at": datetime.now().strftime('%Y-%m-%d %H:%M'),
+
+            # 🧩 СПЕЦИФИКА
+            "from": form.get('from'),
+            "to": form.get('to'),
+            "date": form.get('date'),
+            "time": form.get('time'),
+            "persons": form.get('persons'),
+            "car_type": form.get('car_type')
+        }
+
+        # === СОХРАНЕНИЕ В JSON ===
+        all_requests = load_requests()
+        all_requests.append(transfer_request)
+        save_requests(all_requests)
+
+        # === ОТПРАВКА В TELEGRAM (КАК В ОСТАЛЬНЫХ МЕСТАХ ПРОЕКТА) ===
+        message = (
+            "🚐 НОВЫЙ ТРАНСФЕР\n\n"
+            f"Откуда: {transfer_request['from']}\n"
+            f"Куда: {transfer_request['to']}\n"
+            f"Дата: {transfer_request['date']}\n"
+            f"Время: {transfer_request['time']}\n"
+            f"Пассажиры: {transfer_request['persons']}\n"
+            f"Авто: {transfer_request['car_type']}\n\n"
+            f"📞 Клиент: {transfer_request['user_id']}"
+        )
+
+        try:
+            requests.post(
+                f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+                data={
+                    "chat_id": TELEGRAM_CHAT_ID,
+                    "text": message
+                },
+                timeout=5
+            )
+        except Exception as e:
+            print("Telegram error:", e)
+
+        return redirect('/my-requests')
+
+    return render_template(
+        'frontend/transfer.html',
+        active_page='transfer'
+    )
   
 # ======== АВИАБИЛЕТЫ ========
 API_TOKEN = "ffd20ef2003810e413ac023a2e9dd5ff"
@@ -499,6 +568,8 @@ def booking_confirm(tour_id):
     
 @app.route('/confirm_booking', methods=['POST'])
 def confirm_booking():
+    tour_id = request.form.get('tour_id')
+
     hotel = request.form.get('hotel')
     city = request.form.get('city')
     country = request.form.get('country')
@@ -509,14 +580,20 @@ def confirm_booking():
     name = request.form.get('name')
     phone = request.form.get('phone')
     email = request.form.get('email')
-    
-        # отправка WhatsApp подтверждения
-    if phone:
-        try:
-            send_whatsapp(phone, name)
-        except Exception as e:
-            print("Ошибка WhatsApp:", e)
 
+    # === Загружаем тур ИЗ filter.json ===
+    tours = load_tours()
+    tour = next((t for t in tours if str(t.get("id")) == str(tour_id)), None)
+
+    # === Определяем главное изображение ===
+    main_image = None
+    if tour:
+        if tour.get("image"):
+            main_image = tour["image"]
+        elif tour.get("images") and len(tour["images"]) > 0:
+            main_image = tour["images"][0]
+
+    # === TELEGRAM ===
     message = f"""🔥 Новое бронирование!
     Тур: {hotel}
     Город: {city}
@@ -527,13 +604,15 @@ def confirm_booking():
     Цена: {total_price} ₸
     Имя: {name}
     Телефон: {phone}
-    Email: {email}"""
+    Email: {email}
+    """
 
     requests.post(
         f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
         data={'chat_id': TELEGRAM_CHAT_ID, 'text': message}
     )
 
+    # === EMAIL ===
     if email:
         try:
             s = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
@@ -543,34 +622,44 @@ def confirm_booking():
             m['From'] = SMTP_LOGIN
             m['To'] = email
             m['Subject'] = "Подтверждение бронирования"
-            body = f"Здравствуйте, {name}! Спасибо за бронирование {hotel} на {nights} ночей. Мы свяжемся с вами для уточнения деталей."
+            body = f"Здравствуйте, {name}! Мы получили вашу заявку на тур {hotel}."
             m.attach(MIMEText(body, 'plain'))
             s.sendmail(SMTP_LOGIN, email, m.as_string())
             s.quit()
         except Exception as e:
-            print(f"Mail error: {e}")
-            
-    # === СОХРАНЯЕМ ЗАЯВКУ ДЛЯ КЛИЕНТА ===
+            print("Mail error:", e)
+
+    # === СОХРАНЯЕМ В МОИ ЗАЯВКИ ===
     if session.get('user'):
         all_requests = load_requests()
 
+        title = f"{hotel} • {country}"
+
         all_requests.append({
             "id": str(uuid.uuid4()),
+            "type": "tour",
             "user_id": session['user']['id'],
+
+            # 🔥 ОБЩИЕ ПОЛЯ
+            "title": title,
+            "image": main_image,
+            "price": total_price,
+            "currency": "KZT",
+            "status": "Отправлена",
+            "created_at": datetime.now().strftime("%d.%m.%Y %H:%M"),
+
+            # 🧩 ТУРОВЫЕ ПОЛЯ (ПОКА ОСТАЮТСЯ)
             "hotel": hotel,
             "city": city,
             "country": country,
             "departure_date": departure_date,
             "nights": nights,
-            "tourists": tourists,
-            "price": total_price,
-            "status": "Отправлена",
-            "created_at": datetime.now().strftime("%d.%m.%Y %H:%M")
+            "tourists": tourists
         })
 
         save_requests(all_requests)
 
-    return render_template('frontend/thank_you.html')  
+    return render_template('frontend/thank_you.html') 
     
 # Маршрут для отдачи filter.json
 @app.route('/data/<path:filename>')
