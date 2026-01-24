@@ -2,90 +2,94 @@
 {% block content %}
 
 <style>
-/* ===== СТРАНИЦА ПРОФИЛЯ ===== */
-
-.profile-page {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px 14px 90px;
+/* ===== ОБЩАЯ СТРАНИЦА ===== */
+.profile-wrapper {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  padding: 20px;
 }
 
-/* ===== КАРТОЧКА ПРОФИЛЯ ===== */
+/* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
+.profile-box {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
-.profile-card {
-  background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(12px);
+/* ===== СТЕКЛЯННАЯ КАРТОЧКА ===== */
+.glass-card {
+  background: rgba(255,255,255,0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 22px;
-  padding: 22px;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.18);
-  margin-bottom: 20px;
+  padding: 18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
 }
 
 /* ===== ХЕДЕР ПРОФИЛЯ ===== */
-
 .profile-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 18px;
+  gap: 14px;
 }
 
 .profile-avatar {
-  width: 64px;
-  height: 64px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: linear-gradient(135deg, #7a5a3a, #5a4029);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
   flex-shrink: 0;
 }
 
 .profile-name {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   color: #3b2e20;
 }
 
 .profile-phone {
-  font-size: 14px;
-  color: #777;
+  font-size: 13px;
+  color: #6f6f6f;
+  margin-top: 2px;
 }
 
 /* ===== СТАТИСТИКА ===== */
-
 .profile-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 16px;
+  gap: 10px;
+  margin-top: 14px;
 }
 
 .stat-card {
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.35);
   border-radius: 16px;
-  padding: 14px;
+  padding: 12px 6px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .stat-card strong {
   display: block;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: #3b2e20;
 }
 
 .stat-card span {
-  font-size: 12px;
+  font-size: 11px;
   color: #777;
 }
 
-/* ===== МЕНЮ ПРОФИЛЯ ===== */
-
+/* ===== МЕНЮ ===== */
 .profile-menu {
   display: flex;
   flex-direction: column;
@@ -98,18 +102,18 @@
   justify-content: space-between;
   padding: 16px 18px;
   border-radius: 18px;
-  background: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.45);
   backdrop-filter: blur(8px);
   text-decoration: none;
   color: #3b2e20;
   font-weight: 600;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.14);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .profile-link:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.28);
 }
 
 .profile-link span {
@@ -121,91 +125,92 @@
   opacity: 0.6;
 }
 
-/* ===== КНОПКА ВЫХОДА ===== */
-
+/* ===== ВЫХОД ===== */
 .logout-btn {
-  margin-top: 20px;
   display: block;
   width: 100%;
-  text-align: center;
   padding: 14px;
   border-radius: 18px;
-  background: #f8d7da;
+  text-align: center;
+  background: rgba(248, 215, 218, 0.65);
   color: #721c24;
   font-weight: 700;
   text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
 }
 
-/* ===== АДАПТИВ ===== */
-
-@media (max-width: 600px) {
-  .profile-stats {
-    grid-template-columns: 1fr 1fr 1fr;
+/* ===== МОБИЛКА ===== */
+@media (max-width: 480px) {
+  .profile-box {
+    max-width: 100%;
   }
 }
 </style>
 
-<div class="profile-page">
+<div class="profile-wrapper">
 
-  <!-- ===== КАРТОЧКА ПРОФИЛЯ ===== -->
-  <div class="profile-card">
+  <div class="profile-box">
 
-    <div class="profile-header">
-      <div class="profile-avatar">
-        {{ session.user.phone[-1] }}
-      </div>
-      <div>
-        <div class="profile-name">
-          Клиент Nika Travel
+    <!-- ===== ПРОФИЛЬ ===== -->
+    <div class="glass-card">
+
+      <div class="profile-header">
+        <div class="profile-avatar">
+          {{ session.user.phone[-1] }}
         </div>
-        <div class="profile-phone">
-          {{ session.user.phone }}
+        <div>
+          <div class="profile-name">
+            Клиент Nika Travel
+          </div>
+          <div class="profile-phone">
+            {{ session.user.phone }}
+          </div>
         </div>
       </div>
+
+      <div class="profile-stats">
+        <div class="stat-card">
+          <strong>{{ stats.requests }}</strong>
+          <span>Заявок</span>
+        </div>
+        <div class="stat-card">
+          <strong>{{ stats.active }}</strong>
+          <span>В работе</span>
+        </div>
+        <div class="stat-card">
+          <strong>{{ stats.completed }}</strong>
+          <span>Завершено</span>
+        </div>
+      </div>
+
     </div>
 
-    <!-- ===== СТАТИСТИКА ===== -->
-    <div class="profile-stats">
-      <div class="stat-card">
-        <strong>{{ stats.requests }}</strong>
-        <span>Заявок</span>
-      </div>
-      <div class="stat-card">
-        <strong>{{ stats.active }}</strong>
-        <span>В работе</span>
-      </div>
-      <div class="stat-card">
-        <strong>{{ stats.completed }}</strong>
-        <span>Завершено</span>
-      </div>
+    <!-- ===== МЕНЮ ===== -->
+    <div class="profile-menu">
+
+      <a href="/my-requests" class="profile-link">
+        <span>Мои заявки</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a href="/favorites" class="profile-link">
+        <span>Избранное</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a href="/settings" class="profile-link">
+        <span>Настройки профиля</span>
+        <span class="arrow">›</span>
+      </a>
+
     </div>
 
-  </div>
-
-  <!-- ===== МЕНЮ ===== -->
-  <div class="profile-menu">
-
-    <a href="/my-requests" class="profile-link">
-      <span>Мои заявки</span>
-      <span class="arrow">›</span>
-    </a>
-
-    <a href="/favorites" class="profile-link">
-      <span>Избранное</span>
-      <span class="arrow">›</span>
-    </a>
-
-    <a href="/settings" class="profile-link">
-      <span>Настройки профиля</span>
-      <span class="arrow">›</span>
+    <!-- ===== ВЫХОД ===== -->
+    <a href="/logout" class="logout-btn">
+      Выйти из аккаунта
     </a>
 
   </div>
-
-  <!-- ===== ВЫХОД ===== -->
-  <a href="/logout" class="logout-btn">
-    Выйти из аккаунта
-  </a>
 
 </div>
 

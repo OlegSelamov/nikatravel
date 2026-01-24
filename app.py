@@ -134,11 +134,51 @@ def hotel_detail(id):
 @app.route('/')
 def index():
     tours = load_tours()
+
+    # 🔥 ГОРЯЩИЕ ТУРЫ
+    hot_tours = [
+        t for t in tours
+        if (
+            str(t.get("discount_percent", "")).isdigit()
+            and int(t.get("discount_percent")) >= 10
+        )
+        or (
+            t.get("old_price")
+            and t.get("price")
+            and int(t.get("old_price")) > int(t.get("price"))
+        )
+    ]
+
+    hot_tours = hot_tours[:4]
+
+    # 🧠 ID уже показанных туров
+    hot_ids = {t.get("id") for t in hot_tours if t.get("id") is not None}
+
+    # 🇰🇿 ТУРЫ ПО КАЗАХСТАНУ (без повторов)
+    kazakhstan_tours = [
+        t for t in tours
+        if (
+            t.get("city", "").lower() in ["алматы", "астана", "шымкент"]
+            and t.get("id") not in hot_ids
+        )
+    ][:4]
+
     places = load_json(PLACES_FILE)
     news = load_json(NEWS_FILE)
     hotels = load_json(HOTELS_FILE)
-    banners = load_json(BANNERS_FILE)  # добавляем баннеры
-    return render_template('frontend/index.html', tours=tours, places=places, news=news, hotels=hotels, banners=banners, active_page='home')
+    banners = load_json(BANNERS_FILE)
+
+    return render_template(
+        'frontend/index.html',
+        tours=tours,
+        hot_tours=hot_tours,
+        kazakhstan_tours=kazakhstan_tours,
+        places=places,
+        news=news,
+        hotels=hotels,
+        banners=banners,
+        active_page='home'
+    )
 
 @app.route('/about')
 def about():
