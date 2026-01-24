@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page goods-page">
+
+  <!-- Заголовок -->
+  <div class="glass goods-head">
+    <h1>Товары для отдыха</h1>
+    <p>
+      Всё необходимое для путешествий, моря и активного отдыха.
+      Подберём и доставим под ваш маршрут.
+    </p>
+  </div>
+
+  <!-- Категории -->
+  <div class="goods-categories">
+    <div class="cat-card">🧳 Чемоданы</div>
+    <div class="cat-card">🏖 Пляжные товары</div>
+    <div class="cat-card">🕶 Аксессуары</div>
+    <div class="cat-card">🎒 Рюкзаки</div>
+    <div class="cat-card">🩴 Обувь</div>
+    <div class="cat-card">👕 Одежда</div>
+  </div>
+
+  <!-- Инфо -->
+  <div class="glass goods-info">
+    <h3>Как это работает?</h3>
+    <ul>
+      <li>Выбираете категорию</li>
+      <li>Мы подбираем варианты под вашу поездку</li>
+      <li>Отправляем предложения в WhatsApp</li>
+      <li>Доставка или самовывоз</li>
+    </ul>
+
+    <button class="main-btn">
+      Подобрать товары
+    </button>
+  </div>
+
+</div>
+
+<style>
+/* ===== ОСНОВА ===== */
+.goods-page {
+  max-width: 1100px;
+  margin: 90px auto 120px;
+  padding: 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeUp 0.35s ease;
+}
+
+/* ===== GLASS ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 22px 24px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* ===== HEADER ===== */
+.goods-head h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #4b3821;
+}
+
+.goods-head p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #6b5a42;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* ===== CATEGORIES ===== */
+.goods-categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.cat-card {
+  background: rgba(255,255,255,0.5);
+  border-radius: 18px;
+  padding: 22px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #5c4a32;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cat-card:active {
+  transform: scale(0.96);
+  filter: brightness(0.95);
+}
+
+/* ===== INFO ===== */
+.goods-info h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #4b3821;
+}
+
+.goods-info ul {
+  padding-left: 18px;
+  margin-bottom: 16px;
+  color: #5c4a32;
+  font-size: 14px;
+}
+
+.goods-info li {
+  margin-bottom: 6px;
+}
+
+/* ===== BUTTON ===== */
+.main-btn {
+  background: linear-gradient(135deg, #d8b16a, #c28c3a);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 15px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.main-btn:active {
+  transform: scale(0.96);
+  filter: brightness(0.95);
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .goods-categories {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .goods-page {
+    margin-top: 70px;
+  }
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+{% endblock %}

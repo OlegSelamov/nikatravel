@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page news-page">
+
+  <!-- Заголовок -->
+  <div class="glass news-head">
+    <h1>📰 Новости и полезная информация</h1>
+    <p>
+      Актуальные новости о путешествиях, визах, правилах въезда и выгодных предложениях.
+    </p>
+  </div>
+
+  <!-- Лента новостей -->
+  <div class="news-list">
+
+    <div class="news-card glass">
+      <span class="news-tag">Визы</span>
+      <h3>Упрощён въезд в Таиланд для туристов</h3>
+      <p>
+        С 2026 года изменены правила въезда для граждан Казахстана.
+        Увеличен срок безвизового пребывания.
+      </p>
+      <span class="news-date">24 января 2026</span>
+    </div>
+
+    <div class="news-card glass">
+      <span class="news-tag">Акции</span>
+      <h3>Скидки на туры в ОАЭ до −25%</h3>
+      <p>
+        Специальные предложения на туры в Дубай и Абу-Даби
+        с вылетом в ближайшие даты.
+      </p>
+      <span class="news-date">22 января 2026</span>
+    </div>
+
+    <div class="news-card glass">
+      <span class="news-tag">Полезно</span>
+      <h3>Что взять с собой в круиз: чек-лист</h3>
+      <p>
+        Подготовили список вещей, которые точно пригодятся
+        в морском круизе.
+      </p>
+      <span class="news-date">20 января 2026</span>
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+/* ===== ОСНОВА ===== */
+.news-page {
+  max-width: 1100px;
+  margin: 90px auto 120px;
+  padding: 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeUp 0.35s ease;
+}
+
+/* ===== GLASS ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 22px 24px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* ===== HEADER ===== */
+.news-head h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #4b3821;
+}
+
+.news-head p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #6b5a42;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* ===== LIST ===== */
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ===== CARD ===== */
+.news-card {
+  position: relative;
+}
+
+.news-card h3 {
+  margin: 10px 0 6px;
+  font-size: 18px;
+  color: #4b3821;
+}
+
+.news-card p {
+  font-size: 14px;
+  color: #5c4a32;
+  line-height: 1.5;
+}
+
+.news-date {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* ===== TAG ===== */
+.news-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 12px;
+  background: rgba(201,163,95,0.25);
+  color: #5c4a32;
+  font-weight: 600;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .news-page {
+    margin-top: 70px;
+  }
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+{% endblock %}

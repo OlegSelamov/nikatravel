@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page cruises-page">
+
+  <!-- Заголовок -->
+  <div class="glass cruises-head">
+    <h1>Круизы</h1>
+    <p>
+      Морские и речные круизы по всему миру.  
+      Всё включено: питание, развлечения, комфорт.
+    </p>
+  </div>
+
+  <!-- Форма подбора -->
+  <div class="glass cruises-search">
+
+    <div class="field-grid">
+      <div class="field">
+        <label>Регион круиза</label>
+        <select>
+          <option selected disabled>Выберите регион</option>
+          <option>Средиземное море</option>
+          <option>Персидский залив</option>
+          <option>Карибы</option>
+          <option>Скандинавия</option>
+          <option>Азия</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Порт отправления</label>
+        <input type="text" placeholder="Например: Дубай">
+      </div>
+    </div>
+
+    <div class="field-grid">
+      <div class="field">
+        <label>Дата отправления</label>
+        <input type="date">
+      </div>
+
+      <div class="field">
+        <label>Продолжительность</label>
+        <select>
+          <option selected disabled>Количество ночей</option>
+          <option>3–5 ночей</option>
+          <option>6–8 ночей</option>
+          <option>9–12 ночей</option>
+          <option>12+ ночей</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field-grid">
+      <div class="field">
+        <label>Взрослые</label>
+        <select>
+          <option>1</option>
+          <option selected>2</option>
+          <option>3</option>
+          <option>4+</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Дети</label>
+        <select>
+          <option selected>0</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3+</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="main-btn">
+      Подобрать круиз
+    </button>
+
+  </div>
+
+  <!-- Преимущества -->
+  <div class="cruises-advantages">
+    <div class="adv-item">
+      <span>🍽</span>
+      <p>Питание включено</p>
+    </div>
+    <div class="adv-item">
+      <span>🎭</span>
+      <p>Развлечения на борту</p>
+    </div>
+    <div class="adv-item">
+      <span>🛏</span>
+      <p>Комфортные каюты</p>
+    </div>
+    <div class="adv-item">
+      <span>🌍</span>
+      <p>Несколько стран за одну поездку</p>
+    </div>
+  </div>
+
+</div>
+
+<style>
+/* ===== ОСНОВА ===== */
+.cruises-page {
+  max-width: 1100px;
+  margin: 90px auto 120px;
+  padding: 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeUp 0.35s ease;
+}
+
+/* ===== GLASS ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 22px 24px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* ===== HEADER ===== */
+.cruises-head h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #4b3821;
+}
+
+.cruises-head p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #6b5a42;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* ===== FORM ===== */
+.cruises-search {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 13px;
+  color: #5c4a32;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.cruises-search input,
+.cruises-search select {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.75);
+  font-size: 14px;
+  color: #4b3821;
+  outline: none;
+}
+
+.cruises-search input:focus,
+.cruises-search select:focus {
+  border-color: #c9a35f;
+  box-shadow: 0 0 0 2px rgba(201,163,95,0.2);
+}
+
+/* ===== BUTTON ===== */
+.main-btn {
+  margin-top: 10px;
+  background: linear-gradient(135deg, #d8b16a, #c28c3a);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 15px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.main-btn:active {
+  transform: scale(0.96);
+  filter: brightness(0.95);
+}
+
+/* ===== ADVANTAGES ===== */
+.cruises-advantages {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.adv-item {
+  background: rgba(255,255,255,0.4);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #5c4a32;
+}
+
+.adv-item span {
+  font-size: 20px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cruises-advantages {
+    grid-template-columns: 1fr;
+  }
+
+  .cruises-page {
+    margin-top: 70px;
+  }
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+{% endblock %}

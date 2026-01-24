@@ -26,7 +26,7 @@
       .header {
         position: sticky;
         top: 0;
-        z-index: 999;
+        z-index: 100001;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -136,7 +136,7 @@
         align-items: center;
   
         border-top: 1px solid rgba(0,0,0,0.08);
-        z-index: 1000;
+        z-index: 100001;
       }
 
      .nav-item {
@@ -188,8 +188,117 @@
 
      .fav-btn:active .fav-heart {
        transform: scale(0.9);
-     }	 
+     }
+
+     .page {
+       animation: slideUp 0.35s ease forwards;
+     }
+
+     .page-exit {
+       animation: slideDown 0.35s ease forwards;
+     }
+
+     @keyframes slideUp {
+       from {
+         transform: translateY(40px);
+         opacity: 0;
+       }
+       to {
+         transform: translateY(0);
+         opacity: 1;
+       }
+     }
+
+     @keyframes slideDown {
+       from {
+         transform: translateY(0);
+         opacity: 1;
+       }
+       to {
+         transform: translateY(-40px);
+         opacity: 0;
+       }
+     }
 	 
+	 .tour-fixed-buttons {
+       position: fixed;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background: rgba(255,255,255,0.3);
+       padding: 12px 20px;
+       box-shadow: 0 -2px 15px rgba(0,0,0,0.1);
+       z-index: 1000;
+     }
+
+     @media (max-width: 768px) {
+       .tour-fixed-buttons {
+         bottom: var(--bottom-nav-height);
+       }
+     }
+	 
+	 .page-loader {
+       position: fixed;
+       inset: 0;
+       background: rgba(249, 243, 235, 0.4);
+       -webkit-backdrop-filter: blur(8px);
+       z-index: 99999;
+       opacity: 0;
+       pointer-events: none;
+       transition: opacity 0.25s ease;
+     }
+
+     .page-loader.active {
+       opacity: 1;
+       pointer-events: all;
+     }
+	 
+	 /* ❌ убираем синий фокус и тап-подсветку */
+     button,
+     a,
+     input,
+     textarea,
+     select {
+       outline: none;
+       -webkit-tap-highlight-color: transparent;
+     }
+
+     /* ❌ убираем фокус-рамку */
+     button:focus,
+     a:focus,
+     input:focus,
+     textarea:focus,
+     select:focus {
+       outline: none;
+       box-shadow: none;
+     }
+
+     /* ❌ убираем active-подсветку */
+     button:active,
+     a:active {
+       outline: none;
+       box-shadow: none;
+     }
+	 
+	 * {
+       -webkit-tap-highlight-color: transparent;
+     }
+
+     button,
+     .fav-btn,
+     .nav-item {
+       transition: transform 0.08s ease, filter 0.08s ease;
+	   touch-action: manipulation;
+     }
+
+     button:active,
+     .fav-btn:active,
+     .nav-item:active {
+       transform: scale(0.96);
+       filter: brightness(0.9);
+	   box-shadow: inset 0 2px 6px rgba(0,0,0,0.15);
+     }
+
     </style>
 
     <!-- Aviasales -->
@@ -225,7 +334,29 @@
 </div>
 {% endif %}
 
-{% block content %}{% endblock %}
+<div class="page" id="page">
+  {% block content %}{% endblock %}
+</div>
+
+{% if request.endpoint == 'tour_detail' %}
+<form
+  action="{{ url_for('confirmation_page', tour_id=tour_id) }}"
+  method="get"
+  id="bookForm"
+  class="tour-fixed-buttons-wrapper"
+>
+  <input type="hidden" name="departure_date" value="{{ tour.departure_date }}">
+  <input type="hidden" name="tourists" id="formTourists" value="1">
+  <input type="hidden" name="nights" id="formNights" value="{{ tour.nights }}">
+  <input type="hidden" name="total_price" id="formPrice" value="{{ tour.price }}">
+
+  <div class="tour-fixed-buttons">
+    <button type="submit" id="bookButton" class="btn-book">
+      Забронировать тур за {{ tour.price | default(0) }} ₸
+    </button>
+  </div>
+</form>
+{% endif %}
 
 <footer class="footer">
   Nika Travel © 2025
@@ -257,6 +388,8 @@
   </a>
 
 </nav>
+
+<div id="page-loader" class="page-loader"></div>
 
 <script>
 function toggleMenu() {
@@ -354,19 +487,28 @@ function toggleFav(id){
 function addToFavorites(event, tourId, btn) {
   event.preventDefault();
 
-  // 🔥 1. Анимация полёта (ОСТАЁТСЯ)
+  // 1️⃣ Анимация остаётся
   flyToFavorites(event);
 
-  // 🔥 2. Меняем сердечко на красное
+  // 2️⃣ Работаем с localStorage
+  let favs = JSON.parse(localStorage.getItem('favorites') || '[]');
+
   const img = btn.querySelector('.fav-heart');
-  if (img) {
-    img.src = '/static/icons/heart-filled.png';
+
+  if (favs.includes(tourId)) {
+    // убрать из избранного
+    favs = favs.filter(id => id !== tourId);
+    if (img) img.src = '/static/icons/heart-outline.png';
+  } else {
+    // добавить в избранное
+    favs.push(tourId);
+    if (img) img.src = '/static/icons/heart-filled.png';
   }
 
-  // 🔥 3. Вызываем старую логику (НЕ ЛОМАЕМ)
-  setTimeout(() => {
-    window.location.href = '/add-to-favorites/' + tourId;
-  }, 500);
+  localStorage.setItem('favorites', JSON.stringify(favs));
+
+  // 3️⃣ тихо сохраняем на сервер (БЕЗ перезагрузки)
+  fetch('/add-to-favorites/' + tourId, { method: 'GET' });
 }
 </script>
 
@@ -398,6 +540,63 @@ function flyToFavorites(event) {
 
   setTimeout(() => clone.remove(), 900);
 }
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const favs = JSON.parse(localStorage.getItem('favorites') || '[]');
+
+  document.querySelectorAll('.fav-btn').forEach(btn => {
+    const id = btn.getAttribute('data-tour-id');
+    const img = btn.querySelector('.fav-heart');
+
+    if (id && favs.includes(Number(id)) && img) {
+      img.src = '/static/icons/heart-filled.png';
+    }
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+
+    if (
+      !href ||
+      href.startsWith('#') ||
+      href.startsWith('http') ||
+      link.hasAttribute('target')
+    ) return;
+
+    link.addEventListener('click', e => {
+      e.preventDefault();
+
+      const page = document.getElementById('page');
+      if (!page) return;
+	  
+      page.classList.add('page-exit');
+
+      // ⏱ даём анимации начаться
+      setTimeout(() => {
+        const loader = document.getElementById('page-loader');
+        if (loader) loader.classList.add('active');
+      }, 150);
+
+      // 🚀 уходим на страницу
+      setTimeout(() => {
+        window.location.href = href;
+      }, 300);
+    });
+  });
+});
+</script>
+
+<script>
+window.addEventListener('load', () => {
+  const loader = document.getElementById('page-loader');
+  if (loader) loader.classList.remove('active');
+});
 </script>
 
 </body>

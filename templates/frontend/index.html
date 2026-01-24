@@ -288,7 +288,7 @@ section h2.visible {
   align-items: center;
   justify-items: center;
 
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.8);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 
@@ -424,6 +424,10 @@ section h2.visible {
 
 }
 
+.service-btn:active {
+  transform: scale(0.95);
+}
+
 </style>
 
 <!-- ===== KASPI STYLE BANNERS ===== -->
@@ -471,7 +475,7 @@ section h2.visible {
     <span>Круизы</span>
   </a>
 
-  <a class="service-btn" href="/shop">
+  <a class="service-btn" href="/goods">
     <img src="{{ url_for('static', filename='knopki/shop.png') }}">
     <span>Товары для отдыха</span>
   </a>

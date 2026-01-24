@@ -5,12 +5,12 @@
 
   <!-- 🌍 Верхний полупрозрачный блок -->
   <div class="tour-header glass">
-    <div class="tour-header-info">
+    <div class="tour-title-row">
       <h1>{{ tour.city }} — {{ tour.country }}</h1>
-      <p><strong>Дата вылета:</strong> {{ tour.departure_date }}</p>
+
       <button
         type="button"
-        class="fav-btn add-to-fav-btn"
+        class="fav-btn"
         data-tour-id="{{ tour_id }}"
         onclick="addToFavorites(event, {{ tour_id }}, this)"
       >
@@ -75,18 +75,6 @@
     <a href="{{ url_for('filter_page') }}" class="back-btn">← Назад к выбору тура</a>
   </div>
 
-  <!-- 🔘 Кнопка бронирования -->
-  <form action="{{ url_for('confirmation_page', tour_id=tour_id) }}" method="get" id="bookForm">
-    <input type="hidden" name="departure_date" value="{{ tour.departure_date }}">
-    <input type="hidden" name="tourists" id="formTourists" value="1">
-    <input type="hidden" name="nights" id="formNights" value="{{ tour.nights }}">
-    <input type="hidden" name="total_price" id="formPrice" value="{{ tour.price }}">
-    <div class="tour-fixed-buttons">
-      <button type="submit" id="bookButton" class="btn-book">
-        Забронировать тур за {{ tour.price | default(0) }} ₸
-      </button>
-    </div>
-  </form>
 </div>
 
 <!-- Подключения -->
@@ -272,6 +260,34 @@ body {
 .favorite-btn:hover {
   background: rgba(255, 215, 0, 0.35);
   transform: translateY(-1px);
+}
+
+.tour-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.tour-title-row h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.tour-title-row .fav-btn {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .tour-title-row h1 {
+    font-size: 1.25rem;
+  }
+
+  .fav-heart {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 </style>

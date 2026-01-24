@@ -32,5 +32,22 @@
     "time": "02:29",
     "persons": "3",
     "car_type": "Эконом"
+  },
+  {
+    "id": "840e1344-ae6d-41d4-b8c3-ad9294eca76c",
+    "type": "tour",
+    "user_id": "777",
+    "title": "OLIVE TREE HOTEL 4* (Na-Jomtien) • Таиланд",
+    "image": null,
+    "price": "4056729",
+    "currency": "KZT",
+    "status": "Отправлена",
+    "created_at": "24.01.2026 20:52",
+    "hotel": "OLIVE TREE HOTEL 4* (Na-Jomtien)",
+    "city": "Алматы",
+    "country": "Таиланд",
+    "departure_date": "23.12.2025",
+    "nights": "11",
+    "tourists": "5"
   }
 ]

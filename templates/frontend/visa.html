@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page visa-page">
+
+  <!-- Заголовок -->
+  <div class="glass visa-head">
+    <h1>Оформление визы</h1>
+    <p>
+      Поможем оформить визу без ошибок, очередей и лишних переживаний.
+      Сопровождаем от заявки до результата.
+    </p>
+  </div>
+
+  <!-- Форма -->
+  <div class="glass visa-form">
+
+    <div class="field">
+      <label>Страна назначения</label>
+      <input type="text" placeholder="Например: США, Шенген, Корея">
+    </div>
+
+    <div class="field-grid">
+      <div class="field">
+        <label>Тип визы</label>
+        <select>
+          <option selected disabled>Выберите тип визы</option>
+          <option>Туристическая</option>
+          <option>Деловая</option>
+          <option>Рабочая</option>
+          <option>Учебная</option>
+          <option>Гостевая</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Срок визы</label>
+        <select>
+          <option selected disabled>Срок действия</option>
+          <option>До 30 дней</option>
+          <option>До 90 дней</option>
+          <option>6 месяцев</option>
+          <option>1 год</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field-grid">
+      <div class="field">
+        <label>Гражданство</label>
+        <input type="text" placeholder="Например: Казахстан">
+      </div>
+
+      <div class="field">
+        <label>Город подачи</label>
+        <input type="text" placeholder="Например: Алматы">
+      </div>
+    </div>
+
+    <div class="field-grid">
+      <div class="field">
+        <label>Телефон / WhatsApp</label>
+        <input type="tel" placeholder="+7 ___ ___ __ __">
+      </div>
+
+      <div class="field">
+        <label>Email (необязательно)</label>
+        <input type="email" placeholder="example@mail.com">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Комментарий</label>
+      <textarea placeholder="Есть ли отказы ранее, срочность, дополнительные вопросы"></textarea>
+    </div>
+
+    <button class="main-btn">
+      Оставить заявку на визу
+    </button>
+
+  </div>
+
+  <!-- Что мы берём на себя -->
+  <div class="visa-advantages">
+    <div class="adv-item">
+      <span>📄</span>
+      <p>Проверка и подготовка документов</p>
+    </div>
+    <div class="adv-item">
+      <span>🖊</span>
+      <p>Заполнение анкет без ошибок</p>
+    </div>
+    <div class="adv-item">
+      <span>📅</span>
+      <p>Запись в визовый центр</p>
+    </div>
+    <div class="adv-item">
+      <span>💬</span>
+      <p>Поддержка менеджера 24/7</p>
+    </div>
+  </div>
+
+</div>
+
+<style>
+/* ===== ОСНОВА ===== */
+.visa-page {
+  max-width: 1100px;
+  margin: 90px auto 120px;
+  padding: 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeUp 0.35s ease;
+}
+
+/* ===== GLASS ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 22px 24px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* ===== HEADER ===== */
+.visa-head h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #4b3821;
+}
+
+.visa-head p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #6b5a42;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* ===== FORM ===== */
+.visa-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 13px;
+  color: #5c4a32;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.visa-form input,
+.visa-form select,
+.visa-form textarea {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.75);
+  font-size: 14px;
+  color: #4b3821;
+  outline: none;
+  resize: none;
+}
+
+.visa-form textarea {
+  min-height: 90px;
+}
+
+.visa-form input:focus,
+.visa-form select:focus,
+.visa-form textarea:focus {
+  border-color: #c9a35f;
+  box-shadow: 0 0 0 2px rgba(201,163,95,0.2);
+}
+
+/* ===== BUTTON ===== */
+.main-btn {
+  margin-top: 10px;
+  background: linear-gradient(135deg, #d8b16a, #c28c3a);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 15px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.main-btn:active {
+  transform: scale(0.96);
+  filter: brightness(0.95);
+}
+
+/* ===== ADVANTAGES ===== */
+.visa-advantages {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.adv-item {
+  background: rgba(255,255,255,0.4);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #5c4a32;
+}
+
+.adv-item span {
+  font-size: 20px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .visa-advantages {
+    grid-template-columns: 1fr;
+  }
+
+  .visa-page {
+    margin-top: 70px;
+  }
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+{% endblock %}

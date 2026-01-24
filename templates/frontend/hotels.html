@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page hotels-page">
+
+  <!-- Заголовок -->
+  <div class="glass hotels-head">
+    <h1>Отели</h1>
+    <p>Подбор отелей по лучшим ценам с поддержкой 24/7</p>
+  </div>
+
+  <!-- Форма поиска -->
+  <div class="glass hotels-search">
+
+    <div class="field-grid">
+      <input type="text" placeholder="Страна">
+      <input type="text" placeholder="Город">
+    </div>
+
+    <div class="field-grid">
+      <input type="date">
+      <input type="date">
+    </div>
+
+    <div class="field-grid">
+      <select>
+        <option selected disabled>Взрослые</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4+</option>
+      </select>
+
+      <select>
+        <option selected disabled>Дети</option>
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3+</option>
+      </select>
+    </div>
+
+    <button class="main-btn">
+      Найти отели
+    </button>
+
+  </div>
+
+  <!-- Инфо блок -->
+  <div class="hotels-info">
+    <div class="info-item">
+      <span>💬</span>
+      <p>Поддержка менеджера</p>
+    </div>
+    <div class="info-item">
+      <span>💳</span>
+      <p>Рассрочка и удобная оплата</p>
+    </div>
+    <div class="info-item">
+      <span>🛎</span>
+      <p>Проверенные отели</p>
+    </div>
+  </div>
+
+</div>
+
+<style>
+/* ===== ОСНОВА ===== */
+.hotels-page {
+  max-width: 1100px;
+  margin: 90px auto 120px;
+  padding: 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeUp 0.35s ease;
+}
+
+/* ===== GLASS ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 22px 24px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* ===== HEADER ===== */
+.hotels-head h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #4b3821;
+}
+
+.hotels-head p {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #6b5a42;
+  opacity: 0.85;
+}
+
+/* ===== SEARCH ===== */
+.hotels-search {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.hotels-search input,
+.hotels-search select {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.75);
+  font-size: 14px;
+  color: #4b3821;
+  outline: none;
+}
+
+.hotels-search input:focus,
+.hotels-search select:focus {
+  border-color: #c9a35f;
+  box-shadow: 0 0 0 2px rgba(201,163,95,0.2);
+}
+
+/* ===== BUTTON ===== */
+.main-btn {
+  margin-top: 6px;
+  background: linear-gradient(135deg, #d8b16a, #c28c3a);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.main-btn:active {
+  transform: scale(0.96);
+  filter: brightness(0.95);
+}
+
+/* ===== INFO ===== */
+.hotels-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.info-item {
+  background: rgba(255,255,255,0.4);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #5c4a32;
+}
+
+.info-item span {
+  font-size: 18px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hotels-info {
+    grid-template-columns: 1fr;
+  }
+
+  .hotels-page {
+    margin-top: 70px;
+  }
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+{% endblock %}

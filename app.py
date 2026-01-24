@@ -734,6 +734,33 @@ def send_whatsapp(phone, name):
 @app.route("/spasibo")
 def spasibo():
     return render_template("frontend/spasibo.html")
+    
+@app.route('/hotels', methods=['GET', 'POST'])
+def hotels():
+    if request.method == 'POST':
+        # позже здесь будет логика подбора / отправки заявки
+        pass
+
+    return render_template(
+        'frontend/hotels.html',
+        active_page='hotels'
+    )
+
+@app.route('/visa')
+def visa():
+    return render_template('frontend/visa.html')
+
+@app.route('/cruises')
+def cruises():
+    return render_template('frontend/cruises.html')
+
+@app.route('/goods')
+def goods():
+    return render_template('frontend/goods.html')
+
+@app.route('/news')
+def news():
+    return render_template('frontend/news.html')
 
 # ===========================
 # Админка
