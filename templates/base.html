@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#f2c98a">
+    <link rel="icon" href="/static/icons/icon-192.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nika Travel</title>
@@ -389,12 +392,17 @@
   method="get"
   class="tour-fixed-buttons-wrapper"
 >
-  <input type="hidden" name="tourists" id="formTourists" value="1">
-  <input type="hidden" name="nights" id="formNights" value="{{ tour.nights }}">
-  <input type="hidden" name="total_price" id="formPrice" value="{{ tour.price }}">
+  <!-- 🔗 глобальные данные -->
+  <input type="hidden" name="tourists" id="globalPeople" value="1">
+  <input type="hidden" name="nights" id="globalNights" value="{{ tour.nights }}">
+  <input type="hidden" name="total_price" id="globalPrice" value="{{ tour.price }}">
 
   <div class="tour-fixed-buttons">
-    <button type="submit" class="btn-book">
+    <button
+      type="submit"
+      class="btn-book"
+      id="bookButton"
+    >
       Забронировать тур за {{ tour.price }} ₸
     </button>
   </div>
@@ -677,6 +685,22 @@ document.addEventListener('submit', async (e) => {
 });
 </script>
 
+<script>
+window.updateBooking = function ({ price, nights, people }) {
+  const btn = document.getElementById("bookButton");
+  if (!btn) return;
+
+  btn.innerText = `Забронировать тур за ${price.toLocaleString()} ₸`;
+
+  const priceInput = document.getElementById("globalPrice");
+  const nightsInput = document.getElementById("globalNights");
+  const peopleInput = document.getElementById("globalPeople");
+
+  if (priceInput) priceInput.value = price;
+  if (nightsInput) nightsInput.value = nights;
+  if (peopleInput) peopleInput.value = people;
+};
+</script>
 
 </body>
 </html>

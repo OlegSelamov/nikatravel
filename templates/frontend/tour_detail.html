@@ -465,26 +465,22 @@ body {
 /* ВЕРХНЯЯ ШТОРКА */
 .filter-sheet {
   position: fixed;
-  top: -50vh;              /* 🔥 СПРЯТАНА */
+  top: 0;
   left: 0;
   right: 0;
-  height: 50vh;            /* 🔥 ПОЛ ЭКРАНА */
-  background: rgba(255,255,255,0.97);
 
-  border-radius: 0 0 20px 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  transform: translateY(-100%);
+  transition: transform 0.35s ease;
 
-  transition: top 0.35s ease;
+  height: 50vh;
   z-index: 10001;
-
-  display: flex;
-  flex-direction: column;
 }
 
 /* активное состояние */
 .filter-sheet.active {
-  top: 0;
+  transform: translateY(0);
 }
+
 
 .sheet-overlay.active {
   opacity: 1;
@@ -656,6 +652,39 @@ body {
   top: 0;
 }
 
+/* затемнение */
+.tour-filter-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  z-index: 10000;
+}
+
+.tour-filter-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* шторка */
+.tour-filter-sheet {
+  position: fixed;
+  top: -50vh;
+  left: 0;
+  right: 0;
+  height: 50vh;
+  background: rgba(255,255,255,0.96);
+  border-radius: 0 0 20px 20px;
+  transition: top .35s ease;
+  z-index: 10001;
+}
+
+.tour-filter-sheet.active {
+  top: 0;
+}
+
 </style>
 
 <script>
@@ -680,53 +709,55 @@ const mainSwiper = new Swiper('.main-swiper', {
 });
 /* === ШТОРКА === */
 function openFilterSheet() {
-  document.getElementById('filterSheet')?.classList.add('active');
-  document.getElementById('filterOverlay')?.classList.add('active');
+  const sheet = document.getElementById('filterSheet');
+  const overlay = document.getElementById('filterOverlay');
+
+  if (sheet) sheet.classList.add('active');
+  if (overlay) overlay.classList.add('active');
 }
 
 function closeFilterSheet() {
-  document.getElementById('filterSheet')?.classList.remove('active');
-  document.getElementById('filterOverlay')?.classList.remove('active');
-}
+  const sheet = document.getElementById('filterSheet');
+  const overlay = document.getElementById('filterOverlay');
 
-/* === КНОПКА "ПРИМЕНИТЬ" В ШТОРКЕ === */
+  if (sheet) sheet.classList.remove('active');
+  if (overlay) overlay.classList.remove('active');
+}
+</script>
+
+<script>
 function applyFromSheet() {
-  applyDates();        // считаем цену
-  closeFilterSheet();  // закрываем шторку
-}
+  const people = parseInt(document.getElementById("sheetTourists")?.value) || 1;
+  const nights = parseInt(document.getElementById("sheetNights")?.value) || 1;
 
-/* === ТВОЯ ФОРМУЛА (НЕ МЕНЯЛ) === */
-function applyDates() {
-  const people =
-    parseInt(document.getElementById("sheetTourists")?.value) || 1;
-
-  const nights =
-    parseInt(document.getElementById("sheetNights")?.value) || 1;
-
-  const basePrice = {{ tour.price }};
-  const baseNights = {{ tour.nights }};
+  const basePrice = Number({{ tour.price|int }});
+  const baseNights = Number({{ tour.nights|int }}) || 1;
   const pricePerNight = basePrice / baseNights;
   const total = Math.round(pricePerNight * people * nights);
 
-  // форма бронирования (если есть)
-  const fPeople = document.getElementById("formTourists");
-  const fNights = document.getElementById("formNights");
-  const fPrice  = document.getElementById("formPrice");
-
-  if (fPeople) fPeople.value = people;
-  if (fNights) fNights.value = nights;
-  if (fPrice)  fPrice.value = total;
-
-  // кнопка бронирования
-  // обновляем текст сверху
+  // ✅ 1) Обновляем верхнюю строку (точно существует)
   const summary = document.getElementById("summaryText");
-  if (summary) {
-    summary.innerText = `${people} турист · ${nights} ночей`;
+  if (summary) summary.innerText = `${people} турист · ${nights} ночей`;
+
+  // ✅ 2) Пробуем обновить глобальную кнопку через base.html
+  if (typeof window.updateBooking === "function") {
+    window.updateBooking({ price: total, nights, people });
+  } else {
+    // ✅ 3) ФОЛБЭК: обновим кнопку и hidden прямо отсюда (если base скрипт не подцепился)
+    const btn = document.getElementById("bookButton");
+    if (btn) btn.innerText = `Забронировать тур за ${total.toLocaleString()} ₸`;
+
+    const priceInput = document.getElementById("globalPrice");
+    const nightsInput = document.getElementById("globalNights");
+    const peopleInput = document.getElementById("globalPeople");
+
+    if (priceInput) priceInput.value = total;
+    if (nightsInput) nightsInput.value = nights;
+    if (peopleInput) peopleInput.value = people;
   }
-  const btn = document.getElementById("bookButton");
-  if (btn) {
-    btn.innerText = `Забронировать тур за ${total.toLocaleString()} ₸`;
-  }
+
+  // ✅ закрываем шторку
+  closeFilterSheet();
 }
 </script>
 
