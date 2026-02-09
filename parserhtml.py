@@ -61,15 +61,23 @@ def clean_text_keep_case(x):
     s = re.sub(r"\s+", " ", s)
     return s.strip()
 
-def make_key(rec: dict) -> str:
-    """Ключ сопоставления тура: страна|город|отель|питание|ночей"""
-    return "|".join([
-        normalize_str(rec.get("country", "")),
-        normalize_str(rec.get("city", "")),
-        normalize_str(rec.get("hotel", "")),
-        normalize_str(rec.get("meal", "")),
-        normalize_str(rec.get("nights", "")),
-    ])
+def ensure_dates_prices_standard(rec: dict):
+    dps = rec.get("dates_prices")
+    if not isinstance(dps, list):
+        rec["dates_prices"] = []
+        return
+
+    seen = {}
+    for x in dps:
+        d = normalize_date_to_standard(x.get("date"))
+        if not d:
+            continue
+        price = str(x.get("price", "")).replace(" ", "")
+        seen[d] = price
+
+    rec["dates_prices"] = [
+        {"date": d, "price": p} for d, p in sorted(seen.items())
+    ]
 
 def recompute_primary_price(rec: dict) -> None:
     """Пересчитываем rec['price'] как минимальную цену из dates_prices (если есть)."""
@@ -91,39 +99,58 @@ if not html_folders:
 last_folder = max(html_folders, key=os.path.getmtime)
 logger.info(f"📂 Парсим HTML из папки: {last_folder}")
 
-# ----------------------- ЗАГРУЗКА СУЩЕСТВУЮЩИХ ДАННЫХ -----------------------
+offers_path = DATA_DIR / "offers.json"
+hotels_path = DATA_DIR / "hotels.json"
 
-filter_path = DATA_DIR / "filter.json"
+def slugify(text: str) -> str:
+    s = str(text).lower().strip()
+    s = re.sub(r"\s+", " ", s)
+    s = re.sub(r"[^\w]+", "_", s)
+    return s.strip("_")
 
-def ensure_dates_prices_standard(rec: dict) -> None:
-    """Приводим dates_prices к единому формату и убираем битые даты."""
-    dps = rec.get("dates_prices") or []
-    std = []
-    for dp in dps:
-        if not isinstance(dp, dict):
-            continue
-        d = normalize_date_to_standard(dp.get("date"))
-        if not d:
-            continue
-        std.append({"date": d, "price": str(dp.get("price", ""))})
-    rec["dates_prices"] = std
+def safe_save_json(path: Path, data):
+    import tempfile, os
+    path = str(path)
+    dir_name = os.path.dirname(path)
+    with tempfile.NamedTemporaryFile("w", delete=False, dir=dir_name, encoding="utf-8") as tmp:
+        json.dump(data, tmp, indent=2, ensure_ascii=False)
+        tmp_name = tmp.name
+    os.replace(tmp_name, path)
 
-existing_list = []
-if filter_path.exists():
+# --- ЗАГРУЗКА offers.json ---
+offers_list = []
+if offers_path.exists():
     try:
-        with open(filter_path, "r", encoding="utf-8") as f:
-            existing_list = json.load(f)
-        if not isinstance(existing_list, list):
-            existing_list = []
+        with open(offers_path, "r", encoding="utf-8") as f:
+            offers_list = json.load(f)
+        if not isinstance(offers_list, list):
+            offers_list = []
     except Exception as e:
-        logger.warning(f"⚠️ Ошибка чтения filter.json: {e}")
-        existing_list = []
+        logger.warning(f"⚠️ Ошибка чтения offers.json: {e}")
+        offers_list = []
 
-# Индекс существующих туров по сложному ключу
-existing_index = {}
-for rec in existing_list:
-    ensure_dates_prices_standard(rec)
-    existing_index[make_key(rec)] = rec
+# Индекс offers по ключу: hotel_id|city|meal|nights
+offers_index = {}
+for off in offers_list:
+    key = "|".join([
+        normalize_str(off.get("hotel_id", "")),
+        normalize_str(off.get("city", "")),
+        normalize_str(off.get("meal", "")),
+        normalize_str(off.get("nights", "")),
+    ])
+    offers_index[key] = off
+
+# --- ЗАГРУЗКА hotels.json (опционально, чтобы помнить отели/страны) ---
+hotels_map = {}
+if hotels_path.exists():
+    try:
+        with open(hotels_path, "r", encoding="utf-8") as f:
+            hotels_map = json.load(f)
+        if not isinstance(hotels_map, dict):
+            hotels_map = {}
+    except Exception as e:
+        logger.warning(f"⚠️ Ошибка чтения hotels.json: {e}")
+        hotels_map = {}
 
 # ----------------------- ПАРСИНГ HTML -----------------------
 
@@ -142,280 +169,284 @@ for html_file in html_files:
         tds = row.find_all("td")
         if len(tds) < 14:
             continue
-        try:
-            date_raw = tds[1].get_text(strip=True)
-            country_city_raw = tds[2].get_text(strip=True)
-            nights_raw = tds[3].get_text(strip=True)
 
-            # Если две цифры подряд, суммируем (наследуем твоё правило)
-            if len(nights_raw) == 2 and nights_raw.isdigit():
-                nights = str(int(nights_raw[0]) + int(nights_raw[1]))
-            else:
-                nights = nights_raw
+        date_raw = tds[1].get_text(strip=True)
+        country_city_raw = tds[2].get_text(strip=True)
+        nights_raw = tds[3].get_text(strip=True)
 
-            hotel_name_raw = clean_text_keep_case(tds[4].get_text())
-            seats = tds[5].get_text(strip=True)
+        # Если две цифры подряд, суммируем (наследуем твоё правило)
+        if len(nights_raw) == 2 and nights_raw.isdigit():
+            nights = str(int(nights_raw[0]) + int(nights_raw[1]))
+        else:
+            nights = nights_raw
 
-            meal_raw = tds[6].get_text(strip=True).upper()
-            meal_map = {
-                "AI": "AI",
-                "ALL INCLUSIVE": "AI",
-                "BB": "BB",
-                "BED & BREAKFAST": "BB",
-                "FB": "FB",
-                "FULL BOARD": "FB",
-                "HB": "HB",
-                "HALF BOARD": "HB",
-                "RO": "RO",
-                "ROOM ONLY": "RO",
-                "UAI": "UAI",
-                "ULTRA ALL INCLUSIVE": "UAI"
-            }
-            meal = meal_map.get(meal_raw, "BB")
+        hotel_name_raw = clean_text_keep_case(tds[4].get_text())
+        seats = tds[5].get_text(strip=True)
 
-            price_raw = tds[10].get_text(strip=True)
+        meal_raw = tds[6].get_text(strip=True).upper()
+        meal_map = {
+            "AI": "AI",
+            "ALL INCLUSIVE": "AI",
+            "BB": "BB",
+            "BED & BREAKFAST": "BB",
+            "FB": "FB",
+            "FULL BOARD": "FB",
+            "HB": "HB",
+            "HALF BOARD": "HB",
+            "RO": "RO",
+            "ROOM ONLY": "RO",
+            "UAI": "UAI",
+            "ULTRA ALL INCLUSIVE": "UAI"
+        }
+        meal = meal_map.get(meal_raw, "BB")
 
-            if not date_raw or not hotel_name_raw or not price_raw or "KZT" not in price_raw:
-                continue
-            parts = country_city_raw.split(" из ")
-            if len(parts) != 2:
-                continue
+        price_raw = tds[10].get_text(strip=True)
+            
+        CITY_NORMALIZE = {
+            "Астаны": "Астана",
+            "из Астаны": "Астана",
+            "Алматыдан": "Алматы",
+            "Алматы": "Алматы",
+        }
 
-            destination_raw, departure_city_raw = parts
+        if not date_raw or not hotel_name_raw or not price_raw or "KZT" not in price_raw:
+            continue
+        parts = country_city_raw.split(" из ")
+        if len(parts) != 2:
+            continue
 
-            # Чистим город вылета
-            city = re.sub(r"\s*\(.*?\)", "", departure_city_raw)
-            city = re.sub(r"(Air\s*Astana|SPO\s*NEW|SPO|FN|Standard)", "", city, flags=re.IGNORECASE)
-            city = re.sub(r"[.,\-]", "", city)
-            city = re.sub(r"\d+", "", city)
-            city = re.sub(r"[A-Za-z]+", "", city)
-            city = re.sub(r"\s+", " ", city).strip()
+        destination_raw, departure_city_raw = parts
 
-            # Чистим страну/направление
-            destination_clean = re.sub(r"\s*\(.*?\)", "", destination_raw)
-            destination_clean = destination_clean.split("+")[0]
-            destination_clean = re.sub(r"[.,\-]", "", destination_clean)
-            destination_clean = re.sub(r"\d+", "", destination_clean)
-            destination_clean = re.sub(r"[A-Za-z]+", "", destination_clean)
-            destination_clean = re.sub(r"\s+", " ", destination_clean).strip()
+        # Чистим город вылета
+        city = re.sub(r"\s*\(.*?\)", "", departure_city_raw)
+        city = re.sub(r"(Air\s*Astana|SPO\s*NEW|SPO|FN|Standard)", "", city, flags=re.IGNORECASE)
+        city = re.sub(r"[.,\-]", "", city)
+        city = re.sub(r"\d+", "", city)
+        city = re.sub(r"[A-Za-z]+", "", city)
+        city = re.sub(r"\s+", " ", city).strip()
+        city = CITY_NORMALIZE.get(city, city)
 
-            destination_to_country = {
-                # Азербайджан
-                "Азербайджан": "Азербайджан",
-                # Вьетнам
-                "Дананг": "Вьетнам",
-                "Нячанг": "Вьетнам",
-                "Хойан": "Вьетнам",
-                "Камрань": "Вьетнам",
-                "Хюэ": "Вьетнам",
-                "Фукуок": "Вьетнам",
-                "Хошимин": "Вьетнам",
-                # Грузия
-                "Аджария-Батуми": "Грузия",
-                "Бакуриани": "Грузия",
-                "Боржоми": "Грузия",
-                "Гудаури": "Грузия",
-                "Гурия-Уреки": "Грузия",
-                "Имерети-Кутаиси": "Грузия",
-                "Кахетия": "Грузия",
-                "Саирме": "Грузия",
-                "Сванетия": "Грузия",
-                "Тбилиси": "Грузия",
-                # Индонезия
-                "Бали": "Индонезия",
-                # Катар
-                "Доха": "Катар",
-                # Малайзия
-                "Куала-Лумпур": "Малайзия",
-                "Пинанг": "Малайзия",
-                # Мальдивы
-                "Мальдивы": "Мальдивы",
-                # ОАЭ
-                "Дубай": "ОАЭ",
-                "Абу-Даби": "ОАЭ",
-                "Шарджа": "ОАЭ",
-                "Аджман": "ОАЭ",
-                "Аль-Айн": "ОАЭ",
-                "Рас Аль Хайма": "ОАЭ",
-                "Ум Аль Кувейн": "ОАЭ",
-                "Фуджейра": "ОАЭ",
-                # Сингапур
-                "Сингапур": "Сингапур",
-                # Словения
-                "Словения": "Словения",
-                # Таиланд
-                "Пхукет": "Таиланд",
-                "Бангкок": "Таиланд",
-                "Самуи": "Таиланд",
-                "Као Лак": "Таиланд",
-                "Ко Чанг": "Таиланд",
-                "Краби": "Таиланд",
-                "Паттайя": "Таиланд",
-                "Пханг Нга": "Таиланд",
-                "Районг": "Таиланд",
-                "Самед": "Таиланд",
-                # Турция
-                "Алания": "Турция",
-                "Анталья": "Турция",
-                "Белек": "Турция",
-                "Бодрум": "Турция",
-                "Дидим": "Турция",
-                "Каш": "Турция",
-                "Кемер": "Турция",
-                "Кушадасы": "Турция",
-                "Мармарис": "Турция",
-                "Сиде": "Турция",
-                "Стамбул": "Турция",
-                "Фетхие": "Турция",
-                "Экскурсионные Туры": "Турция",
-                "Анталия": "Турция",
-                "Турция Стамбул": "Турция",
-                "Турция Экскурсионные туры": "Турция",
-                # Черногория
-                "Черногория": "Черногория",
-                # Чехия
-                "Карловы Вары": "Чехия",
-                "Марианские Лазне": "Чехия",
-                "Прага": "Чехия",
-                "Теплице": "Чехия",
-                "Яхимов": "Чехия",
-                # Шри-Ланка
-                "Шри-Ланка": "Шри-Ланка",
-                # Южная Корея
-                "Корея": "Южная Корея",
-                "Сеул": "Южная Корея"
-            }
+        # Чистим страну/направление
+        destination_clean = re.sub(r"\s*\(.*?\)", "", destination_raw)
+        destination_clean = destination_clean.split("+")[0]
+        destination_clean = re.sub(r"[.,\-]", "", destination_clean)
+        destination_clean = re.sub(r"\d+", "", destination_clean)
+        destination_clean = re.sub(r"[A-Za-z]+", "", destination_clean)
+        destination_clean = re.sub(r"\s+", " ", destination_clean).strip()
 
-            country = destination_to_country.get(destination_clean, destination_clean)
+        destination_to_country = {
+            # Азербайджан
+            "Азербайджан": "Азербайджан",
+            # Вьетнам
+            "Дананг": "Вьетнам",
+            "Нячанг": "Вьетнам",
+            "Хойан": "Вьетнам",
+            "Камрань": "Вьетнам",
+            "Хюэ": "Вьетнам",
+            "Фукуок": "Вьетнам",
+            "Хошимин": "Вьетнам",
+            # Грузия
+            "Аджария-Батуми": "Грузия",
+            "Бакуриани": "Грузия",
+            "Боржоми": "Грузия",
+            "Гудаури": "Грузия",
+            "Гурия-Уреки": "Грузия",
+            "Имерети-Кутаиси": "Грузия",
+            "Кахетия": "Грузия",
+            "Саирме": "Грузия",
+            "Сванетия": "Грузия",
+            "Тбилиси": "Грузия",
+            # Индонезия
+            "Бали": "Индонезия",
+            # Катар
+            "Доха": "Катар",
+            # Малайзия
+            "Куала-Лумпур": "Малайзия",
+            "Пинанг": "Малайзия",
+            # Мальдивы
+            "Мальдивы": "Мальдивы",
+            # ОАЭ
+            "Дубай": "ОАЭ",
+            "Абу-Даби": "ОАЭ",
+            "Шарджа": "ОАЭ",
+            "Аджман": "ОАЭ",
+            "Аль-Айн": "ОАЭ",
+            "Рас Аль Хайма": "ОАЭ",
+            "Ум Аль Кувейн": "ОАЭ",
+            "Фуджейра": "ОАЭ",
+            # Сингапур
+            "Сингапур": "Сингапур",
+            # Словения
+            "Словения": "Словения",
+            # Таиланд
+            "Пхукет": "Таиланд",
+            "Бангкок": "Таиланд",
+            "Самуи": "Таиланд",
+            "Као Лак": "Таиланд",
+            "Ко Чанг": "Таиланд",
+            "Краби": "Таиланд",
+            "Паттайя": "Таиланд",
+            "Пханг Нга": "Таиланд",
+            "Районг": "Таиланд",
+            "Самед": "Таиланд",
+            # Турция
+            "Алания": "Турция",
+            "Анталья": "Турция",
+            "Белек": "Турция",
+            "Бодрум": "Турция",
+            "Дидим": "Турция",
+            "Каш": "Турция",
+            "Кемер": "Турция",
+            "Кушадасы": "Турция",
+            "Мармарис": "Турция",
+            "Сиде": "Турция",
+            "Стамбул": "Турция",
+            "Фетхие": "Турция",
+            "Экскурсионные Туры": "Турция",
+            "Анталия": "Турция",
+            "Турция Стамбул": "Турция",
+            "Турция Экскурсионные туры": "Турция",
+            # Черногория
+            "Черногория": "Черногория",
+            # Чехия
+            "Карловы Вары": "Чехия",
+            "Марианские Лазне": "Чехия",
+            "Прага": "Чехия",
+            "Теплице": "Чехия",
+            "Яхимов": "Чехия",
+            # Шри-Ланка
+            "Шри-Ланка": "Шри-Ланка",
+            # Южная Корея
+            "Корея": "Южная Корея",
+            "Сеул": "Южная Корея"
+        }
 
-            price = price_raw.replace(" KZT", "").replace(" ", "")
-            date_std = normalize_date_to_standard(date_raw)
-            if not date_std:
-                continue
+        country = destination_to_country.get(destination_clean, destination_clean)
 
-            rec_new = {
+        price = price_raw.replace(" KZT", "").replace(" ", "")
+        date_std = normalize_date_to_standard(date_raw)
+        if not date_std:
+            continue
+
+        hotel_id = slugify(hotel_name_raw)
+
+        # 1) hotels.json: записываем только если отеля ещё нет (НЕ затираем фото/описание)
+        if hotel_id not in hotels_map:
+            hotels_map[hotel_id] = {
                 "hotel": hotel_name_raw,
-                "city": city,
                 "country": country,
-                "meal": meal,
-                "nights": nights,
-                "seats": seats if seats else "-",
-                "price": price,  # пересчёт ниже возможен
-                "old_price": "",
-                "discount_percent": "",
-                "price_per_month": "",
-                "installment_months": "",
                 "image": "",
                 "gallery": [],
                 "description": "",
-                "dates_prices": [{"date": date_std, "price": price}],
             }
 
-            # Расчёты цен (как у тебя было)
-            try:
-                price_int = int(price)
-                old_price = round(price_int / 0.8)
-                final_price = round(price_int * 1.12)
-                price_per_month = round(final_price / 12)
-                rec_new["old_price"] = str(old_price)
-                rec_new["discount_percent"] = "20"
-                rec_new["installment_months"] = "12"
-                rec_new["price_per_month"] = str(price_per_month)
-            except Exception as e:
-                logger.info(f"⚠️ Ошибка при расчёте цены: {e}")
+        # 2) offers.json: пишем динамику
+        offer_new = {
+            "hotel_id": hotel_id,
+            "hotel": hotel_name_raw,   # можно оставить для удобства в админке/логах
+            "city": city,
+            "country": country,
+            "meal": meal,
+            "nights": nights,
+            "seats": seats if seats else "-",
+            "price": price,
+            "old_price": "",
+            "discount_percent": "",
+            "price_per_month": "",
+            "installment_months": "",
+            "dates_prices": [{"date": date_std, "price": price}],
+        }
 
-            hotels_parsed.append(rec_new)
+        # Расчёты цен (как у тебя было)
+        try:
+            price_int = int(price)
+            old_price = round(price_int / 0.8)
+            final_price = round(price_int * 1.12)
+            price_per_month = round(final_price / 12)
+            offer_new["old_price"] = str(old_price)
+            offer_new["discount_percent"] = "20"
+            offer_new["installment_months"] = "12"
+            offer_new["price_per_month"] = str(price_per_month)
+        except Exception as e:
+            logger.info(f"⚠️ Ошибка при расчёте цены: {e}")
+
+        hotels_parsed.append(offer_new)
 
             # Удаление временной папки с фотками после добавления тура
-            try:
-                import shutil
-                hotel_folder = DATA_DIR / "".join(c for c in hotel_name_raw if c.isalnum() or c in " _-")
-                if hotel_folder.exists():
-                    shutil.rmtree(hotel_folder)
-                    logger.info(f"🧹 Удалена папка с фото: {hotel_folder}")
-            except Exception as e:
-                logger.warning(f"⚠️ Ошибка при удалении временной папки с фото: {e}")
+            #try:
+                #import shutil
+                #hotel_folder = DATA_DIR / "".join(c for c in hotel_name_raw if c.isalnum() or c in " _-")
+               # if hotel_folder.exists():
+                    #shutil.rmtree(hotel_folder)
+                    #logger.info(f"🧹 Удалена папка с фото: {hotel_folder}")
+            #except Exception as e:
+                #logger.warning(f"⚠️ Ошибка при удалении временной папки с фото: {e}")
 
-        except Exception as e:
-            logger.warning(f"⚠️ Ошибка при обработке строки: {e}")
-            continue
+        #except Exception as e:
+            #logger.warning(f"⚠️ Ошибка при обработке строки: {e}")
+            #continue
 
 # ----------------------- МЕРДЖ С СУЩЕСТВУЮЩИМИ -----------------------
 
-# Индекс свежепарсенных по ключу
+# --- МЕРДЖ: свежие offers (hotels_parsed) -> offers_index ---
 parsed_index = {}
-for rec in hotels_parsed:
-    k = make_key(rec)
+
+for off in hotels_parsed:
+    k = "|".join([
+        normalize_str(off.get("hotel_id", "")),
+        normalize_str(off.get("city", "")),
+        normalize_str(off.get("meal", "")),
+        normalize_str(off.get("nights", "")),
+    ])
     if k not in parsed_index:
-        parsed_index[k] = rec
+        parsed_index[k] = off
     else:
-        # объединяем даты, если один и тот же ключ встретился больше раза
-        for dp in rec.get("dates_prices", []):
+        # объединяем даты внутри одного запуска
+        for dp in off.get("dates_prices", []):
             d = normalize_date_to_standard(dp.get("date"))
             if not d:
                 continue
-            existing_dp = next((x for x in parsed_index[k]["dates_prices"] if normalize_date_to_standard(x["date"]) == d), None)
-            if existing_dp:
-                existing_dp["price"] = str(dp.get("price", existing_dp.get("price", "")))
+            ex = next((x for x in parsed_index[k]["dates_prices"] if normalize_date_to_standard(x.get("date")) == d), None)
+            if ex:
+                ex["price"] = str(dp.get("price", ex.get("price", "")))
             else:
                 parsed_index[k]["dates_prices"].append({"date": d, "price": str(dp.get("price", ""))})
 
-# Теперь сшиваем parsed_index в existing_index
-for k, new_rec in parsed_index.items():
-    if k in existing_index:
-        base = existing_index[k]
-        # dates_prices: обновляем по датам
+# мердж в общий offers_index (старые + новые)
+for k, new_off in parsed_index.items():
+    if k in offers_index:
+        base = offers_index[k]
         base.setdefault("dates_prices", [])
         ensure_dates_prices_standard(base)
 
-        for dp in new_rec.get("dates_prices", []):
+        # даты: обновить/добавить
+        for dp in new_off.get("dates_prices", []):
             d = normalize_date_to_standard(dp.get("date"))
             if not d:
                 continue
             price = str(dp.get("price", ""))
-
             ex = next((x for x in base["dates_prices"] if normalize_date_to_standard(x.get("date")) == d), None)
             if ex:
-                if str(ex.get("price", "")) != price:
-                    ex["price"] = price  # обновляем цену на свежую
+                ex["price"] = price
             else:
                 base["dates_prices"].append({"date": d, "price": price})
 
-        # можно обновить «витринные» поля (цены/скидки/рассрочку) из свежей записи
+        # обновляем витринные поля
         for fld in ("price", "old_price", "discount_percent", "price_per_month", "installment_months", "seats"):
-            if new_rec.get(fld):
-                base[fld] = new_rec[fld]
+            if new_off.get(fld):
+                base[fld] = new_off[fld]
 
-        # пересчёт основного price как минимума
         recompute_primary_price(base)
-
     else:
-        # Новый тур — просто добавляем
-        existing_index[k] = new_rec
-        # и тоже нормализуем даты на всякий случай
-        ensure_dates_prices_standard(existing_index[k])
-        recompute_primary_price(existing_index[k])
-        logger.info(f"🆕 Добавлен новый тур: {new_rec.get('hotel','')}")
+        offers_index[k] = new_off
+        ensure_dates_prices_standard(offers_index[k])
+        recompute_primary_price(offers_index[k])
 
-final_results = list(existing_index.values())
+offers_final = list(offers_index.values())
 
-# ----------------------- ПРИСВОЕНИЕ ID -----------------------
+# --- СОХРАНЕНИЕ offers.json + hotels.json ---
+safe_save_json(offers_path, offers_final)
+safe_save_json(hotels_path, hotels_map)
 
-existing_ids = set()
-for item in final_results:
-    if isinstance(item.get("id"), int):
-        existing_ids.add(item["id"])
-
-next_id = max(existing_ids, default=0) + 1
-for hotel in final_results:
-    if "id" not in hotel or not isinstance(hotel["id"], int):
-        hotel["id"] = next_id
-        next_id += 1
-
-# ----------------------- СОХРАНЕНИЕ -----------------------
-
-with open(filter_path, "w", encoding="utf-8") as f:
-    json.dump(final_results, f, indent=2, ensure_ascii=False)
-
-logger.info(f"✅ Сформировано {len(final_results)} туров (мердж по ключу country|city|hotel|meal|nights).")
-print(f"Готово: {len(final_results)} туров сохранено в filter.json")
+logger.info(f"✅ Сформировано {len(offers_final)} offers (ключ hotel_id|city|meal|nights).")
+print(f"Готово: {len(offers_final)} offers сохранено в offers.json, hotels: {len(hotels_map)}")

@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="faq-container">
+  <div class="faq-hero">
+    <span class="faq-pill">Поддержка 24/7</span>
+    <h1>Часто задаваемые вопросы</h1>
+    <p>
+      Собрали ответы на самые популярные вопросы о бронировании, оплате,
+      документах и сопровождении. Если не нашли нужное — напишите нам, мы поможем.
+    </p>
+  </div>
+
+  <div class="faq-grid">
+    <div class="faq-card">
+      <h2>Бронирование</h2>
+      <details>
+        <summary>Как забронировать тур?</summary>
+        <p>
+          Выберите тур в каталоге, заполните заявку и отправьте её. Наш менеджер
+          свяжется с вами, уточнит детали и подтвердит бронирование.
+        </p>
+      </details>
+      <details>
+        <summary>Можно ли забронировать без предоплаты?</summary>
+        <p>
+          В большинстве случаев требуется предоплата для фиксации цены и места.
+          Однако мы можем подобрать варианты с минимальным первым платежом.
+        </p>
+      </details>
+      <details>
+        <summary>Как быстро подтверждается тур?</summary>
+        <p>
+          Обычно подтверждение занимает от 10 минут до нескольких часов — всё
+          зависит от оператора и наличия мест.
+        </p>
+      </details>
+    </div>
+
+    <div class="faq-card">
+      <h2>Оплата и документы</h2>
+      <details>
+        <summary>Какие способы оплаты доступны?</summary>
+        <p>
+          Мы принимаем оплату банковскими переводами, картами и предлагаем
+          рассрочку от Jusan Bank. Подробности уточняйте у менеджера.
+        </p>
+      </details>
+      <details>
+        <summary>Когда я получу документы?</summary>
+        <p>
+          Ваучеры и билеты отправляем после полной оплаты. Обычно это занимает
+          до 24 часов.
+        </p>
+      </details>
+      <details>
+        <summary>Что делать, если изменились даты поездки?</summary>
+        <p>
+          Напишите нам как можно быстрее — мы проверим условия перебронирования
+          и предложим варианты изменения.
+        </p>
+      </details>
+    </div>
+
+    <div class="faq-card">
+      <h2>Поддержка во время поездки</h2>
+      <details>
+        <summary>К кому обращаться в путешествии?</summary>
+        <p>
+          Мы на связи 24/7 в WhatsApp и Telegram. Также у каждого тура есть
+          контакт принимающей стороны.
+        </p>
+      </details>
+      <details>
+        <summary>Как оформить страховку?</summary>
+        <p>
+          Страховку можно оформить вместе с туром — мы предложим несколько
+          вариантов и поможем подобрать оптимальный пакет.
+        </p>
+      </details>
+      <details>
+        <summary>Помогаете ли с визой?</summary>
+        <p>
+          Да, мы подскажем перечень документов, сроки и стоимость визового
+          сопровождения.
+        </p>
+      </details>
+    </div>
+  </div>
+
+  <div class="faq-footer">
+    <h3>Не нашли ответ?</h3>
+    <p>Напишите нам — мы быстро ответим и поможем подобрать лучший вариант.</p>
+    <a href="{{ url_for('contacts') }}" class="faq-button">Связаться с нами</a>
+  </div>
+</div>
+
+<style>
+  .faq-container {
+    max-width: 1100px;
+    margin: 100px auto 60px;
+    padding: 20px;
+    color: #4b3821;
+  }
+
+  .faq-hero {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 35px 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 35px;
+  }
+
+  .faq-pill {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #eacda3, #d6ae7b);
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .faq-hero h1 {
+    font-size: 2.2rem;
+    margin: 10px 0 12px;
+  }
+
+  .faq-hero p {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 16px;
+    color: #5a432b;
+  }
+
+  .faq-grid {
+    display: grid;
+    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .faq-card {
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 18px;
+    padding: 22px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  }
+
+  .faq-card h2 {
+    margin-bottom: 14px;
+    font-size: 1.3rem;
+  }
+
+  .faq-card details {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+  }
+
+  .faq-card summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #4b3821;
+  }
+
+  .faq-card p {
+    margin: 10px 0 0;
+    color: #5a432b;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .faq-footer {
+    margin-top: 40px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  }
+
+  .faq-footer h3 {
+    margin-bottom: 8px;
+  }
+
+  .faq-button {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 12px 26px;
+    background: linear-gradient(135deg, #eacda3, #d6ae7b);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .faq-container {
+      margin: 80px 12px 40px;
+      padding: 10px;
+    }
+
+    .faq-hero {
+      padding: 25px 18px;
+    }
+
+    .faq-hero h1 {
+      font-size: 1.7rem;
+    }
+
+    .faq-hero p {
+      font-size: 14px;
+    }
+
+    .faq-card {
+      padding: 18px;
+    }
+  }
+</style>
+{% endblock %}

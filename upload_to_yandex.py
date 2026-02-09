@@ -15,7 +15,7 @@ PUBLIC_URL  = "https://pub-d2bcce88ffcd45f692cd5ee867c9eeda.r2.dev"
 # === Paths ===
 BASE_DIR    = Path(__file__).resolve().parent
 IMG_DIR     = BASE_DIR / "static" / "img"
-FILTER_FILE = BASE_DIR / "data" / "filter.json"
+HOTELS_FILE = BASE_DIR / "data" / "hotels.json"
 
 # === S3 client ===
 session = boto3.session.Session()
@@ -48,18 +48,18 @@ def list_all_keys(bucket: str, prefix: str = "") -> Set[str]:
 def is_url(s: str) -> bool:
     return isinstance(s, str) and (s.startswith("http://") or s.startswith("https://"))
 
-def collect_needed_files(tours: List[dict]) -> Set[str]:
-    """
-    Собираем ВСЕ имена файлов (basename) из image и gallery, которые НЕ URL.
-    """
-    needed: Set[str] = set()
-    for t in tours:
-        img = t.get("image")
+def collect_needed_files(hotels: dict) -> set:
+    needed = set()
+
+    for h in hotels.values():  # ← ВОТ КЛЮЧЕВОЕ ИЗМЕНЕНИЕ
+        img = h.get("image")
         if isinstance(img, str) and not is_url(img):
             needed.add(os.path.basename(img))
-        for g in t.get("gallery", []):
+
+        for g in h.get("gallery", []):
             if isinstance(g, str) and not is_url(g):
                 needed.add(os.path.basename(g))
+
     return needed
 
 def upload_one(local_file: Path, remote_name: str) -> Tuple[str, bool, str]:
@@ -71,15 +71,15 @@ def upload_one(local_file: Path, remote_name: str) -> Tuple[str, bool, str]:
         return remote_name, False, ""
 
 def update_filter_json(max_workers: int = 10):
-    if not FILTER_FILE.exists():
-        print("❌ filter.json не найден!")
+    if not HOTELS_FILE.exists():
+        print("❌ hotels.json не найден!")
         return
 
-    with open(FILTER_FILE, "r", encoding="utf-8") as f:
-        tours = json.load(f)
+    with open(HOTELS_FILE, "r", encoding="utf-8") as f:
+        hotels = json.load(f)
 
     # 1) Собираем все требуемые не-URL файлы из JSON
-    needed_files = collect_needed_files(tours)
+    needed_files = collect_needed_files(hotels)
     if not needed_files:
         print("⏹ В JSON нет локальных путей для замены (всё уже URL?).")
         return
@@ -118,18 +118,18 @@ def update_filter_json(max_workers: int = 10):
 
     # 5) Обновляем JSON: заменяем только те строки, что не URL и чьи basename есть в url_map
     changed = 0
-    for t in tours:
+    for h in hotels.values():
         # image
-        img = t.get("image")
+        img = h.get("image")
         if isinstance(img, str) and not is_url(img):
             base = os.path.basename(img)
             new_url = url_map.get(base)
             if new_url and new_url != img:
-                t["image"] = new_url
+                h["image"] = new_url
                 changed += 1
 
         # gallery
-        gallery = t.get("gallery", [])
+        gallery = h.get("gallery", [])
         new_gallery = []
         replaced_here = False
         for g in gallery:
@@ -142,26 +142,26 @@ def update_filter_json(max_workers: int = 10):
             else:
                 new_gallery.append(g)
         if replaced_here:
-            t["gallery"] = new_gallery
+            h["gallery"] = new_gallery
             changed += 1
 
     if changed > 0:
-        with open(FILTER_FILE, "w", encoding="utf-8") as f:
-            json.dump(tours, f, ensure_ascii=False, indent=2)
-        print(f"✅ filter.json обновлён. Заменено полей: {changed}")
+        with open(HOTELS_FILE, "w", encoding="utf-8") as f:
+            json.dump(hotels, f, ensure_ascii=False, indent=2)
+        print(f"✅ hotels.json обновлён. Заменено полей: {changed}")
     else:
         print("⏹ Изменений нет — нечего было заменять.")
 
-def cleanup_uploaded_images(json_path="data/filter.json", img_folder="static/img"):
+def cleanup_uploaded_images(json_path="data/hotels.json", img_folder="static/img"):
     with open(json_path, "r", encoding="utf-8") as f:
         tours = json.load(f)
 
     used_files = set()
-    for t in tours:
-        img = t.get("image")
+    for h in hotels.values():
+        img = h.get("image")
         if isinstance(img, str) and not is_url(img):
             used_files.add(os.path.basename(img))
-        for g in t.get("gallery", []):
+        for g in h.get("gallery", []):
             if isinstance(g, str) and not is_url(g):
                 used_files.add(os.path.basename(g))
 

@@ -24,25 +24,14 @@
 </div>
 
 <script>
-let allTours = [];
+let allTours = {{ tours | tojson }};
 let calendarInstance = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById('available-tours').style.display = 'none';
-  loadData();
+  populateCountrySelect();
+  restoreFilterState();
 });
-
-async function loadData() {
-  try {
-    const res = await fetch('data/filter.json?t=' + Date.now());
-    allTours = await res.json();
-    console.log("JSON загружен:", allTours);
-    populateCountrySelect();
-    restoreFilterState();
-  } catch (e) {
-    console.error("Ошибка загрузки JSON:", e);
-  }
-}
 
 function populateCountrySelect() {
   const countrySelect = document.getElementById('countrySelect');

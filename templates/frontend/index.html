@@ -967,7 +967,7 @@ section h2.visible {
   <div class="hot-deals-grid">
 
     {% for tour in hot_tours[:4] %}
-    <a href="{{ url_for('tour_detail', tour_id=loop.index0) }}" class="hot-card">
+    <a href="{{ url_for('tour_detail', tour_id=tour['id']) }}" class="hot-card">
 
       <div class="hot-label">Горящий тур</div>
 
@@ -1006,7 +1006,7 @@ section h2.visible {
     <div class="tour-grid">
 
       {% for tour in kazakhstan_tours %}
-      <a href="{{ url_for('tour_detail', tour_id=tour.id) }}" class="tour-card">
+      <a href="{{ url_for('tour_detail', tour_id=tour['id']) }}" class="tour-card">
 
         <div class="tour-badge">Тур по Казахстану</div>
 

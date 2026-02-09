@@ -2,37 +2,49 @@
 {% block content %}
 
 <div class="tour-detail-wrapper">
+  <div class="tour-summary glass" onclick="openFilterSheet()">
+    <span id="summaryText">
+      {{ tour.tourists or 1 }} турист · {{ tour.nights }} ночей
+    </span>
+    <span class="summary-edit">Изменить</span>
+  </div>
 
   <!-- 🌍 Верхний полупрозрачный блок -->
   <div class="tour-header glass">
-    <div class="tour-title-row">
-      <h1>{{ tour.city }} — {{ tour.country }}</h1>
 
-      <button
-        type="button"
-        class="fav-btn"
-        data-tour-id="{{ tour_id }}"
-        onclick="addToFavorites(event, {{ tour_id }}, this)"
-      >
-        <img
-          src="{{ url_for('static', filename='icons/heart-outline.png') }}"
-          class="fav-heart"
-          alt="В избранное"
+    <div class="tour-head">
+
+      <div class="tour-row">
+        <span class="tour-label">Направление</span>
+        <div class="tour-direction">
+          {{ tour.city }} → {{ tour.country }}
+        </div>
+      </div>
+
+      <div class="tour-row tour-hotel-line">
+        <div class="tour-hotel">
+          <span class="tour-label">Отель</span>
+          <div class="tour-hotel-name">
+            {{ tour.hotel }}
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="fav-btn"
+          data-tour-id="{{ tour.id }}"
+          onclick="addToFavorites(event, {{ tour.id }}, this)"
         >
-      </button>
+          <img
+            src="{{ url_for('static', filename='icons/heart-outline.png') }}"
+            class="fav-heart"
+            alt="В избранное"
+          >
+        </button>
+      </div>
+
     </div>
 
-    <div class="mini-filter">
-      <label>Туристов:</label>
-      <input type="number" id="tourists" min="1" value="{{ tour.tourists or 1 }}">
-      <label>Ночей:</label>
-      <select id="nights-select">
-        {% for n in range(2, 21) %}
-          <option value="{{ n }}" {% if n == tour.nights %}selected{% endif %}>{{ n }}</option>
-        {% endfor %}
-      </select>
-      <button onclick="applyDates()">Применить</button>
-    </div>
   </div>
 
   <!-- 🖼 Галерея (возвращена старая структура) -->
@@ -68,11 +80,19 @@
     </div>
   </div>
   {% endif %}
+  
+  <div class="tour-params glass">
+    <div class="param"><span>Вылет</span><strong>{{ tour.departure_date }}</strong></div>
+    <div class="param"><span>Ночей</span><strong>{{ tour.nights }}</strong></div>
+    <div class="param"><span>Питание</span><strong>{{ tour.meal }}</strong></div>
+    <div class="param"><span>Перелёт</span><strong>Включён</strong></div>
+    <div class="param"><span>Багаж</span><strong>20 кг</strong></div>
+    <div class="param"><span>Места</span><strong>{{ tour.seats }}</strong></div>
+  </div>
 
   <!-- 💬 Описание -->
-  <div class="tour-info-card glass">
-    <p>{{ tour.description }}</p>
-    <a href="{{ url_for('filter_page') }}" class="back-btn">← Назад к выбору тура</a>
+  <div class="tour-description glass">
+    {{ tour.description | truncate(600) }}
   </div>
 
 </div>
@@ -82,6 +102,34 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+<div class="tour-filter-overlay" id="filterOverlay" onclick="closeFilterSheet()"></div>
+<div class="tour-filter-sheet" id="filterSheet">
+
+  <div class="sheet-top">
+    <span>Параметры тура</span>
+    <button class="apply-sheet-btn" onclick="applyFromSheet()">Готово</button>
+  </div>
+
+  <div class="sheet-content">
+    <div class="sheet-row">
+      <label>Количество туристов</label>
+      <input type="number" id="sheetTourists" min="1" value="1">
+    </div>
+
+    <div class="sheet-row">
+      <label>Количество ночей</label>
+      <select id="sheetNights">
+        {% for n in range(2, 21) %}
+          <option value="{{ n }}" {% if n == tour.nights %}selected{% endif %}>
+            {{ n }} ночей
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+</div>
 
 <style>
 body {
@@ -262,32 +310,350 @@ body {
   transform: translateY(-1px);
 }
 
-.tour-title-row {
+.tour-params {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.param {
+  background: rgba(255,255,255,0.5);
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+}
+
+.param span {
+  display: block;
+  font-size: 13px;
+  color: #7a6a55;
+}
+
+.param strong {
+  font-size: 15px;
+  color: #4b3821;
+}
+
+@media (max-width: 768px) {
+  .tour-params {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.tour-head {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Общая строка */
+.tour-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Лейблы */
+.tour-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #8b7a65;
+}
+
+/* Направление */
+.tour-direction {
+  font-size: 16px;
+  font-weight: 600;
+  color: #3f2f1e;
+}
+
+/* Строка отеля + сердце */
+.tour-hotel-line {
+  flex-direction: row;
+  align-items: center;        /* 🔥 ВАЖНО */
   justify-content: space-between;
   gap: 14px;
 }
 
-.tour-title-row h1 {
-  margin: 0;
-  font-size: 1.5rem;
-  line-height: 1.2;
+/* Блок с отелем */
+.tour-hotel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.tour-title-row .fav-btn {
-  flex-shrink: 0;
+/* Название отеля */
+.tour-hotel-name {
+  font-size: 18px;            /* 🔥 КРУПНЕЕ */
+  font-weight: 600;
+  line-height: 1.3;
+  color: #2f2418;
 }
 
+/* Сердечко */
+.fav-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fav-heart {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.15s ease;
+}
+
+.fav-btn:active .fav-heart {
+  transform: scale(0.9);
+}
+
+/* 📱 мобилка */
 @media (max-width: 768px) {
-  .tour-title-row h1 {
-    font-size: 1.25rem;
+  .tour-hotel-name {
+    font-size: 16px;
+  }
+
+  .tour-direction {
+    font-size: 15px;
   }
 
   .fav-heart {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
   }
+}
+
+.open-filter-btn {
+  margin-top: 8px;
+  align-self: flex-start;
+
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(6px);
+
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 10px;
+  padding: 8px 14px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #3f2f1e;
+
+  cursor: pointer;
+}
+
+.open-filter-btn:active {
+  transform: scale(0.97);
+}
+
+/* затемнение */
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 10000;
+}
+
+/* ВЕРХНЯЯ ШТОРКА */
+.filter-sheet {
+  position: fixed;
+  top: -50vh;              /* 🔥 СПРЯТАНА */
+  left: 0;
+  right: 0;
+  height: 50vh;            /* 🔥 ПОЛ ЭКРАНА */
+  background: rgba(255,255,255,0.97);
+
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+  transition: top 0.35s ease;
+  z-index: 10001;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* активное состояние */
+.filter-sheet.active {
+  top: 0;
+}
+
+.sheet-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ручка */
+.sheet-handle {
+  width: 40px;
+  height: 4px;
+  background: #ccc;
+  border-radius: 2px;
+  margin: 14px auto 0;
+}
+
+.filter-sheet h3 {
+  margin: 0 0 18px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* поля */
+.sheet-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.sheet-row label {
+  font-size: 13px;
+  color: #6b5a44;
+}
+
+.sheet-row input,
+.sheet-row select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.15);
+  font-size: 15px;
+}
+
+/* кнопка */
+.apply-sheet-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+
+  background: #c7934b;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.apply-sheet-btn:active {
+  transform: scale(0.97);
+}
+
+.sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.sheet-header span {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2f2418;
+}
+
+.sheet-header button {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #555;
+}
+
+.sheet-top {
+  position: sticky;
+  top: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.95);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.sheet-content {
+  padding: 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.apply-sheet-btn {
+  background: #c7934b;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tour-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 12px;
+  padding: 12px 16px;
+
+  cursor: pointer;
+}
+
+.summary-edit {
+  font-size: 13px;
+  color: #c7934b;
+  font-weight: 500;
+}
+
+/* ✅ Overlay мини-фильтра — отдельный, без конфликтов с base.html */
+.tour-filter-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  z-index: 10000; /* ниже, чем base sheet (100002), но мы не активируем base sheet */
+}
+
+.tour-filter-overlay.active{
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ✅ Шторка мини-фильтра */
+.tour-filter-sheet{
+  position: fixed;
+  top: -50vh;
+  left: 0;
+  right: 0;
+  height: 50vh;
+  background: rgba(255,255,255,0.97);
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  transition: top .35s ease;
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+}
+
+.tour-filter-sheet.active{
+  top: 0;
 }
 
 </style>
@@ -312,23 +678,55 @@ const mainSwiper = new Swiper('.main-swiper', {
     1024: { slidesPerView: 3 }
   }
 });
+/* === ШТОРКА === */
+function openFilterSheet() {
+  document.getElementById('filterSheet')?.classList.add('active');
+  document.getElementById('filterOverlay')?.classList.add('active');
+}
 
-/* Lightbox */
-const lightbox = GLightbox({ selector: '.glightbox', loop: true });
+function closeFilterSheet() {
+  document.getElementById('filterSheet')?.classList.remove('active');
+  document.getElementById('filterOverlay')?.classList.remove('active');
+}
 
-/* Мини фильтр */
+/* === КНОПКА "ПРИМЕНИТЬ" В ШТОРКЕ === */
+function applyFromSheet() {
+  applyDates();        // считаем цену
+  closeFilterSheet();  // закрываем шторку
+}
+
+/* === ТВОЯ ФОРМУЛА (НЕ МЕНЯЛ) === */
 function applyDates() {
-  const people = parseInt(document.getElementById("tourists").value) || 1;
-  const nights = parseInt(document.getElementById("nights-select").value) || 1;
+  const people =
+    parseInt(document.getElementById("sheetTourists")?.value) || 1;
+
+  const nights =
+    parseInt(document.getElementById("sheetNights")?.value) || 1;
+
   const basePrice = {{ tour.price }};
   const baseNights = {{ tour.nights }};
   const pricePerNight = basePrice / baseNights;
   const total = Math.round(pricePerNight * people * nights);
 
-  document.getElementById("formTourists").value = people;
-  document.getElementById("formNights").value = nights;
-  document.getElementById("formPrice").value = total;
-  document.getElementById("bookButton").innerText = `Забронировать тур за ${total.toLocaleString()} ₸`;
+  // форма бронирования (если есть)
+  const fPeople = document.getElementById("formTourists");
+  const fNights = document.getElementById("formNights");
+  const fPrice  = document.getElementById("formPrice");
+
+  if (fPeople) fPeople.value = people;
+  if (fNights) fNights.value = nights;
+  if (fPrice)  fPrice.value = total;
+
+  // кнопка бронирования
+  // обновляем текст сверху
+  const summary = document.getElementById("summaryText");
+  if (summary) {
+    summary.innerText = `${people} турист · ${nights} ночей`;
+  }
+  const btn = document.getElementById("bookButton");
+  if (btn) {
+    btn.innerText = `Забронировать тур за ${total.toLocaleString()} ₸`;
+  }
 }
 </script>
 

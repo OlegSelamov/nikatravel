@@ -16,6 +16,10 @@ HEADERS = {
     "Referer": "https://www.google.com/"
 }
 
+def build_booking_search_url(hotel_name):
+    query = urllib.parse.quote(hotel_name)
+    return f"https://www.booking.com/searchresults.ru.html?ss={query}"
+
 def clean_query(hotel_name, country=""):
     q = f"{hotel_name} {country}".strip()
     q = re.sub(r"\d+\*", "", q)

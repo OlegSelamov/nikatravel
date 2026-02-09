@@ -1,4 +1,7 @@
-{% extends 'base.html' %}
+{% if not request.headers.get('X-Sheet') %}
+  {% extends 'base.html' %}
+{% endif %}
+
 {% block content %}
 
 <style>
@@ -118,25 +121,18 @@
 </style>
 
 <div class="login-wrapper">
-
   <div class="login-box">
 
-    <!-- ЛОГО -->
     <img
       src="{{ url_for('static', filename='fon/logo.png') }}"
-      alt="Nika Travel"
       class="login-logo"
+      alt="Nika Travel"
     >
 
-    <div class="login-title">
-      Вход в Nika Travel
-    </div>
+    <div class="login-title">Вход в Nika Travel</div>
+    <div class="login-subtitle">Введите номер телефона</div>
 
-    <div class="login-subtitle">
-      Введите номер телефона
-    </div>
-
-    <form method="POST" class="login-form">
+    <form method="POST" action="{{ url_for('login') }}" class="login-form">
 
       <label for="phone">Номер телефона</label>
       <input
@@ -147,10 +143,7 @@
         required
       >
 
-      <button type="submit" class="login-btn">
-        Войти
-      </button>
-
+      <button type="submit" class="login-btn">Войти</button>
     </form>
 
     <div class="login-note">
@@ -159,7 +152,6 @@
     </div>
 
   </div>
-
 </div>
 
 {% endblock %}

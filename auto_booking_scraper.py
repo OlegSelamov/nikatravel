@@ -6,7 +6,7 @@ import logging
 from PIL import Image, ImageStat
 import imagehash
 
-from scraper_ddg import get_booking_url_by_hotel_name
+#from scraper_ddg import get_booking_url_by_hotel_name
 from booking_scraper_vlite_plus import scrape_booking_selenium
 
 logger = logging.getLogger("parser_logger")
@@ -20,9 +20,16 @@ file_handler.setFormatter(formatter)
 if not logger.hasHandlers():
     logger.addHandler(file_handler)
 
-FILTER_JSON = "data/filter.json"
+HOTELS_JSON = "data/hotels.json"
 IMG_FOLDER = "static/img"
 os.makedirs(IMG_FOLDER, exist_ok=True)
+
+def is_hotel_filled(hotel: dict) -> bool:
+    return (
+        isinstance(hotel.get("gallery"), list) and len(hotel["gallery"]) > 0 and
+        isinstance(hotel.get("image"), str) and hotel["image"].strip() != "" and
+        isinstance(hotel.get("description"), str) and hotel["description"].strip() != ""
+    )
 
 def is_valid_image(file_path):
     try:
@@ -64,42 +71,32 @@ def get_image_score(image_path):
     except Exception:
         return 0
 
-def is_tour_filled(tour):
-    return (
-        isinstance(tour.get("gallery"), list) and len(tour["gallery"]) > 0 and
-        isinstance(tour.get("image"), str) and tour["image"].strip() != "" and
-        isinstance(tour.get("description"), str) and tour["description"].strip() != ""
-    )
-
 def main():
     logger.info("START: auto_booking_scraper запускается...")
-    with open(FILTER_JSON, "r", encoding="utf-8") as f:
-        tours = json.load(f)
-    logger.info(f"🔢 Загружено {len(tours)} туров из filter.json")
+    with open(HOTELS_JSON, "r", encoding="utf-8") as f:
+        hotels = json.load(f)
+
+    logger.info(f"🏨 Загружено {len(hotels)} отелей из hotels.json")
 
     updated = 0
 
-    for i, tour in enumerate(tours):
-        if is_tour_filled(tour):
-            logger.info(f"[{i}] Уже заполнен: {tour['hotel']} — пропускаем")
+    for i, (hotel_id, hotel) in enumerate(hotels.items()):
+        if is_hotel_filled(hotel):
+            logger.info(f"[{i}] Уже заполнен: {hotel['hotel']} — пропускаем")
             continue
 
-        hotel_name = tour["hotel"]
+        hotel_name = hotel["hotel"]
         logger.info(f"[{i}] Ищем Booking для: {hotel_name}")
 
         # URL теперь НЕ нужен — мы используем Google
         url = "google"
-        tour["hotel_url"] = "google"  # просто метка
 
         logger.info(f"Booking найден: {url}")
 
-        folder_name = hotel_name.replace(" ", "_").replace("*", "").replace("/", "_")
-        folder_path = f"data/{folder_name}"
+        folder_path = os.path.join("data", "tmp", hotel_id)
         if os.path.exists(folder_path):
-            try:
-                shutil.rmtree(folder_path)
-            except Exception:
-                pass
+            shutil.rmtree(folder_path)
+        os.makedirs(folder_path, exist_ok=True)
 
         try:
             img_count, description = scrape_booking_selenium(url, folder_path)
@@ -128,7 +125,7 @@ def main():
 
         gallery_filenames = []
         for idx, img_path in enumerate(unique_images):
-            new_filename = f"{folder_name}_{idx+1}.jpg"
+            new_filename = f"{hotel_id}_{idx+1}.jpg"
             dest_path = os.path.join(IMG_FOLDER, new_filename)
             if not os.path.exists(dest_path):
                 try:
@@ -136,8 +133,6 @@ def main():
                 except Exception as e:
                     logger.warning(f"Ошибка копирования {img_path} -> {dest_path}: {e}")
             gallery_filenames.append(new_filename)
-
-        tour["gallery"] = gallery_filenames
 
         if gallery_filenames:
             scored = []
@@ -148,20 +143,24 @@ def main():
                     score = 0
                 scored.append((f, score))
             scored.sort(key=lambda x: x[1], reverse=True)
-            tour["image"] = scored[0][0]
 
-        tour["description"] = description.strip() if description else "Описание недоступно"
+        # обновляем данные отеля в памяти
+        hotel["gallery"] = gallery_filenames
+        hotel["image"] = scored[0][0] if gallery_filenames else ""
+        hotel["description"] = description.strip() if description else "Описание недоступно"
 
-        tours[i] = tour
+        hotels[hotel_id] = hotel
         updated += 1
-        logger.info(f"[{i}] Обновлено: {hotel_name}")
 
+        logger.info(f"[{i}] 🏨 Отель обновлён: {hotel['hotel']}")
+
+        # сохраняем hotels.json
         try:
-            with open(FILTER_JSON, "w", encoding="utf-8") as f:
-                json.dump(tours, f, ensure_ascii=False, indent=2)
-            logger.info(f"✅ JSON обновлён после {hotel_name}")
+            with open(HOTELS_JSON, "w", encoding="utf-8") as f:
+                json.dump(hotels, f, ensure_ascii=False, indent=2)
+            logger.info(f"✅ hotels.json сохранён после {hotel['hotel']}")
         except Exception as e:
-            logger.error(f"❌ Ошибка при сохранении filter.json после {hotel_name}: {e}")
+            logger.error(f"❌ Ошибка при сохранении hotels.json: {e}")
 
 if __name__ == "__main__":
     try:

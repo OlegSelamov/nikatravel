@@ -1,14 +1,12 @@
 {
-  "city_code": "57",
-  "country_code": "64",
-  "departure_date": "22.12.2025",
-  "departure_end": "31.12.2025",
+  "city_code": "7",
+  "country_code": "22",
+  "departure_date": "04.02.2026",
+  "departure_end": "28.02.2026",
   "nights": [
-    7
+    6
   ],
-  "meal": [
-    "BB"
-  ],
+  "meal": [],
   "currency": "KZT",
   "ADULT": "1",
   "STARS": [

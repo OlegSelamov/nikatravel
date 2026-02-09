@@ -49,5 +49,39 @@
     "departure_date": "23.12.2025",
     "nights": "11",
     "tourists": "5"
+  },
+  {
+    "id": "f258a4b2-5836-4c31-a8a6-857ba595ea0c",
+    "type": "tour",
+    "user_id": "777",
+    "title": "Boutique Hotel Baku 4* (Баку) • Азербайджан",
+    "image": null,
+    "price": "564144.0",
+    "currency": "KZT",
+    "status": "Отправлена",
+    "created_at": "06.02.2026 22:32",
+    "hotel": "Boutique Hotel Baku 4* (Баку)",
+    "city": "Астана",
+    "country": "Азербайджан",
+    "departure_date": "16.02.2026",
+    "nights": "7",
+    "tourists": "1"
+  },
+  {
+    "id": "tr_1770399226",
+    "type": "transfer",
+    "user_id": "777",
+    "title": "Трансфер • Добролюбова 34/2 → Добролюбова 34/2",
+    "image": null,
+    "price": null,
+    "currency": "USD",
+    "status": "Новый",
+    "created_at": "2026-02-06 22:33",
+    "from": "Добролюбова 34/2",
+    "to": "Добролюбова 34/2",
+    "date": "2026-02-22",
+    "time": "16:00",
+    "persons": "2",
+    "car_type": "Минивэн"
   }
 ]

@@ -298,6 +298,50 @@
        filter: brightness(0.9);
 	   box-shadow: inset 0 2px 6px rgba(0,0,0,0.15);
      }
+	 
+	 .sheet-overlay {
+       position: fixed;
+       inset: 0;
+       background: rgba(0,0,0,0.25);
+       opacity: 0;
+       pointer-events: none;
+       transition: opacity .3s ease;
+       z-index: 100002;
+     }
+
+     .sheet-overlay.active {
+       opacity: 1;
+       pointer-events: all;
+     }
+
+     .sheet {
+       position: absolute;
+       bottom: -100%;
+       left: 0;
+       width: 100%;
+       max-height: 90vh;
+       background: rgba(255,255,255,0.9);
+       backdrop-filter: blur(14px);
+       border-radius: 22px 22px 0 0;
+       transition: bottom .35s ease;
+       overflow-y: auto;
+     }
+
+     .sheet-overlay.active .sheet {
+       bottom: 0;
+     }
+
+     .sheet-handle {
+       width: 44px;
+       height: 5px;
+       background: rgba(0,0,0,0.25);
+       border-radius: 4px;
+       margin: 10px auto;
+     }
+
+     .sheet-content {
+       padding: 20px;
+     }
 
     </style>
 
@@ -327,6 +371,7 @@
   <div class="nav-links" id="navMenu">
     <a href="{{ url_for('index') }}">Главная</a>
     <a href="{{ url_for('about') }}">О нас</a>
+	<a href="{{ url_for('faq') }}">FAQ</a>
     <a href="{{ url_for('filter_page') }}">Доступные туры</a>
     <a href="{{ url_for('flights') }}">Авиабилеты</a>
     <a href="{{ url_for('contacts') }}">Контакты</a>
@@ -342,17 +387,15 @@
 <form
   action="{{ url_for('confirmation_page', tour_id=tour_id) }}"
   method="get"
-  id="bookForm"
   class="tour-fixed-buttons-wrapper"
 >
-  <input type="hidden" name="departure_date" value="{{ tour.departure_date }}">
   <input type="hidden" name="tourists" id="formTourists" value="1">
   <input type="hidden" name="nights" id="formNights" value="{{ tour.nights }}">
   <input type="hidden" name="total_price" id="formPrice" value="{{ tour.price }}">
 
   <div class="tour-fixed-buttons">
-    <button type="submit" id="bookButton" class="btn-book">
-      Забронировать тур за {{ tour.price | default(0) }} ₸
+    <button type="submit" class="btn-book">
+      Забронировать тур за {{ tour.price }} ₸
     </button>
   </div>
 </form>
@@ -390,6 +433,13 @@
 </nav>
 
 <div id="page-loader" class="page-loader"></div>
+
+<div id="sheet" class="sheet-overlay" onclick="if(event.target.id==='sheet')this.classList.remove('active')">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-content" id="sheetContent"></div>
+  </div>
+</div>
 
 <script>
 function toggleMenu() {
@@ -558,46 +608,75 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('a[href]').forEach(link => {
-    const href = link.getAttribute('href');
-
-    if (
-      !href ||
-      href.startsWith('#') ||
-      href.startsWith('http') ||
-      link.hasAttribute('target')
-    ) return;
-
-    link.addEventListener('click', e => {
-      e.preventDefault();
-
-      const page = document.getElementById('page');
-      if (!page) return;
-	  
-      page.classList.add('page-exit');
-
-      // ⏱ даём анимации начаться
-      setTimeout(() => {
-        const loader = document.getElementById('page-loader');
-        if (loader) loader.classList.add('active');
-      }, 150);
-
-      // 🚀 уходим на страницу
-      setTimeout(() => {
-        window.location.href = href;
-      }, 300);
-    });
-  });
-});
-</script>
-
-<script>
 window.addEventListener('load', () => {
   const loader = document.getElementById('page-loader');
   if (loader) loader.classList.remove('active');
 });
 </script>
+
+<script>
+document.addEventListener('click', async (e) => {
+  const link = e.target.closest('a');
+  if (!link) return;
+
+  const href = link.getAttribute('href');
+  if (!href || href.startsWith('#') || href.startsWith('http')) return;
+
+  e.preventDefault();
+
+  try {
+    const res = await fetch(href, {
+      headers: { 'X-Sheet': '1' },
+      redirect: 'follow'
+    });
+
+    // 🔥 если сервер отдал логин — открываем шторку
+    if (res.url.includes('/login')) {
+      const html = await res.text();
+      openSheetWithHTML(html);
+      return;
+    }
+
+    // иначе обычная навигация
+    window.location.href = href;
+
+  } catch (err) {
+    window.location.href = href;
+  }
+});
+
+function openSheetWithHTML(html) {
+  const sheet = document.getElementById('sheet');
+  const content = document.getElementById('sheetContent');
+  content.innerHTML = html;
+  sheet.classList.add('active');
+}
+</script>
+
+<script>
+document.addEventListener('submit', async (e) => {
+  const form = e.target;
+  if (!form.closest('#sheetContent')) return;
+
+  e.preventDefault();
+
+  const res = await fetch(form.action, {
+    method: 'POST',
+    headers: {
+      'X-Sheet': '1'
+    },
+    body: new FormData(form)
+  });
+
+  const data = await res.json();
+
+  if (data.success) {
+    document.getElementById('sheet').classList.remove('active');
+    location.reload(); // обновим UI (избранное / профиль)
+  }
+});
+</script>
+
 
 </body>
 </html>

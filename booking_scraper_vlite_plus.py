@@ -3,9 +3,10 @@ import re
 import time
 import json
 import logging
+import urllib.parse
 import requests
-from bs4 import BeautifulSoup
 
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -13,6 +14,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 
 # -------------------------------------------------------------
 # ЛОГИ
@@ -28,47 +30,31 @@ if not logger.hasHandlers():
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
     
-HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"}
-HEADERS = {"User-Agent": "Mozilla/5.0"}
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0 Safari/537.36",
+    "Accept": "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
+    "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "Referer": "https://www.booking.com/"
+}
 
 COOKIES_FILE = "booking_cookies.json"
-
-def google_find_booking_url(name):
-    try:
-        q = f'site:booking.com "{name}"'
-        url = f"https://www.google.com/search?q={q.replace(' ', '+')}"
-        r = requests.get(url, headers=HEADERS, timeout=10)
-        soup = BeautifulSoup(r.text, "html.parser")
-
-        for a in soup.find_all("a"):
-            href = a.get("href", "")
-            if "booking.com/hotel" in href:
-                clean = href.split("url=")[-1].split("&")[0]
-                return clean
-    except:
-        pass
-    return None
 
 # -------------------------------------------------------------
 # Selenium Driver
 # -------------------------------------------------------------
+def build_booking_search_url(hotel_name: str) -> str:
+    query = urllib.parse.quote(clean_hotel_name(hotel_name))
+    return f"https://www.booking.com/searchresults.ru.html?ss={query}"
+
 def create_driver():
     chrome_options = Options()
-
-    # браузер с окном (НЕ headless)
-    # если нужно headless — раскомментируй:
-    # chrome_options.add_argument("--headless=new")
-
-    chrome_options.add_argument("--disable-blink-features=AutomationControlled")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument("--start-maximized")
     chrome_options.add_argument("--lang=ru-RU")
     chrome_options.add_argument(
         "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
     )
 
-    service = Service("C:/PRO/NIKATRAVEL/chromedriver.exe")
+    service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=chrome_options)
     return driver
 
@@ -386,8 +372,10 @@ def find_booking_url(driver, hotel_name):
 # Извлечение JSON и фото
 # -------------------------------------------------------------
 def collect_json_data(driver, folder, limit=30):
+    import time
     os.makedirs(folder, exist_ok=True)
 
+    # --- Парсим HTML страницы ---
     soup = BeautifulSoup(driver.page_source, "html.parser")
     scripts = soup.find_all("script")
 
@@ -410,35 +398,76 @@ def collect_json_data(driver, folder, limit=30):
 
     for script in scripts:
         txt = script.string or script.get_text(strip=True)
-        if not txt or not (txt.startswith("{") or txt.startswith("[")):
+        if not txt:
+            continue
+        if not (txt.startswith("{") or txt.startswith("[")):
             continue
         try:
             data = json.loads(txt)
             dig(data)
-        except:
+        except Exception:
             pass
 
     images = list(images)
 
-    # Сортировка: max2048 → max1600 → max1280 → max1024
+    # --- сортировка по качеству ---
     def score(url):
-        return ("max2048" in url, "max1600" in url, "max1440" in url, "max1280" in url, "max1024" in url)
+        return (
+            "max2048" in url,
+            "max1600" in url,
+            "max1440" in url,
+            "max1280" in url,
+            "max1024" in url,
+        )
 
     images_sorted = sorted(images, key=score, reverse=True)[:limit]
 
     logger.info(f"Нашли фото: {len(images)} | Скачиваем: {len(images_sorted)}")
 
+    # --- СКАЧИВАНИЕ ФОТО ---
+    session = requests.Session()
     downloaded = 0
+
     for idx, url in enumerate(images_sorted, 1):
         try:
-            r = requests.get(url, headers=HEADERS, timeout=20)
-            if r.status_code == 200:
+            # ссылки вида //cf.bstatic.com
+            if url.startswith("//"):
+                url = "https:" + url
+
+            r = session.get(
+                url,
+                headers={
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                                  "AppleWebKit/537.36 (KHTML, like Gecko) "
+                                  "Chrome/144.0 Safari/537.36",
+                    "Accept": "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
+                    "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+                    "Referer": "https://www.booking.com/",
+                },
+                timeout=30,
+                allow_redirects=True
+            )
+
+            logger.info(
+                f"IMG {idx}: status={r.status_code} size={len(r.content)}"
+            )
+
+            # защита от HTML/заглушек
+            if r.status_code == 200 and len(r.content) > 10_000:
                 with open(os.path.join(folder, f"photo_{idx}.jpg"), "wb") as f:
                     f.write(r.content)
                 downloaded += 1
-        except:
-            pass
+            else:
+                logger.warning(
+                    f"❌ Не картинка: status={r.status_code}, size={len(r.content)}"
+                )
 
+            time.sleep(0.3)  # антибан
+
+        except Exception as e:
+            logger.error(f"Ошибка скачивания {url}: {e}")
+
+    # --- описание ---
     description = "Описание недоступно"
     if descriptions:
         descriptions.sort(key=len, reverse=True)
@@ -450,28 +479,6 @@ def collect_json_data(driver, folder, limit=30):
     return downloaded, description
 
 # -------------------------------------------------------------
-# ГЛАВНАЯ ФУНКЦИЯ (использует твой auto_booking_scraper.py)
-# -------------------------------------------------------------
-# -------------------------------------------------------------
-# GOOGLE через Selenium
-# -------------------------------------------------------------
-def google_selenium_find(driver, name):
-    query = f'site:booking.com "{name}"'
-    driver.get("https://www.google.com/search?q=" + query.replace(" ", "+"))
-    time.sleep(2)
-    kill_modals(driver)
-
-    links = driver.find_elements(By.CSS_SELECTOR, "a")
-
-    for link in links:
-        href = link.get_attribute("href") or ""
-        if "booking.com/hotel" in href:
-            return href
-
-    return None
-
-
-# -------------------------------------------------------------
 # ОСНОВНАЯ ФУНКЦИЯ SCRAPER
 # -------------------------------------------------------------
 def scrape_booking_selenium(url, folder, limit=30):
@@ -479,47 +486,41 @@ def scrape_booking_selenium(url, folder, limit=30):
     driver = create_driver()
 
     try:
-        # ---- Загружаем cookies ----
         if load_cookies(driver):
             logger.info("✔ Cookies загружены.")
         else:
             logger.info("⚠ Cookies нет.")
 
-        booking_url = None
-
-        # ---- 1) Прямой URL ----
+        # 1) Если передан прямой URL — используем его
         if url and url not in ("None", "google"):
             booking_url = url
+        else:
+            # 2) ИНАЧЕ — сразу идём в Booking Search
+            booking_url = build_booking_search_url(hotel)
 
-        # ---- 2) Google поиск ----
-        elif url == "google":
-            logger.info("🔎 Ищем через GOOGLE…")
-            google_url = google_selenium_find(driver, hotel)
-            if google_url:
-                logger.info(f"🚀 Google нашёл: {google_url}")
-                booking_url = google_url
-            else:
-                logger.info("⚠ Google не нашёл. Перехожу к Booking Search.")
-
-        # ---- 3) Booking поиск ----
-        if not booking_url:
-            booking_url = find_booking_url(driver, hotel)
-
-        if not booking_url:
-            return 0, "Описание недоступно"
-
-        # ---- 4) Открываем страницу ----
+        logger.info(f"🌍 Открываем: {booking_url}")
         driver.get(booking_url)
         time.sleep(4)
         kill_modals(driver)
 
+        # Если это searchresults — кликаем первый отель
+        if "searchresults" in booking_url:
+            first = WebDriverWait(driver, 20).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, "a[data-testid='title-link']"))
+            )
+
+            hotel_url = first.get_attribute("href")
+
+            logger.info(f"➡ Переходим напрямую: {hotel_url}")
+
+            driver.get(hotel_url)
+            time.sleep(4)
+            kill_modals(driver)
+
         return collect_json_data(driver, folder, limit)
 
     finally:
-        try:
-            driver.quit()
-        except:
-            pass
+        driver.quit()
 
 # -------------------------------------------------------------
 # Совместимость
