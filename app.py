@@ -24,6 +24,8 @@ log = logging.getLogger('werkzeug')
 log.disabled = True
 
 app = Flask(__name__)
+OFFERS_PATH = os.path.join("data", "offers.json")
+HOTELS_PATH = os.path.join("data", "hotels.json")
 app.secret_key = 'supersecretkey'
 
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'img')
@@ -1268,6 +1270,51 @@ def delete_banner(id):
         save_json(BANNERS_FILE, banners)
     return redirect(url_for('admin_banners'))
 
+def load_tours():
+    if not os.path.exists(TOURS_PATH):
+        return []
+    with open(TOURS_PATH, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+@app.get("/api/tours")
+def api_tours():
+    offers = load_json(OFFERS_PATH, [])
+    hotels = load_json(HOTELS_PATH, {})
+
+    result = []
+
+    for offer in offers:
+        hotel_id = offer.get("hotel_id")
+
+        # получаем данные отеля по ключу
+        hotel_data = hotels.get(hotel_id, {})
+
+        result.append({
+            "id": hotel_id,
+
+            # данные отеля
+            "hotel": hotel_data.get("hotel"),
+            "country": hotel_data.get("country"),
+            "image": hotel_data.get("image"),
+            "gallery": hotel_data.get("gallery", []),
+            "description": hotel_data.get("description"),
+
+            # данные оффера
+            "city": offer.get("city"),
+            "meal": offer.get("meal"),
+            "nights": int(offer.get("nights", 0)),
+            "seats": offer.get("seats"),
+
+            "price": int(offer.get("price", 0)),
+            "old_price": int(offer.get("old_price", 0)),
+            "discount_percent": int(offer.get("discount_percent", 0)),
+            "price_per_month": int(offer.get("price_per_month", 0)),
+            "installment_months": int(offer.get("installment_months", 0)),
+
+            "dates_prices": offer.get("dates_prices", [])
+        })
+
+    return jsonify(result)
 # ===========================
 # Запуск
 # ===========================
