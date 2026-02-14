@@ -1315,6 +1315,42 @@ def api_tours():
         })
 
     return jsonify(result)
+    
+@app.route('/api/booking', methods=['POST'])
+def api_booking():
+    data = request.json
+
+    hotel = data.get("hotel")
+    price = data.get("price")
+    name = data.get("name")
+    phone = data.get("phone")
+    email = data.get("email")
+    people = data.get("people")
+
+    message = f"""
+🔥 Новая заявка из приложения!
+
+🏨 Отель: {hotel}
+💰 Цена: {price}
+👤 Имя: {name}
+📞 Телефон: {phone}
+📧 Email: {email}
+👥 Туристов: {people}
+"""
+
+    try:
+        requests.post(
+            f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+            data={
+                "chat_id": TELEGRAM_CHAT_ID,
+                "text": message
+            },
+            timeout=5
+        )
+    except Exception as e:
+        print("Telegram error:", e)
+
+    return jsonify({"status": "ok"})
 # ===========================
 # Запуск
 # ===========================
