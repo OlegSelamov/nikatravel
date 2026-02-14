@@ -1351,6 +1351,19 @@ def api_booking():
         print("Telegram error:", e)
 
     return jsonify({"status": "ok"})
+    
+@app.route('/api/login', methods=['POST'])
+def api_login():
+    data = request.json
+
+    email = data.get("email")
+    password = data.get("password")
+
+    # Временно — тестовая проверка
+    if email == "admin@nikatravel.kz" and password == "1234":
+        return jsonify({"status": "ok", "token": "demo_token"})
+    else:
+        return jsonify({"error": "Неверный логин"}), 401
 # ===========================
 # Запуск
 # ===========================
