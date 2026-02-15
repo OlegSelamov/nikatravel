@@ -64,6 +64,18 @@ def load_json(path, default):
 def save_json(path, data):
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+        
+USERS_FILE = os.path.join(DATA_FOLDER, "users.json")
+
+def load_users():
+    if os.path.exists(USERS_FILE):
+        with open(USERS_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return []
+
+def save_users(users):
+    with open(USERS_FILE, "w", encoding="utf-8") as f:
+        json.dump(users, f, ensure_ascii=False, indent=2)
 
 # === НАСТРОЙКИ TELEGRAM ===
 TELEGRAM_TOKEN = '8198089868:AAFJndPCalVaUBhmKEUAv7qrUpkcOs52XEY'
@@ -1359,11 +1371,103 @@ def api_login():
     email = data.get("email")
     password = data.get("password")
 
-    # Временно — тестовая проверка
-    if email == "admin@nikatravel.kz" and password == "1234":
-        return jsonify({"status": "ok", "token": "demo_token"})
-    else:
-        return jsonify({"error": "Неверный логин"}), 401
+    users = load_users()
+
+    hashed_password = hashlib.sha256(password.encode()).hexdigest()
+
+    user = next(
+        (u for u in users if u["email"] == email and u["password"] == hashed_password),
+        None
+    )
+
+    if not user:
+        return jsonify({"error": "Неверный логин или пароль"}), 401
+
+    token = str(uuid.uuid4())
+
+    return jsonify({
+        "status": "ok",
+        "token": token,
+        "user_id": user["id"]
+    })
+        
+@app.route('/api/register', methods=['POST'])
+def api_register():
+    data = request.json
+
+    email = data.get("email")
+    password = data.get("password")
+
+    if not email or not password:
+        return jsonify({"error": "Заполните поля"}), 400
+
+    users = load_users()
+
+    if any(u["email"] == email for u in users):
+        return jsonify({"error": "Пользователь уже существует"}), 400
+
+    hashed_password = hashlib.sha256(password.encode()).hexdigest()
+
+    new_user = {
+        "id": str(uuid.uuid4()),
+        "email": email,
+        "password": hashed_password
+    }
+
+    users.append(new_user)
+    save_users(users)
+
+    return jsonify({"status": "created"}), 201
+    
+@app.route('/api/orders', methods=['GET'])
+def api_orders():
+    token = request.headers.get("Authorization")
+
+    if not token:
+        return jsonify({"error": "Нет токена"}), 401
+
+    # У нас пока токен = user_id (упрощённая схема)
+    # Позже сделаем нормальный JWT
+
+    user_id = request.args.get("user_id")
+
+    if not user_id:
+        return jsonify({"error": "Нет user_id"}), 400
+
+    all_requests = load_requests()
+
+    user_orders = [
+        r for r in all_requests
+        if r.get("user_id") == user_id
+    ]
+
+    return jsonify(user_orders)
+
+@app.route('/api/favorites', methods=['GET'])
+def api_favorites():
+    user_id = request.args.get("user_id")
+
+    if not user_id:
+        return jsonify({"error": "Нет user_id"}), 400
+
+    favorites = load_favorites()
+    offers = load_offers()
+    hotels_by_id = load_hotel_details()
+    tours = enrich_offers_with_hotels(offers, hotels_by_id)
+
+    user_fav_ids = {
+        f['tour_id']
+        for f in favorites
+        if f['user_id'] == user_id
+    }
+
+    favorite_tours = [
+        t for t in tours
+        if t.get('id') in user_fav_ids
+    ]
+
+    return jsonify(favorite_tours)
+
 # ===========================
 # Запуск
 # ===========================
