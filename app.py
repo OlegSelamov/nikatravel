@@ -1377,7 +1377,7 @@ def api_booking():
 
     return jsonify({"status": "ok"})
     
-@app.route('/api/login', methods=['POST'])
+@app.route('/api/login/', methods=['POST'])
 def api_login():
     data = request.json
 
@@ -1404,7 +1404,7 @@ def api_login():
         "user_id": user["id"]
     })
         
-@app.route('/api/register', methods=['POST'])
+@app.route('/api/register/', methods=['POST'])
 def api_register():
     try:
         data = request.json or {}
