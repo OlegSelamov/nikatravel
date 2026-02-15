@@ -50,6 +50,7 @@ PLACES_FILE = os.path.join(DATA_FOLDER, 'places.json')
 NEWS_FILE = os.path.join(DATA_FOLDER, 'news.json')
 HOTELS_FILE = HOTELS_SITE_FILE
 BANNERS_FILE = os.path.join(DATA_FOLDER, 'banners.json')
+USERS_FILE = os.path.join(DATA_FOLDER, "users.json")
 
 def load_json(path, default):
     try:
@@ -65,15 +66,27 @@ def save_json(path, data):
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
         
-USERS_FILE = os.path.join(DATA_FOLDER, "users.json")
 
 def load_users():
-    if os.path.exists(USERS_FILE):
+    try:
+        # ✅ гарантируем, что папка data существует
+        os.makedirs(DATA_FOLDER, exist_ok=True)
+
+        # ✅ если файла нет — создаём пустой
+        if not os.path.exists(USERS_FILE):
+            with open(USERS_FILE, "w", encoding="utf-8") as f:
+                json.dump([], f, ensure_ascii=False, indent=2)
+
         with open(USERS_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return []
+            data = json.load(f)
+            return data if isinstance(data, list) else []
+    except Exception as e:
+        print("❌ load_users error:", e)
+        return []
 
 def save_users(users):
+    # ✅ гарантируем папку
+    os.makedirs(DATA_FOLDER, exist_ok=True)
     with open(USERS_FILE, "w", encoding="utf-8") as f:
         json.dump(users, f, ensure_ascii=False, indent=2)
 
@@ -1393,31 +1406,35 @@ def api_login():
         
 @app.route('/api/register', methods=['POST'])
 def api_register():
-    data = request.json
+    try:
+        data = request.json or {}
+        email = (data.get("email") or "").strip().lower()
+        password = (data.get("password") or "").strip()
 
-    email = data.get("email")
-    password = data.get("password")
+        if not email or not password:
+            return jsonify({"error": "Заполните email и пароль"}), 400
 
-    if not email or not password:
-        return jsonify({"error": "Заполните поля"}), 400
+        users = load_users()
 
-    users = load_users()
+        if any(u.get("email") == email for u in users):
+            return jsonify({"error": "Пользователь уже существует"}), 400
 
-    if any(u["email"] == email for u in users):
-        return jsonify({"error": "Пользователь уже существует"}), 400
+        hashed_password = hashlib.sha256(password.encode("utf-8")).hexdigest()
 
-    hashed_password = hashlib.sha256(password.encode()).hexdigest()
+        new_user = {
+            "id": str(uuid.uuid4()),
+            "email": email,
+            "password": hashed_password
+        }
 
-    new_user = {
-        "id": str(uuid.uuid4()),
-        "email": email,
-        "password": hashed_password
-    }
+        users.append(new_user)
+        save_users(users)
 
-    users.append(new_user)
-    save_users(users)
+        return jsonify({"status": "created"}), 201
 
-    return jsonify({"status": "created"}), 201
+    except Exception as e:
+        print("❌ register error:", e)
+        return jsonify({"error": f"Server error: {e}"}), 500
     
 @app.route('/api/orders', methods=['GET'])
 def api_orders():
