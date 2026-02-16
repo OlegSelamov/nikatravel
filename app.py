@@ -49,8 +49,7 @@ HOTELS_SITE_FILE = os.path.join(DATA_FOLDER, 'hotels_site.json')  # старые
 PLACES_FILE = os.path.join(DATA_FOLDER, 'places.json')
 NEWS_FILE = os.path.join(DATA_FOLDER, 'news.json')
 HOTELS_FILE = HOTELS_SITE_FILE
-DATA_FOLDER = os.path.join(BASE_DIR, "data")
-BANNERS_FILE = os.path.join(DATA_FOLDER, "banners.json")
+BANNERS_FILE = os.path.join(DATA_FOLDER, 'banners.json')
 USERS_FILE = os.path.join(DATA_FOLDER, "users.json")
 
 def load_json(path, default):
