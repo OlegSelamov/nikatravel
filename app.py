@@ -1280,6 +1280,7 @@ def add_banner():
     if request.method == 'POST':
         image = request.files['image']
         link = request.form['link']
+        position = request.form.get('position', 'top')
 
         if image and image.filename != "":
             filename = secure_filename(image.filename)
@@ -1289,7 +1290,8 @@ def add_banner():
 
         banners.append({
             "image": filename,
-            "link": link
+            "link": link,
+            "position": position
         })
 
         save_json(BANNERS_FILE, banners)
