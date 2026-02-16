@@ -1270,12 +1270,12 @@ def delete_hotel(id):
 
 @app.route('/admin/banners')
 def admin_banners():
-    banners = load_json(BANNERS_FILE)
+    banners = load_json(BANNERS_FILE, [])
     return render_template('admin/banners_list.html', banners=banners)
 
 @app.route('/admin/banners/add', methods=['GET', 'POST'])
 def add_banner():
-    banners = load_json(BANNERS_FILE)
+    banners = load_json(BANNERS_FILE, [])
 
     if request.method == 'POST':
         image = request.files['image']
@@ -1301,7 +1301,7 @@ def add_banner():
 
 @app.route('/admin/banners/delete/<int:id>')
 def delete_banner(id):
-    banners = load_json(BANNERS_FILE)
+    banners = load_json(BANNERS_FILE, [])
     if 0 <= id < len(banners):
         banners.pop(id)
         save_json(BANNERS_FILE, banners)
