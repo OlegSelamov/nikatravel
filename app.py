@@ -89,6 +89,16 @@ def save_users(users):
     os.makedirs(DATA_FOLDER, exist_ok=True)
     with open(USERS_FILE, "w", encoding="utf-8") as f:
         json.dump(users, f, ensure_ascii=False, indent=2)
+        
+def load_banners():
+    if os.path.exists(BANNERS_FILE):
+        with open(BANNERS_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return []
+
+def save_banners(data):
+    with open(BANNERS_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
 # === НАСТРОЙКИ TELEGRAM ===
 TELEGRAM_TOKEN = '8198089868:AAFJndPCalVaUBhmKEUAv7qrUpkcOs52XEY'
@@ -1484,6 +1494,13 @@ def api_favorites():
     ]
 
     return jsonify(favorite_tours)
+    
+@app.route('/api/banners/', methods=['GET'])
+def api_get_banners():
+    banners = load_banners()
+    active_banners = [b for b in banners if b.get("active")]
+    active_banners.sort(key=lambda x: x.get("order", 0))
+    return jsonify(active_banners)
 
 # ===========================
 # Запуск
