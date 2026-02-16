@@ -49,7 +49,8 @@ HOTELS_SITE_FILE = os.path.join(DATA_FOLDER, 'hotels_site.json')  # старые
 PLACES_FILE = os.path.join(DATA_FOLDER, 'places.json')
 NEWS_FILE = os.path.join(DATA_FOLDER, 'news.json')
 HOTELS_FILE = HOTELS_SITE_FILE
-BANNERS_FILE = os.path.join(DATA_FOLDER, 'banners.json')
+DATA_FOLDER = os.path.join(BASE_DIR, "data")
+BANNERS_FILE = os.path.join(DATA_FOLDER, "banners.json")
 USERS_FILE = os.path.join(DATA_FOLDER, "users.json")
 
 def load_json(path, default):
@@ -1497,10 +1498,11 @@ def api_favorites():
     
 @app.route('/api/banners/', methods=['GET'])
 def api_get_banners():
-    banners = load_banners()
-    active_banners = [b for b in banners if b.get("active")]
-    active_banners.sort(key=lambda x: x.get("order", 0))
-    return jsonify(active_banners)
+    if os.path.exists(BANNERS_FILE):
+        with open(BANNERS_FILE, "r", encoding="utf-8") as f:
+            banners = json.load(f)
+        return jsonify(banners)
+    return jsonify([])
 
 # ===========================
 # Запуск
