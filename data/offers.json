@@ -12762,5 +12762,3725 @@
         "price": "939218"
       }
     ]
+  },
+  {
+    "hotel_id": "vita_gardenia_hotel_tskaltubo_4_цхалтубо",
+    "hotel": "Vita Gardenia Hotel Tskaltubo 4* (Цхалтубо)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "472647",
+    "old_price": "380205",
+    "discount_percent": "20",
+    "price_per_month": "28389",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "472647"
+      }
+    ]
+  },
+  {
+    "hotel_id": "new_wave_apart_hotel_4_батуми",
+    "hotel": "New Wave Apart Hotel 4* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "680890",
+    "old_price": "382690",
+    "discount_percent": "20",
+    "price_per_month": "28574",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "680890"
+      }
+    ]
+  },
+  {
+    "hotel_id": "eleven_inn_tbilisi_4_тбилиси",
+    "hotel": "Eleven Inn Tbilisi 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "445312",
+    "old_price": "403812",
+    "discount_percent": "20",
+    "price_per_month": "30151",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "445312"
+      }
+    ]
+  },
+  {
+    "hotel_id": "iveria_inn_hotel_4_тбилиси",
+    "hotel": "Iveria Inn Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "495012",
+    "old_price": "403812",
+    "discount_percent": "20",
+    "price_per_month": "30151",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "495012"
+      }
+    ]
+  },
+  {
+    "hotel_id": "sharden_hotel_4_тбилиси",
+    "hotel": "Sharden Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "437360",
+    "old_price": "403812",
+    "discount_percent": "20",
+    "price_per_month": "30151",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "437360"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_salvador_4_батуми",
+    "hotel": "Hotel Salvador 4* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "420959",
+    "old_price": "421208",
+    "discount_percent": "20",
+    "price_per_month": "31450",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "420959"
+      }
+    ]
+  },
+  {
+    "hotel_id": "kutaisi_inn_5_кутаиси",
+    "hotel": "Kutaisi Inn 5* (Кутаиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "545706",
+    "old_price": "424314",
+    "discount_percent": "20",
+    "price_per_month": "31682",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "545706"
+      }
+    ]
+  },
+  {
+    "hotel_id": "townhouse_tbilisi_boutique_hotel_4_тбилиси",
+    "hotel": "TownHouse Tbilisi Boutique Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "475629",
+    "old_price": "427420",
+    "discount_percent": "20",
+    "price_per_month": "31914",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "475629"
+      }
+    ]
+  },
+  {
+    "hotel_id": "aqua_batumi_hotel_apartments_4_батуми",
+    "hotel": "Aqua Batumi Hotel & Apartments 4* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "440342",
+    "old_price": "431148",
+    "discount_percent": "20",
+    "price_per_month": "32192",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "440342"
+      }
+    ]
+  },
+  {
+    "hotel_id": "marionn_hotel_4_тбилиси",
+    "hotel": "Marionn Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "532784",
+    "old_price": "451028",
+    "discount_percent": "20",
+    "price_per_month": "33677",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "532784"
+      }
+    ]
+  },
+  {
+    "hotel_id": "kalasi_hotel_4_тбилиси",
+    "hotel": "Kalasi Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "609819",
+    "old_price": "451649",
+    "discount_percent": "20",
+    "price_per_month": "33723",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "609819"
+      }
+    ]
+  },
+  {
+    "hotel_id": "brim_hotel_tbilisi_4_тбилиси",
+    "hotel": "Brim Hotel Tbilisi 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "456743",
+    "old_price": "451649",
+    "discount_percent": "20",
+    "price_per_month": "33723",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "456743"
+      }
+    ]
+  },
+  {
+    "hotel_id": "sole_palace_4_тбилиси",
+    "hotel": "Sole Palace 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "418474",
+    "old_price": "451649",
+    "discount_percent": "20",
+    "price_per_month": "33723",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "418474"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_astoria_tbilisi_4_тбилиси",
+    "hotel": "Hotel Astoria Tbilisi 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "361319",
+    "old_price": "451649",
+    "discount_percent": "20",
+    "price_per_month": "33723",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "361319"
+      }
+    ]
+  },
+  {
+    "hotel_id": "biography_tbilisi_4_тбилиси",
+    "hotel": "Biography Tbilisi 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "705243",
+    "old_price": "451649",
+    "discount_percent": "20",
+    "price_per_month": "33723",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "705243"
+      }
+    ]
+  },
+  {
+    "hotel_id": "tskaltubo_epic_hotel_spa_4_цхалтубо",
+    "hotel": "Tskaltubo Epic Hotel & Spa 4* (Цхалтубо)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "744009",
+    "old_price": "452270",
+    "discount_percent": "20",
+    "price_per_month": "33770",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "744009"
+      }
+    ]
+  },
+  {
+    "hotel_id": "urban_park_hotel_4_тбилиси",
+    "hotel": "Urban Park Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "674926",
+    "old_price": "461589",
+    "discount_percent": "20",
+    "price_per_month": "34465",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "674926"
+      }
+    ]
+  },
+  {
+    "hotel_id": "1_hotel_borjomi_milano_palace_borjomi_4_боржоми",
+    "hotel": "1 Hotel Borjomi (Milano Palace Borjomi) 4* (Боржоми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "479605",
+    "old_price": "465938",
+    "discount_percent": "20",
+    "price_per_month": "34790",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "479605"
+      }
+    ]
+  },
+  {
+    "hotel_id": "citrus_hotel_4_тбилиси",
+    "hotel": "Citrus Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "374738",
+    "old_price": "468422",
+    "discount_percent": "20",
+    "price_per_month": "34976",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "374738"
+      }
+    ]
+  },
+  {
+    "hotel_id": "coste_hotel_4_тбилиси",
+    "hotel": "Coste Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "709219",
+    "old_price": "468422",
+    "discount_percent": "20",
+    "price_per_month": "34976",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "709219"
+      }
+    ]
+  },
+  {
+    "hotel_id": "heritage_hotel_suites_4_тбилиси",
+    "hotel": "Heritage Hotel & Suites 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "685860",
+    "old_price": "475256",
+    "discount_percent": "20",
+    "price_per_month": "35486",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "685860"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_wine_palace_4_тбилиси",
+    "hotel": "Hotel Wine Palace 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "380205",
+    "old_price": "475256",
+    "discount_percent": "20",
+    "price_per_month": "35486",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "380205"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_21_4_тбилиси",
+    "hotel": "Hotel 21 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "647591",
+    "old_price": "475256",
+    "discount_percent": "20",
+    "price_per_month": "35486",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "647591"
+      }
+    ]
+  },
+  {
+    "hotel_id": "iveria_inn_hotel_4_тбилиси",
+    "hotel": "Iveria Inn Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "510916",
+    "old_price": "485196",
+    "discount_percent": "20",
+    "price_per_month": "36228",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "510916"
+      }
+    ]
+  },
+  {
+    "hotel_id": "brosse_garden_4_тбилиси",
+    "hotel": "Brosse Garden 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "462210",
+    "old_price": "485196",
+    "discount_percent": "20",
+    "price_per_month": "36228",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "462210"
+      }
+    ]
+  },
+  {
+    "hotel_id": "best_western_premier_batumi_5_батуми",
+    "hotel": "Best Western Premier Batumi 5* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "723135",
+    "old_price": "492651",
+    "discount_percent": "20",
+    "price_per_month": "36785",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "723135"
+      }
+    ]
+  },
+  {
+    "hotel_id": "tapis_rouge_design_boutique_hotel_5_батуми",
+    "hotel": "Tapis Rouge Design Boutique Hotel 5* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "975611",
+    "old_price": "497621",
+    "discount_percent": "20",
+    "price_per_month": "37156",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "975611"
+      }
+    ]
+  },
+  {
+    "hotel_id": "mariinsky_apartments_hotel_4_батуми",
+    "hotel": "Mariinsky Apartments & Hotel 4* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "535766",
+    "old_price": "506940",
+    "discount_percent": "20",
+    "price_per_month": "37852",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "535766"
+      }
+    ]
+  },
+  {
+    "hotel_id": "khedi_hotel_tbilisi_4_тбилиси",
+    "hotel": "Khedi Hotel Tbilisi 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "659519",
+    "old_price": "513774",
+    "discount_percent": "20",
+    "price_per_month": "38362",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "659519"
+      }
+    ]
+  },
+  {
+    "hotel_id": "pine_astoria_tbilisi_5_тбилиси",
+    "hotel": "Pine Astoria Tbilisi 5* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "418474",
+    "old_price": "523092",
+    "discount_percent": "20",
+    "price_per_month": "39058",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "418474"
+      }
+    ]
+  },
+  {
+    "hotel_id": "iris_hotel_4_тбилиси",
+    "hotel": "Iris Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "724129",
+    "old_price": "523092",
+    "discount_percent": "20",
+    "price_per_month": "39058",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "724129"
+      }
+    ]
+  },
+  {
+    "hotel_id": "legends_tskaltubo_spa_resort_4_цхалтубо",
+    "hotel": "Legends Tskaltubo Spa Resort 4* (Цхалтубо)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "625226",
+    "old_price": "528684",
+    "discount_percent": "20",
+    "price_per_month": "39475",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "625226"
+      }
+    ]
+  },
+  {
+    "hotel_id": "newport_hotel_kutaisi_4_кутаиси",
+    "hotel": "Newport Hotel Kutaisi 4* (Кутаиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "530299",
+    "old_price": "529305",
+    "discount_percent": "20",
+    "price_per_month": "39521",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "530299"
+      }
+    ]
+  },
+  {
+    "hotel_id": "about_sololaki_4_тбилиси",
+    "hotel": "About Sololaki 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "502467",
+    "old_price": "532411",
+    "discount_percent": "20",
+    "price_per_month": "39753",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "502467"
+      }
+    ]
+  },
+  {
+    "hotel_id": "kutaisi_inn_5_кутаиси",
+    "hotel": "Kutaisi Inn 5* (Кутаиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "545706",
+    "old_price": "534275",
+    "discount_percent": "20",
+    "price_per_month": "39892",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "545706"
+      }
+    ]
+  },
+  {
+    "hotel_id": "vita_gardenia_hotel_tskaltubo_4_цхалтубо",
+    "hotel": "Vita Gardenia Hotel Tskaltubo 4* (Цхалтубо)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "553658",
+    "old_price": "541730",
+    "discount_percent": "20",
+    "price_per_month": "40449",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "553658"
+      }
+    ]
+  },
+  {
+    "hotel_id": "best_western_kutaisi_city_center_4_кутаиси",
+    "hotel": "Best Western Kutaisi City Center 4* (Кутаиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "595406",
+    "old_price": "543594",
+    "discount_percent": "20",
+    "price_per_month": "40588",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "595406"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_passport_tbilisi_4_тбилиси",
+    "hotel": "Hotel Passport Tbilisi 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "571550",
+    "old_price": "546700",
+    "discount_percent": "20",
+    "price_per_month": "40820",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "571550"
+      }
+    ]
+  },
+  {
+    "hotel_id": "alliance_palace_batumi_5_батуми",
+    "hotel": "Alliance Palace Batumi 5* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "743512",
+    "old_price": "546700",
+    "discount_percent": "20",
+    "price_per_month": "40820",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "743512"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_puris_moedani_4_тбилиси",
+    "hotel": "Hotel Puris Moedani 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "495012",
+    "old_price": "546700",
+    "discount_percent": "20",
+    "price_per_month": "40820",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "495012"
+      }
+    ]
+  },
+  {
+    "hotel_id": "litz_resort_5_квариати",
+    "hotel": "Litz Resort 5* (Квариати)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "690830",
+    "old_price": "556640",
+    "discount_percent": "20",
+    "price_per_month": "41562",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "690830"
+      }
+    ]
+  },
+  {
+    "hotel_id": "grand_noel_bakuriani_4_бакуриани",
+    "hotel": "Grand Noel Bakuriani 4* (Бакуриани)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "724129",
+    "old_price": "557261",
+    "discount_percent": "20",
+    "price_per_month": "41609",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "724129"
+      }
+    ]
+  },
+  {
+    "hotel_id": "kutaisi_inn_5_кутаиси",
+    "hotel": "Kutaisi Inn 5* (Кутаиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "600873",
+    "old_price": "566580",
+    "discount_percent": "20",
+    "price_per_month": "42305",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "600873"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotels_preference_hualing_tbilisi_5_тбилиси",
+    "hotel": "Hotels & Preference Hualing Tbilisi 5* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1718129",
+    "old_price": "570929",
+    "discount_percent": "20",
+    "price_per_month": "42629",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1718129"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_abanotubani_4_тбилиси",
+    "hotel": "Hotel Abanotubani 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1010898",
+    "old_price": "570929",
+    "discount_percent": "20",
+    "price_per_month": "42629",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1010898"
+      }
+    ]
+  },
+  {
+    "hotel_id": "new_wave_apart_hotel_4_батуми",
+    "hotel": "New Wave Apart Hotel 4* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "735560",
+    "old_price": "585218",
+    "discount_percent": "20",
+    "price_per_month": "43696",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "735560"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hampton_by_hilton_batumi_center_4_батуми",
+    "hotel": "Hampton By Hilton Batumi Center 4* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "582981",
+    "old_price": "585218",
+    "discount_percent": "20",
+    "price_per_month": "43696",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "582981"
+      }
+    ]
+  },
+  {
+    "hotel_id": "1_hotel_borjomi_milano_palace_borjomi_4_боржоми",
+    "hotel": "1 Hotel Borjomi (Milano Palace Borjomi) 4* (Боржоми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "549185",
+    "old_price": "590809",
+    "discount_percent": "20",
+    "price_per_month": "44114",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "549185"
+      }
+    ]
+  },
+  {
+    "hotel_id": "sharden_hotel_4_тбилиси",
+    "hotel": "Sharden Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "539245",
+    "old_price": "592051",
+    "discount_percent": "20",
+    "price_per_month": "44206",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "539245"
+      }
+    ]
+  },
+  {
+    "hotel_id": "iveria_inn_hotel_4_тбилиси",
+    "hotel": "Iveria Inn Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "572047",
+    "old_price": "592051",
+    "discount_percent": "20",
+    "price_per_month": "44206",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "572047"
+      }
+    ]
+  },
+  {
+    "hotel_id": "eleven_inn_tbilisi_4_тбилиси",
+    "hotel": "Eleven Inn Tbilisi 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "543718",
+    "old_price": "592051",
+    "discount_percent": "20",
+    "price_per_month": "44206",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "543718"
+      }
+    ]
+  },
+  {
+    "hotel_id": "tskaltubo_epic_hotel_spa_4_цхалтубо",
+    "hotel": "Tskaltubo Epic Hotel & Spa 4* (Цхалтубо)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "747488",
+    "old_price": "592672",
+    "discount_percent": "20",
+    "price_per_month": "44253",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "747488"
+      }
+    ]
+  },
+  {
+    "hotel_id": "colosseum_marina_hotel_5_батуми",
+    "hotel": "Colosseum Marina Hotel 5* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "727111",
+    "old_price": "593294",
+    "discount_percent": "20",
+    "price_per_month": "44299",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "727111"
+      }
+    ]
+  },
+  {
+    "hotel_id": "museum_hotel_orbeliani_4_тбилиси",
+    "hotel": "Museum Hotel Orbeliani 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "781781",
+    "old_price": "594536",
+    "discount_percent": "20",
+    "price_per_month": "44392",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "781781"
+      }
+    ]
+  },
+  {
+    "hotel_id": "newport_hotel_kutaisi_4_кутаиси",
+    "hotel": "Newport Hotel Kutaisi 4* (Кутаиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "536760",
+    "old_price": "594536",
+    "discount_percent": "20",
+    "price_per_month": "44392",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "536760"
+      }
+    ]
+  },
+  {
+    "hotel_id": "best_western_kutaisi_city_center_4_кутаиси",
+    "hotel": "Best Western Kutaisi City Center 4* (Кутаиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "574035",
+    "old_price": "602612",
+    "discount_percent": "20",
+    "price_per_month": "44995",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "574035"
+      }
+    ]
+  },
+  {
+    "hotel_id": "townhouse_tbilisi_boutique_hotel_4_тбилиси",
+    "hotel": "TownHouse Tbilisi Boutique Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "561113",
+    "old_price": "605719",
+    "discount_percent": "20",
+    "price_per_month": "45227",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "561113"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_salvador_4_батуми",
+    "hotel": "Hotel Salvador 4* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "550179",
+    "old_price": "612552",
+    "discount_percent": "20",
+    "price_per_month": "45737",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "550179"
+      }
+    ]
+  },
+  {
+    "hotel_id": "1_hotel_borjomi_milano_palace_borjomi_4_боржоми",
+    "hotel": "1 Hotel Borjomi (Milano Palace Borjomi) 4* (Боржоми)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "554155",
+    "old_price": "616280",
+    "discount_percent": "20",
+    "price_per_month": "46016",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "554155"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_pine_chalets_4_гудаури",
+    "hotel": "Hotel Pine Chalets 4* (Гудаури)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "495012",
+    "old_price": "618765",
+    "discount_percent": "20",
+    "price_per_month": "46201",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "495012"
+      }
+    ]
+  },
+  {
+    "hotel_id": "shota_rustaveli_boutique_hotel_4_тбилиси",
+    "hotel": "Shota Rustaveli Boutique Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "533281",
+    "old_price": "618765",
+    "discount_percent": "20",
+    "price_per_month": "46201",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "533281"
+      }
+    ]
+  },
+  {
+    "hotel_id": "novotel_tbilisi_center_4_тбилиси",
+    "hotel": "Novotel Tbilisi Center 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "666974",
+    "old_price": "618765",
+    "discount_percent": "20",
+    "price_per_month": "46201",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "666974"
+      }
+    ]
+  },
+  {
+    "hotel_id": "kalasi_hotel_4_тбилиси",
+    "hotel": "Kalasi Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "637651",
+    "old_price": "619386",
+    "discount_percent": "20",
+    "price_per_month": "46248",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "637651"
+      }
+    ]
+  },
+  {
+    "hotel_id": "brim_hotel_tbilisi_4_тбилиси",
+    "hotel": "Brim Hotel Tbilisi 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "550179",
+    "old_price": "619386",
+    "discount_percent": "20",
+    "price_per_month": "46248",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "550179"
+      }
+    ]
+  },
+  {
+    "hotel_id": "marionn_hotel_4_тбилиси",
+    "hotel": "Marionn Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "593915",
+    "old_price": "619386",
+    "discount_percent": "20",
+    "price_per_month": "46248",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "593915"
+      }
+    ]
+  },
+  {
+    "hotel_id": "sole_palace_4_тбилиси",
+    "hotel": "Sole Palace 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "528311",
+    "old_price": "619386",
+    "discount_percent": "20",
+    "price_per_month": "46248",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "528311"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_astoria_tbilisi_4_тбилиси",
+    "hotel": "Hotel Astoria Tbilisi 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "495509",
+    "old_price": "619386",
+    "discount_percent": "20",
+    "price_per_month": "46248",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "495509"
+      }
+    ]
+  },
+  {
+    "hotel_id": "biography_tbilisi_4_тбилиси",
+    "hotel": "Biography Tbilisi 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "692321",
+    "old_price": "619386",
+    "discount_percent": "20",
+    "price_per_month": "46248",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "692321"
+      }
+    ]
+  },
+  {
+    "hotel_id": "aqua_batumi_hotel_apartments_4_батуми",
+    "hotel": "Aqua Batumi Hotel & Apartments 4* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "563598",
+    "old_price": "619386",
+    "discount_percent": "20",
+    "price_per_month": "46248",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "563598"
+      }
+    ]
+  },
+  {
+    "hotel_id": "crystal_hotel_spa_5_бакуриани",
+    "hotel": "Crystal Hotel & Spa 5* (Бакуриани)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "805637",
+    "old_price": "629326",
+    "discount_percent": "20",
+    "price_per_month": "46990",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "805637"
+      }
+    ]
+  },
+  {
+    "hotel_id": "citrus_hotel_4_тбилиси",
+    "hotel": "Citrus Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "506443",
+    "old_price": "633054",
+    "discount_percent": "20",
+    "price_per_month": "47268",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "506443"
+      }
+    ]
+  },
+  {
+    "hotel_id": "coste_hotel_4_тбилиси",
+    "hotel": "Coste Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "703255",
+    "old_price": "633054",
+    "discount_percent": "20",
+    "price_per_month": "47268",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "703255"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_wine_palace_4_тбилиси",
+    "hotel": "Hotel Wine Palace 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "506443",
+    "old_price": "633054",
+    "discount_percent": "20",
+    "price_per_month": "47268",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "506443"
+      }
+    ]
+  },
+  {
+    "hotel_id": "heritage_hotel_suites_4_тбилиси",
+    "hotel": "Heritage Hotel & Suites 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "681387",
+    "old_price": "633054",
+    "discount_percent": "20",
+    "price_per_month": "47268",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "681387"
+      }
+    ]
+  },
+  {
+    "hotel_id": "urban_park_hotel_4_тбилиси",
+    "hotel": "Urban Park Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "681387",
+    "old_price": "633054",
+    "discount_percent": "20",
+    "price_per_month": "47268",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "681387"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_21_4_тбилиси",
+    "hotel": "Hotel 21 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "659519",
+    "old_price": "633054",
+    "discount_percent": "20",
+    "price_per_month": "47268",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "659519"
+      }
+    ]
+  },
+  {
+    "hotel_id": "newport_hotel_kutaisi_4_кутаиси",
+    "hotel": "Newport Hotel Kutaisi 4* (Кутаиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "589939",
+    "old_price": "641751",
+    "discount_percent": "20",
+    "price_per_month": "47917",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "589939"
+      }
+    ]
+  },
+  {
+    "hotel_id": "brosse_garden_4_тбилиси",
+    "hotel": "Brosse Garden 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "550179",
+    "old_price": "646721",
+    "discount_percent": "20",
+    "price_per_month": "48288",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "550179"
+      }
+    ]
+  },
+  {
+    "hotel_id": "legends_tskaltubo_spa_resort_4_цхалтубо",
+    "hotel": "Legends Tskaltubo Spa Resort 4* (Цхалтубо)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "662501",
+    "old_price": "647342",
+    "discount_percent": "20",
+    "price_per_month": "48335",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "662501"
+      }
+    ]
+  },
+  {
+    "hotel_id": "grand_noel_bakuriani_4_бакуриани",
+    "hotel": "Grand Noel Bakuriani 4* (Бакуриани)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "710213",
+    "old_price": "648585",
+    "discount_percent": "20",
+    "price_per_month": "48428",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "710213"
+      }
+    ]
+  },
+  {
+    "hotel_id": "best_western_kutaisi_city_center_4_кутаиси",
+    "hotel": "Best Western Kutaisi City Center 4* (Кутаиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "636160",
+    "old_price": "652312",
+    "discount_percent": "20",
+    "price_per_month": "48706",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "636160"
+      }
+    ]
+  },
+  {
+    "hotel_id": "khedi_hotel_tbilisi_4_тбилиси",
+    "hotel": "Khedi Hotel Tbilisi 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "665980",
+    "old_price": "654798",
+    "discount_percent": "20",
+    "price_per_month": "48892",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "665980"
+      }
+    ]
+  },
+  {
+    "hotel_id": "pine_astoria_tbilisi_5_тбилиси",
+    "hotel": "Pine Astoria Tbilisi 5* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "528311",
+    "old_price": "660389",
+    "discount_percent": "20",
+    "price_per_month": "49309",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "528311"
+      }
+    ]
+  },
+  {
+    "hotel_id": "iris_hotel_4_тбилиси",
+    "hotel": "Iris Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "703255",
+    "old_price": "660389",
+    "discount_percent": "20",
+    "price_per_month": "49309",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "703255"
+      }
+    ]
+  },
+  {
+    "hotel_id": "best_western_premier_batumi_5_батуми",
+    "hotel": "Best Western Premier Batumi 5* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "765877",
+    "old_price": "663495",
+    "discount_percent": "20",
+    "price_per_month": "49541",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "765877"
+      }
+    ]
+  },
+  {
+    "hotel_id": "about_sololaki_4_тбилиси",
+    "hotel": "About Sololaki 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "576520",
+    "old_price": "665980",
+    "discount_percent": "20",
+    "price_per_month": "49726",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "576520"
+      }
+    ]
+  },
+  {
+    "hotel_id": "tapis_rouge_design_boutique_hotel_5_батуми",
+    "hotel": "Tapis Rouge Design Boutique Hotel 5* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "946288",
+    "old_price": "667222",
+    "discount_percent": "20",
+    "price_per_month": "49819",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "946288"
+      }
+    ]
+  },
+  {
+    "hotel_id": "mariinsky_apartments_hotel_4_батуми",
+    "hotel": "Mariinsky Apartments & Hotel 4* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "631687",
+    "old_price": "674056",
+    "discount_percent": "20",
+    "price_per_month": "50330",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "631687"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_passport_tbilisi_4_тбилиси",
+    "hotel": "Hotel Passport Tbilisi 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "615783",
+    "old_price": "674056",
+    "discount_percent": "20",
+    "price_per_month": "50330",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "615783"
+      }
+    ]
+  },
+  {
+    "hotel_id": "bazzar_boutique_hotel_4_тбилиси",
+    "hotel": "Bazzar Boutique Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "912492",
+    "old_price": "676541",
+    "discount_percent": "20",
+    "price_per_month": "50515",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "912492"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_pine_chalets_4_гудаури",
+    "hotel": "Hotel Pine Chalets 4* (Гудаури)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "543718",
+    "old_price": "679648",
+    "discount_percent": "20",
+    "price_per_month": "50747",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "543718"
+      }
+    ]
+  },
+  {
+    "hotel_id": "paragraph_resort_spa_shekvetili_autograph_collection_5_шекветили",
+    "hotel": "Paragraph Resort & Spa Shekvetili, Autograph Collection 5* (Шекветили)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "601867",
+    "old_price": "687102",
+    "discount_percent": "20",
+    "price_per_month": "51304",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "601867"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_abanotubani_4_тбилиси",
+    "hotel": "Hotel Abanotubani 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "866768",
+    "old_price": "687724",
+    "discount_percent": "20",
+    "price_per_month": "51350",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "866768"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotels_preference_hualing_tbilisi_5_тбилиси",
+    "hotel": "Hotels & Preference Hualing Tbilisi 5* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "1271326",
+    "old_price": "687724",
+    "discount_percent": "20",
+    "price_per_month": "51350",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1271326"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_puris_moedani_4_тбилиси",
+    "hotel": "Hotel Puris Moedani 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "582981",
+    "old_price": "687724",
+    "discount_percent": "20",
+    "price_per_month": "51350",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "582981"
+      }
+    ]
+  },
+  {
+    "hotel_id": "holiday_inn_tbilisi_an_ihg_hotel_4_тбилиси",
+    "hotel": "Holiday Inn - Tbilisi, an IHG Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "685860",
+    "old_price": "690209",
+    "discount_percent": "20",
+    "price_per_month": "51536",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "685860"
+      }
+    ]
+  },
+  {
+    "hotel_id": "ambassadori_goderdzi_hotel_5_батуми",
+    "hotel": "Ambassadori Goderdzi Hotel 5* (Батуми)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "746494",
+    "old_price": "700770",
+    "discount_percent": "20",
+    "price_per_month": "52324",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "746494"
+      }
+    ]
+  },
+  {
+    "hotel_id": "museum_hotel_orbeliani_4_тбилиси",
+    "hotel": "Museum Hotel Orbeliani 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "736057",
+    "old_price": "701391",
+    "discount_percent": "20",
+    "price_per_month": "52371",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "736057"
+      }
+    ]
+  },
+  {
+    "hotel_id": "the_blue_fox_hotel_4_тбилиси",
+    "hotel": "The Blue Fox Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "661010",
+    "old_price": "705119",
+    "discount_percent": "20",
+    "price_per_month": "52649",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "661010"
+      }
+    ]
+  },
+  {
+    "hotel_id": "alliance_palace_batumi_5_батуми",
+    "hotel": "Alliance Palace Batumi 5* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "785260",
+    "old_price": "708225",
+    "discount_percent": "20",
+    "price_per_month": "52881",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "785260"
+      }
+    ]
+  },
+  {
+    "hotel_id": "crystal_hotel_spa_5_бакуриани",
+    "hotel": "Crystal Hotel & Spa 5* (Бакуриани)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "783769",
+    "old_price": "710089",
+    "discount_percent": "20",
+    "price_per_month": "53020",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "783769"
+      }
+    ]
+  },
+  {
+    "hotel_id": "shota_rustaveli_boutique_hotel_4_тбилиси",
+    "hotel": "Shota Rustaveli Boutique Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "593915",
+    "old_price": "715059",
+    "discount_percent": "20",
+    "price_per_month": "53391",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "593915"
+      }
+    ]
+  },
+  {
+    "hotel_id": "novotel_tbilisi_center_4_тбилиси",
+    "hotel": "Novotel Tbilisi Center 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "670453",
+    "old_price": "715059",
+    "discount_percent": "20",
+    "price_per_month": "53391",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "670453"
+      }
+    ]
+  },
+  {
+    "hotel_id": "billionaire_ramada_plaza_by_wyndham_batumi_5_батуми",
+    "hotel": "Billionaire Ramada Plaza By Wyndham Batumi 5* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "726614",
+    "old_price": "717544",
+    "discount_percent": "20",
+    "price_per_month": "53577",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "726614"
+      }
+    ]
+  },
+  {
+    "hotel_id": "ambassadori_goderdzi_hotel_5_батуми",
+    "hotel": "Ambassadori Goderdzi Hotel 5* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "872235",
+    "old_price": "727484",
+    "discount_percent": "20",
+    "price_per_month": "54319",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "872235"
+      }
+    ]
+  },
+  {
+    "hotel_id": "litz_resort_5_квариати",
+    "hotel": "Litz Resort 5* (Квариати)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "747985",
+    "old_price": "730590",
+    "discount_percent": "20",
+    "price_per_month": "54551",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "747985"
+      }
+    ]
+  },
+  {
+    "hotel_id": "colosseum_marina_hotel_5_батуми",
+    "hotel": "Colosseum Marina Hotel 5* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "768859",
+    "old_price": "735560",
+    "discount_percent": "20",
+    "price_per_month": "54922",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "768859"
+      }
+    ]
+  },
+  {
+    "hotel_id": "paragraph_resort_spa_shekvetili_autograph_collection_5_шекветили",
+    "hotel": "Paragraph Resort & Spa Shekvetili, Autograph Collection 5* (Шекветили)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "681387",
+    "old_price": "736802",
+    "discount_percent": "20",
+    "price_per_month": "55015",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "681387"
+      }
+    ]
+  },
+  {
+    "hotel_id": "kokhta_plaza_boutique_hotel_4_бакуриани",
+    "hotel": "Kokhta Plaza Boutique Hotel 4* (Бакуриани)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "847882",
+    "old_price": "744258",
+    "discount_percent": "20",
+    "price_per_month": "55571",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "847882"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_pine_chalets_4_гудаури",
+    "hotel": "Hotel Pine Chalets 4* (Гудаури)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "600873",
+    "old_price": "751091",
+    "discount_percent": "20",
+    "price_per_month": "56082",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "600873"
+      }
+    ]
+  },
+  {
+    "hotel_id": "bazzar_boutique_hotel_4_тбилиси",
+    "hotel": "Bazzar Boutique Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "823529",
+    "old_price": "756061",
+    "discount_percent": "20",
+    "price_per_month": "56453",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "823529"
+      }
+    ]
+  },
+  {
+    "hotel_id": "holiday_inn_tbilisi_an_ihg_hotel_4_тбилиси",
+    "hotel": "Holiday Inn - Tbilisi, an IHG Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "681387",
+    "old_price": "756061",
+    "discount_percent": "20",
+    "price_per_month": "56453",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "681387"
+      }
+    ]
+  },
+  {
+    "hotel_id": "crowne_plaza_borjomi_an_ihg_hotel_5_боржоми",
+    "hotel": "Crowne Plaza - Borjomi, an IHG Hotel 5* (Боржоми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1733536",
+    "old_price": "757304",
+    "discount_percent": "20",
+    "price_per_month": "56545",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1733536"
+      }
+    ]
+  },
+  {
+    "hotel_id": "sheraton_batumi_hotel_5_батуми",
+    "hotel": "Sheraton Batumi Hotel 5* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "777805",
+    "old_price": "772835",
+    "discount_percent": "20",
+    "price_per_month": "57705",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "777805"
+      }
+    ]
+  },
+  {
+    "hotel_id": "sheraton_grand_tbilisi_metechi_palace_5_тбилиси",
+    "hotel": "Sheraton Grand Tbilisi Metechi Palace 5* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1454719",
+    "old_price": "776562",
+    "discount_percent": "20",
+    "price_per_month": "57983",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1454719"
+      }
+    ]
+  },
+  {
+    "hotel_id": "the_blue_fox_hotel_4_тбилиси",
+    "hotel": "The Blue Fox Hotel 4* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "676914",
+    "old_price": "777805",
+    "discount_percent": "20",
+    "price_per_month": "58076",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "676914"
+      }
+    ]
+  },
+  {
+    "hotel_id": "crowne_plaza_borjomi_an_ihg_hotel_5_боржоми",
+    "hotel": "Crowne Plaza - Borjomi, an IHG Hotel 5* (Боржоми)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "1270332",
+    "old_price": "782154",
+    "discount_percent": "20",
+    "price_per_month": "58401",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1270332"
+      }
+    ]
+  },
+  {
+    "hotel_id": "kokhta_plaza_boutique_hotel_4_бакуриани",
+    "hotel": "Kokhta Plaza Boutique Hotel 4* (Бакуриани)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "814086",
+    "old_price": "792094",
+    "discount_percent": "20",
+    "price_per_month": "59143",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "814086"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_ushba_in_mestia_4_местия",
+    "hotel": "Hotel Ushba in Mestia 4* (Местия)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1016862",
+    "old_price": "793336",
+    "discount_percent": "20",
+    "price_per_month": "59236",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1016862"
+      }
+    ]
+  },
+  {
+    "hotel_id": "crowne_plaza_borjomi_an_ihg_hotel_5_боржоми",
+    "hotel": "Crowne Plaza - Borjomi, an IHG Hotel 5* (Боржоми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "1444779",
+    "old_price": "798928",
+    "discount_percent": "20",
+    "price_per_month": "59653",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1444779"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_tsiga_4_гудаури",
+    "hotel": "Hotel Tsiga 4* (Гудаури)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "1007916",
+    "old_price": "798928",
+    "discount_percent": "20",
+    "price_per_month": "59653",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1007916"
+      }
+    ]
+  },
+  {
+    "hotel_id": "wyndham_grand_tbilisi_5_тбилиси",
+    "hotel": "Wyndham Grand Tbilisi 5* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1274805",
+    "old_price": "800170",
+    "discount_percent": "20",
+    "price_per_month": "59746",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1274805"
+      }
+    ]
+  },
+  {
+    "hotel_id": "sheraton_grand_tbilisi_metechi_palace_5_тбилиси",
+    "hotel": "Sheraton Grand Tbilisi Metechi Palace 5* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "1120238",
+    "old_price": "805140",
+    "discount_percent": "20",
+    "price_per_month": "60117",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1120238"
+      }
+    ]
+  },
+  {
+    "hotel_id": "wyndham_grand_tbilisi_5_тбилиси",
+    "hotel": "Wyndham Grand Tbilisi 5* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "1017856",
+    "old_price": "818808",
+    "discount_percent": "20",
+    "price_per_month": "61138",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1017856"
+      }
+    ]
+  },
+  {
+    "hotel_id": "billionaire_ramada_plaza_by_wyndham_batumi_5_батуми",
+    "hotel": "Billionaire Ramada Plaza By Wyndham Batumi 5* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "768362",
+    "old_price": "823778",
+    "discount_percent": "20",
+    "price_per_month": "61509",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "768362"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_tsiga_4_гудаури",
+    "hotel": "Hotel Tsiga 4* (Гудаури)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1253931",
+    "old_price": "833718",
+    "discount_percent": "20",
+    "price_per_month": "62251",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1253931"
+      }
+    ]
+  },
+  {
+    "hotel_id": "paragraph_resort_spa_shekvetili_autograph_collection_5_шекветили",
+    "hotel": "Paragraph Resort & Spa Shekvetili, Autograph Collection 5* (Шекветили)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "736057",
+    "old_price": "838066",
+    "discount_percent": "20",
+    "price_per_month": "62576",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "736057"
+      }
+    ]
+  },
+  {
+    "hotel_id": "gistola_hotel_mestia_4_местия",
+    "hotel": "Gistola Hotel Mestia 4* (Местия)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "902552",
+    "old_price": "841172",
+    "discount_percent": "20",
+    "price_per_month": "62808",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "902552"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_tsiga_4_гудаури",
+    "hotel": "Hotel Tsiga 4* (Гудаури)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "972629",
+    "old_price": "846764",
+    "discount_percent": "20",
+    "price_per_month": "63225",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "972629"
+      }
+    ]
+  },
+  {
+    "hotel_id": "sheraton_batumi_hotel_5_батуми",
+    "hotel": "Sheraton Batumi Hotel 5* (Батуми)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "809613",
+    "old_price": "868508",
+    "discount_percent": "20",
+    "price_per_month": "64849",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "809613"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_carpe_diem_gudauri_4_гудаури",
+    "hotel": "Hotel Carpe Diem Gudauri 4* (Гудаури)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "1575987",
+    "old_price": "894600",
+    "discount_percent": "20",
+    "price_per_month": "66797",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1575987"
+      }
+    ]
+  },
+  {
+    "hotel_id": "paragraph_golf_spa_tabori_autograph_collection_5_тбилиси",
+    "hotel": "Paragraph Golf & Spa Tabori, Autograph Collection 5* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "777308",
+    "old_price": "905782",
+    "discount_percent": "20",
+    "price_per_month": "67632",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "777308"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_carpe_diem_gudauri_4_гудаури",
+    "hotel": "Hotel Carpe Diem Gudauri 4* (Гудаури)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1939791",
+    "old_price": "919450",
+    "discount_percent": "20",
+    "price_per_month": "68652",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1939791"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_carpe_diem_gudauri_4_гудаури",
+    "hotel": "Hotel Carpe Diem Gudauri 4* (Гудаури)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "1426887",
+    "old_price": "923178",
+    "discount_percent": "20",
+    "price_per_month": "68931",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1426887"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_roshe_gudauri_4_гудаури",
+    "hotel": "Hotel Roshe Gudauri 4* (Гудаури)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "1280769",
+    "old_price": "952376",
+    "discount_percent": "20",
+    "price_per_month": "71111",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1280769"
+      }
+    ]
+  },
+  {
+    "hotel_id": "swissotel_tbilisi_5_тбилиси",
+    "hotel": "Swissotel Tbilisi 5* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "761901",
+    "old_price": "952376",
+    "discount_percent": "20",
+    "price_per_month": "71111",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "761901"
+      }
+    ]
+  },
+  {
+    "hotel_id": "paragraph_golf_spa_tabori_autograph_collection_5_тбилиси",
+    "hotel": "Paragraph Golf & Spa Tabori, Autograph Collection 5* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "854343",
+    "old_price": "952998",
+    "discount_percent": "20",
+    "price_per_month": "71157",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "854343"
+      }
+    ]
+  },
+  {
+    "hotel_id": "rooms_hotel_kokhta_4_бакуриани",
+    "hotel": "Rooms Hotel Kokhta 4* (Бакуриани)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "1125208",
+    "old_price": "959210",
+    "discount_percent": "20",
+    "price_per_month": "71621",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1125208"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_roshe_gudauri_4_гудаури",
+    "hotel": "Hotel Roshe Gudauri 4* (Гудаури)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "1190812",
+    "old_price": "969771",
+    "discount_percent": "20",
+    "price_per_month": "72410",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1190812"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hotel_roshe_gudauri_4_гудаури",
+    "hotel": "Hotel Roshe Gudauri 4* (Гудаури)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1527281",
+    "old_price": "1000834",
+    "discount_percent": "20",
+    "price_per_month": "74729",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1527281"
+      }
+    ]
+  },
+  {
+    "hotel_id": "rooms_hotel_kokhta_4_бакуриани",
+    "hotel": "Rooms Hotel Kokhta 4* (Бакуриани)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1316553",
+    "old_price": "1019471",
+    "discount_percent": "20",
+    "price_per_month": "76120",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1316553"
+      }
+    ]
+  },
+  {
+    "hotel_id": "swissotel_tbilisi_5_тбилиси",
+    "hotel": "Swissotel Tbilisi 5* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "827505",
+    "old_price": "1034381",
+    "discount_percent": "20",
+    "price_per_month": "77234",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "827505"
+      }
+    ]
+  },
+  {
+    "hotel_id": "stamba_hotel_5_тбилиси",
+    "hotel": "Stamba Hotel 5* (Тбилиси)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "902055",
+    "old_price": "1061716",
+    "discount_percent": "20",
+    "price_per_month": "79275",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "902055"
+      }
+    ]
+  },
+  {
+    "hotel_id": "marco_polo_gudauri_hotel_5_гудаури",
+    "hotel": "Marco Polo Gudauri Hotel 5* (Гудаури)",
+    "city": "Астана",
+    "country": "Батуми",
+    "meal": "BB",
+    "nights": "4+3",
+    "seats": "-",
+    "price": "1992473",
+    "old_price": "1120114",
+    "discount_percent": "20",
+    "price_per_month": "83635",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1992473"
+      }
+    ]
+  },
+  {
+    "hotel_id": "marco_polo_gudauri_hotel_5_гудаури",
+    "hotel": "Marco Polo Gudauri Hotel 5* (Гудаури)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "5+2",
+    "seats": "-",
+    "price": "2283218",
+    "old_price": "1140615",
+    "discount_percent": "20",
+    "price_per_month": "85166",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "2283218"
+      }
+    ]
+  },
+  {
+    "hotel_id": "stamba_hotel_5_тбилиси",
+    "hotel": "Stamba Hotel 5* (Тбилиси)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1039227",
+    "old_price": "1177890",
+    "discount_percent": "20",
+    "price_per_month": "87949",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "1039227"
+      }
+    ]
+  },
+  {
+    "hotel_id": "marco_polo_gudauri_hotel_5_гудаури",
+    "hotel": "Marco Polo Gudauri Hotel 5* (Гудаури)",
+    "city": "Астана",
+    "country": "Грузия",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "2930312",
+    "old_price": "1263622",
+    "discount_percent": "20",
+    "price_per_month": "94350",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "27.02.2026",
+        "price": "2930312"
+      }
+    ]
+  },
+  {
+    "hotel_id": "al_mansour_plaza_hotel_4_b_ring_road",
+    "hotel": "Al Mansour Plaza Hotel 4* (B Ring Road)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "545706",
+    "old_price": "534275",
+    "discount_percent": "20",
+    "price_per_month": "39892",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "545706"
+      }
+    ]
+  },
+  {
+    "hotel_id": "al_mansour_suites_hotel_4_c_ring_road",
+    "hotel": "Al Mansour Suites Hotel 4* (C Ring Road)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "545706",
+    "old_price": "534275",
+    "discount_percent": "20",
+    "price_per_month": "39892",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "545706"
+      }
+    ]
+  },
+  {
+    "hotel_id": "grand_regal_hotel_4_old_town",
+    "hotel": "Grand Regal Hotel 4* (OLD TOWN)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "518371",
+    "old_price": "549185",
+    "discount_percent": "20",
+    "price_per_month": "41006",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "518371"
+      }
+    ]
+  },
+  {
+    "hotel_id": "vip_hotel_doha_5_al_sadd",
+    "hotel": "VIP Hotel Doha 5* (AL Sadd)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "715680",
+    "old_price": "568444",
+    "discount_percent": "20",
+    "price_per_month": "42444",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "715680"
+      }
+    ]
+  },
+  {
+    "hotel_id": "central_inn_souq_waqif_hotel_4_souq_waqif",
+    "hotel": "Central Inn Souq Waqif Hotel 4* (Souq Waqif)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "636657",
+    "old_price": "578384",
+    "discount_percent": "20",
+    "price_per_month": "43186",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "636657"
+      }
+    ]
+  },
+  {
+    "hotel_id": "horizon_manor_hotel_doha_4_old_town",
+    "hotel": "Horizon Manor Hotel Doha 4* (OLD TOWN)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "462707",
+    "old_price": "578384",
+    "discount_percent": "20",
+    "price_per_month": "43186",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "462707"
+      }
+    ]
+  },
+  {
+    "hotel_id": "retaj_al_rayyan_hotel_4_al_dafna",
+    "hotel": "Retaj Al Rayyan Hotel 4* (Al Dafna)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "668465",
+    "old_price": "628084",
+    "discount_percent": "20",
+    "price_per_month": "46897",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "668465"
+      }
+    ]
+  },
+  {
+    "hotel_id": "al_aseel_hotel_4_old_town",
+    "hotel": "Al Aseel Hotel 4* (OLD TOWN)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "508431",
+    "old_price": "635539",
+    "discount_percent": "20",
+    "price_per_month": "47454",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "508431"
+      }
+    ]
+  },
+  {
+    "hotel_id": "the_royal_riviera_hotel_4_corniche_road",
+    "hotel": "The Royal Riviera Hotel 4* (Corniche Road)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "700273",
+    "old_price": "657904",
+    "discount_percent": "20",
+    "price_per_month": "49124",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "700273"
+      }
+    ]
+  },
+  {
+    "hotel_id": "westpac_hotel_suites_doha_4_west_bey",
+    "hotel": "Westpac Hotel & Suites Doha 4* (West Bey)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "541730",
+    "old_price": "677162",
+    "discount_percent": "20",
+    "price_per_month": "50562",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "541730"
+      }
+    ]
+  },
+  {
+    "hotel_id": "concorde_hotel_doha_5_al_sadd",
+    "hotel": "Concorde Hotel Doha 5* (AL Sadd)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "553658",
+    "old_price": "692072",
+    "discount_percent": "20",
+    "price_per_month": "51675",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "553658"
+      }
+    ]
+  },
+  {
+    "hotel_id": "best_plaza_west_bay_5_west_bey",
+    "hotel": "Best Plaza West Bay 5* (West Bey)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1067556",
+    "old_price": "716922",
+    "discount_percent": "20",
+    "price_per_month": "53530",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "1067556"
+      }
+    ]
+  },
+  {
+    "hotel_id": "ezdan_hotel_west_bay_4_al_dafna",
+    "hotel": "Ezdan Hotel West Bay 4* (Al Dafna)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "751464",
+    "old_price": "736802",
+    "discount_percent": "20",
+    "price_per_month": "55015",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "751464"
+      }
+    ]
+  },
+  {
+    "hotel_id": "delta_hotels_by_marriott_city_center_doha_5_west_bey",
+    "hotel": "Delta Hotels by Marriott City Center Doha 5* (West Bey)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1071532",
+    "old_price": "741772",
+    "discount_percent": "20",
+    "price_per_month": "55386",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "1071532"
+      }
+    ]
+  },
+  {
+    "hotel_id": "the_bentley_luxury_hotel_and_suites_5_west_bey",
+    "hotel": "The Bentley Luxury Hotel and Suites 5* (West Bey)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "980581",
+    "old_price": "741772",
+    "discount_percent": "20",
+    "price_per_month": "55386",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "980581"
+      }
+    ]
+  },
+  {
+    "hotel_id": "souq_al_wakra_hotel_qatar_by_tivoli_5_corniche_road",
+    "hotel": "Souq Al Wakra Hotel Qatar by Tivoli 5* (Corniche Road)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "933366",
+    "old_price": "770971",
+    "discount_percent": "20",
+    "price_per_month": "57566",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "933366"
+      }
+    ]
+  },
+  {
+    "hotel_id": "four_points_by_sheraton_doha_4_mushaireb",
+    "hotel": "Four Points by Sheraton Doha 4* (Mushaireb)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "632681",
+    "old_price": "790851",
+    "discount_percent": "20",
+    "price_per_month": "59050",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "632681"
+      }
+    ]
+  },
+  {
+    "hotel_id": "steigenberger_hotel_residence_5_old_airport_road",
+    "hotel": "Steigenberger Hotel & Residence 5* (Old Airport Road)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "700273",
+    "old_price": "805761",
+    "discount_percent": "20",
+    "price_per_month": "60164",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "700273"
+      }
+    ]
+  },
+  {
+    "hotel_id": "musheireb_boutique_hotel_by_tivoli_5_souq_waqif",
+    "hotel": "Musheireb Boutique Hotel by Tivoli 5* (Souq Waqif)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "688345",
+    "old_price": "836824",
+    "discount_percent": "20",
+    "price_per_month": "62483",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "688345"
+      }
+    ]
+  },
+  {
+    "hotel_id": "arumaila_boutique_hotel_by_tivoli_5_west_bey",
+    "hotel": "Arumaila Boutique Hotel by Tivoli 5* (West Bey)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "862295",
+    "old_price": "836824",
+    "discount_percent": "20",
+    "price_per_month": "62483",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "862295"
+      }
+    ]
+  },
+  {
+    "hotel_id": "najd_boutique_hotel_by_tivoli_5_al_rayyan",
+    "hotel": "Najd Boutique Hotel by Tivoli 5* (Al Rayyan)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1349355",
+    "old_price": "843036",
+    "discount_percent": "20",
+    "price_per_month": "62947",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "1349355"
+      }
+    ]
+  },
+  {
+    "hotel_id": "doubletree_by_hilton_doha_old_town_5_old_town",
+    "hotel": "Doubletree by Hilton Doha Old Town 5* (OLD TOWN)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "842415",
+    "old_price": "845521",
+    "discount_percent": "20",
+    "price_per_month": "63132",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "842415"
+      }
+    ]
+  },
+  {
+    "hotel_id": "al_jomrok_boutique_hotel_by_tivoli_5_abu_samra",
+    "hotel": "Al Jomrok Boutique Hotel by Tivoli 5* (ABU SAMRA)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "701764",
+    "old_price": "856704",
+    "discount_percent": "20",
+    "price_per_month": "63967",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "701764"
+      }
+    ]
+  },
+  {
+    "hotel_id": "al_mirqab_boutiq_hotel_by_tivoli_5_katara",
+    "hotel": "Al Mirqab Boutiq Hotel by Tivoli 5* (Katara)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1258404",
+    "old_price": "866644",
+    "discount_percent": "20",
+    "price_per_month": "64709",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "1258404"
+      }
+    ]
+  },
+  {
+    "hotel_id": "al_bidda_boutique_hotel_by_tivoli_5_al_rayyan",
+    "hotel": "Al Bidda Boutique Hotel by Tivoli 5* (Al Rayyan)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1266356",
+    "old_price": "876584",
+    "discount_percent": "20",
+    "price_per_month": "65452",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "1266356"
+      }
+    ]
+  },
+  {
+    "hotel_id": "w_doha_hotel_residences_5_west_bey",
+    "hotel": "W Doha Hotel & Residences 5* (West Bey)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "2352798",
+    "old_price": "929390",
+    "discount_percent": "20",
+    "price_per_month": "69394",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "2352798"
+      }
+    ]
+  },
+  {
+    "hotel_id": "al_najada_doha_hotel_apartments_by_oaks_4_souq_waqif",
+    "hotel": "Al Najada Doha Hotel Apartments by Oaks 4* (Souq Waqif)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1131172",
+    "old_price": "934360",
+    "discount_percent": "20",
+    "price_per_month": "69766",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "1131172"
+      }
+    ]
+  },
+  {
+    "hotel_id": "sedra_arjaan_by_rotana_4_pearl_of_qatar",
+    "hotel": "Sedra Arjaan by Rotana 4* (Pearl of Qatar)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1701231",
+    "old_price": "965422",
+    "discount_percent": "20",
+    "price_per_month": "72085",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "1701231"
+      }
+    ]
+  },
+  {
+    "hotel_id": "sealine_beach_al_murwab_resort_5_mesaieed",
+    "hotel": "Sealine Beach, Al Murwab Resort 5* (Mesaieed)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "3737937",
+    "old_price": "980954",
+    "discount_percent": "20",
+    "price_per_month": "73245",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "3737937"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hilton_doha_5_west_bey",
+    "hotel": "Hilton Doha 5* (West Bey)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1059604",
+    "old_price": "1082839",
+    "discount_percent": "20",
+    "price_per_month": "80852",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "1059604"
+      }
+    ]
+  },
+  {
+    "hotel_id": "rixos_premium_qetaifan_island_north_doha_5_lusail",
+    "hotel": "Rixos Premium Qetaifan Island North Doha 5* (Lusail)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "2997904",
+    "old_price": "1113901",
+    "discount_percent": "20",
+    "price_per_month": "83171",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "2997904"
+      }
+    ]
+  },
+  {
+    "hotel_id": "rixos_gulf_hotel_doha_5_corniche_road",
+    "hotel": "Rixos Gulf Hotel Doha 5* (Corniche Road)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "2779721",
+    "old_price": "1117008",
+    "discount_percent": "20",
+    "price_per_month": "83403",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "2779721"
+      }
+    ]
+  },
+  {
+    "hotel_id": "sheraton_grand_doha_resort_convention_hotel_5_west_bey",
+    "hotel": "Sheraton Grand Doha Resort & Convention Hotel 5* (West Bey)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1779260",
+    "old_price": "1131918",
+    "discount_percent": "20",
+    "price_per_month": "84516",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "1779260"
+      }
+    ]
+  },
+  {
+    "hotel_id": "the_ned_doha_5_corniche_road",
+    "hotel": "The Ned Doha 5* (Corniche Road)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "2154992",
+    "old_price": "1201498",
+    "discount_percent": "20",
+    "price_per_month": "89712",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "2154992"
+      }
+    ]
+  },
+  {
+    "hotel_id": "waldorf_astoria_doha_west_bay_5_west_bey",
+    "hotel": "Waldorf Astoria Doha West Bay 5* (West Bey)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "1776775",
+    "old_price": "1405889",
+    "discount_percent": "20",
+    "price_per_month": "104973",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "1776775"
+      }
+    ]
+  },
+  {
+    "hotel_id": "hilton_salwa_beach_resort_villas_5_abu_samra",
+    "hotel": "Hilton Salwa Beach Resort & Villas 5* (ABU SAMRA)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "11262517",
+    "old_price": "1407752",
+    "discount_percent": "20",
+    "price_per_month": "105112",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "11262517"
+      }
+    ]
+  },
+  {
+    "hotel_id": "the_ritz_carlton_sharq_village_doha_5_sharq_village",
+    "hotel": "The Ritz-Carlton Sharq Village, Doha 5* (Sharq Village)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "24422083",
+    "old_price": "1558716",
+    "discount_percent": "20",
+    "price_per_month": "116384",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "24422083"
+      }
+    ]
+  },
+  {
+    "hotel_id": "the_st_regis_doha_5_katara",
+    "hotel": "The St. Regis Doha 5* (Katara)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "4296068",
+    "old_price": "1589779",
+    "discount_percent": "20",
+    "price_per_month": "118704",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "4296068"
+      }
+    ]
+  },
+  {
+    "hotel_id": "waldorf_astoria_lusail_doha_5_lusail",
+    "hotel": "Waldorf Astoria Lusail Doha 5* (Lusail)",
+    "city": "Астана",
+    "country": "Катар",
+    "meal": "BB",
+    "nights": "7",
+    "seats": "-",
+    "price": "4592777",
+    "old_price": "1599719",
+    "discount_percent": "20",
+    "price_per_month": "119446",
+    "installment_months": "12",
+    "dates_prices": [
+      {
+        "date": "02.03.2026",
+        "price": "4592777"
+      }
+    ]
   }
 ]

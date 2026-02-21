@@ -1,12 +1,14 @@
 {
   "city_code": "7",
-  "country_code": "22",
-  "departure_date": "04.02.2026",
+  "country_code": "95",
+  "departure_date": "22.02.2026",
   "departure_end": "28.02.2026",
   "nights": [
-    6
+    7
   ],
-  "meal": [],
+  "meal": [
+    "BB"
+  ],
   "currency": "KZT",
   "ADULT": "1",
   "STARS": [
