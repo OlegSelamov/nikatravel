@@ -3,7 +3,7 @@
 <head>
     <link rel="manifest" href="/static/manifest.json">
     <meta name="theme-color" content="#f2c98a">
-    <link rel="icon" href="/static/icons/icon-192.png">
+    <link rel="icon" href="/static/fon/logo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nika Travel</title>
@@ -23,21 +23,29 @@
         font-family: 'Poppins', sans-serif;
         background-color: #f9f3eb;
         color: #2b2b2b;
+		padding-top: 58px;   /* 🔥 высота хедера */
       }
 
       /* 🔝 Хедер */
-      .header {
-        position: sticky;
-        top: 0;
-        z-index: 100001;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 18px 40px;
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      }
+	  .header {
+	    position: fixed;              /* 🔥 теперь реально приклеен */
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    height: 58px;                 /* 🔥 меньше высота */
+	    padding: 0 30px;              /* 🔥 убрали вертикальный padding */
+	  
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+
+	    background: rgba(255, 255, 255, 0.85);
+	    backdrop-filter: blur(12px);
+
+	    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+	    z-index: 100001;
+	  }
+	  
       .header-logo {
         font-size: 28px;
         font-weight: 700;
@@ -48,35 +56,54 @@
       .header-logo:hover {
         color: #c19668;
       }
+	  
+	  .logo-block {
+		  display: flex;
+		  align-items: center;
+		  gap: 12px;
+	  }
+
+	  .logo {
+		  height: 120px;
+	  }
+
+	  .logo-text {
+		  font-size: 20px;
+		  font-weight: 700;
+		  color: white;
+		  letter-spacing: 1px;
+	  }
 
       /* Меню */
       .nav-links {
         display: flex;
         gap: 25px;
       }
-      .nav-links a {
-        text-decoration: none;
-        color: #333;
-        font-weight: 500;
-        position: relative;
-        transition: color 0.3s;
-      }
-      .nav-links a::after {
-        content: "";
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 0%;
-        height: 2px;
-        background: linear-gradient(135deg, #eacda3, #d6ae7b);
-        transition: 0.3s;
-      }
-      .nav-links a:hover {
-        color: #d6ae7b;
-      }
-      .nav-links a:hover::after {
-        width: 100%;
-      }
+	  .nav-links a {
+	    text-decoration: none;
+	    color: #555;
+	    font-weight: 500;
+	    font-size: 15px;
+	    padding: 8px 4px;
+	    position: relative;
+	    transition: color 0.25s ease;
+	  }
+	  .nav-links a::after {
+	    content: "";
+	    position: absolute;
+	    bottom: -6px;
+	    left: 0;
+	    width: 0%;
+	    height: 2px;
+	    background: #ff7a00;
+	    transition: width 0.3s ease;
+	  }
+	  .nav-links a:hover {
+	    color: #111;
+	  }
+	  .nav-links a:hover::after {
+	    width: 100%;
+	  }
 
       /* Бургер */
       .burger {
@@ -365,7 +392,9 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 {% if not request.path.startswith('/admin') %}
 <div class="header">
-  <a href="{{ url_for('index') }}" class="header-logo">Nika Travel</a>
+  <div class="logo-block">
+    <img src="/static/fon/logo1.png" class="logo">
+  </div>
 
   <div class="burger" onclick="toggleMenu()">
     <div></div><div></div><div></div>
@@ -373,11 +402,10 @@
 
   <div class="nav-links" id="navMenu">
     <a href="{{ url_for('index') }}">Главная</a>
-    <a href="{{ url_for('about') }}">О нас</a>
-	<a href="{{ url_for('faq') }}">FAQ</a>
     <a href="{{ url_for('filter_page') }}">Доступные туры</a>
-    <a href="{{ url_for('flights') }}">Авиабилеты</a>
+    <a href="/favorites">Избранное</a>
     <a href="{{ url_for('contacts') }}">Контакты</a>
+    <a href="/profile">Личный кабинет</a>
   </div>
 </div>
 {% endif %}

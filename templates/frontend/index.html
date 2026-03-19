@@ -901,20 +901,118 @@ section h2.visible {
   line-height: 1.4;
 }
 
+.hero {
+  position: relative;
+  height: 500px;
+  background: url('/static/fon/hero.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-filter {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 1000px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+}
+
+.hero-filter h1 {
+  margin-bottom: 25px;
+  color: #222;
+}
+
+.filter-row {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.filter-row select {
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-family: inherit;
+  min-width: 180px;
+}
+
+.hero-btn {
+  padding: 12px 24px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #ff7a00, #0066ff);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.hero-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,102,255,0.4);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 420px;
+  }
+
+  .filter-row {
+    flex-direction: column;
+  }
+
+  .filter-row select,
+  .hero-btn {
+    width: 100%;
+  }
+}
+
 </style>
 
 <!-- ===== KASPI STYLE BANNERS ===== -->
-<div class="swiper kaspi-swiper">
-  <div class="swiper-wrapper">
+<section class="hero">
 
-    {% for banner in banners %}
-      <a href="{{ banner.link }}" class="swiper-slide kaspi-slide">
-        <img src="{{ url_for('static', filename='banners/' + banner.image) }}" alt="">
-      </a>
-    {% endfor %}
+  <div class="hero-overlay">
+    <div class="hero-filter">
 
+      <h1>Найди свой идеальный тур</h1>
+
+      <div class="filter-row">
+        <select>
+          <option>Город вылета</option>
+        </select>
+
+        <select>
+          <option>Страна</option>
+        </select>
+
+        <select>
+          <option>Ночей</option>
+        </select>
+
+        <button class="hero-btn">
+          Найти тур
+        </button>
+      </div>
+
+    </div>
   </div>
-</div>
+
+</section>
 
 <section class="services-cards">
 
