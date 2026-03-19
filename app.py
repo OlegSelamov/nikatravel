@@ -601,6 +601,10 @@ def contacts():
 @app.route('/faq')
 def faq():
     return render_template('frontend/faq.html')
+    
+@app.route("/privacy")
+def privacy():
+    return render_template("frontend/privacy.html")
 
 @app.route('/filter')
 def filter_page():
