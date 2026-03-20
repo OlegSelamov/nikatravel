@@ -166,6 +166,72 @@
         .admin-table td .icon:hover {
           transform: scale(1.2);
         }
+		
+		.tour-table{
+			width:100%;
+			border-collapse:collapse;
+			background:white;
+			border-radius:12px;
+			overflow:hidden;
+			box-shadow:0 5px 20px rgba(0,0,0,0.1);
+		}
+
+		.tour-table th{
+			background:#f5f5f5;
+			padding:12px;
+			text-align:left;
+		}
+
+		.tour-table td{
+			padding:10px;
+			border-bottom:1px solid #eee;
+		}
+
+		.tour-photo{
+			width:140px;
+			height:90px;
+			object-fit:cover;
+			border-radius:8px;
+		}
+
+		.delete-btn{
+			color:red;
+			font-size:22px;
+			text-decoration:none;
+		}
+		
+		.tour-actions{
+			display:flex;
+			gap:8px;
+		}
+
+		.btn-edit{
+			background:#3498db;
+			color:white;
+			padding:6px 14px;
+			border-radius:8px;
+			text-decoration:none;
+			font-size:13px;
+			transition:0.2s;
+		}
+
+		.btn-edit:hover{
+			background:#2c80b9;
+		}
+
+		.btn-delete{
+			background:#e74c3c;
+			color:white;
+			padding:6px 14px;
+			border-radius:8px;
+			text-decoration:none;
+			font-size:13px;
+			transition:0.2s;
+		}
+
+		.btn-delete:hover{
+			background:#c0392b;
+		}
 
         /* Адаптивность */
         @media (max-width: 768px) {
@@ -337,39 +403,61 @@
       {% endif %}
     {% endwith %}
 
-<table class="admin-table">
-  <thead>
-    <tr>
-      <th>Дата вылета</th>
-      <th>Город</th>
-      <th>Страна</th>
-      <th>Отель</th>
-      <th>Ночей</th>
-      <th>Питание</th>
-      <th>Мест</th>
-      <th>Цена</th>
-      <th>Действия</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for tour in tours %}
-    <tr>
-      <td>{{ tour.departure_date }}</td>
-      <td>{{ tour.city }}</td>
-      <td>{{ tour.country }}</td>
-      <td>{{ tour.hotel }}</td>
-      <td>{{ tour.nights }}</td>
-      <td>{{ tour.meal }}</td>
-      <td>{{ tour.seats }}</td>
-      <td>{{ tour.price }} {{ tour.currency }}</td>
-      <td>
-        <a href="{{ url_for('edit_tour', id=loop.index0) }}" class="icon">✏️</a>
-        <a href="{{ url_for('delete_tour', id=loop.index0) }}" class="icon">❌</a>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
+<h2 style="margin-top:30px">Список туров</h2>
+
+<table class="tour-table">
+
+<tr>
+    <th>Фото</th>
+    <th>Отель</th>
+    <th>Страна</th>
+	<th>Дата</th>
+    <th>Город</th>
+    <th>Ночей</th>
+    <th>Питание</th>
+    <th>Цена</th>
+    <th></th>
+</tr>
+
+{% for tour in tours %}
+
+<tr>
+
+<td>
+<img src="{{ tour.image }}" class="tour-photo">
+</td>
+
+<td>{{ tour.hotel_name }}</td>
+<td>{{ tour.country }}</td>
+<td>{{ tour.date }}</td>
+<td>{{ tour.city }}</td>
+<td>{{ tour.nights }}</td>
+<td>{{ tour.meal }}</td>
+<td>{{ tour.price }}</td>
+
+<td>
+<div class="tour-actions">
+
+<a href="/admin/edit/{{ tour.id }}" class="btn-edit">
+Редактировать
+</a>
+
+<a href="/admin/delete/{{ tour.id }}"
+   class="btn-delete"
+   onclick="return confirm('Удалить тур?')">
+Удалить
+</a>
+
+</div>
+</td>
+
+</tr>
+
+{% endfor %}
+
 </table>
+
+</div>
 <!-- Автообновление логов -->
 <script>
   function updateLog() {

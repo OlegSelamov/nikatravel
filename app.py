@@ -152,6 +152,13 @@ def load_hotel_details():
             data = json.load(f)
             return data if isinstance(data, dict) else {}
     return {}
+    
+def save_hotels(hotels):
+
+    path = os.path.join('data', 'hotels.json')
+
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(hotels, f, ensure_ascii=False, indent=2)
 
 def enrich_offers_with_hotels(offers, hotels_by_id):
     """Для карточек: добавляем image/gallery/description из hotels.json"""
@@ -186,6 +193,44 @@ def enrich_offers_with_hotels(offers, hotels_by_id):
 
         out.append(merged)
     return out
+    
+def load_all_tours():
+
+    offers_path = os.path.join('data', 'offers.json')
+    hotels_path = os.path.join('data', 'hotels.json')
+
+    if not os.path.exists(offers_path):
+        return []
+
+    with open(offers_path, encoding='utf-8') as f:
+        offers = json.load(f)
+
+    if os.path.exists(hotels_path):
+        with open(hotels_path, encoding='utf-8') as f:
+            hotels = json.load(f)
+    else:
+        hotels = {}
+
+    tours = []
+
+    for o in offers:
+
+        hotel = hotels.get(o.get("hotel_id"), {})
+
+        tours.append({
+            "id": o.get("id"),
+            "hotel_name": hotel.get("hotel"),
+            "country": hotel.get("country"),
+            "image": hotel.get("image"),
+            "city": o.get("city"),
+            "nights": o.get("nights"),
+            "meal": o.get("meal"),
+            "price": o.get("price"),
+            "date": (o.get("dates_prices")[0].get("date")
+                     if o.get("dates_prices") else "")
+        })
+
+    return tours
 
 # ===========================
 # Маршруты основного сайта
@@ -977,9 +1022,7 @@ def admin_filter():
         return redirect(url_for('admin_filter'))          
 
         # GET-запрос — вернуть фильтр
-    offers = load_offers()
-    hotels_by_id = load_hotel_details()
-    tours = enrich_offers_with_hotels(offers, hotels_by_id)
+    tours = load_all_tours()
     return render_template('admin/filter_admin.html', config=config, tours=tours)
     
 @app.route('/admin/log_text')
@@ -1031,53 +1074,92 @@ def add_tour():
 
     return render_template('admin/add_tour.html')
 
-@app.route('/admin/edit/<int:id>', methods=['GET', 'POST'])
+@app.route('/admin/edit/<int:id>', methods=['GET','POST'])
 def edit_tour(id):
-    if not session.get('admin_logged_in'):
-        return redirect(url_for('admin_login'))
 
     offers = load_offers()
+    hotels = load_hotel_details()
+
     offer = next((o for o in offers if o.get("id") == id), None)
+
     if not offer:
-        return "Тур не найден", 404
+        return "Тур не найден"
 
+    # ⭐ СОХРАНЕНИЕ
     if request.method == 'POST':
-        # обновляем ТОЛЬКО offer (offers.json)
-        offer['city'] = request.form.get('city')
-        offer['country'] = request.form.get('country')
-        offer['hotel_id'] = request.form.get('hotel_id') or offer.get('hotel_id')
-        offer['nights'] = request.form.get('nights')
-        offer['meal'] = request.form.get('meal')
 
-        # dates_prices: либо обновляем первую дату, либо создаём
-        departure_date = request.form.get('departure_date')
-        price = request.form.get('price')
-
-        if departure_date and price:
-            dp = offer.get("dates_prices") or []
-            if dp:
-                dp[0]["date"] = departure_date
-                dp[0]["price"] = price
-            else:
-                dp = [{"date": departure_date, "price": price}]
-            offer["dates_prices"] = dp
+        offer["city"] = request.form.get("city")
+        offer["meal"] = request.form.get("meal")
+        offer["nights"] = request.form.get("nights")
+        offer["price"] = request.form.get("price")
+        offer["old_price"] = request.form.get("old_price")
+        offer["price_per_month"] = request.form.get("price_per_month")
+        offer["installment_months"] = request.form.get("installment_months")
+        offer["discount_percent"] = request.form.get("discount_percent")
 
         save_offers(offers)
-        return redirect(url_for('admin_filter'))
 
-    # Для формы удобно показать текущие значения
-    # (описание/картинки подтянутся на странице через enrich при выводе списка)
-    return render_template('admin/edit_tour.html', offer=offer, id=id)
+        return redirect('/admin/filter')
 
-@app.route('/admin/delete/<int:id>')
+    # ⭐ ПОДГОТОВКА ДАННЫХ
+    hotel = hotels.get(offer.get("hotel_id"))
+
+    tour = offer.copy()
+
+    if hotel:
+        tour["hotel_name"] = hotel.get("hotel")
+        tour["country"] = hotel.get("country")
+        tour["image"] = hotel.get("image")
+        tour["gallery"] = hotel.get("gallery", [])
+        tour["description"] = hotel.get("description")
+
+    return render_template('admin/edit_tour.html', tour=tour)
+    
+@app.route('/admin/set-main-photo/<hotel_id>')
+def set_main_photo(hotel_id):
+
+    url = request.args.get("url")
+
+    hotels = load_hotel_details()
+
+    if hotel_id in hotels:
+
+        hotels[hotel_id]["image"] = url
+
+        save_hotels(hotels)
+
+    return redirect(request.referrer)
+    
+@app.route('/admin/delete-photo/<hotel_id>')
+def delete_photo(hotel_id):
+
+    url = request.args.get("url")
+
+    hotels = load_hotel_details()
+
+    if hotel_id in hotels:
+
+        gallery = hotels[hotel_id].get("gallery", [])
+
+        if url in gallery:
+            gallery.remove(url)
+
+        hotels[hotel_id]["gallery"] = gallery
+
+        save_hotels(hotels)
+
+    return redirect(request.referrer)
+
+@app.route('/admin/delete/<id>')
 def delete_tour(id):
-    if not session.get('admin_logged_in'):
-        return redirect(url_for('admin_login'))
 
     offers = load_offers()
-    offers = [o for o in offers if o.get("id") != id]
+
+    offers = [o for o in offers if str(o.get("id")) != str(id)]
+
     save_offers(offers)
-    return redirect(url_for('admin_filter'))
+
+    return redirect('/admin/filter')
     
     # =============== МАРШРУТЫ: МЕСТА ========================
 @app.route('/admin/places')

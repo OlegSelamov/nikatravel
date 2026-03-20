@@ -1,34 +1,211 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Редактировать тур</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+<meta charset="UTF-8">
+<title>Редактировать тур</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f8;
+padding:40px;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:14px;
+max-width:900px;
+margin:auto;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+h2{
+margin-bottom:25px;
+}
+
+.row{
+display:flex;
+gap:15px;
+margin-bottom:15px;
+}
+
+input{
+flex:1;
+padding:10px;
+border:1px solid #ddd;
+border-radius:8px;
+}
+
+textarea{
+width:100%;
+padding:10px;
+border-radius:8px;
+border:1px solid #ddd;
+min-height:120px;
+}
+
+.save-btn{
+background:#27ae60;
+color:white;
+padding:12px 25px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+}
+
+.save-btn:hover{
+background:#1e874b;
+}
+
+.gallery{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:15px;
+}
+
+.gallery img{
+width:140px;
+height:90px;
+object-fit:cover;
+border-radius:8px;
+}
+
+.photo-card{
+position:relative;
+display:inline-block;
+}
+
+.photo-card img{
+width:140px;
+height:90px;
+object-fit:cover;
+border-radius:8px;
+}
+
+.photo-actions{
+position:absolute;
+top:5px;
+right:5px;
+display:flex;
+gap:4px;
+}
+
+.btn-main,
+.btn-del{
+background:rgba(0,0,0,0.6);
+color:white;
+font-size:11px;
+padding:3px 6px;
+border-radius:6px;
+text-decoration:none;
+line-height:1;
+}
+
+.btn-main:hover{
+background:#27ae60;
+}
+
+.btn-del:hover{
+background:#e74c3c;
+}
+
+</style>
 </head>
+
 <body>
-        <h2>Редактировать тур</h2>
-        <form method="POST" enctype="multipart/form-data">
-            <input type="text" name="city" value="{{ tour.city }}" placeholder="Город отправления" required><br>
-            <input type="text" name="country" value="{{ tour.country }}" placeholder="Страна назначения" required><br>
-            <input type="text" name="hotel" value="{{ tour.hotel }}" placeholder="Название отеля" required><br>
-            <input type="number" name="nights" value="{{ tour.nights }}" placeholder="Количество ночей" required><br>
-            <input type="text" name="meal" value="{{ tour.meal }}" placeholder="Питание" required><br>
-            <input type="number" name="price" value="{{ tour.price }}" placeholder="Цена" required><br>
-            <input type="text" name="seats" value="{{ tour.seats }}" placeholder="Места" required><br>
-			<textarea name="description" placeholder="Описание тура">{{ tour.description if tour else '' }}</textarea><br>
-            <input type="file" name="gallery_images" multiple><br>
 
-            <p>Текущее фото:</p>
-            {% if tour.image %}
-                <img src="{{ url_for('static', filename='img/' + tour.image) }}" style="width:100px; height:auto; margin-bottom:10px;">
-            {% else %}
-                <p>Нет фото</p>
-            {% endif %}
+<div class="card">
 
-            <input type="file" name="image"><br>  <!-- Новое поле для выбора файла -->
+<h2>Редактировать тур</h2>
 
-            <button type="submit">Сохранить изменения</button>
-        </form>
+<div style="background:#f8f9fb;padding:15px;border-radius:10px;margin-bottom:20px">
+
+<div style="font-size:18px;font-weight:bold">
+{{ tour.hotel_name }}
+</div>
+
+<div style="color:#777">
+{{ tour.country }}
+</div>
+
+</div>
+
+<form method="POST">
+
+<div class="row">
+<input name="city" value="{{ tour.city }}" placeholder="Город">
+<input name="nights" value="{{ tour.nights }}" placeholder="Ночей">
+<input name="meal" value="{{ tour.meal }}" placeholder="Питание">
+</div>
+
+<div class="row">
+<input name="price" value="{{ tour.price }}" placeholder="Цена">
+<input name="old_price" value="{{ tour.old_price }}" placeholder="Старая цена">
+<input name="price_per_month" value="{{ tour.price_per_month }}" placeholder="Цена в месяц">
+</div>
+
+<div class="row">
+<input name="installment_months" value="{{ tour.installment_months }}" placeholder="Месяцев рассрочки">
+<input name="discount_percent" value="{{ tour.discount_percent }}" placeholder="Скидка %">
+</div>
+
+<h3>Даты тура</h3>
+
+{% for d in tour.dates_prices %}
+<div class="row">
+<input name="date_{{ loop.index }}" value="{{ d.date }}">
+<input name="price_{{ loop.index }}" value="{{ d.price }}">
+</div>
+{% endfor %}
+
+<h3>Главная фотка</h3>
+
+{% if tour.image %}
+<img src="{{ tour.image }}" style="width:220px;border-radius:10px">
+{% endif %}
+
+<h3>Галерея</h3>
+
+<div class="gallery">
+
+{% for g in tour.gallery %}
+
+<div class="photo-card">
+
+<img src="{{ g }}">
+
+<div class="photo-actions">
+
+<a href="/admin/set-main-photo/{{ tour.hotel_id }}?url={{ g }}" 
+   class="btn-main">
+На главную
+</a>
+
+<a href="/admin/delete-photo/{{ tour.hotel_id }}?url={{ g }}" 
+   class="btn-del"
+   onclick="return confirm('Удалить фото?')">
+Удалить
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<br><br>
+
+<button class="save-btn">Сохранить</button>
+
+</form>
+
+</div>
+
 </body>
 </html>

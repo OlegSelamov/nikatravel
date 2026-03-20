@@ -1,13 +1,19 @@
 import json
+import time
 
-with open('data/filter.json', 'r', encoding='utf-8') as f:
-    tours = json.load(f)
+with open("data/offers.json", encoding="utf-8") as f:
+    offers = json.load(f)
 
-# Проставим ID начиная с 1
-for idx, tour in enumerate(tours, start=1):
-    tour['id'] = idx
+changed = False
 
-with open('data/filter.json', 'w', encoding='utf-8') as f:
-    json.dump(tours, f, ensure_ascii=False, indent=2)
+for o in offers:
+    if not o.get("id"):
+        o["id"] = int(time.time() * 1000)
+        changed = True
+        time.sleep(0.001)
 
-print(f"✅ Проставлено {len(tours)} ID")
+if changed:
+    with open("data/offers.json", "w", encoding="utf-8") as f:
+        json.dump(offers, f, ensure_ascii=False, indent=2)
+
+print("ID добавлены")

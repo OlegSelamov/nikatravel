@@ -1,309 +1,5 @@
 [
   {
-    "hotel_id": "royal_sapphire_hotel_4_баку",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "373986",
-    "old_price": "404329",
-    "discount_percent": "20",
-    "price_per_month": "30190",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "03.09.2025",
-        "price": "405132"
-      },
-      {
-        "date": "14.12.2025",
-        "price": "402390"
-      },
-      {
-        "date": "17.12.2025",
-        "price": "405546"
-      },
-      {
-        "date": "10.12.2025",
-        "price": "405546"
-      },
-      {
-        "date": "06.12.2025",
-        "price": "410806"
-      },
-      {
-        "date": "07.12.2025",
-        "price": "410806"
-      },
-      {
-        "date": "13.12.2025",
-        "price": "399234"
-      },
-      {
-        "date": "03.12.2025",
-        "price": "373986"
-      },
-      {
-        "date": "15.02.2026",
-        "price": "470934"
-      },
-      {
-        "date": "22.02.2026",
-        "price": "470934"
-      },
-      {
-        "date": "08.02.2026",
-        "price": "470934"
-      },
-      {
-        "date": "07.02.2026",
-        "price": "482220"
-      },
-      {
-        "date": "14.02.2026",
-        "price": "482220"
-      },
-      {
-        "date": "21.02.2026",
-        "price": "482220"
-      },
-      {
-        "date": "28.02.2026",
-        "price": "485298"
-      },
-      {
-        "date": "25.02.2026",
-        "price": "487863"
-      },
-      {
-        "date": "04.02.2026",
-        "price": "487863"
-      },
-      {
-        "date": "11.02.2026",
-        "price": "487863"
-      },
-      {
-        "date": "18.02.2026",
-        "price": "487863"
-      },
-      {
-        "date": "23.02.2026",
-        "price": "435883"
-      },
-      {
-        "date": "24.02.2026",
-        "price": "435883"
-      },
-      {
-        "date": "27.02.2026",
-        "price": "435883"
-      },
-      {
-        "date": "13.02.2026",
-        "price": "435883"
-      },
-      {
-        "date": "16.02.2026",
-        "price": "435883"
-      },
-      {
-        "date": "20.02.2026",
-        "price": "435883"
-      },
-      {
-        "date": "17.02.2026",
-        "price": "435883"
-      },
-      {
-        "date": "10.02.2026",
-        "price": "435883"
-      },
-      {
-        "date": "09.02.2026",
-        "price": "435883"
-      },
-      {
-        "date": "06.02.2026",
-        "price": "435883"
-      }
-    ]
-  },
-  {
-    "hotel_id": "ammar_grand_hotel_4_баку",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "430248",
-    "old_price": "537810",
-    "discount_percent": "20",
-    "price_per_month": "40156",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "03.09.2025",
-        "price": "430248"
-      },
-      {
-        "date": "10.09.2025",
-        "price": "430248"
-      },
-      {
-        "date": "24.09.2025",
-        "price": "434616"
-      }
-    ]
-  },
-  {
-    "hotel_id": "metro_city_hotel_4_баку",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "394500",
-    "old_price": "473400",
-    "discount_percent": "20",
-    "price_per_month": "35347",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "03.09.2025",
-        "price": "430248"
-      },
-      {
-        "date": "14.12.2025",
-        "price": "394500"
-      },
-      {
-        "date": "10.12.2025",
-        "price": "397130"
-      },
-      {
-        "date": "17.12.2025",
-        "price": "397130"
-      },
-      {
-        "date": "13.12.2025",
-        "price": "402916"
-      },
-      {
-        "date": "07.12.2025",
-        "price": "402916"
-      },
-      {
-        "date": "06.12.2025",
-        "price": "402916"
-      },
-      {
-        "date": "03.12.2025",
-        "price": "409754"
-      }
-    ]
-  },
-  {
-    "hotel_id": "dondar_hotel_4_баку",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "442806",
-    "old_price": "447764",
-    "discount_percent": "20",
-    "price_per_month": "33433",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "03.09.2025",
-        "price": "442806"
-      },
-      {
-        "date": "08.02.2026",
-        "price": "541215"
-      },
-      {
-        "date": "22.02.2026",
-        "price": "541215"
-      },
-      {
-        "date": "15.02.2026",
-        "price": "541215"
-      },
-      {
-        "date": "07.02.2026",
-        "price": "552501"
-      },
-      {
-        "date": "14.02.2026",
-        "price": "552501"
-      },
-      {
-        "date": "21.02.2026",
-        "price": "552501"
-      },
-      {
-        "date": "28.02.2026",
-        "price": "555579"
-      },
-      {
-        "date": "11.02.2026",
-        "price": "558144"
-      },
-      {
-        "date": "04.02.2026",
-        "price": "558144"
-      },
-      {
-        "date": "18.02.2026",
-        "price": "558144"
-      },
-      {
-        "date": "25.02.2026",
-        "price": "558144"
-      },
-      {
-        "date": "06.02.2026",
-        "price": "505890"
-      },
-      {
-        "date": "09.02.2026",
-        "price": "505890"
-      },
-      {
-        "date": "10.02.2026",
-        "price": "505890"
-      },
-      {
-        "date": "13.02.2026",
-        "price": "505890"
-      },
-      {
-        "date": "16.02.2026",
-        "price": "505890"
-      },
-      {
-        "date": "17.02.2026",
-        "price": "505890"
-      },
-      {
-        "date": "20.02.2026",
-        "price": "505890"
-      },
-      {
-        "date": "23.02.2026",
-        "price": "505890"
-      },
-      {
-        "date": "24.02.2026",
-        "price": "505890"
-      },
-      {
-        "date": "27.02.2026",
-        "price": "505890"
-      }
-    ]
-  },
-  {
     "hotel_id": "merida_hotel_baku_4_баку",
     "city": "Алматы",
     "meal": "BB",
@@ -355,77 +51,8 @@
         "date": "03.12.2025",
         "price": "409754"
       }
-    ]
-  },
-  {
-    "hotel_id": "alba_hotel_spa_5_баку",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "394500",
-    "old_price": "493125",
-    "discount_percent": "20",
-    "price_per_month": "36820",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "24.09.2025",
-        "price": "447174"
-      },
-      {
-        "date": "10.09.2025",
-        "price": "447174"
-      },
-      {
-        "date": "03.09.2025",
-        "price": "447174"
-      },
-      {
-        "date": "01.10.2025",
-        "price": "449631"
-      },
-      {
-        "date": "08.10.2025",
-        "price": "449631"
-      },
-      {
-        "date": "15.10.2025",
-        "price": "449631"
-      },
-      {
-        "date": "14.12.2025",
-        "price": "394500"
-      },
-      {
-        "date": "17.12.2025",
-        "price": "397130"
-      },
-      {
-        "date": "10.12.2025",
-        "price": "397130"
-      },
-      {
-        "date": "13.12.2025",
-        "price": "402916"
-      },
-      {
-        "date": "06.12.2025",
-        "price": "402916"
-      },
-      {
-        "date": "07.12.2025",
-        "price": "402916"
-      },
-      {
-        "date": "03.12.2025",
-        "price": "426060"
-      },
-      {
-        "date": "31.12.2025",
-        "price": "603322"
-      }
-    ]
+    ],
+    "id": 1774028987721
   },
   {
     "hotel_id": "sands_of_time_4_баку",
@@ -443,61 +70,8 @@
         "date": "03.09.2025",
         "price": "455364"
       }
-    ]
-  },
-  {
-    "hotel_id": "diamond_hotel_baku_4_баку",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "387136",
-    "old_price": "473400",
-    "discount_percent": "20",
-    "price_per_month": "35347",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "03.09.2025",
-        "price": "455364"
-      },
-      {
-        "date": "14.12.2025",
-        "price": "406598"
-      },
-      {
-        "date": "17.12.2025",
-        "price": "409228"
-      },
-      {
-        "date": "10.12.2025",
-        "price": "409228"
-      },
-      {
-        "date": "13.12.2025",
-        "price": "387136"
-      },
-      {
-        "date": "06.12.2025",
-        "price": "387136"
-      },
-      {
-        "date": "07.12.2025",
-        "price": "387136"
-      },
-      {
-        "date": "03.12.2025",
-        "price": "409754"
-      },
-      {
-        "date": "27.12.2025",
-        "price": "626992"
-      },
-      {
-        "date": "28.12.2025",
-        "price": "630148"
-      }
-    ]
+    ],
+    "id": 1774028987724
   },
   {
     "hotel_id": "atropat_hotel_4_баку",
@@ -519,7 +93,8 @@
         "date": "03.09.2025",
         "price": "459732"
       }
-    ]
+    ],
+    "id": 1774028987728
   },
   {
     "hotel_id": "supreme_hotel_baku_4_баку",
@@ -573,7 +148,8 @@
         "date": "20.12.2025",
         "price": "642772"
       }
-    ]
+    ],
+    "id": 1774028987730
   },
   {
     "hotel_id": "volga_hotel_baku_4_баку",
@@ -615,7 +191,8 @@
         "date": "13.12.2025",
         "price": "415014"
       }
-    ]
+    ],
+    "id": 1774028987732
   },
   {
     "hotel_id": "auroom_hotel_baku_4_баку",
@@ -745,7 +322,8 @@
         "date": "23.02.2026",
         "price": "505890"
       }
-    ]
+    ],
+    "id": 1774028987734
   },
   {
     "hotel_id": "homebridge_hotel_apartments_4_баку",
@@ -883,7 +461,8 @@
         "date": "27.02.2026",
         "price": "412888"
       }
-    ]
+    ],
+    "id": 1774028987736
   },
   {
     "hotel_id": "boulevard_side_hotel_4_баку",
@@ -993,7 +572,8 @@
         "date": "06.02.2026",
         "price": "346458"
       }
-    ]
+    ],
+    "id": 1774028987738
   },
   {
     "hotel_id": "nobel_hotel_4_баку",
@@ -1131,7 +711,8 @@
         "date": "09.02.2026",
         "price": "416465"
       }
-    ]
+    ],
+    "id": 1774028987740
   },
   {
     "hotel_id": "east_legend_hotel_4_баку",
@@ -1257,7 +838,8 @@
         "date": "06.02.2026",
         "price": "323463"
       }
-    ]
+    ],
+    "id": 1774028987742
   },
   {
     "hotel_id": "west_inn_4_баку",
@@ -1407,7 +989,8 @@
         "date": "27.02.2026",
         "price": "552902"
       }
-    ]
+    ],
+    "id": 1774028987744
   },
   {
     "hotel_id": "golden_coast_hotel_5_баку",
@@ -1441,7 +1024,8 @@
         "date": "07.12.2025",
         "price": "1403368"
       }
-    ]
+    ],
+    "id": 1774028987746
   },
   {
     "hotel_id": "sapphire_hotel_bayil_4_баку",
@@ -1459,7 +1043,8 @@
         "date": "03.09.2025",
         "price": "505596"
       }
-    ]
+    ],
+    "id": 1774028987748
   },
   {
     "hotel_id": "graaf_hotel_4_баку",
@@ -1489,7 +1074,8 @@
         "date": "20.12.2025",
         "price": "634356"
       }
-    ]
+    ],
+    "id": 1774028987750
   },
   {
     "hotel_id": "sunday_hotel_4_баку",
@@ -1519,7 +1105,8 @@
         "date": "03.12.2025",
         "price": "613842"
       }
-    ]
+    ],
+    "id": 1774028987752
   },
   {
     "hotel_id": "atlas_hotel_baku_4_баку",
@@ -1541,7 +1128,8 @@
         "date": "10.09.2025",
         "price": "514332"
       }
-    ]
+    ],
+    "id": 1774028987754
   },
   {
     "hotel_id": "city_park_hotel_baku_4_баку",
@@ -1647,7 +1235,8 @@
         "date": "27.02.2026",
         "price": "439971"
       }
-    ]
+    ],
+    "id": 1774028987756
   },
   {
     "hotel_id": "premier_palace_hotel_4_баку",
@@ -1673,7 +1262,8 @@
         "date": "24.09.2025",
         "price": "522522"
       }
-    ]
+    ],
+    "id": 1774028987758
   },
   {
     "hotel_id": "austin_hotel_4_баку",
@@ -1795,25 +1385,8 @@
         "date": "09.02.2026",
         "price": "506401"
       }
-    ]
-  },
-  {
-    "hotel_id": "nizami_boutique_hotel_5_баку",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "526890",
-    "old_price": "658612",
-    "discount_percent": "20",
-    "price_per_month": "49176",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "03.09.2025",
-        "price": "526890"
-      }
-    ]
+    ],
+    "id": 1774028987760
   },
   {
     "hotel_id": "parkside_hotel_apartments_4_баку",
@@ -1835,7 +1408,8 @@
         "date": "03.12.2025",
         "price": "602270"
       }
-    ]
+    ],
+    "id": 1774028987764
   },
   {
     "hotel_id": "midway_hotel_baku_5_баку",
@@ -1949,7 +1523,8 @@
         "date": "27.02.2026",
         "price": "541149"
       }
-    ]
+    ],
+    "id": 1774028987766
   },
   {
     "hotel_id": "elite_luxury_suite_5_конаклы",
@@ -1979,7 +1554,8 @@
         "date": "26.12.2025",
         "price": "673322"
       }
-    ]
+    ],
+    "id": 1774028987768
   },
   {
     "hotel_id": "cher_hotel_spa_taksim_5_таксим_центр2",
@@ -2085,7 +1661,8 @@
         "date": "27.12.2025",
         "price": "601835"
       }
-    ]
+    ],
+    "id": 1774028987770
   },
   {
     "hotel_id": "ramada_hotel_suites_by_wyndham_istanbul_merter_5_мертер",
@@ -2195,41 +1772,8 @@
         "date": "23.12.2025",
         "price": "650104"
       }
-    ]
-  },
-  {
-    "hotel_id": "akgun_hotel_5_фатих",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "690316",
-    "old_price": "862895",
-    "discount_percent": "20",
-    "price_per_month": "64430",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "19.09.2025",
-        "price": "690316"
-      },
-      {
-        "date": "20.09.2025",
-        "price": "690316"
-      },
-      {
-        "date": "17.09.2025",
-        "price": "690316"
-      },
-      {
-        "date": "18.09.2025",
-        "price": "690316"
-      },
-      {
-        "date": "15.09.2025",
-        "price": "690316"
-      }
-    ]
+    ],
+    "id": 1774028987772
   },
   {
     "hotel_id": "mercure_istanbul_bomonti_5_таксим_центр2",
@@ -2307,7 +1851,8 @@
         "date": "29.12.2025",
         "price": "712426"
       }
-    ]
+    ],
+    "id": 1774028987776
   },
   {
     "hotel_id": "alan_sea_hotel_danang_5_danang",
@@ -2329,7 +1874,8 @@
         "date": "12.09.2025",
         "price": "472924"
       }
-    ]
+    ],
+    "id": 1774028987778
   },
   {
     "hotel_id": "wink_icon_hotel_danang_riverside_5_danang",
@@ -2351,7 +1897,8 @@
         "date": "12.09.2025",
         "price": "485528"
       }
-    ]
+    ],
+    "id": 1774028987779
   },
   {
     "hotel_id": "hoi_an_babylon_luxury_hotel_spa_5_hoi_an",
@@ -2373,7 +1920,8 @@
         "date": "12.09.2025",
         "price": "501968"
       }
-    ]
+    ],
+    "id": 1774028987781
   },
   {
     "hotel_id": "holiday_beach_hotel_danang_5_danang",
@@ -2395,7 +1943,8 @@
         "date": "12.09.2025",
         "price": "501968"
       }
-    ]
+    ],
+    "id": 1774028987783
   },
   {
     "hotel_id": "cozy_savvy_boutique_hoi_an_hotel_5_hoi_an",
@@ -2417,7 +1966,8 @@
         "date": "12.09.2025",
         "price": "506352"
       }
-    ]
+    ],
+    "id": 1774028987785
   },
   {
     "hotel_id": "risemount_premier_resort_danang_5_danang",
@@ -2439,7 +1989,8 @@
         "date": "12.09.2025",
         "price": "510736"
       }
-    ]
+    ],
+    "id": 1774028987786
   },
   {
     "hotel_id": "bellerive_hoi_an_hotel_spa_5_hoi_an",
@@ -2461,7 +2012,8 @@
         "date": "12.09.2025",
         "price": "512380"
       }
-    ]
+    ],
+    "id": 1774028987788
   },
   {
     "hotel_id": "anmira_resort_and_spa_hoi_an_5_hoi_an",
@@ -2483,7 +2035,8 @@
         "date": "12.09.2025",
         "price": "515120"
       }
-    ]
+    ],
+    "id": 1774028987790
   },
   {
     "hotel_id": "sen_village_hoi_an_5_hoi_an",
@@ -2505,7 +2058,8 @@
         "date": "12.09.2025",
         "price": "515120"
       }
-    ]
+    ],
+    "id": 1774028987792
   },
   {
     "hotel_id": "penisula_hotel_danang_5_danang",
@@ -2527,7 +2081,8 @@
         "date": "12.09.2025",
         "price": "527176"
       }
-    ]
+    ],
+    "id": 1774028987794
   },
   {
     "hotel_id": "awaken_da_nang_hotel_5_danang",
@@ -2549,7 +2104,8 @@
         "date": "12.09.2025",
         "price": "531560"
       }
-    ]
+    ],
+    "id": 1774028987796
   },
   {
     "hotel_id": "nesta_hoian_resort_spa_5_hoi_an",
@@ -2571,7 +2127,8 @@
         "date": "12.09.2025",
         "price": "531560"
       }
-    ]
+    ],
+    "id": 1774028987798
   },
   {
     "hotel_id": "wyndham_hoi_an_royal_beachfront_resort_villas_5_hoi_an",
@@ -2593,7 +2150,8 @@
         "date": "12.09.2025",
         "price": "532108"
       }
-    ]
+    ],
+    "id": 1774028987800
   },
   {
     "hotel_id": "the_pearl_hoian_ex_citadines_pearl_5_hoi_an",
@@ -2615,7 +2173,8 @@
         "date": "12.09.2025",
         "price": "532656"
       }
-    ]
+    ],
+    "id": 1774028987802
   },
   {
     "hotel_id": "the_blossom_resort_island_all_inclusive_5_danang",
@@ -2637,7 +2196,8 @@
         "date": "12.09.2025",
         "price": "535944"
       }
-    ]
+    ],
+    "id": 1774028987804
   },
   {
     "hotel_id": "muong_thanh_luxury_danang_5_danang",
@@ -2659,7 +2219,8 @@
         "date": "12.09.2025",
         "price": "537040"
       }
-    ]
+    ],
+    "id": 1774028987806
   },
   {
     "hotel_id": "maximilan_danang_beach_hotel_5_danang",
@@ -2681,7 +2242,8 @@
         "date": "12.09.2025",
         "price": "540328"
       }
-    ]
+    ],
+    "id": 1774028987808
   },
   {
     "hotel_id": "grand_tourane_da_nang_5_danang",
@@ -2703,7 +2265,8 @@
         "date": "12.09.2025",
         "price": "540328"
       }
-    ]
+    ],
+    "id": 1774028987810
   },
   {
     "hotel_id": "hoi_an_memories_land_5_hoi_an",
@@ -2725,7 +2288,8 @@
         "date": "12.09.2025",
         "price": "544164"
       }
-    ]
+    ],
+    "id": 1774028987812
   },
   {
     "hotel_id": "wyndham_danang_golden_bay_5_danang",
@@ -2747,7 +2311,8 @@
         "date": "12.09.2025",
         "price": "548548"
       }
-    ]
+    ],
+    "id": 1774028987814
   },
   {
     "hotel_id": "renaissance_hoi_an_resort_spa_5_hoi_an",
@@ -2769,7 +2334,8 @@
         "date": "12.09.2025",
         "price": "549644"
       }
-    ]
+    ],
+    "id": 1774028987816
   },
   {
     "hotel_id": "the_ocean_resort_5_danang",
@@ -2787,7 +2353,8 @@
         "date": "13.09.2025",
         "price": "542520"
       }
-    ]
+    ],
+    "id": 1774028987818
   },
   {
     "hotel_id": "grand_mercure_danang_5_danang",
@@ -2805,7 +2372,8 @@
         "date": "13.09.2025",
         "price": "549096"
       }
-    ]
+    ],
+    "id": 1774028987820
   },
   {
     "hotel_id": "river_town_hoi_an_resort_spa_5_hoi_an",
@@ -2823,7 +2391,8 @@
         "date": "13.09.2025",
         "price": "549096"
       }
-    ]
+    ],
+    "id": 1774028987822
   },
   {
     "hotel_id": "robinson_nam_hoi_an_5_hoi_an",
@@ -2841,7 +2410,8 @@
         "date": "13.09.2025",
         "price": "553480"
       }
-    ]
+    ],
+    "id": 1774028987824
   },
   {
     "hotel_id": "hoi_an_memories_resort_spa_5_hoi_an",
@@ -2859,7 +2429,8 @@
         "date": "13.09.2025",
         "price": "553480"
       }
-    ]
+    ],
+    "id": 1774028987826
   },
   {
     "hotel_id": "regalia_gold_nha_trang_5_nha_trang",
@@ -2893,7 +2464,8 @@
         "date": "15.10.2025",
         "price": "555588"
       }
-    ]
+    ],
+    "id": 1774028987828
   },
   {
     "hotel_id": "almanity_hoi_a_resort_spa_5_hoi_an",
@@ -2911,7 +2483,8 @@
         "date": "13.09.2025",
         "price": "555672"
       }
-    ]
+    ],
+    "id": 1774028987830
   },
   {
     "hotel_id": "queen_ann_nha_trang_hotel_5_nha_trang",
@@ -2929,7 +2502,8 @@
         "date": "19.10.2025",
         "price": "465552"
       }
-    ]
+    ],
+    "id": 1774028987832
   },
   {
     "hotel_id": "allegro_hoi_an_a_little_luxury_hotel_spa_5_hoi_an",
@@ -2947,7 +2521,8 @@
         "date": "13.09.2025",
         "price": "671300"
       }
-    ]
+    ],
+    "id": 1774028987834
   },
   {
     "hotel_id": "sheraton_nha_trang_hotel_spa_5_nha_trang",
@@ -2965,7 +2540,8 @@
         "date": "17.09.2025",
         "price": "826932"
       }
-    ]
+    ],
+    "id": 1774028987836
   },
   {
     "hotel_id": "fusion_resort_cam_ranh_5_cam_ranh",
@@ -2983,7 +2559,8 @@
         "date": "24.09.2025",
         "price": "1425348"
       }
-    ]
+    ],
+    "id": 1774028987838
   },
   {
     "hotel_id": "ttc_hotel_michelia_5_nha_trang",
@@ -3009,7 +2586,8 @@
         "date": "15.10.2025",
         "price": "555588"
       }
-    ]
+    ],
+    "id": 1774028987840
   },
   {
     "hotel_id": "the_art_nest_hotel_5_nha_trang",
@@ -3035,7 +2613,8 @@
         "date": "15.10.2025",
         "price": "558882"
       }
-    ]
+    ],
+    "id": 1774028987842
   },
   {
     "hotel_id": "d_qua_hotel_5_nha_trang",
@@ -3053,7 +2632,8 @@
         "date": "19.10.2025",
         "price": "476532"
       }
-    ]
+    ],
+    "id": 1774028987844
   },
   {
     "hotel_id": "gonsala_nha_trang_5_nha_trang",
@@ -3079,7 +2659,8 @@
         "date": "15.10.2025",
         "price": "566019"
       }
-    ]
+    ],
+    "id": 1774028987846
   },
   {
     "hotel_id": "emerald_bay_hotel_spa_5_nha_trang",
@@ -3105,7 +2686,8 @@
         "date": "08.10.2025",
         "price": "566019"
       }
-    ]
+    ],
+    "id": 1774028987850
   },
   {
     "hotel_id": "virgo_hotel_nha_trang_5_nha_trang",
@@ -3127,7 +2709,8 @@
         "date": "08.10.2025",
         "price": "569862"
       }
-    ]
+    ],
+    "id": 1774028987852
   },
   {
     "hotel_id": "vesna_hotel_nha_trang_5_nha_trang",
@@ -3145,7 +2728,8 @@
         "date": "19.10.2025",
         "price": "501786"
       }
-    ]
+    ],
+    "id": 1774028987854
   },
   {
     "hotel_id": "iconique_hotel_nha_trang_5_nha_trang",
@@ -3163,7 +2747,8 @@
         "date": "19.10.2025",
         "price": "454572"
       }
-    ]
+    ],
+    "id": 1774028987855
   },
   {
     "hotel_id": "nha_trang_horizon_hotel_5_nha_trang",
@@ -3181,7 +2766,8 @@
         "date": "19.10.2025",
         "price": "458415"
       }
-    ]
+    ],
+    "id": 1774028987857
   },
   {
     "hotel_id": "panama_hotel_nha_trang_5_nha_trang",
@@ -3199,7 +2785,8 @@
         "date": "19.10.2025",
         "price": "458415"
       }
-    ]
+    ],
+    "id": 1774028987859
   },
   {
     "hotel_id": "champa_island_hotel_spa_5_nha_trang",
@@ -3217,7 +2804,8 @@
         "date": "19.10.2025",
         "price": "461709"
       }
-    ]
+    ],
+    "id": 1774028987861
   },
   {
     "hotel_id": "quinter_central_nha_trang_5_nha_trang",
@@ -3235,7 +2823,8 @@
         "date": "19.10.2025",
         "price": "461709"
       }
-    ]
+    ],
+    "id": 1774028987862
   },
   {
     "hotel_id": "diamond_bay_hotel_nha_trang_5_nha_trang",
@@ -3253,7 +2842,8 @@
         "date": "19.10.2025",
         "price": "465552"
       }
-    ]
+    ],
+    "id": 1774028987864
   },
   {
     "hotel_id": "florida_nha_trang_hotel_5_nha_trang",
@@ -3271,7 +2861,8 @@
         "date": "19.10.2025",
         "price": "468846"
       }
-    ]
+    ],
+    "id": 1774028987866
   },
   {
     "hotel_id": "art_nest_hotel_nha_trang_5_nha_trang",
@@ -3289,7 +2880,8 @@
         "date": "19.10.2025",
         "price": "468846"
       }
-    ]
+    ],
+    "id": 1774028987868
   },
   {
     "hotel_id": "ttc_michelia_hotel_nha_trang_5_nha_trang",
@@ -3307,7 +2899,8 @@
         "date": "19.10.2025",
         "price": "472689"
       }
-    ]
+    ],
+    "id": 1774028987870
   },
   {
     "hotel_id": "costabella_resort_nha_trang_formerly_diamond_bay_condotel_resort_5_cam_ranh",
@@ -3325,7 +2918,8 @@
         "date": "19.10.2025",
         "price": "472689"
       }
-    ]
+    ],
+    "id": 1774028987872
   },
   {
     "hotel_id": "best_western_premier_marvella_nha_trang_5_nha_trang",
@@ -3343,7 +2937,8 @@
         "date": "19.10.2025",
         "price": "501786"
       }
-    ]
+    ],
+    "id": 1774028987874
   },
   {
     "hotel_id": "muong_thanh_luxury_vien_trieu_hotel_5_nha_trang",
@@ -3361,7 +2956,8 @@
         "date": "19.10.2025",
         "price": "486963"
       }
-    ]
+    ],
+    "id": 1774028987876
   },
   {
     "hotel_id": "citadines_bayfront_nha_trang_5_nha_trang",
@@ -3379,7 +2975,8 @@
         "date": "19.10.2025",
         "price": "490806"
       }
-    ]
+    ],
+    "id": 1774028987878
   },
   {
     "hotel_id": "diamond_bay_condotel_resort_nha_trang_5_nha_trang",
@@ -3397,7 +2994,8 @@
         "date": "19.10.2025",
         "price": "494649"
       }
-    ]
+    ],
+    "id": 1774028987880
   },
   {
     "hotel_id": "the_signature_hotel_nha_trang_5_nha_trang",
@@ -3415,7 +3013,8 @@
         "date": "19.10.2025",
         "price": "512766"
       }
-    ]
+    ],
+    "id": 1774028987882
   },
   {
     "hotel_id": "december_hotel_5_nha_trang",
@@ -3433,7 +3032,8 @@
         "date": "19.10.2025",
         "price": "497943"
       }
-    ]
+    ],
+    "id": 1774028987884
   },
   {
     "hotel_id": "tui_blue_nha_trang_5_nha_trang",
@@ -3451,7 +3051,8 @@
         "date": "19.10.2025",
         "price": "501786"
       }
-    ]
+    ],
+    "id": 1774028987886
   },
   {
     "hotel_id": "diamond_bay_resort_spa_nha_trang_5_cam_ranh",
@@ -3469,7 +3070,8 @@
         "date": "19.10.2025",
         "price": "502884"
       }
-    ]
+    ],
+    "id": 1774028987888
   },
   {
     "hotel_id": "boton_blue_hotel_spa_nha_trang_5_nha_trang",
@@ -3487,7 +3089,8 @@
         "date": "19.10.2025",
         "price": "516060"
       }
-    ]
+    ],
+    "id": 1774028987890
   },
   {
     "hotel_id": "ocean_waves_resort_cam_ranh_5_cam_ranh",
@@ -3505,7 +3108,8 @@
         "date": "19.10.2025",
         "price": "519903"
       }
-    ]
+    ],
+    "id": 1774028987892
   },
   {
     "hotel_id": "the_empyrean_nha_trang_5_nha_trang",
@@ -3523,7 +3127,8 @@
         "date": "19.10.2025",
         "price": "527040"
       }
-    ]
+    ],
+    "id": 1774028987894
   },
   {
     "hotel_id": "ttc_van_phong_bay_resort_5_doc_let_beach",
@@ -3541,7 +3146,8 @@
         "date": "19.10.2025",
         "price": "541314"
       }
-    ]
+    ],
+    "id": 1774028987896
   },
   {
     "hotel_id": "intercontinental_residences_nha_trang_5_nha_trang",
@@ -3559,7 +3165,8 @@
         "date": "19.10.2025",
         "price": "686250"
       }
-    ]
+    ],
+    "id": 1774028987898
   },
   {
     "hotel_id": "radisson_blu_resort_cam_ranh_5_cam_ranh",
@@ -3577,7 +3184,8 @@
         "date": "08.10.2025",
         "price": "790560"
       }
-    ]
+    ],
+    "id": 1774028987900
   },
   {
     "hotel_id": "amiana_resort_nha_trang_5_nha_trang",
@@ -3595,7 +3203,8 @@
         "date": "19.10.2025",
         "price": "874557"
       }
-    ]
+    ],
+    "id": 1774028987902
   },
   {
     "hotel_id": "best_western_premier_sonasea_villas_5_phu_quoc",
@@ -3613,7 +3222,8 @@
         "date": "30.10.2025",
         "price": "1337913"
       }
-    ]
+    ],
+    "id": 1774028987904
   },
   {
     "hotel_id": "ramada_by_wyndham_baku_5_баку",
@@ -3667,7 +3277,8 @@
         "date": "13.12.2025",
         "price": "676962"
       }
-    ]
+    ],
+    "id": 1774028987906
   },
   {
     "hotel_id": "wyndham_baku_formed_rich_hotel_5_баку",
@@ -3705,7 +3316,8 @@
         "date": "17.12.2025",
         "price": "549670"
       }
-    ]
+    ],
+    "id": 1774028987908
   },
   {
     "hotel_id": "sapphire_hotel_5_баку",
@@ -3767,7 +3379,8 @@
         "date": "06.12.2025",
         "price": "666968"
       }
-    ]
+    ],
+    "id": 1774028987909
   },
   {
     "hotel_id": "badam_d_art_boutique_hotel_5_баку",
@@ -3801,7 +3414,8 @@
         "date": "14.12.2025",
         "price": "562820"
       }
-    ]
+    ],
+    "id": 1774028987911
   },
   {
     "hotel_id": "sultan_inn_boutique_hotel_5_баку",
@@ -3855,7 +3469,8 @@
         "date": "13.12.2025",
         "price": "679066"
       }
-    ]
+    ],
+    "id": 1774028987913
   },
   {
     "hotel_id": "badamdar_hotel_and_residences_5_баку",
@@ -3881,7 +3496,8 @@
         "date": "08.10.2025",
         "price": "677466"
       }
-    ]
+    ],
+    "id": 1774028987914
   },
   {
     "hotel_id": "sapphire_inn_hotel_5_баку",
@@ -3991,7 +3607,8 @@
         "date": "27.02.2026",
         "price": "506401"
       }
-    ]
+    ],
+    "id": 1774028987916
   },
   {
     "hotel_id": "hotel_intourist_palace_batumi_5_батуми",
@@ -4041,7 +3658,8 @@
         "date": "16.12.2025",
         "price": "410800"
       }
-    ]
+    ],
+    "id": 1774028987918
   },
   {
     "hotel_id": "sky_tower_hotel_5_батуми",
@@ -4087,7 +3705,8 @@
         "date": "28.10.2025",
         "price": "482022"
       }
-    ]
+    ],
+    "id": 1774028987920
   },
   {
     "hotel_id": "kutaisi_inn_5_кутаиси",
@@ -4117,7 +3736,8 @@
         "date": "30.10.2025",
         "price": "514962"
       }
-    ]
+    ],
+    "id": 1774028987922
   },
   {
     "hotel_id": "colosseum_marina_hotel_5_батуми",
@@ -4163,7 +3783,8 @@
         "date": "28.10.2025",
         "price": "516060"
       }
-    ]
+    ],
+    "id": 1774028987924
   },
   {
     "hotel_id": "litz_resort_5_квариати",
@@ -4201,7 +3822,8 @@
         "date": "18.10.2025",
         "price": "508923"
       }
-    ]
+    ],
+    "id": 1774028987926
   },
   {
     "hotel_id": "gino_seaside_tbilisi_trademark_collection_by_wyndham_5_тбилиси",
@@ -4247,7 +3869,8 @@
         "date": "18.10.2025",
         "price": "519903"
       }
-    ]
+    ],
+    "id": 1774028987928
   },
   {
     "hotel_id": "lopota_lake_resort_spa_5_лопота",
@@ -4265,7 +3888,8 @@
         "date": "26.10.2025",
         "price": "939339"
       }
-    ]
+    ],
+    "id": 1774028987930
   },
   {
     "hotel_id": "courtyard_by_marriott_batumi_5_батуми",
@@ -4283,7 +3907,8 @@
         "date": "05.10.2025",
         "price": "1046943"
       }
-    ]
+    ],
+    "id": 1774028987932
   },
   {
     "hotel_id": "marco_polo_gudauri_hotel_5_гудаури",
@@ -4301,7 +3926,8 @@
         "date": "10.10.2025",
         "price": "578097"
       }
-    ]
+    ],
+    "id": 1774028987934
   },
   {
     "hotel_id": "hotel_afisha_5_тбилиси",
@@ -4319,7 +3945,8 @@
         "date": "07.10.2025",
         "price": "604998"
       }
-    ]
+    ],
+    "id": 1774028987936
   },
   {
     "hotel_id": "miramare_magnetic_beach_hotel_5_кобулети",
@@ -4337,7 +3964,8 @@
         "date": "07.10.2025",
         "price": "664290"
       }
-    ]
+    ],
+    "id": 1774028987938
   },
   {
     "hotel_id": "royal_tulip_hotel_casino_tbilisi_5_тбилиси",
@@ -4355,7 +3983,8 @@
         "date": "24.10.2025",
         "price": "689544"
       }
-    ]
+    ],
+    "id": 1774028987940
   },
   {
     "hotel_id": "wyndham_batumi_5_батуми",
@@ -4373,7 +4002,8 @@
         "date": "17.10.2025",
         "price": "747189"
       }
-    ]
+    ],
+    "id": 1774028987942
   },
   {
     "hotel_id": "sheraton_grand_tbilisi_metechi_palace_5_тбилиси",
@@ -4391,7 +4021,8 @@
         "date": "26.10.2025",
         "price": "824598"
       }
-    ]
+    ],
+    "id": 1774028987944
   },
   {
     "hotel_id": "astera_canggu_5_чангу",
@@ -4509,7 +4140,8 @@
         "date": "13.12.2025",
         "price": "1024920"
       }
-    ]
+    ],
+    "id": 1774028987946
   },
   {
     "hotel_id": "rijasa_agung_resort_and_villas_5_убуд",
@@ -4643,7 +4275,8 @@
         "date": "13.12.2025",
         "price": "1068080"
       }
-    ]
+    ],
+    "id": 1774028987948
   },
   {
     "hotel_id": "sini_vie_villa_5_семиньяк",
@@ -4681,7 +4314,8 @@
         "date": "27.10.2025",
         "price": "1118862"
       }
-    ]
+    ],
+    "id": 1774028987950
   },
   {
     "hotel_id": "sofitel_bali_nusa_dua_beach_resort_5_нуса_дуа",
@@ -4699,7 +4333,8 @@
         "date": "20.10.2025",
         "price": "1571787"
       }
-    ]
+    ],
+    "id": 1774028987952
   },
   {
     "hotel_id": "alila_ubud_5_убуд",
@@ -4717,7 +4352,8 @@
         "date": "11.10.2025",
         "price": "1605825"
       }
-    ]
+    ],
+    "id": 1774028987954
   },
   {
     "hotel_id": "rimba_jimbaran_bali_by_ayana_5_джимбаран",
@@ -4735,7 +4371,8 @@
         "date": "23.10.2025",
         "price": "1681587"
       }
-    ]
+    ],
+    "id": 1774028987955
   },
   {
     "hotel_id": "gending_kedis_luxury_villas_spa_estate_5_джимбаран",
@@ -4753,7 +4390,8 @@
         "date": "03.10.2025",
         "price": "1780407"
       }
-    ]
+    ],
+    "id": 1774028987957
   },
   {
     "hotel_id": "komaneka_at_tanggayuda_ubud_5_убуд",
@@ -4771,7 +4409,8 @@
         "date": "24.10.2025",
         "price": "1867698"
       }
-    ]
+    ],
+    "id": 1774028987959
   },
   {
     "hotel_id": "maya_ubud_resort_spa_5_убуд",
@@ -4789,7 +4428,8 @@
         "date": "29.10.2025",
         "price": "1964322"
       }
-    ]
+    ],
+    "id": 1774028987961
   },
   {
     "hotel_id": "kappa_senses_ubud_5_убуд",
@@ -4807,7 +4447,8 @@
         "date": "06.10.2025",
         "price": "2056005"
       }
-    ]
+    ],
+    "id": 1774028987963
   },
   {
     "hotel_id": "amarterra_villas_resort_bali_nusa_dua_autograph_collection_5_нуса_дуа",
@@ -4825,7 +4466,8 @@
         "date": "27.10.2025",
         "price": "2180079"
       }
-    ]
+    ],
+    "id": 1774028987965
   },
   {
     "hotel_id": "kamandalu_ubud_5_убуд",
@@ -4843,7 +4485,8 @@
         "date": "06.10.2025",
         "price": "2312937"
       }
-    ]
+    ],
+    "id": 1774028987967
   },
   {
     "hotel_id": "puri_wulandari_a_boutique_resort_spa_5_убуд",
@@ -4861,7 +4504,8 @@
         "date": "30.10.2025",
         "price": "2523753"
       }
-    ]
+    ],
+    "id": 1774028987969
   },
   {
     "hotel_id": "mamaka_by_ovolo_5_кута",
@@ -4911,7 +4555,8 @@
         "date": "22.12.2025",
         "price": "1071720"
       }
-    ]
+    ],
+    "id": 1774028987971
   },
   {
     "hotel_id": "hanging_gardens_of_bali_5_убуд",
@@ -4929,7 +4574,8 @@
         "date": "21.10.2025",
         "price": "2989854"
       }
-    ]
+    ],
+    "id": 1774028987973
   },
   {
     "hotel_id": "capella_ubud_5_убуд",
@@ -4947,7 +4593,8 @@
         "date": "15.10.2025",
         "price": "4655520"
       }
-    ]
+    ],
+    "id": 1774028987974
   },
   {
     "hotel_id": "ayung_resort_ubud_5_убуд",
@@ -4965,7 +4612,8 @@
         "date": "09.10.2025",
         "price": "1249524"
       }
-    ]
+    ],
+    "id": 1774028987976
   },
   {
     "hotel_id": "ayodya_resort_bali_5_нуса_дуа",
@@ -4987,7 +4635,8 @@
         "date": "10.12.2025",
         "price": "1296360"
       }
-    ]
+    ],
+    "id": 1774028987978
   },
   {
     "hotel_id": "kenran_resort_ubud_5_убуд",
@@ -5005,7 +4654,8 @@
         "date": "20.10.2025",
         "price": "1362069"
       }
-    ]
+    ],
+    "id": 1774028987980
   },
   {
     "hotel_id": "nusa_dua_beach_hotel_spa_bali_5_нуса_дуа",
@@ -5023,7 +4673,8 @@
         "date": "19.10.2025",
         "price": "1395009"
       }
-    ]
+    ],
+    "id": 1774028987982
   },
   {
     "hotel_id": "renaissance_bali_uluwatu_resort_spa_5_убуд",
@@ -5045,7 +4696,8 @@
         "date": "04.10.2025",
         "price": "1527318"
       }
-    ]
+    ],
+    "id": 1774028987984
   },
   {
     "hotel_id": "como_uma_canggu_5_чангу",
@@ -5063,7 +4715,8 @@
         "date": "20.10.2025",
         "price": "1486692"
       }
-    ]
+    ],
+    "id": 1774028987986
   },
   {
     "hotel_id": "crowne_plaza_doha_the_business_park_5_al_dafna",
@@ -5093,7 +4746,8 @@
         "date": "17.10.2025",
         "price": "834480"
       }
-    ]
+    ],
+    "id": 1774028987988
   },
   {
     "hotel_id": "saraya_corniche_hotel_5_old_town",
@@ -5123,7 +4777,8 @@
         "date": "20.12.2025",
         "price": "565976"
       }
-    ]
+    ],
+    "id": 1774028987990
   },
   {
     "hotel_id": "tio_sea_resort_formerly_al_sultan_beach_resort_5_al_khor",
@@ -5233,7 +4888,8 @@
         "date": "31.12.2025",
         "price": "767434"
       }
-    ]
+    ],
+    "id": 1774028987992
   },
   {
     "hotel_id": "cielo_hotel_lusail_5_lusail",
@@ -5303,7 +4959,8 @@
         "date": "25.12.2025",
         "price": "770064"
       }
-    ]
+    ],
+    "id": 1774028987994
   },
   {
     "hotel_id": "souq_al_wakra_hotel_qatar_by_tivoli_5_corniche_road",
@@ -5329,7 +4986,8 @@
         "date": "20.12.2025",
         "price": "754284"
       }
-    ]
+    ],
+    "id": 1774028987996
   },
   {
     "hotel_id": "radisson_blu_hotel_doha_5_al_sadd",
@@ -5359,7 +5017,8 @@
         "date": "30.12.2025",
         "price": "843704"
       }
-    ]
+    ],
+    "id": 1774028987998
   },
   {
     "hotel_id": "fraser_suites_doha_5_sharq_village",
@@ -5393,7 +5052,8 @@
         "date": "29.10.2025",
         "price": "856440"
       }
-    ]
+    ],
+    "id": 1774028988000
   },
   {
     "hotel_id": "grand_regency_hotel_doha_by_wyndham_5_al_sadd",
@@ -5427,7 +5087,8 @@
         "date": "27.12.2025",
         "price": "759544"
       }
-    ]
+    ],
+    "id": 1774028988002
   },
   {
     "hotel_id": "golden_tulip_doha_5_old_town",
@@ -5453,7 +5114,8 @@
         "date": "18.10.2025",
         "price": "584685"
       }
-    ]
+    ],
+    "id": 1774028988004
   },
   {
     "hotel_id": "delta_hotels_by_marriott_city_center_doha_5_west_bey",
@@ -5479,7 +5141,8 @@
         "date": "20.12.2025",
         "price": "664338"
       }
-    ]
+    ],
+    "id": 1774028988006
   },
   {
     "hotel_id": "retaj_salwa_resort_spa_5_al_rayyan",
@@ -5565,7 +5228,8 @@
         "date": "25.12.2025",
         "price": "771642"
       }
-    ]
+    ],
+    "id": 1774028988008
   },
   {
     "hotel_id": "waterfront_hotel_lusail_5_lusail",
@@ -5599,7 +5263,8 @@
         "date": "20.12.2025",
         "price": "629622"
       }
-    ]
+    ],
+    "id": 1774028988010
   },
   {
     "hotel_id": "shaza_doha_5_old_town",
@@ -5625,7 +5290,8 @@
         "date": "18.10.2025",
         "price": "611037"
       }
-    ]
+    ],
+    "id": 1774028988012
   },
   {
     "hotel_id": "dusitd2_salwa_doha_5_downtown",
@@ -5651,7 +5317,8 @@
         "date": "18.10.2025",
         "price": "619821"
       }
-    ]
+    ],
+    "id": 1774028988014
   },
   {
     "hotel_id": "millennium_plaza_doha_5_al_sadd",
@@ -5681,7 +5348,8 @@
         "date": "20.12.2025",
         "price": "649610"
       }
-    ]
+    ],
+    "id": 1774028988016
   },
   {
     "hotel_id": "qabila_westbay_hotel_5_west_bey",
@@ -5699,7 +5367,8 @@
         "date": "04.10.2025",
         "price": "586881"
       }
-    ]
+    ],
+    "id": 1774028988018
   },
   {
     "hotel_id": "concorde_hotel_doha_5_al_sadd",
@@ -5717,7 +5386,8 @@
         "date": "04.10.2025",
         "price": "591273"
       }
-    ]
+    ],
+    "id": 1774028988020
   },
   {
     "hotel_id": "millennium_place_doha_5_al_sadd",
@@ -5739,7 +5409,8 @@
         "date": "19.10.2025",
         "price": "882792"
       }
-    ]
+    ],
+    "id": 1774028988022
   },
   {
     "hotel_id": "hyatt_regency_oryx_doha_5_old_airport_road",
@@ -5765,7 +5436,8 @@
         "date": "20.12.2025",
         "price": "741660"
       }
-    ]
+    ],
+    "id": 1774028988024
   },
   {
     "hotel_id": "park_hyatt_doha_5_downtown",
@@ -5783,7 +5455,8 @@
         "date": "04.10.2025",
         "price": "626409"
       }
-    ]
+    ],
+    "id": 1774028988026
   },
   {
     "hotel_id": "musheireb_boutique_hotel_by_tivoli_5_banana_island",
@@ -5801,7 +5474,8 @@
         "date": "11.10.2025",
         "price": "632448"
       }
-    ]
+    ],
+    "id": 1774028988028
   },
   {
     "hotel_id": "arumaila_boutique_hotel_by_tivoli_5_west_bey",
@@ -5819,7 +5493,8 @@
         "date": "11.10.2025",
         "price": "632448"
       }
-    ]
+    ],
+    "id": 1774028988030
   },
   {
     "hotel_id": "le_meridien_city_center_doha_5_west_bey",
@@ -5837,7 +5512,8 @@
         "date": "07.10.2025",
         "price": "978867"
       }
-    ]
+    ],
+    "id": 1774028988031
   },
   {
     "hotel_id": "wyndham_grand_doha_west_bay_beach_5_al_dafna",
@@ -5859,7 +5535,8 @@
         "date": "13.12.2025",
         "price": "3130226"
       }
-    ]
+    ],
+    "id": 1774028988033
   },
   {
     "hotel_id": "hilton_doha_5_west_bey",
@@ -5881,7 +5558,8 @@
         "date": "30.12.2025",
         "price": "1596936"
       }
-    ]
+    ],
+    "id": 1774028988035
   },
   {
     "hotel_id": "hyatt_andaz_doha_5_west_bey",
@@ -5911,7 +5589,8 @@
         "date": "12.12.2025",
         "price": "2024574"
       }
-    ]
+    ],
+    "id": 1774028988037
   },
   {
     "hotel_id": "marriott_luxury_collection_al_messila_resort_spa_doha_5_al_rayyan",
@@ -5977,7 +5656,8 @@
         "date": "28.12.2025",
         "price": "4265334"
       }
-    ]
+    ],
+    "id": 1774028988039
   },
   {
     "hotel_id": "the_ned_doha_5_corniche_road",
@@ -6007,7 +5687,8 @@
         "date": "25.12.2025",
         "price": "2749402"
       }
-    ]
+    ],
+    "id": 1774028988041
   },
   {
     "hotel_id": "banyan_tree_doha_at_la_cigale_mushaireb_5_mushaireb",
@@ -6029,7 +5710,8 @@
         "date": "14.12.2025",
         "price": "1582734"
       }
-    ]
+    ],
+    "id": 1774028988042
   },
   {
     "hotel_id": "marsa_malaz_kempinski_the_pearl_doha_5_pearl_of_qatar",
@@ -6099,7 +5781,8 @@
         "date": "28.12.2025",
         "price": "2842504"
       }
-    ]
+    ],
+    "id": 1774028988044
   },
   {
     "hotel_id": "sealine_beach_al_murwab_resort_5_mesaieed",
@@ -6117,7 +5800,8 @@
         "date": "11.10.2025",
         "price": "713151"
       }
-    ]
+    ],
+    "id": 1774028988046
   },
   {
     "hotel_id": "four_seasons_hotel_doha_5_west_bey",
@@ -6135,7 +5819,8 @@
         "date": "01.10.2025",
         "price": "2062044"
       }
-    ]
+    ],
+    "id": 1774028988048
   },
   {
     "hotel_id": "velero_hotel_doha_5_lusail",
@@ -6169,7 +5854,8 @@
         "date": "14.12.2025",
         "price": "1637964"
       }
-    ]
+    ],
+    "id": 1774028988050
   },
   {
     "hotel_id": "ezdan_palace_hotel_5_west_bey",
@@ -6191,7 +5877,8 @@
         "date": "20.12.2025",
         "price": "674332"
       }
-    ]
+    ],
+    "id": 1774028988052
   },
   {
     "hotel_id": "hotel_royal_signature_5_куала_лумпур",
@@ -6221,7 +5908,8 @@
         "date": "21.10.2025",
         "price": "970851"
       }
-    ]
+    ],
+    "id": 1774028988054
   },
   {
     "hotel_id": "berjaya_times_square_5_куала_лумпур",
@@ -6251,7 +5939,8 @@
         "date": "21.10.2025",
         "price": "952470"
       }
-    ]
+    ],
+    "id": 1774028988056
   },
   {
     "hotel_id": "pullman_kuala_lumpur_city_center_5_куала_лумпур",
@@ -6281,7 +5970,8 @@
         "date": "21.10.2025",
         "price": "1016525"
       }
-    ]
+    ],
+    "id": 1774028988058
   },
   {
     "hotel_id": "crowne_plaza_kuala_lumpur_city_centre_5_куала_лумпур",
@@ -6311,7 +6001,8 @@
         "date": "21.10.2025",
         "price": "1069997"
       }
-    ]
+    ],
+    "id": 1774028988060
   },
   {
     "hotel_id": "the_majestic_hotel_kuala_lumpur_5_куала_лумпур",
@@ -6341,7 +6032,8 @@
         "date": "21.10.2025",
         "price": "1085593"
       }
-    ]
+    ],
+    "id": 1774028988061
   },
   {
     "hotel_id": "shangri_la_kuala_lumpur_5_куала_лумпур",
@@ -6371,7 +6063,8 @@
         "date": "21.10.2025",
         "price": "1090049"
       }
-    ]
+    ],
+    "id": 1774028988063
   },
   {
     "hotel_id": "ascott_hotel_kuala_lumpur_5_куала_лумпур",
@@ -6401,7 +6094,8 @@
         "date": "21.10.2025",
         "price": "1095619"
       }
-    ]
+    ],
+    "id": 1774028988065
   },
   {
     "hotel_id": "parkroyal_collection_5_куала_лумпур",
@@ -6431,7 +6125,8 @@
         "date": "21.10.2025",
         "price": "1096733"
       }
-    ]
+    ],
+    "id": 1774028988067
   },
   {
     "hotel_id": "pavilion_hotel_kuala_lumpur_5_куала_лумпур",
@@ -6461,7 +6156,8 @@
         "date": "21.10.2025",
         "price": "1102303"
       }
-    ]
+    ],
+    "id": 1774028988069
   },
   {
     "hotel_id": "eq_kuala_lumpur_5_куала_лумпур",
@@ -6491,7 +6187,8 @@
         "date": "21.10.2025",
         "price": "1200335"
       }
-    ]
+    ],
+    "id": 1774028988070
   },
   {
     "hotel_id": "imperial_lexis_kuala_lumpur_5_куала_лумпур",
@@ -6521,7 +6218,8 @@
         "date": "21.10.2025",
         "price": "1200335"
       }
-    ]
+    ],
+    "id": 1774028988072
   },
   {
     "hotel_id": "sama_sama_kl_international_airport_5_куала_лумпур",
@@ -6547,7 +6245,8 @@
         "date": "14.10.2025",
         "price": "1188638"
       }
-    ]
+    ],
+    "id": 1774028988074
   },
   {
     "hotel_id": "pan_pacific_serviced_suites_kl_5_куала_лумпур",
@@ -6573,7 +6272,8 @@
         "date": "14.10.2025",
         "price": "1196993"
       }
-    ]
+    ],
+    "id": 1774028988076
   },
   {
     "hotel_id": "barcelo_nasandhura_male_5_мале",
@@ -6591,7 +6291,8 @@
         "date": "25.10.2025",
         "price": "1563942"
       }
-    ]
+    ],
+    "id": 1774028988078
   },
   {
     "hotel_id": "centara_mirage_lagoon_maldives_5_северный_мале_атолл",
@@ -6609,7 +6310,8 @@
         "date": "08.10.2025",
         "price": "1734574"
       }
-    ]
+    ],
+    "id": 1774028988080
   },
   {
     "hotel_id": "saii_lagoon_maldives_5_южный_мале_атолл",
@@ -6627,7 +6329,8 @@
         "date": "25.10.2025",
         "price": "1806594"
       }
-    ]
+    ],
+    "id": 1774028988082
   },
   {
     "hotel_id": "dhigufaru_island_resort_5_баа_атолл",
@@ -6645,7 +6348,8 @@
         "date": "13.10.2025",
         "price": "1842050"
       }
-    ]
+    ],
+    "id": 1774028988084
   },
   {
     "hotel_id": "kandima_maldives_5_гаафу_даалу_атолл",
@@ -6663,7 +6367,8 @@
         "date": "30.10.2025",
         "price": "1937892"
       }
-    ]
+    ],
+    "id": 1774028988086
   },
   {
     "hotel_id": "machchafushi_island_resort_spa_maldives_5_ари_атолл",
@@ -6681,7 +6386,8 @@
         "date": "08.10.2025",
         "price": "2002156"
       }
-    ]
+    ],
+    "id": 1774028988088
   },
   {
     "hotel_id": "kurumba_maldives_5_северный_мале_атолл",
@@ -6699,7 +6405,8 @@
         "date": "29.10.2025",
         "price": "2042598"
       }
-    ]
+    ],
+    "id": 1774028988090
   },
   {
     "hotel_id": "velassaru_maldives_5_южный_мале_атолл",
@@ -6717,7 +6424,8 @@
         "date": "10.10.2025",
         "price": "2069744"
       }
-    ]
+    ],
+    "id": 1774028988092
   },
   {
     "hotel_id": "nooe_maldives_kunaavashi_5_фаафу_даалу_атоллы",
@@ -6735,7 +6443,8 @@
         "date": "29.10.2025",
         "price": "2113510"
       }
-    ]
+    ],
+    "id": 1774028988094
   },
   {
     "hotel_id": "sheraton_maldives_full_moon_resort_spa_5_северный_мале_атолл",
@@ -6753,7 +6462,8 @@
         "date": "29.10.2025",
         "price": "2158384"
       }
-    ]
+    ],
+    "id": 1774028988096
   },
   {
     "hotel_id": "furaveri_island_resort_spa_5_раа_баа_атоллы",
@@ -6771,7 +6481,8 @@
         "date": "29.10.2025",
         "price": "2204366"
       }
-    ]
+    ],
+    "id": 1774028988097
   },
   {
     "hotel_id": "le_meridien_maldives_resort_spa_5_лавиани_атолл",
@@ -6789,7 +6500,8 @@
         "date": "21.10.2025",
         "price": "2227080"
       }
-    ]
+    ],
+    "id": 1774028988099
   },
   {
     "hotel_id": "hard_rock_hotel_maldives_5_южный_мале_атолл",
@@ -6807,7 +6519,8 @@
         "date": "30.10.2025",
         "price": "2494662"
       }
-    ]
+    ],
+    "id": 1774028988101
   },
   {
     "hotel_id": "cinnamon_velifushi_maldives_5_северный_мале_атолл",
@@ -6825,7 +6538,8 @@
         "date": "16.10.2025",
         "price": "2547846"
       }
-    ]
+    ],
+    "id": 1774028988103
   },
   {
     "hotel_id": "nh_maldives_kuda_rah_resort_5_ари_атолл",
@@ -6843,7 +6557,8 @@
         "date": "08.10.2025",
         "price": "2745624"
       }
-    ]
+    ],
+    "id": 1774028988105
   },
   {
     "hotel_id": "centara_grand_lagoon_maldives_5_северный_мале_атолл",
@@ -6861,7 +6576,8 @@
         "date": "08.10.2025",
         "price": "2906284"
       }
-    ]
+    ],
+    "id": 1774028988107
   },
   {
     "hotel_id": "fushifaru_maldives_5_лавиани_атолл",
@@ -6879,7 +6595,8 @@
         "date": "29.10.2025",
         "price": "3045338"
       }
-    ]
+    ],
+    "id": 1774028988109
   },
   {
     "hotel_id": "coco_bodu_hithi_maldives_5_северный_мале_атолл",
@@ -6897,7 +6614,8 @@
         "date": "10.10.2025",
         "price": "3159462"
       }
-    ]
+    ],
+    "id": 1774028988111
   },
   {
     "hotel_id": "grand_park_kodhipparu_5_северный_мале_атолл",
@@ -6915,7 +6633,8 @@
         "date": "29.10.2025",
         "price": "3342282"
       }
-    ]
+    ],
+    "id": 1774028988113
   },
   {
     "hotel_id": "noku_maldives_5_ноону_атолл",
@@ -6933,7 +6652,8 @@
         "date": "29.10.2025",
         "price": "3473026"
       }
-    ]
+    ],
+    "id": 1774028988115
   },
   {
     "hotel_id": "hideaway_beach_resort_spa_5_хаа_алифу_атолл",
@@ -6951,7 +6671,8 @@
         "date": "29.10.2025",
         "price": "3724542"
       }
-    ]
+    ],
+    "id": 1774028988116
   },
   {
     "hotel_id": "patina_maldives_fari_islands_5_северный_мале_атолл",
@@ -6969,7 +6690,8 @@
         "date": "29.10.2025",
         "price": "3726758"
       }
-    ]
+    ],
+    "id": 1774028988118
   },
   {
     "hotel_id": "nh_collection_maldives_havodda_resort_5_гаафу_даалу_атолл",
@@ -6987,7 +6709,8 @@
         "date": "29.10.2025",
         "price": "3856948"
       }
-    ]
+    ],
+    "id": 1774028988120
   },
   {
     "hotel_id": "kandolhu_maldives_5_ари_атолл",
@@ -7005,7 +6728,8 @@
         "date": "09.10.2025",
         "price": "3861380"
       }
-    ]
+    ],
+    "id": 1774028988122
   },
   {
     "hotel_id": "madifushi_private_island_maldives_5_мииму_атолл",
@@ -7023,7 +6747,8 @@
         "date": "26.10.2025",
         "price": "4334496"
       }
-    ]
+    ],
+    "id": 1774028988124
   },
   {
     "hotel_id": "niyama_private_islands_maldives_5_ари_атолл",
@@ -7041,7 +6766,8 @@
         "date": "29.10.2025",
         "price": "4718972"
       }
-    ]
+    ],
+    "id": 1774028988126
   },
   {
     "hotel_id": "alila_kothaifaru_maldives_5_раа_баа_атоллы",
@@ -7059,7 +6785,8 @@
         "date": "17.10.2025",
         "price": "4740578"
       }
-    ]
+    ],
+    "id": 1774028988128
   },
   {
     "hotel_id": "six_senses_kanuhura_5_лавиани_атолл",
@@ -7077,7 +6804,8 @@
         "date": "29.10.2025",
         "price": "4838082"
       }
-    ]
+    ],
+    "id": 1774028988130
   },
   {
     "hotel_id": "the_residence_maldives_at_falhumaafushi_5_гаафу_алифу_атолл",
@@ -7095,7 +6823,8 @@
         "date": "23.10.2025",
         "price": "4910656"
       }
-    ]
+    ],
+    "id": 1774028988132
   },
   {
     "hotel_id": "hilton_maldives_amingiri_resort_spa_5_северный_мале_атолл",
@@ -7113,7 +6842,8 @@
         "date": "30.10.2025",
         "price": "5026442"
       }
-    ]
+    ],
+    "id": 1774028988134
   },
   {
     "hotel_id": "so_maldives_5_гаафу_алифу_атолл",
@@ -7131,7 +6861,8 @@
         "date": "14.10.2025",
         "price": "5044170"
       }
-    ]
+    ],
+    "id": 1774028988136
   },
   {
     "hotel_id": "huvafen_fushi_5_северный_мале_атолл",
@@ -7149,7 +6880,8 @@
         "date": "23.10.2025",
         "price": "5063006"
       }
-    ]
+    ],
+    "id": 1774028988138
   },
   {
     "hotel_id": "constance_halaveli_maldives_5_ари_атолл",
@@ -7167,7 +6899,8 @@
         "date": "23.10.2025",
         "price": "5229206"
       }
-    ]
+    ],
+    "id": 1774028988140
   },
   {
     "hotel_id": "intercontinental_maldives_maamunagau_resort_5_раа_баа_атоллы",
@@ -7185,7 +6918,8 @@
         "date": "28.10.2025",
         "price": "5383772"
       }
-    ]
+    ],
+    "id": 1774028988141
   },
   {
     "hotel_id": "six_senses_laamu_5_лааму_атолл",
@@ -7203,7 +6937,8 @@
         "date": "28.10.2025",
         "price": "5389312"
       }
-    ]
+    ],
+    "id": 1774028988143
   },
   {
     "hotel_id": "four_seasons_resorts_maldives_at_kuda_huraa_5_северный_мале_атолл",
@@ -7221,7 +6956,8 @@
         "date": "26.10.2025",
         "price": "5486816"
       }
-    ]
+    ],
+    "id": 1774028988145
   },
   {
     "hotel_id": "como_cocoa_island_5_мале",
@@ -7239,7 +6975,8 @@
         "date": "26.10.2025",
         "price": "5514516"
       }
-    ]
+    ],
+    "id": 1774028988147
   },
   {
     "hotel_id": "jw_marriott_kaafu_atoll_island_resort_5_мале",
@@ -7257,7 +6994,8 @@
         "date": "29.10.2025",
         "price": "5790408"
       }
-    ]
+    ],
+    "id": 1774028988149
   },
   {
     "hotel_id": "seaside_finolhu_baa_atoll_maldives_5_баа_атолл",
@@ -7275,7 +7013,8 @@
         "date": "29.10.2025",
         "price": "5932232"
       }
-    ]
+    ],
+    "id": 1774028988151
   },
   {
     "hotel_id": "boutique_hotel_baku_4_баку",
@@ -7329,7 +7068,8 @@
         "date": "27.02.2026",
         "price": "564144"
       }
-    ]
+    ],
+    "id": 1774028988153
   },
   {
     "hotel_id": "port_rivoli_baku_hotel_4_баку",
@@ -7383,7 +7123,8 @@
         "date": "27.02.2026",
         "price": "358211"
       }
-    ]
+    ],
+    "id": 1774028988155
   },
   {
     "hotel_id": "premier_palace_baku_4_баку",
@@ -7437,7 +7178,8 @@
         "date": "27.02.2026",
         "price": "416976"
       }
-    ]
+    ],
+    "id": 1774028988157
   },
   {
     "hotel_id": "grand_midway_hotel_4_баку",
@@ -7491,7 +7233,8 @@
         "date": "27.02.2026",
         "price": "370475"
       }
-    ]
+    ],
+    "id": 1774028988158
   },
   {
     "hotel_id": "holiday_inn_baku_by_ihg_4_баку",
@@ -7545,7 +7288,8 @@
         "date": "27.02.2026",
         "price": "766500"
       }
-    ]
+    ],
+    "id": 1774028988160
   },
   {
     "hotel_id": "shah_palace_hotel_old_city_4_баку",
@@ -7599,7 +7343,8 @@
         "date": "27.02.2026",
         "price": "509978"
       }
-    ]
+    ],
+    "id": 1774028988162
   },
   {
     "hotel_id": "sheraton_baku_intourist_5_баку",
@@ -7653,7 +7398,8 @@
         "date": "27.02.2026",
         "price": "1443575"
       }
-    ]
+    ],
+    "id": 1774028988164
   },
   {
     "hotel_id": "baku_marriott_hotel_boulevard_5_баку",
@@ -7707,7 +7453,8 @@
         "date": "27.02.2026",
         "price": "561078"
       }
-    ]
+    ],
+    "id": 1774028988166
   },
   {
     "hotel_id": "midtown_hotel_4_баку",
@@ -7761,7 +7508,8 @@
         "date": "27.02.2026",
         "price": "1287720"
       }
-    ]
+    ],
+    "id": 1774028988168
   },
   {
     "hotel_id": "art_gallery_hotel_5_баку",
@@ -7815,7 +7563,8 @@
         "date": "27.02.2026",
         "price": "1276478"
       }
-    ]
+    ],
+    "id": 1774028988170
   },
   {
     "hotel_id": "wyndham_garden_baku_5_баку",
@@ -7869,7 +7618,8 @@
         "date": "27.02.2026",
         "price": "552902"
       }
-    ]
+    ],
+    "id": 1774028988172
   },
   {
     "hotel_id": "hilton_garden_inn_baku_4_баку",
@@ -7923,7 +7673,8 @@
         "date": "27.02.2026",
         "price": "561078"
       }
-    ]
+    ],
+    "id": 1774028988173
   },
   {
     "hotel_id": "gabala_garden_hotel_5_габала",
@@ -7977,7 +7728,8 @@
         "date": "27.02.2026",
         "price": "2277527"
       }
-    ]
+    ],
+    "id": 1774028988175
   },
   {
     "hotel_id": "courtyard_by_marriott_baku_4_баку",
@@ -8031,7 +7783,8 @@
         "date": "27.02.2026",
         "price": "564655"
       }
-    ]
+    ],
+    "id": 1774028988177
   },
   {
     "hotel_id": "the_landmark_hotel_baku_5_баку",
@@ -8085,7 +7838,8 @@
         "date": "27.02.2026",
         "price": "820666"
       }
-    ]
+    ],
+    "id": 1774028988178
   },
   {
     "hotel_id": "movenpick_winter_park_baku_4_баку",
@@ -8139,7 +7893,8 @@
         "date": "27.02.2026",
         "price": "552391"
       }
-    ]
+    ],
+    "id": 1774028988180
   },
   {
     "hotel_id": "theatrum_hotel_5_баку",
@@ -8193,7 +7948,8 @@
         "date": "27.02.2026",
         "price": "541149"
       }
-    ]
+    ],
+    "id": 1774028988182
   },
   {
     "hotel_id": "macara_sheki_city_hotel_4_шеки",
@@ -8247,7 +8003,8 @@
         "date": "27.02.2026",
         "price": "531951"
       }
-    ]
+    ],
+    "id": 1774028988184
   },
   {
     "hotel_id": "boutique_19_hotel_4_баку",
@@ -8301,7 +8058,8 @@
         "date": "27.02.2026",
         "price": "556990"
       }
-    ]
+    ],
+    "id": 1774028988186
   },
   {
     "hotel_id": "shabran_wellbeing_resort_5_шабран",
@@ -8355,7 +8113,8 @@
         "date": "27.02.2026",
         "price": "1031709"
       }
-    ]
+    ],
+    "id": 1774028988188
   },
   {
     "hotel_id": "iris_hotel_baku_4_баку",
@@ -8409,7 +8168,8 @@
         "date": "27.02.2026",
         "price": "451724"
       }
-    ]
+    ],
+    "id": 1774028988189
   },
   {
     "hotel_id": "marxal_resort_spa_sheki_5_шеки",
@@ -8463,7 +8223,8 @@
         "date": "27.02.2026",
         "price": "1892744"
       }
-    ]
+    ],
+    "id": 1774028988191
   },
   {
     "hotel_id": "mercure_baku_city_hotel_5_баку",
@@ -8517,7 +8278,8 @@
         "date": "27.02.2026",
         "price": "505890"
       }
-    ]
+    ],
+    "id": 1774028988193
   },
   {
     "hotel_id": "promenade_hotel_4_баку",
@@ -8571,7 +8333,8 @@
         "date": "27.02.2026",
         "price": "532973"
       }
-    ]
+    ],
+    "id": 1774028988195
   },
   {
     "hotel_id": "hyatt_regency_baku_5_баку",
@@ -8625,7 +8388,8 @@
         "date": "27.02.2026",
         "price": "3165645"
       }
-    ]
+    ],
+    "id": 1774028988197
   },
   {
     "hotel_id": "monte_napoleone_hotel_4_баку",
@@ -8679,7 +8443,8 @@
         "date": "27.02.2026",
         "price": "529396"
       }
-    ]
+    ],
+    "id": 1774028988199
   },
   {
     "hotel_id": "intercontinental_baku_by_ihg_5_баку",
@@ -8733,7 +8498,8 @@
         "date": "27.02.2026",
         "price": "962213"
       }
-    ]
+    ],
+    "id": 1774028988201
   },
   {
     "hotel_id": "quba_palace_hotel_golf_resort_5_губа",
@@ -8787,7 +8553,8 @@
         "date": "27.02.2026",
         "price": "3163090"
       }
-    ]
+    ],
+    "id": 1774028988203
   },
   {
     "hotel_id": "hilton_baku_5_баку",
@@ -8841,7 +8608,8 @@
         "date": "27.02.2026",
         "price": "1738933"
       }
-    ]
+    ],
+    "id": 1774028988205
   },
   {
     "hotel_id": "dinamo_hotel_5_баку",
@@ -8895,7 +8663,8 @@
         "date": "27.02.2026",
         "price": "1100694"
       }
-    ]
+    ],
+    "id": 1774028988207
   },
   {
     "hotel_id": "ivy_garden_hotel_5_баку",
@@ -8949,7 +8718,8 @@
         "date": "27.02.2026",
         "price": "552391"
       }
-    ]
+    ],
+    "id": 1774028988209
   },
   {
     "hotel_id": "qafqaz_riverside_hotel_gabala_5_габала",
@@ -9003,7 +8773,8 @@
         "date": "27.02.2026",
         "price": "3811038"
       }
-    ]
+    ],
+    "id": 1774028988211
   },
   {
     "hotel_id": "atropat_old_city_hotel_4_баку",
@@ -9057,7 +8828,8 @@
         "date": "27.02.2026",
         "price": "509978"
       }
-    ]
+    ],
+    "id": 1774028988213
   },
   {
     "hotel_id": "the_ritz_carlton_baku_5_баку",
@@ -9111,7 +8883,8 @@
         "date": "27.02.2026",
         "price": "3348072"
       }
-    ]
+    ],
+    "id": 1774028988214
   },
   {
     "hotel_id": "jw_marriott_absheron_baku_hotel_5_баку",
@@ -9165,7 +8938,8 @@
         "date": "27.02.2026",
         "price": "26494328"
       }
-    ]
+    ],
+    "id": 1774028988215
   },
   {
     "hotel_id": "royal_sapphire_hotel_4_баку",
@@ -9221,7 +8995,8 @@
         "date": "27.02.2026",
         "price": "435883"
       }
-    ]
+    ],
+    "id": 1774028988217
   },
   {
     "hotel_id": "east_legend_hotel_4_баку",
@@ -9277,7 +9052,8 @@
         "date": "27.02.2026",
         "price": "323463"
       }
-    ]
+    ],
+    "id": 1774028988219
   },
   {
     "hotel_id": "boulevard_side_hotel_4_баку",
@@ -9333,7 +9109,8 @@
         "date": "27.02.2026",
         "price": "346458"
       }
-    ]
+    ],
+    "id": 1774028988221
   },
   {
     "hotel_id": "west_inn_4_баку",
@@ -9389,7 +9166,8 @@
         "date": "27.02.2026",
         "price": "552902"
       }
-    ]
+    ],
+    "id": 1774028988223
   },
   {
     "hotel_id": "dondar_hotel_4_баку",
@@ -9445,7 +9223,8 @@
         "date": "27.02.2026",
         "price": "505890"
       }
-    ]
+    ],
+    "id": 1774028988225
   },
   {
     "hotel_id": "auroom_hotel_baku_4_баку",
@@ -9501,7 +9280,8 @@
         "date": "27.02.2026",
         "price": "505890"
       }
-    ]
+    ],
+    "id": 1774028988227
   },
   {
     "hotel_id": "city_park_hotel_baku_4_баку",
@@ -9557,7 +9337,8 @@
         "date": "27.02.2026",
         "price": "439971"
       }
-    ]
+    ],
+    "id": 1774028988229
   },
   {
     "hotel_id": "midway_hotel_baku_5_баку",
@@ -9613,7 +9394,8 @@
         "date": "27.02.2026",
         "price": "541149"
       }
-    ]
+    ],
+    "id": 1774028988231
   },
   {
     "hotel_id": "nobel_hotel_4_баку",
@@ -9669,7 +9451,8 @@
         "date": "27.02.2026",
         "price": "416465"
       }
-    ]
+    ],
+    "id": 1774028988232
   },
   {
     "hotel_id": "homebridge_hotel_apartments_4_баку",
@@ -9725,7 +9508,8 @@
         "date": "27.02.2026",
         "price": "412888"
       }
-    ]
+    ],
+    "id": 1774028988234
   },
   {
     "hotel_id": "sapphire_inn_hotel_5_баку",
@@ -9781,7 +9565,8 @@
         "date": "27.02.2026",
         "price": "506401"
       }
-    ]
+    ],
+    "id": 1774028988236
   },
   {
     "hotel_id": "austin_hotel_4_баку",
@@ -9837,7 +9622,8 @@
         "date": "27.02.2026",
         "price": "506401"
       }
-    ]
+    ],
+    "id": 1774028988238
   },
   {
     "hotel_id": "dad_resort_phu_quoc_4_phu_quoc",
@@ -9881,7 +9667,8 @@
         "date": "24.02.2026",
         "price": "733285"
       }
-    ]
+    ],
+    "id": 1774028988240
   },
   {
     "hotel_id": "santa_garden_resort_4_phu_quoc",
@@ -9925,7 +9712,8 @@
         "date": "24.02.2026",
         "price": "671454"
       }
-    ]
+    ],
+    "id": 1774028988242
   },
   {
     "hotel_id": "tomhill_boutique_resort_spa_4_phu_quoc",
@@ -9969,7 +9757,8 @@
         "date": "24.02.2026",
         "price": "721021"
       }
-    ]
+    ],
+    "id": 1774028988244
   },
   {
     "hotel_id": "muong_thanh_luxury_phu_quoc_hotel_4_phu_quoc",
@@ -10013,7 +9802,8 @@
         "date": "24.02.2026",
         "price": "709779"
       }
-    ]
+    ],
+    "id": 1774028988246
   },
   {
     "hotel_id": "avs_hotel_phu_quoc_4_phu_quoc",
@@ -10057,7 +9847,8 @@
         "date": "24.02.2026",
         "price": "729708"
       }
-    ]
+    ],
+    "id": 1774028988248
   },
   {
     "hotel_id": "yng_luxor_resort_phu_quoc_4_phu_quoc",
@@ -10101,7 +9892,8 @@
         "date": "24.02.2026",
         "price": "721021"
       }
-    ]
+    ],
+    "id": 1774028988250
   },
   {
     "hotel_id": "saigon_phu_quoc_resort_spa_4_phu_quoc",
@@ -10145,7 +9937,8 @@
         "date": "24.02.2026",
         "price": "735840"
       }
-    ]
+    ],
+    "id": 1774028988252
   },
   {
     "hotel_id": "aquasun_hotel_phu_quoc_4_phu_quoc",
@@ -10189,7 +9982,8 @@
         "date": "24.02.2026",
         "price": "726642"
       }
-    ]
+    ],
+    "id": 1774028988254
   },
   {
     "hotel_id": "kingo_retreat_resort_phu_quoc_4_phu_quoc",
@@ -10233,7 +10027,8 @@
         "date": "24.02.2026",
         "price": "735329"
       }
-    ]
+    ],
+    "id": 1774028988257
   },
   {
     "hotel_id": "tahiti_beach_hotel_4_phu_quoc",
@@ -10277,7 +10072,8 @@
         "date": "24.02.2026",
         "price": "724087"
       }
-    ]
+    ],
+    "id": 1774028988258
   },
   {
     "hotel_id": "famiana_green_villa_4_phu_quoc",
@@ -10321,7 +10117,8 @@
         "date": "24.02.2026",
         "price": "724598"
       }
-    ]
+    ],
+    "id": 1774028988260
   },
   {
     "hotel_id": "jm_boutique_hotel_phu_quoc_4_phu_quoc",
@@ -10365,7 +10162,8 @@
         "date": "24.02.2026",
         "price": "726642"
       }
-    ]
+    ],
+    "id": 1774028988263
   },
   {
     "hotel_id": "soul_boutique_hotel_phu_quoc_4_phu_quoc",
@@ -10409,7 +10207,8 @@
         "date": "24.02.2026",
         "price": "721532"
       }
-    ]
+    ],
+    "id": 1774028988264
   },
   {
     "hotel_id": "tahiti_resort_phu_quoc_4_phu_quoc",
@@ -10453,7 +10252,8 @@
         "date": "24.02.2026",
         "price": "721021"
       }
-    ]
+    ],
+    "id": 1774028988266
   },
   {
     "hotel_id": "amarin_resort_phu_quoc_4_phu_quoc",
@@ -10497,7 +10297,8 @@
         "date": "24.02.2026",
         "price": "718466"
       }
-    ]
+    ],
+    "id": 1774028988268
   },
   {
     "hotel_id": "anja_beach_resort_spa_phu_quoc_4_phu_quoc",
@@ -10541,7 +10342,8 @@
         "date": "24.02.2026",
         "price": "724598"
       }
-    ]
+    ],
+    "id": 1774028988270
   },
   {
     "hotel_id": "sea_sense_resort_4_phu_quoc",
@@ -10585,7 +10387,8 @@
         "date": "24.02.2026",
         "price": "726642"
       }
-    ]
+    ],
+    "id": 1774028988272
   },
   {
     "hotel_id": "the_palmy_phu_quoc_resort_spa_4_phu_quoc",
@@ -10629,7 +10432,8 @@
         "date": "24.02.2026",
         "price": "718466"
       }
-    ]
+    ],
+    "id": 1774028988274
   },
   {
     "hotel_id": "sunset_beach_resort_spa_phu_quoc_4_phu_quoc",
@@ -10673,7 +10477,8 @@
         "date": "24.02.2026",
         "price": "721021"
       }
-    ]
+    ],
+    "id": 1774028988276
   },
   {
     "hotel_id": "sol_by_melia_phu_quoc_4_phu_quoc",
@@ -10717,7 +10522,8 @@
         "date": "24.02.2026",
         "price": "733285"
       }
-    ]
+    ],
+    "id": 1774028988277
   },
   {
     "hotel_id": "the_shells_resort_and_spa_phu_quoc_5_phu_quoc",
@@ -10761,7 +10567,8 @@
         "date": "24.02.2026",
         "price": "926954"
       }
-    ]
+    ],
+    "id": 1774028988279
   },
   {
     "hotel_id": "sonaga_beach_resort_villa_phu_quoc_5_phu_quoc",
@@ -10805,7 +10612,8 @@
         "date": "24.02.2026",
         "price": "941773"
       }
-    ]
+    ],
+    "id": 1774028988281
   },
   {
     "hotel_id": "radisson_blu_resort_phu_quoc_5_phu_quoc",
@@ -10849,7 +10657,8 @@
         "date": "24.02.2026",
         "price": "733285"
       }
-    ]
+    ],
+    "id": 1774028988283
   },
   {
     "hotel_id": "vinholidays_fiesta_phu_quoc_4_phu_quoc",
@@ -10893,7 +10702,8 @@
         "date": "24.02.2026",
         "price": "712334"
       }
-    ]
+    ],
+    "id": 1774028988285
   },
   {
     "hotel_id": "mercury_phu_quoc_resort_villas_4_phu_quoc",
@@ -10937,7 +10747,8 @@
         "date": "24.02.2026",
         "price": "938196"
       }
-    ]
+    ],
+    "id": 1774028988287
   },
   {
     "hotel_id": "milana_beach_resort_spa_4_phu_quoc",
@@ -10981,7 +10792,8 @@
         "date": "24.02.2026",
         "price": "735840"
       }
-    ]
+    ],
+    "id": 1774028988289
   },
   {
     "hotel_id": "famiana_green_villa_4_phu_quoc",
@@ -11025,7 +10837,8 @@
         "date": "24.02.2026",
         "price": "727153"
       }
-    ]
+    ],
+    "id": 1774028988291
   },
   {
     "hotel_id": "movenpick_villas_residences_phu_quoc_5_phu_quoc",
@@ -11069,7 +10882,8 @@
         "date": "24.02.2026",
         "price": "937685"
       }
-    ]
+    ],
+    "id": 1774028988293
   },
   {
     "hotel_id": "sol_by_melia_phu_quoc_4_phu_quoc",
@@ -11113,7 +10927,8 @@
         "date": "24.02.2026",
         "price": "902426"
       }
-    ]
+    ],
+    "id": 1774028988295
   },
   {
     "hotel_id": "famiana_green_villa_4_phu_quoc",
@@ -11157,7 +10972,8 @@
         "date": "24.02.2026",
         "price": "884030"
       }
-    ]
+    ],
+    "id": 1774028988297
   },
   {
     "hotel_id": "saigon_phu_quoc_resort_spa_4_phu_quoc",
@@ -11201,7 +11017,8 @@
         "date": "24.02.2026",
         "price": "727153"
       }
-    ]
+    ],
+    "id": 1774028988299
   },
   {
     "hotel_id": "best_western_premier_sonasea_phu_quoc_5_phu_quoc",
@@ -11245,7 +11062,8 @@
         "date": "24.02.2026",
         "price": "733285"
       }
-    ]
+    ],
+    "id": 1774028988302
   },
   {
     "hotel_id": "amarin_resort_phu_quoc_4_phu_quoc",
@@ -11289,7 +11107,8 @@
         "date": "24.02.2026",
         "price": "872277"
       }
-    ]
+    ],
+    "id": 1774028988303
   },
   {
     "hotel_id": "thien_thanh_phu_quoc_resort_5_phu_quoc",
@@ -11333,7 +11152,8 @@
         "date": "24.02.2026",
         "price": "944839"
       }
-    ]
+    ],
+    "id": 1774028988305
   },
   {
     "hotel_id": "saigon_phu_quoc_resort_spa_4_phu_quoc",
@@ -11377,7 +11197,8 @@
         "date": "24.02.2026",
         "price": "901404"
       }
-    ]
+    ],
+    "id": 1774028988307
   },
   {
     "hotel_id": "lazure_resort_and_spa_4_phu_quoc",
@@ -11421,7 +11242,8 @@
         "date": "24.02.2026",
         "price": "903959"
       }
-    ]
+    ],
+    "id": 1774028988309
   },
   {
     "hotel_id": "famiana_resort_spa_phu_quoc_4_phu_quoc",
@@ -11465,7 +11287,8 @@
         "date": "24.02.2026",
         "price": "913157"
       }
-    ]
+    ],
+    "id": 1774028988311
   },
   {
     "hotel_id": "wyndham_garden_grandworld_phu_quoc_4_phu_quoc",
@@ -11509,7 +11332,8 @@
         "date": "24.02.2026",
         "price": "939218"
       }
-    ]
+    ],
+    "id": 1774028988314
   },
   {
     "hotel_id": "phu_quoc_ocean_pearl_hotel_4_phu_quoc",
@@ -11553,7 +11377,8 @@
         "date": "24.02.2026",
         "price": "878409"
       }
-    ]
+    ],
+    "id": 1774028988315
   },
   {
     "hotel_id": "crowne_plaza_phu_quoc_starbay_by_ihg_5_phu_quoc",
@@ -11585,7 +11410,8 @@
         "date": "24.02.2026",
         "price": "933597"
       }
-    ]
+    ],
+    "id": 1774028988317
   },
   {
     "hotel_id": "lahana_resort_phu_quoc_spa_4_duong_dong_beach",
@@ -11629,7 +11455,8 @@
         "date": "24.02.2026",
         "price": "900382"
       }
-    ]
+    ],
+    "id": 1774028988319
   },
   {
     "hotel_id": "seashells_phu_quoc_hotel_spa_5_phu_quoc",
@@ -11673,7 +11500,8 @@
         "date": "24.02.2026",
         "price": "938707"
       }
-    ]
+    ],
+    "id": 1774028988321
   },
   {
     "hotel_id": "premier_residences_phu_quoc_emerald_bay_managed_by_accor_5_phu_quoc",
@@ -11705,7 +11533,8 @@
         "date": "24.02.2026",
         "price": "942284"
       }
-    ]
+    ],
+    "id": 1774028988323
   },
   {
     "hotel_id": "dusit_princess_moonrise_beach_resort_5_phu_quoc",
@@ -11749,7 +11578,8 @@
         "date": "24.02.2026",
         "price": "938707"
       }
-    ]
+    ],
+    "id": 1774028988325
   },
   {
     "hotel_id": "amarin_resort_phu_quoc_4_phu_quoc",
@@ -11793,7 +11623,8 @@
         "date": "24.02.2026",
         "price": "930531"
       }
-    ]
+    ],
+    "id": 1774028988327
   },
   {
     "hotel_id": "movenpick_resort_waverly_phu_quoc_5_phu_quoc",
@@ -11833,7 +11664,8 @@
         "date": "24.02.2026",
         "price": "910602"
       }
-    ]
+    ],
+    "id": 1774028988328
   },
   {
     "hotel_id": "green_bay_phu_quoc_resort_spa_4_phu_quoc",
@@ -11869,7 +11701,8 @@
         "date": "24.02.2026",
         "price": "930531"
       }
-    ]
+    ],
+    "id": 1774028988330
   },
   {
     "hotel_id": "world_hotels_long_beach_resort_phu_quoc_4_phu_quoc",
@@ -11913,7 +11746,8 @@
         "date": "24.02.2026",
         "price": "927465"
       }
-    ]
+    ],
+    "id": 1774028988332
   },
   {
     "hotel_id": "mercury_phu_quoc_resort_villas_4_phu_quoc",
@@ -11957,7 +11791,8 @@
         "date": "24.02.2026",
         "price": "853881"
       }
-    ]
+    ],
+    "id": 1774028988334
   },
   {
     "hotel_id": "famiana_resort_spa_phu_quoc_4_phu_quoc",
@@ -12001,7 +11836,8 @@
         "date": "24.02.2026",
         "price": "930531"
       }
-    ]
+    ],
+    "id": 1774028988336
   },
   {
     "hotel_id": "radisson_blu_resort_phu_quoc_5_phu_quoc",
@@ -12037,7 +11873,8 @@
         "date": "24.02.2026",
         "price": "877898"
       }
-    ]
+    ],
+    "id": 1774028988338
   },
   {
     "hotel_id": "best_western_premier_sonasea_phu_quoc_5_phu_quoc",
@@ -12073,7 +11910,8 @@
         "date": "24.02.2026",
         "price": "930531"
       }
-    ]
+    ],
+    "id": 1774028988340
   },
   {
     "hotel_id": "ocean_bay_resort_4_phu_quoc",
@@ -12109,7 +11947,8 @@
         "date": "24.02.2026",
         "price": "930531"
       }
-    ]
+    ],
+    "id": 1774028988342
   },
   {
     "hotel_id": "wyndham_grand_phu_quoc_5_phu_quoc",
@@ -12145,7 +11984,8 @@
         "date": "24.02.2026",
         "price": "936152"
       }
-    ]
+    ],
+    "id": 1774028988344
   },
   {
     "hotel_id": "pullman_phu_quoc_beach_resort_5_phu_quoc",
@@ -12173,7 +12013,8 @@
         "date": "24.02.2026",
         "price": "933086"
       }
-    ]
+    ],
+    "id": 1774028988346
   },
   {
     "hotel_id": "movenpick_villas_residences_phu_quoc_5_phu_quoc",
@@ -12201,7 +12042,8 @@
         "date": "24.02.2026",
         "price": "934619"
       }
-    ]
+    ],
+    "id": 1774028988348
   },
   {
     "hotel_id": "grand_ocean_bay_resort_phu_quoc_5_phu_quoc",
@@ -12237,7 +12079,8 @@
         "date": "24.02.2026",
         "price": "933086"
       }
-    ]
+    ],
+    "id": 1774028988350
   },
   {
     "hotel_id": "chen_sea_resort_spa_phu_quoc_4_phu_quoc",
@@ -12269,7 +12112,8 @@
         "date": "24.02.2026",
         "price": "900893"
       }
-    ]
+    ],
+    "id": 1774028988352
   },
   {
     "hotel_id": "famiana_resort_spa_phu_quoc_4_phu_quoc",
@@ -12313,7 +12157,8 @@
         "date": "24.02.2026",
         "price": "930531"
       }
-    ]
+    ],
+    "id": 1774028988354
   },
   {
     "hotel_id": "world_hotels_long_beach_resort_phu_quoc_5_phu_quoc",
@@ -12345,7 +12190,8 @@
         "date": "24.02.2026",
         "price": "924399"
       }
-    ]
+    ],
+    "id": 1774028988356
   },
   {
     "hotel_id": "mercury_phu_quoc_resort_villas_4_phu_quoc",
@@ -12389,7 +12235,8 @@
         "date": "24.02.2026",
         "price": "909580"
       }
-    ]
+    ],
+    "id": 1774028988358
   },
   {
     "hotel_id": "best_western_premier_sonasea_phu_quoc_5_phu_quoc",
@@ -12421,7 +12268,8 @@
         "date": "24.02.2026",
         "price": "936152"
       }
-    ]
+    ],
+    "id": 1774028988360
   },
   {
     "hotel_id": "radisson_blu_resort_phu_quoc_5_phu_quoc",
@@ -12453,7 +12301,8 @@
         "date": "24.02.2026",
         "price": "933086"
       }
-    ]
+    ],
+    "id": 1774028988362
   },
   {
     "hotel_id": "soul_boutique_hotel_phu_quoc_4_phu_quoc",
@@ -12489,7 +12338,8 @@
         "date": "24.02.2026",
         "price": "927465"
       }
-    ]
+    ],
+    "id": 1774028988364
   },
   {
     "hotel_id": "sheraton_phu_quoc_long_beach_resort_5_phu_quoc",
@@ -12533,7 +12383,8 @@
         "date": "24.02.2026",
         "price": "898338"
       }
-    ]
+    ],
+    "id": 1774028988366
   },
   {
     "hotel_id": "vinpearl_resort_spa_phu_quoc_5_bai_dai_beach",
@@ -12569,7 +12420,8 @@
         "date": "24.02.2026",
         "price": "927465"
       }
-    ]
+    ],
+    "id": 1774028988368
   },
   {
     "hotel_id": "sonaga_beach_resort_villa_phu_quoc_5_phu_quoc",
@@ -12605,7 +12457,8 @@
         "date": "24.02.2026",
         "price": "930020"
       }
-    ]
+    ],
+    "id": 1774028988370
   },
   {
     "hotel_id": "movenpick_resort_waverly_phu_quoc_5_phu_quoc",
@@ -12625,7 +12478,8 @@
         "date": "22.02.2026",
         "price": "940240"
       }
-    ]
+    ],
+    "id": 1774028988372
   },
   {
     "hotel_id": "premier_residences_phu_quoc_emerald_bay_managed_by_accor_5_phu_quoc",
@@ -12645,7 +12499,8 @@
         "date": "22.02.2026",
         "price": "917756"
       }
-    ]
+    ],
+    "id": 1774028988373
   },
   {
     "hotel_id": "green_bay_phu_quoc_resort_spa_4_phu_quoc",
@@ -12665,7 +12520,8 @@
         "date": "22.02.2026",
         "price": "917756"
       }
-    ]
+    ],
+    "id": 1774028988375
   },
   {
     "hotel_id": "crowne_plaza_phu_quoc_starbay_by_ihg_5_phu_quoc",
@@ -12685,7 +12541,8 @@
         "date": "22.02.2026",
         "price": "923377"
       }
-    ]
+    ],
+    "id": 1774028988377
   },
   {
     "hotel_id": "seashells_phu_quoc_hotel_spa_5_phu_quoc",
@@ -12721,7 +12578,8 @@
         "date": "24.02.2026",
         "price": "924399"
       }
-    ]
+    ],
+    "id": 1774028988379
   },
   {
     "hotel_id": "movenpick_villas_residences_phu_quoc_5_phu_quoc",
@@ -12741,7 +12599,8 @@
         "date": "01.03.2026",
         "price": "930531"
       }
-    ]
+    ],
+    "id": 1774028988381
   },
   {
     "hotel_id": "world_hotels_long_beach_resort_phu_quoc_5_phu_quoc",
@@ -12761,7 +12620,8 @@
         "date": "22.02.2026",
         "price": "939218"
       }
-    ]
+    ],
+    "id": 1774028988383
   },
   {
     "hotel_id": "vita_gardenia_hotel_tskaltubo_4_цхалтубо",
@@ -12781,7 +12641,8 @@
         "date": "27.02.2026",
         "price": "472647"
       }
-    ]
+    ],
+    "id": 1774028988385
   },
   {
     "hotel_id": "new_wave_apart_hotel_4_батуми",
@@ -12801,7 +12662,8 @@
         "date": "27.02.2026",
         "price": "680890"
       }
-    ]
+    ],
+    "id": 1774028988387
   },
   {
     "hotel_id": "eleven_inn_tbilisi_4_тбилиси",
@@ -12821,7 +12683,8 @@
         "date": "27.02.2026",
         "price": "445312"
       }
-    ]
+    ],
+    "id": 1774028988389
   },
   {
     "hotel_id": "iveria_inn_hotel_4_тбилиси",
@@ -12841,7 +12704,8 @@
         "date": "27.02.2026",
         "price": "495012"
       }
-    ]
+    ],
+    "id": 1774028988391
   },
   {
     "hotel_id": "sharden_hotel_4_тбилиси",
@@ -12861,7 +12725,8 @@
         "date": "27.02.2026",
         "price": "437360"
       }
-    ]
+    ],
+    "id": 1774028988393
   },
   {
     "hotel_id": "hotel_salvador_4_батуми",
@@ -12881,7 +12746,8 @@
         "date": "27.02.2026",
         "price": "420959"
       }
-    ]
+    ],
+    "id": 1774028988395
   },
   {
     "hotel_id": "kutaisi_inn_5_кутаиси",
@@ -12901,7 +12767,8 @@
         "date": "27.02.2026",
         "price": "545706"
       }
-    ]
+    ],
+    "id": 1774028988397
   },
   {
     "hotel_id": "townhouse_tbilisi_boutique_hotel_4_тбилиси",
@@ -12921,7 +12788,8 @@
         "date": "27.02.2026",
         "price": "475629"
       }
-    ]
+    ],
+    "id": 1774028988399
   },
   {
     "hotel_id": "aqua_batumi_hotel_apartments_4_батуми",
@@ -12941,7 +12809,8 @@
         "date": "27.02.2026",
         "price": "440342"
       }
-    ]
+    ],
+    "id": 1774028988401
   },
   {
     "hotel_id": "marionn_hotel_4_тбилиси",
@@ -12961,7 +12830,8 @@
         "date": "27.02.2026",
         "price": "532784"
       }
-    ]
+    ],
+    "id": 1774028988403
   },
   {
     "hotel_id": "kalasi_hotel_4_тбилиси",
@@ -12981,7 +12851,8 @@
         "date": "27.02.2026",
         "price": "609819"
       }
-    ]
+    ],
+    "id": 1774028988404
   },
   {
     "hotel_id": "brim_hotel_tbilisi_4_тбилиси",
@@ -13001,7 +12872,8 @@
         "date": "27.02.2026",
         "price": "456743"
       }
-    ]
+    ],
+    "id": 1774028988406
   },
   {
     "hotel_id": "sole_palace_4_тбилиси",
@@ -13021,7 +12893,8 @@
         "date": "27.02.2026",
         "price": "418474"
       }
-    ]
+    ],
+    "id": 1774028988408
   },
   {
     "hotel_id": "hotel_astoria_tbilisi_4_тбилиси",
@@ -13041,7 +12914,8 @@
         "date": "27.02.2026",
         "price": "361319"
       }
-    ]
+    ],
+    "id": 1774028988410
   },
   {
     "hotel_id": "biography_tbilisi_4_тбилиси",
@@ -13061,7 +12935,8 @@
         "date": "27.02.2026",
         "price": "705243"
       }
-    ]
+    ],
+    "id": 1774028988412
   },
   {
     "hotel_id": "tskaltubo_epic_hotel_spa_4_цхалтубо",
@@ -13081,7 +12956,8 @@
         "date": "27.02.2026",
         "price": "744009"
       }
-    ]
+    ],
+    "id": 1774028988414
   },
   {
     "hotel_id": "urban_park_hotel_4_тбилиси",
@@ -13101,7 +12977,8 @@
         "date": "27.02.2026",
         "price": "674926"
       }
-    ]
+    ],
+    "id": 1774028988416
   },
   {
     "hotel_id": "1_hotel_borjomi_milano_palace_borjomi_4_боржоми",
@@ -13121,7 +12998,8 @@
         "date": "27.02.2026",
         "price": "479605"
       }
-    ]
+    ],
+    "id": 1774028988417
   },
   {
     "hotel_id": "citrus_hotel_4_тбилиси",
@@ -13141,7 +13019,8 @@
         "date": "27.02.2026",
         "price": "374738"
       }
-    ]
+    ],
+    "id": 1774028988419
   },
   {
     "hotel_id": "coste_hotel_4_тбилиси",
@@ -13161,7 +13040,8 @@
         "date": "27.02.2026",
         "price": "709219"
       }
-    ]
+    ],
+    "id": 1774028988421
   },
   {
     "hotel_id": "heritage_hotel_suites_4_тбилиси",
@@ -13181,7 +13061,8 @@
         "date": "27.02.2026",
         "price": "685860"
       }
-    ]
+    ],
+    "id": 1774028988423
   },
   {
     "hotel_id": "hotel_wine_palace_4_тбилиси",
@@ -13201,7 +13082,8 @@
         "date": "27.02.2026",
         "price": "380205"
       }
-    ]
+    ],
+    "id": 1774028988425
   },
   {
     "hotel_id": "hotel_21_4_тбилиси",
@@ -13221,7 +13103,8 @@
         "date": "27.02.2026",
         "price": "647591"
       }
-    ]
+    ],
+    "id": 1774028988427
   },
   {
     "hotel_id": "iveria_inn_hotel_4_тбилиси",
@@ -13241,7 +13124,8 @@
         "date": "27.02.2026",
         "price": "510916"
       }
-    ]
+    ],
+    "id": 1774028988429
   },
   {
     "hotel_id": "brosse_garden_4_тбилиси",
@@ -13261,7 +13145,8 @@
         "date": "27.02.2026",
         "price": "462210"
       }
-    ]
+    ],
+    "id": 1774028988431
   },
   {
     "hotel_id": "best_western_premier_batumi_5_батуми",
@@ -13281,7 +13166,8 @@
         "date": "27.02.2026",
         "price": "723135"
       }
-    ]
+    ],
+    "id": 1774028988433
   },
   {
     "hotel_id": "tapis_rouge_design_boutique_hotel_5_батуми",
@@ -13301,7 +13187,8 @@
         "date": "27.02.2026",
         "price": "975611"
       }
-    ]
+    ],
+    "id": 1774028988435
   },
   {
     "hotel_id": "mariinsky_apartments_hotel_4_батуми",
@@ -13321,7 +13208,8 @@
         "date": "27.02.2026",
         "price": "535766"
       }
-    ]
+    ],
+    "id": 1774028988437
   },
   {
     "hotel_id": "khedi_hotel_tbilisi_4_тбилиси",
@@ -13341,7 +13229,8 @@
         "date": "27.02.2026",
         "price": "659519"
       }
-    ]
+    ],
+    "id": 1774028988439
   },
   {
     "hotel_id": "pine_astoria_tbilisi_5_тбилиси",
@@ -13361,7 +13250,8 @@
         "date": "27.02.2026",
         "price": "418474"
       }
-    ]
+    ],
+    "id": 1774028988441
   },
   {
     "hotel_id": "iris_hotel_4_тбилиси",
@@ -13381,7 +13271,8 @@
         "date": "27.02.2026",
         "price": "724129"
       }
-    ]
+    ],
+    "id": 1774028988443
   },
   {
     "hotel_id": "legends_tskaltubo_spa_resort_4_цхалтубо",
@@ -13401,7 +13292,8 @@
         "date": "27.02.2026",
         "price": "625226"
       }
-    ]
+    ],
+    "id": 1774028988445
   },
   {
     "hotel_id": "newport_hotel_kutaisi_4_кутаиси",
@@ -13421,7 +13313,8 @@
         "date": "27.02.2026",
         "price": "530299"
       }
-    ]
+    ],
+    "id": 1774028988447
   },
   {
     "hotel_id": "about_sololaki_4_тбилиси",
@@ -13441,7 +13334,8 @@
         "date": "27.02.2026",
         "price": "502467"
       }
-    ]
+    ],
+    "id": 1774028988449
   },
   {
     "hotel_id": "kutaisi_inn_5_кутаиси",
@@ -13461,7 +13355,8 @@
         "date": "27.02.2026",
         "price": "545706"
       }
-    ]
+    ],
+    "id": 1774028988451
   },
   {
     "hotel_id": "vita_gardenia_hotel_tskaltubo_4_цхалтубо",
@@ -13481,7 +13376,8 @@
         "date": "27.02.2026",
         "price": "553658"
       }
-    ]
+    ],
+    "id": 1774028988452
   },
   {
     "hotel_id": "best_western_kutaisi_city_center_4_кутаиси",
@@ -13501,7 +13397,8 @@
         "date": "27.02.2026",
         "price": "595406"
       }
-    ]
+    ],
+    "id": 1774028988454
   },
   {
     "hotel_id": "hotel_passport_tbilisi_4_тбилиси",
@@ -13521,7 +13418,8 @@
         "date": "27.02.2026",
         "price": "571550"
       }
-    ]
+    ],
+    "id": 1774028988456
   },
   {
     "hotel_id": "alliance_palace_batumi_5_батуми",
@@ -13541,7 +13439,8 @@
         "date": "27.02.2026",
         "price": "743512"
       }
-    ]
+    ],
+    "id": 1774028988458
   },
   {
     "hotel_id": "hotel_puris_moedani_4_тбилиси",
@@ -13561,7 +13460,8 @@
         "date": "27.02.2026",
         "price": "495012"
       }
-    ]
+    ],
+    "id": 1774028988460
   },
   {
     "hotel_id": "litz_resort_5_квариати",
@@ -13581,7 +13481,8 @@
         "date": "27.02.2026",
         "price": "690830"
       }
-    ]
+    ],
+    "id": 1774028988462
   },
   {
     "hotel_id": "grand_noel_bakuriani_4_бакуриани",
@@ -13601,7 +13502,8 @@
         "date": "27.02.2026",
         "price": "724129"
       }
-    ]
+    ],
+    "id": 1774028988464
   },
   {
     "hotel_id": "kutaisi_inn_5_кутаиси",
@@ -13621,7 +13523,8 @@
         "date": "27.02.2026",
         "price": "600873"
       }
-    ]
+    ],
+    "id": 1774028988466
   },
   {
     "hotel_id": "hotels_preference_hualing_tbilisi_5_тбилиси",
@@ -13641,7 +13544,8 @@
         "date": "27.02.2026",
         "price": "1718129"
       }
-    ]
+    ],
+    "id": 1774028988468
   },
   {
     "hotel_id": "hotel_abanotubani_4_тбилиси",
@@ -13661,7 +13565,8 @@
         "date": "27.02.2026",
         "price": "1010898"
       }
-    ]
+    ],
+    "id": 1774028988470
   },
   {
     "hotel_id": "new_wave_apart_hotel_4_батуми",
@@ -13681,7 +13586,8 @@
         "date": "27.02.2026",
         "price": "735560"
       }
-    ]
+    ],
+    "id": 1774028988472
   },
   {
     "hotel_id": "hampton_by_hilton_batumi_center_4_батуми",
@@ -13701,7 +13607,8 @@
         "date": "27.02.2026",
         "price": "582981"
       }
-    ]
+    ],
+    "id": 1774028988474
   },
   {
     "hotel_id": "1_hotel_borjomi_milano_palace_borjomi_4_боржоми",
@@ -13721,7 +13628,8 @@
         "date": "27.02.2026",
         "price": "549185"
       }
-    ]
+    ],
+    "id": 1774028988475
   },
   {
     "hotel_id": "sharden_hotel_4_тбилиси",
@@ -13741,7 +13649,8 @@
         "date": "27.02.2026",
         "price": "539245"
       }
-    ]
+    ],
+    "id": 1774028988477
   },
   {
     "hotel_id": "iveria_inn_hotel_4_тбилиси",
@@ -13761,7 +13670,8 @@
         "date": "27.02.2026",
         "price": "572047"
       }
-    ]
+    ],
+    "id": 1774028988479
   },
   {
     "hotel_id": "eleven_inn_tbilisi_4_тбилиси",
@@ -13781,7 +13691,8 @@
         "date": "27.02.2026",
         "price": "543718"
       }
-    ]
+    ],
+    "id": 1774028988481
   },
   {
     "hotel_id": "tskaltubo_epic_hotel_spa_4_цхалтубо",
@@ -13801,7 +13712,8 @@
         "date": "27.02.2026",
         "price": "747488"
       }
-    ]
+    ],
+    "id": 1774028988483
   },
   {
     "hotel_id": "colosseum_marina_hotel_5_батуми",
@@ -13821,7 +13733,8 @@
         "date": "27.02.2026",
         "price": "727111"
       }
-    ]
+    ],
+    "id": 1774028988485
   },
   {
     "hotel_id": "museum_hotel_orbeliani_4_тбилиси",
@@ -13841,7 +13754,8 @@
         "date": "27.02.2026",
         "price": "781781"
       }
-    ]
+    ],
+    "id": 1774028988486
   },
   {
     "hotel_id": "newport_hotel_kutaisi_4_кутаиси",
@@ -13861,7 +13775,8 @@
         "date": "27.02.2026",
         "price": "536760"
       }
-    ]
+    ],
+    "id": 1774028988488
   },
   {
     "hotel_id": "best_western_kutaisi_city_center_4_кутаиси",
@@ -13881,7 +13796,8 @@
         "date": "27.02.2026",
         "price": "574035"
       }
-    ]
+    ],
+    "id": 1774028988490
   },
   {
     "hotel_id": "townhouse_tbilisi_boutique_hotel_4_тбилиси",
@@ -13901,7 +13817,8 @@
         "date": "27.02.2026",
         "price": "561113"
       }
-    ]
+    ],
+    "id": 1774028988492
   },
   {
     "hotel_id": "hotel_salvador_4_батуми",
@@ -13921,7 +13838,8 @@
         "date": "27.02.2026",
         "price": "550179"
       }
-    ]
+    ],
+    "id": 1774028988494
   },
   {
     "hotel_id": "1_hotel_borjomi_milano_palace_borjomi_4_боржоми",
@@ -13941,7 +13859,8 @@
         "date": "27.02.2026",
         "price": "554155"
       }
-    ]
+    ],
+    "id": 1774028988496
   },
   {
     "hotel_id": "hotel_pine_chalets_4_гудаури",
@@ -13961,7 +13880,8 @@
         "date": "27.02.2026",
         "price": "495012"
       }
-    ]
+    ],
+    "id": 1774028988498
   },
   {
     "hotel_id": "shota_rustaveli_boutique_hotel_4_тбилиси",
@@ -13981,7 +13901,8 @@
         "date": "27.02.2026",
         "price": "533281"
       }
-    ]
+    ],
+    "id": 1774028988500
   },
   {
     "hotel_id": "novotel_tbilisi_center_4_тбилиси",
@@ -14001,7 +13922,8 @@
         "date": "27.02.2026",
         "price": "666974"
       }
-    ]
+    ],
+    "id": 1774028988502
   },
   {
     "hotel_id": "kalasi_hotel_4_тбилиси",
@@ -14021,7 +13943,8 @@
         "date": "27.02.2026",
         "price": "637651"
       }
-    ]
+    ],
+    "id": 1774028988504
   },
   {
     "hotel_id": "brim_hotel_tbilisi_4_тбилиси",
@@ -14041,7 +13964,8 @@
         "date": "27.02.2026",
         "price": "550179"
       }
-    ]
+    ],
+    "id": 1774028988506
   },
   {
     "hotel_id": "marionn_hotel_4_тбилиси",
@@ -14061,7 +13985,8 @@
         "date": "27.02.2026",
         "price": "593915"
       }
-    ]
+    ],
+    "id": 1774028988508
   },
   {
     "hotel_id": "sole_palace_4_тбилиси",
@@ -14081,7 +14006,8 @@
         "date": "27.02.2026",
         "price": "528311"
       }
-    ]
+    ],
+    "id": 1774028988510
   },
   {
     "hotel_id": "hotel_astoria_tbilisi_4_тбилиси",
@@ -14101,7 +14027,8 @@
         "date": "27.02.2026",
         "price": "495509"
       }
-    ]
+    ],
+    "id": 1774028988512
   },
   {
     "hotel_id": "biography_tbilisi_4_тбилиси",
@@ -14121,7 +14048,8 @@
         "date": "27.02.2026",
         "price": "692321"
       }
-    ]
+    ],
+    "id": 1774028988514
   },
   {
     "hotel_id": "aqua_batumi_hotel_apartments_4_батуми",
@@ -14141,7 +14069,8 @@
         "date": "27.02.2026",
         "price": "563598"
       }
-    ]
+    ],
+    "id": 1774028988516
   },
   {
     "hotel_id": "crystal_hotel_spa_5_бакуриани",
@@ -14161,7 +14090,8 @@
         "date": "27.02.2026",
         "price": "805637"
       }
-    ]
+    ],
+    "id": 1774028988517
   },
   {
     "hotel_id": "citrus_hotel_4_тбилиси",
@@ -14181,7 +14111,8 @@
         "date": "27.02.2026",
         "price": "506443"
       }
-    ]
+    ],
+    "id": 1774028988520
   },
   {
     "hotel_id": "coste_hotel_4_тбилиси",
@@ -14201,7 +14132,8 @@
         "date": "27.02.2026",
         "price": "703255"
       }
-    ]
+    ],
+    "id": 1774028988521
   },
   {
     "hotel_id": "hotel_wine_palace_4_тбилиси",
@@ -14221,7 +14153,8 @@
         "date": "27.02.2026",
         "price": "506443"
       }
-    ]
+    ],
+    "id": 1774028988523
   },
   {
     "hotel_id": "heritage_hotel_suites_4_тбилиси",
@@ -14241,7 +14174,8 @@
         "date": "27.02.2026",
         "price": "681387"
       }
-    ]
+    ],
+    "id": 1774028988525
   },
   {
     "hotel_id": "urban_park_hotel_4_тбилиси",
@@ -14261,7 +14195,8 @@
         "date": "27.02.2026",
         "price": "681387"
       }
-    ]
+    ],
+    "id": 1774028988527
   },
   {
     "hotel_id": "hotel_21_4_тбилиси",
@@ -14281,7 +14216,8 @@
         "date": "27.02.2026",
         "price": "659519"
       }
-    ]
+    ],
+    "id": 1774028988529
   },
   {
     "hotel_id": "newport_hotel_kutaisi_4_кутаиси",
@@ -14301,7 +14237,8 @@
         "date": "27.02.2026",
         "price": "589939"
       }
-    ]
+    ],
+    "id": 1774028988531
   },
   {
     "hotel_id": "brosse_garden_4_тбилиси",
@@ -14321,7 +14258,8 @@
         "date": "27.02.2026",
         "price": "550179"
       }
-    ]
+    ],
+    "id": 1774028988533
   },
   {
     "hotel_id": "legends_tskaltubo_spa_resort_4_цхалтубо",
@@ -14341,7 +14279,8 @@
         "date": "27.02.2026",
         "price": "662501"
       }
-    ]
+    ],
+    "id": 1774028988535
   },
   {
     "hotel_id": "grand_noel_bakuriani_4_бакуриани",
@@ -14361,7 +14300,8 @@
         "date": "27.02.2026",
         "price": "710213"
       }
-    ]
+    ],
+    "id": 1774028988536
   },
   {
     "hotel_id": "best_western_kutaisi_city_center_4_кутаиси",
@@ -14381,7 +14321,8 @@
         "date": "27.02.2026",
         "price": "636160"
       }
-    ]
+    ],
+    "id": 1774028988538
   },
   {
     "hotel_id": "khedi_hotel_tbilisi_4_тбилиси",
@@ -14401,7 +14342,8 @@
         "date": "27.02.2026",
         "price": "665980"
       }
-    ]
+    ],
+    "id": 1774028988540
   },
   {
     "hotel_id": "pine_astoria_tbilisi_5_тбилиси",
@@ -14421,7 +14363,8 @@
         "date": "27.02.2026",
         "price": "528311"
       }
-    ]
+    ],
+    "id": 1774028988542
   },
   {
     "hotel_id": "iris_hotel_4_тбилиси",
@@ -14441,7 +14384,8 @@
         "date": "27.02.2026",
         "price": "703255"
       }
-    ]
+    ],
+    "id": 1774028988544
   },
   {
     "hotel_id": "best_western_premier_batumi_5_батуми",
@@ -14461,7 +14405,8 @@
         "date": "27.02.2026",
         "price": "765877"
       }
-    ]
+    ],
+    "id": 1774028988546
   },
   {
     "hotel_id": "about_sololaki_4_тбилиси",
@@ -14481,7 +14426,8 @@
         "date": "27.02.2026",
         "price": "576520"
       }
-    ]
+    ],
+    "id": 1774028988548
   },
   {
     "hotel_id": "tapis_rouge_design_boutique_hotel_5_батуми",
@@ -14501,7 +14447,8 @@
         "date": "27.02.2026",
         "price": "946288"
       }
-    ]
+    ],
+    "id": 1774028988550
   },
   {
     "hotel_id": "mariinsky_apartments_hotel_4_батуми",
@@ -14521,7 +14468,8 @@
         "date": "27.02.2026",
         "price": "631687"
       }
-    ]
+    ],
+    "id": 1774028988551
   },
   {
     "hotel_id": "hotel_passport_tbilisi_4_тбилиси",
@@ -14541,7 +14489,8 @@
         "date": "27.02.2026",
         "price": "615783"
       }
-    ]
+    ],
+    "id": 1774028988553
   },
   {
     "hotel_id": "bazzar_boutique_hotel_4_тбилиси",
@@ -14561,7 +14510,8 @@
         "date": "27.02.2026",
         "price": "912492"
       }
-    ]
+    ],
+    "id": 1774028988555
   },
   {
     "hotel_id": "hotel_pine_chalets_4_гудаури",
@@ -14581,7 +14531,8 @@
         "date": "27.02.2026",
         "price": "543718"
       }
-    ]
+    ],
+    "id": 1774028988557
   },
   {
     "hotel_id": "paragraph_resort_spa_shekvetili_autograph_collection_5_шекветили",
@@ -14601,7 +14552,8 @@
         "date": "27.02.2026",
         "price": "601867"
       }
-    ]
+    ],
+    "id": 1774028988558
   },
   {
     "hotel_id": "hotel_abanotubani_4_тбилиси",
@@ -14621,7 +14573,8 @@
         "date": "27.02.2026",
         "price": "866768"
       }
-    ]
+    ],
+    "id": 1774028988560
   },
   {
     "hotel_id": "hotels_preference_hualing_tbilisi_5_тбилиси",
@@ -14641,7 +14594,8 @@
         "date": "27.02.2026",
         "price": "1271326"
       }
-    ]
+    ],
+    "id": 1774028988562
   },
   {
     "hotel_id": "hotel_puris_moedani_4_тбилиси",
@@ -14661,7 +14615,8 @@
         "date": "27.02.2026",
         "price": "582981"
       }
-    ]
+    ],
+    "id": 1774028988564
   },
   {
     "hotel_id": "holiday_inn_tbilisi_an_ihg_hotel_4_тбилиси",
@@ -14681,7 +14636,8 @@
         "date": "27.02.2026",
         "price": "685860"
       }
-    ]
+    ],
+    "id": 1774028988566
   },
   {
     "hotel_id": "ambassadori_goderdzi_hotel_5_батуми",
@@ -14701,7 +14657,8 @@
         "date": "27.02.2026",
         "price": "746494"
       }
-    ]
+    ],
+    "id": 1774028988568
   },
   {
     "hotel_id": "museum_hotel_orbeliani_4_тбилиси",
@@ -14721,7 +14678,8 @@
         "date": "27.02.2026",
         "price": "736057"
       }
-    ]
+    ],
+    "id": 1774028988570
   },
   {
     "hotel_id": "the_blue_fox_hotel_4_тбилиси",
@@ -14741,7 +14699,8 @@
         "date": "27.02.2026",
         "price": "661010"
       }
-    ]
+    ],
+    "id": 1774028988572
   },
   {
     "hotel_id": "alliance_palace_batumi_5_батуми",
@@ -14761,7 +14720,8 @@
         "date": "27.02.2026",
         "price": "785260"
       }
-    ]
+    ],
+    "id": 1774028988574
   },
   {
     "hotel_id": "crystal_hotel_spa_5_бакуриани",
@@ -14781,7 +14741,8 @@
         "date": "27.02.2026",
         "price": "783769"
       }
-    ]
+    ],
+    "id": 1774028988576
   },
   {
     "hotel_id": "shota_rustaveli_boutique_hotel_4_тбилиси",
@@ -14801,7 +14762,8 @@
         "date": "27.02.2026",
         "price": "593915"
       }
-    ]
+    ],
+    "id": 1774028988578
   },
   {
     "hotel_id": "novotel_tbilisi_center_4_тбилиси",
@@ -14821,7 +14783,8 @@
         "date": "27.02.2026",
         "price": "670453"
       }
-    ]
+    ],
+    "id": 1774028988580
   },
   {
     "hotel_id": "billionaire_ramada_plaza_by_wyndham_batumi_5_батуми",
@@ -14841,7 +14804,8 @@
         "date": "27.02.2026",
         "price": "726614"
       }
-    ]
+    ],
+    "id": 1774028988582
   },
   {
     "hotel_id": "ambassadori_goderdzi_hotel_5_батуми",
@@ -14861,7 +14825,8 @@
         "date": "27.02.2026",
         "price": "872235"
       }
-    ]
+    ],
+    "id": 1774028988584
   },
   {
     "hotel_id": "litz_resort_5_квариати",
@@ -14881,7 +14846,8 @@
         "date": "27.02.2026",
         "price": "747985"
       }
-    ]
+    ],
+    "id": 1774028988586
   },
   {
     "hotel_id": "colosseum_marina_hotel_5_батуми",
@@ -14901,7 +14867,8 @@
         "date": "27.02.2026",
         "price": "768859"
       }
-    ]
+    ],
+    "id": 1774028988588
   },
   {
     "hotel_id": "paragraph_resort_spa_shekvetili_autograph_collection_5_шекветили",
@@ -14921,7 +14888,8 @@
         "date": "27.02.2026",
         "price": "681387"
       }
-    ]
+    ],
+    "id": 1774028988590
   },
   {
     "hotel_id": "kokhta_plaza_boutique_hotel_4_бакуриани",
@@ -14941,7 +14909,8 @@
         "date": "27.02.2026",
         "price": "847882"
       }
-    ]
+    ],
+    "id": 1774028988592
   },
   {
     "hotel_id": "hotel_pine_chalets_4_гудаури",
@@ -14961,7 +14930,8 @@
         "date": "27.02.2026",
         "price": "600873"
       }
-    ]
+    ],
+    "id": 1774028988594
   },
   {
     "hotel_id": "bazzar_boutique_hotel_4_тбилиси",
@@ -14981,7 +14951,8 @@
         "date": "27.02.2026",
         "price": "823529"
       }
-    ]
+    ],
+    "id": 1774028988596
   },
   {
     "hotel_id": "holiday_inn_tbilisi_an_ihg_hotel_4_тбилиси",
@@ -15001,7 +14972,8 @@
         "date": "27.02.2026",
         "price": "681387"
       }
-    ]
+    ],
+    "id": 1774028988598
   },
   {
     "hotel_id": "crowne_plaza_borjomi_an_ihg_hotel_5_боржоми",
@@ -15021,7 +14993,8 @@
         "date": "27.02.2026",
         "price": "1733536"
       }
-    ]
+    ],
+    "id": 1774028988600
   },
   {
     "hotel_id": "sheraton_batumi_hotel_5_батуми",
@@ -15041,7 +15014,8 @@
         "date": "27.02.2026",
         "price": "777805"
       }
-    ]
+    ],
+    "id": 1774028988602
   },
   {
     "hotel_id": "sheraton_grand_tbilisi_metechi_palace_5_тбилиси",
@@ -15061,7 +15035,8 @@
         "date": "27.02.2026",
         "price": "1454719"
       }
-    ]
+    ],
+    "id": 1774028988604
   },
   {
     "hotel_id": "the_blue_fox_hotel_4_тбилиси",
@@ -15081,7 +15056,8 @@
         "date": "27.02.2026",
         "price": "676914"
       }
-    ]
+    ],
+    "id": 1774028988606
   },
   {
     "hotel_id": "crowne_plaza_borjomi_an_ihg_hotel_5_боржоми",
@@ -15101,7 +15077,8 @@
         "date": "27.02.2026",
         "price": "1270332"
       }
-    ]
+    ],
+    "id": 1774028988608
   },
   {
     "hotel_id": "kokhta_plaza_boutique_hotel_4_бакуриани",
@@ -15121,7 +15098,8 @@
         "date": "27.02.2026",
         "price": "814086"
       }
-    ]
+    ],
+    "id": 1774028988610
   },
   {
     "hotel_id": "hotel_ushba_in_mestia_4_местия",
@@ -15141,7 +15119,8 @@
         "date": "27.02.2026",
         "price": "1016862"
       }
-    ]
+    ],
+    "id": 1774028988612
   },
   {
     "hotel_id": "crowne_plaza_borjomi_an_ihg_hotel_5_боржоми",
@@ -15161,7 +15140,8 @@
         "date": "27.02.2026",
         "price": "1444779"
       }
-    ]
+    ],
+    "id": 1774028988614
   },
   {
     "hotel_id": "hotel_tsiga_4_гудаури",
@@ -15181,7 +15161,8 @@
         "date": "27.02.2026",
         "price": "1007916"
       }
-    ]
+    ],
+    "id": 1774028988616
   },
   {
     "hotel_id": "wyndham_grand_tbilisi_5_тбилиси",
@@ -15201,7 +15182,8 @@
         "date": "27.02.2026",
         "price": "1274805"
       }
-    ]
+    ],
+    "id": 1774028988618
   },
   {
     "hotel_id": "sheraton_grand_tbilisi_metechi_palace_5_тбилиси",
@@ -15221,7 +15203,8 @@
         "date": "27.02.2026",
         "price": "1120238"
       }
-    ]
+    ],
+    "id": 1774028988620
   },
   {
     "hotel_id": "wyndham_grand_tbilisi_5_тбилиси",
@@ -15241,7 +15224,8 @@
         "date": "27.02.2026",
         "price": "1017856"
       }
-    ]
+    ],
+    "id": 1774028988622
   },
   {
     "hotel_id": "billionaire_ramada_plaza_by_wyndham_batumi_5_батуми",
@@ -15261,7 +15245,8 @@
         "date": "27.02.2026",
         "price": "768362"
       }
-    ]
+    ],
+    "id": 1774028988624
   },
   {
     "hotel_id": "hotel_tsiga_4_гудаури",
@@ -15281,7 +15266,8 @@
         "date": "27.02.2026",
         "price": "1253931"
       }
-    ]
+    ],
+    "id": 1774028988626
   },
   {
     "hotel_id": "paragraph_resort_spa_shekvetili_autograph_collection_5_шекветили",
@@ -15301,7 +15287,8 @@
         "date": "27.02.2026",
         "price": "736057"
       }
-    ]
+    ],
+    "id": 1774028988628
   },
   {
     "hotel_id": "gistola_hotel_mestia_4_местия",
@@ -15321,7 +15308,8 @@
         "date": "27.02.2026",
         "price": "902552"
       }
-    ]
+    ],
+    "id": 1774028988630
   },
   {
     "hotel_id": "hotel_tsiga_4_гудаури",
@@ -15341,7 +15329,8 @@
         "date": "27.02.2026",
         "price": "972629"
       }
-    ]
+    ],
+    "id": 1774028988632
   },
   {
     "hotel_id": "sheraton_batumi_hotel_5_батуми",
@@ -15361,7 +15350,8 @@
         "date": "27.02.2026",
         "price": "809613"
       }
-    ]
+    ],
+    "id": 1774028988634
   },
   {
     "hotel_id": "hotel_carpe_diem_gudauri_4_гудаури",
@@ -15381,7 +15371,8 @@
         "date": "27.02.2026",
         "price": "1575987"
       }
-    ]
+    ],
+    "id": 1774028988636
   },
   {
     "hotel_id": "paragraph_golf_spa_tabori_autograph_collection_5_тбилиси",
@@ -15401,7 +15392,8 @@
         "date": "27.02.2026",
         "price": "777308"
       }
-    ]
+    ],
+    "id": 1774028988638
   },
   {
     "hotel_id": "hotel_carpe_diem_gudauri_4_гудаури",
@@ -15421,7 +15413,8 @@
         "date": "27.02.2026",
         "price": "1939791"
       }
-    ]
+    ],
+    "id": 1774028988640
   },
   {
     "hotel_id": "hotel_carpe_diem_gudauri_4_гудаури",
@@ -15441,7 +15434,8 @@
         "date": "27.02.2026",
         "price": "1426887"
       }
-    ]
+    ],
+    "id": 1774028988642
   },
   {
     "hotel_id": "hotel_roshe_gudauri_4_гудаури",
@@ -15461,7 +15455,8 @@
         "date": "27.02.2026",
         "price": "1280769"
       }
-    ]
+    ],
+    "id": 1774028988644
   },
   {
     "hotel_id": "swissotel_tbilisi_5_тбилиси",
@@ -15481,7 +15476,8 @@
         "date": "27.02.2026",
         "price": "761901"
       }
-    ]
+    ],
+    "id": 1774028988646
   },
   {
     "hotel_id": "paragraph_golf_spa_tabori_autograph_collection_5_тбилиси",
@@ -15501,7 +15497,8 @@
         "date": "27.02.2026",
         "price": "854343"
       }
-    ]
+    ],
+    "id": 1774028988648
   },
   {
     "hotel_id": "rooms_hotel_kokhta_4_бакуриани",
@@ -15521,7 +15518,8 @@
         "date": "27.02.2026",
         "price": "1125208"
       }
-    ]
+    ],
+    "id": 1774028988650
   },
   {
     "hotel_id": "hotel_roshe_gudauri_4_гудаури",
@@ -15541,7 +15539,8 @@
         "date": "27.02.2026",
         "price": "1190812"
       }
-    ]
+    ],
+    "id": 1774028988652
   },
   {
     "hotel_id": "hotel_roshe_gudauri_4_гудаури",
@@ -15561,7 +15560,8 @@
         "date": "27.02.2026",
         "price": "1527281"
       }
-    ]
+    ],
+    "id": 1774028988654
   },
   {
     "hotel_id": "rooms_hotel_kokhta_4_бакуриани",
@@ -15581,7 +15581,8 @@
         "date": "27.02.2026",
         "price": "1316553"
       }
-    ]
+    ],
+    "id": 1774028988656
   },
   {
     "hotel_id": "swissotel_tbilisi_5_тбилиси",
@@ -15601,7 +15602,8 @@
         "date": "27.02.2026",
         "price": "827505"
       }
-    ]
+    ],
+    "id": 1774028988658
   },
   {
     "hotel_id": "stamba_hotel_5_тбилиси",
@@ -15621,7 +15623,8 @@
         "date": "27.02.2026",
         "price": "902055"
       }
-    ]
+    ],
+    "id": 1774028988659
   },
   {
     "hotel_id": "marco_polo_gudauri_hotel_5_гудаури",
@@ -15641,7 +15644,8 @@
         "date": "27.02.2026",
         "price": "1992473"
       }
-    ]
+    ],
+    "id": 1774028988661
   },
   {
     "hotel_id": "marco_polo_gudauri_hotel_5_гудаури",
@@ -15661,7 +15665,8 @@
         "date": "27.02.2026",
         "price": "2283218"
       }
-    ]
+    ],
+    "id": 1774028988662
   },
   {
     "hotel_id": "stamba_hotel_5_тбилиси",
@@ -15681,7 +15686,8 @@
         "date": "27.02.2026",
         "price": "1039227"
       }
-    ]
+    ],
+    "id": 1774028988664
   },
   {
     "hotel_id": "marco_polo_gudauri_hotel_5_гудаури",
@@ -15701,7 +15707,8 @@
         "date": "27.02.2026",
         "price": "2930312"
       }
-    ]
+    ],
+    "id": 1774028988666
   },
   {
     "hotel_id": "al_mansour_plaza_hotel_4_b_ring_road",
@@ -15721,7 +15728,8 @@
         "date": "02.03.2026",
         "price": "545706"
       }
-    ]
+    ],
+    "id": 1774028988668
   },
   {
     "hotel_id": "al_mansour_suites_hotel_4_c_ring_road",
@@ -15741,7 +15749,8 @@
         "date": "02.03.2026",
         "price": "545706"
       }
-    ]
+    ],
+    "id": 1774028988670
   },
   {
     "hotel_id": "grand_regal_hotel_4_old_town",
@@ -15761,7 +15770,8 @@
         "date": "02.03.2026",
         "price": "518371"
       }
-    ]
+    ],
+    "id": 1774028988672
   },
   {
     "hotel_id": "vip_hotel_doha_5_al_sadd",
@@ -15781,7 +15791,8 @@
         "date": "02.03.2026",
         "price": "715680"
       }
-    ]
+    ],
+    "id": 1774028988674
   },
   {
     "hotel_id": "central_inn_souq_waqif_hotel_4_souq_waqif",
@@ -15801,7 +15812,8 @@
         "date": "02.03.2026",
         "price": "636657"
       }
-    ]
+    ],
+    "id": 1774028988676
   },
   {
     "hotel_id": "horizon_manor_hotel_doha_4_old_town",
@@ -15821,7 +15833,8 @@
         "date": "02.03.2026",
         "price": "462707"
       }
-    ]
+    ],
+    "id": 1774028988678
   },
   {
     "hotel_id": "retaj_al_rayyan_hotel_4_al_dafna",
@@ -15841,7 +15854,8 @@
         "date": "02.03.2026",
         "price": "668465"
       }
-    ]
+    ],
+    "id": 1774028988680
   },
   {
     "hotel_id": "al_aseel_hotel_4_old_town",
@@ -15861,7 +15875,8 @@
         "date": "02.03.2026",
         "price": "508431"
       }
-    ]
+    ],
+    "id": 1774028988682
   },
   {
     "hotel_id": "the_royal_riviera_hotel_4_corniche_road",
@@ -15881,7 +15896,8 @@
         "date": "02.03.2026",
         "price": "700273"
       }
-    ]
+    ],
+    "id": 1774028988684
   },
   {
     "hotel_id": "westpac_hotel_suites_doha_4_west_bey",
@@ -15901,7 +15917,8 @@
         "date": "02.03.2026",
         "price": "541730"
       }
-    ]
+    ],
+    "id": 1774028988686
   },
   {
     "hotel_id": "concorde_hotel_doha_5_al_sadd",
@@ -15921,7 +15938,8 @@
         "date": "02.03.2026",
         "price": "553658"
       }
-    ]
+    ],
+    "id": 1774028988688
   },
   {
     "hotel_id": "best_plaza_west_bay_5_west_bey",
@@ -15941,7 +15959,8 @@
         "date": "02.03.2026",
         "price": "1067556"
       }
-    ]
+    ],
+    "id": 1774028988689
   },
   {
     "hotel_id": "ezdan_hotel_west_bay_4_al_dafna",
@@ -15961,7 +15980,8 @@
         "date": "02.03.2026",
         "price": "751464"
       }
-    ]
+    ],
+    "id": 1774028988691
   },
   {
     "hotel_id": "delta_hotels_by_marriott_city_center_doha_5_west_bey",
@@ -15981,7 +16001,8 @@
         "date": "02.03.2026",
         "price": "1071532"
       }
-    ]
+    ],
+    "id": 1774028988693
   },
   {
     "hotel_id": "the_bentley_luxury_hotel_and_suites_5_west_bey",
@@ -16001,7 +16022,8 @@
         "date": "02.03.2026",
         "price": "980581"
       }
-    ]
+    ],
+    "id": 1774028988695
   },
   {
     "hotel_id": "souq_al_wakra_hotel_qatar_by_tivoli_5_corniche_road",
@@ -16021,7 +16043,8 @@
         "date": "02.03.2026",
         "price": "933366"
       }
-    ]
+    ],
+    "id": 1774028988697
   },
   {
     "hotel_id": "four_points_by_sheraton_doha_4_mushaireb",
@@ -16041,7 +16064,8 @@
         "date": "02.03.2026",
         "price": "632681"
       }
-    ]
+    ],
+    "id": 1774028988699
   },
   {
     "hotel_id": "steigenberger_hotel_residence_5_old_airport_road",
@@ -16061,7 +16085,8 @@
         "date": "02.03.2026",
         "price": "700273"
       }
-    ]
+    ],
+    "id": 1774028988701
   },
   {
     "hotel_id": "musheireb_boutique_hotel_by_tivoli_5_souq_waqif",
@@ -16081,7 +16106,8 @@
         "date": "02.03.2026",
         "price": "688345"
       }
-    ]
+    ],
+    "id": 1774028988703
   },
   {
     "hotel_id": "arumaila_boutique_hotel_by_tivoli_5_west_bey",
@@ -16101,7 +16127,8 @@
         "date": "02.03.2026",
         "price": "862295"
       }
-    ]
+    ],
+    "id": 1774028988705
   },
   {
     "hotel_id": "najd_boutique_hotel_by_tivoli_5_al_rayyan",
@@ -16121,7 +16148,8 @@
         "date": "02.03.2026",
         "price": "1349355"
       }
-    ]
+    ],
+    "id": 1774028988707
   },
   {
     "hotel_id": "doubletree_by_hilton_doha_old_town_5_old_town",
@@ -16141,7 +16169,8 @@
         "date": "02.03.2026",
         "price": "842415"
       }
-    ]
+    ],
+    "id": 1774028988709
   },
   {
     "hotel_id": "al_jomrok_boutique_hotel_by_tivoli_5_abu_samra",
@@ -16161,7 +16190,8 @@
         "date": "02.03.2026",
         "price": "701764"
       }
-    ]
+    ],
+    "id": 1774028988711
   },
   {
     "hotel_id": "al_mirqab_boutiq_hotel_by_tivoli_5_katara",
@@ -16181,7 +16211,8 @@
         "date": "02.03.2026",
         "price": "1258404"
       }
-    ]
+    ],
+    "id": 1774028988713
   },
   {
     "hotel_id": "al_bidda_boutique_hotel_by_tivoli_5_al_rayyan",
@@ -16201,7 +16232,8 @@
         "date": "02.03.2026",
         "price": "1266356"
       }
-    ]
+    ],
+    "id": 1774028988715
   },
   {
     "hotel_id": "w_doha_hotel_residences_5_west_bey",
@@ -16221,7 +16253,8 @@
         "date": "02.03.2026",
         "price": "2352798"
       }
-    ]
+    ],
+    "id": 1774028988716
   },
   {
     "hotel_id": "al_najada_doha_hotel_apartments_by_oaks_4_souq_waqif",
@@ -16241,7 +16274,8 @@
         "date": "02.03.2026",
         "price": "1131172"
       }
-    ]
+    ],
+    "id": 1774028988718
   },
   {
     "hotel_id": "sedra_arjaan_by_rotana_4_pearl_of_qatar",
@@ -16261,7 +16295,8 @@
         "date": "02.03.2026",
         "price": "1701231"
       }
-    ]
+    ],
+    "id": 1774028988720
   },
   {
     "hotel_id": "sealine_beach_al_murwab_resort_5_mesaieed",
@@ -16281,7 +16316,8 @@
         "date": "02.03.2026",
         "price": "3737937"
       }
-    ]
+    ],
+    "id": 1774028988722
   },
   {
     "hotel_id": "hilton_doha_5_west_bey",
@@ -16301,7 +16337,8 @@
         "date": "02.03.2026",
         "price": "1059604"
       }
-    ]
+    ],
+    "id": 1774028988724
   },
   {
     "hotel_id": "rixos_premium_qetaifan_island_north_doha_5_lusail",
@@ -16321,7 +16358,8 @@
         "date": "02.03.2026",
         "price": "2997904"
       }
-    ]
+    ],
+    "id": 1774028988726
   },
   {
     "hotel_id": "rixos_gulf_hotel_doha_5_corniche_road",
@@ -16341,7 +16379,8 @@
         "date": "02.03.2026",
         "price": "2779721"
       }
-    ]
+    ],
+    "id": 1774028988728
   },
   {
     "hotel_id": "sheraton_grand_doha_resort_convention_hotel_5_west_bey",
@@ -16361,7 +16400,8 @@
         "date": "02.03.2026",
         "price": "1779260"
       }
-    ]
+    ],
+    "id": 1774028988730
   },
   {
     "hotel_id": "the_ned_doha_5_corniche_road",
@@ -16381,7 +16421,8 @@
         "date": "02.03.2026",
         "price": "2154992"
       }
-    ]
+    ],
+    "id": 1774028988732
   },
   {
     "hotel_id": "waldorf_astoria_doha_west_bay_5_west_bey",
@@ -16401,7 +16442,8 @@
         "date": "02.03.2026",
         "price": "1776775"
       }
-    ]
+    ],
+    "id": 1774028988734
   },
   {
     "hotel_id": "hilton_salwa_beach_resort_villas_5_abu_samra",
@@ -16421,7 +16463,8 @@
         "date": "02.03.2026",
         "price": "11262517"
       }
-    ]
+    ],
+    "id": 1774028988736
   },
   {
     "hotel_id": "the_ritz_carlton_sharq_village_doha_5_sharq_village",
@@ -16441,7 +16484,8 @@
         "date": "02.03.2026",
         "price": "24422083"
       }
-    ]
+    ],
+    "id": 1774028988738
   },
   {
     "hotel_id": "the_st_regis_doha_5_katara",
@@ -16461,7 +16505,8 @@
         "date": "02.03.2026",
         "price": "4296068"
       }
-    ]
+    ],
+    "id": 1774028988740
   },
   {
     "hotel_id": "waldorf_astoria_lusail_doha_5_lusail",
@@ -16481,6 +16526,7 @@
         "date": "02.03.2026",
         "price": "4592777"
       }
-    ]
+    ],
+    "id": 1774028988742
   }
 ]
