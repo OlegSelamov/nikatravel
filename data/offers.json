@@ -1389,29 +1389,6 @@
     "id": 1774028987760
   },
   {
-    "hotel_id": "parkside_hotel_apartments_4_баку",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "530712",
-    "old_price": "752838",
-    "discount_percent": "20",
-    "price_per_month": "56212",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "03.09.2025",
-        "price": "530712"
-      },
-      {
-        "date": "03.12.2025",
-        "price": "602270"
-      }
-    ],
-    "id": 1774028987764
-  },
-  {
     "hotel_id": "midway_hotel_baku_5_баку",
     "city": "Алматы",
     "meal": "BB",
@@ -1556,224 +1533,6 @@
       }
     ],
     "id": 1774028987768
-  },
-  {
-    "hotel_id": "cher_hotel_spa_taksim_5_таксим_центр2",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "595114",
-    "old_price": "743892",
-    "discount_percent": "20",
-    "price_per_month": "55544",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "20.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "18.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "19.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "15.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "16.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "17.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "27.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "28.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "25.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "26.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "22.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "23.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "24.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "21.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "30.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "29.09.2025",
-        "price": "616308"
-      },
-      {
-        "date": "31.12.2025",
-        "price": "595114"
-      },
-      {
-        "date": "25.12.2025",
-        "price": "596947"
-      },
-      {
-        "date": "28.12.2025",
-        "price": "600613"
-      },
-      {
-        "date": "29.12.2025",
-        "price": "600613"
-      },
-      {
-        "date": "30.12.2025",
-        "price": "600613"
-      },
-      {
-        "date": "26.12.2025",
-        "price": "601835"
-      },
-      {
-        "date": "27.12.2025",
-        "price": "601835"
-      }
-    ],
-    "id": 1774028987770
-  },
-  {
-    "hotel_id": "ramada_hotel_suites_by_wyndham_istanbul_merter_5_мертер",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "618943",
-    "old_price": "816449",
-    "discount_percent": "20",
-    "price_per_month": "60962",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "29.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "27.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "28.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "30.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "20.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "21.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "22.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "23.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "24.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "25.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "26.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "17.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "16.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "15.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "18.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "19.09.2025",
-        "price": "658416"
-      },
-      {
-        "date": "27.12.2025",
-        "price": "711204"
-      },
-      {
-        "date": "24.12.2025",
-        "price": "618943"
-      },
-      {
-        "date": "25.12.2025",
-        "price": "634218"
-      },
-      {
-        "date": "28.12.2025",
-        "price": "726479"
-      },
-      {
-        "date": "26.12.2025",
-        "price": "649493"
-      },
-      {
-        "date": "21.12.2025",
-        "price": "619554"
-      },
-      {
-        "date": "22.12.2025",
-        "price": "634829"
-      },
-      {
-        "date": "23.12.2025",
-        "price": "650104"
-      }
-    ],
-    "id": 1774028987772
   },
   {
     "hotel_id": "mercure_istanbul_bomonti_5_таксим_центр2",
@@ -1993,29 +1752,6 @@
     "id": 1774028987786
   },
   {
-    "hotel_id": "bellerive_hoi_an_hotel_spa_5_hoi_an",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "495940",
-    "old_price": "619925",
-    "discount_percent": "20",
-    "price_per_month": "46288",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "13.09.2025",
-        "price": "495940"
-      },
-      {
-        "date": "12.09.2025",
-        "price": "512380"
-      }
-    ],
-    "id": 1774028987788
-  },
-  {
     "hotel_id": "anmira_resort_and_spa_hoi_an_5_hoi_an",
     "city": "Алматы",
     "meal": "BB",
@@ -2106,29 +1842,6 @@
       }
     ],
     "id": 1774028987796
-  },
-  {
-    "hotel_id": "nesta_hoian_resort_spa_5_hoi_an",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "515120",
-    "old_price": "643900",
-    "discount_percent": "20",
-    "price_per_month": "48078",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "13.09.2025",
-        "price": "515120"
-      },
-      {
-        "date": "12.09.2025",
-        "price": "531560"
-      }
-    ],
-    "id": 1774028987798
   },
   {
     "hotel_id": "wyndham_hoi_an_royal_beachfront_resort_villas_5_hoi_an",
@@ -2315,29 +2028,6 @@
     "id": 1774028987814
   },
   {
-    "hotel_id": "renaissance_hoi_an_resort_spa_5_hoi_an",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "533204",
-    "old_price": "666505",
-    "discount_percent": "20",
-    "price_per_month": "49766",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "13.09.2025",
-        "price": "533204"
-      },
-      {
-        "date": "12.09.2025",
-        "price": "549644"
-      }
-    ],
-    "id": 1774028987816
-  },
-  {
     "hotel_id": "the_ocean_resort_5_danang",
     "city": "Алматы",
     "meal": "BB",
@@ -2412,25 +2102,6 @@
       }
     ],
     "id": 1774028987824
-  },
-  {
-    "hotel_id": "hoi_an_memories_resort_spa_5_hoi_an",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "553480",
-    "old_price": "691850",
-    "discount_percent": "20",
-    "price_per_month": "51658",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "13.09.2025",
-        "price": "553480"
-      }
-    ],
-    "id": 1774028987826
   },
   {
     "hotel_id": "regalia_gold_nha_trang_5_nha_trang",
@@ -6067,37 +5738,6 @@
     "id": 1774028988063
   },
   {
-    "hotel_id": "ascott_hotel_kuala_lumpur_5_куала_лумпур",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "6",
-    "seats": "-",
-    "price": "1058857",
-    "old_price": "1323571",
-    "discount_percent": "20",
-    "price_per_month": "98827",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "28.10.2025",
-        "price": "1058857"
-      },
-      {
-        "date": "07.10.2025",
-        "price": "1058857"
-      },
-      {
-        "date": "14.10.2025",
-        "price": "1064984"
-      },
-      {
-        "date": "21.10.2025",
-        "price": "1095619"
-      }
-    ],
-    "id": 1774028988065
-  },
-  {
     "hotel_id": "parkroyal_collection_5_куала_лумпур",
     "city": "Алматы",
     "meal": "BB",
@@ -6129,37 +5769,6 @@
     "id": 1774028988067
   },
   {
-    "hotel_id": "pavilion_hotel_kuala_lumpur_5_куала_лумпур",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "6",
-    "seats": "-",
-    "price": "1065541",
-    "old_price": "1331926",
-    "discount_percent": "20",
-    "price_per_month": "99450",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "28.10.2025",
-        "price": "1065541"
-      },
-      {
-        "date": "07.10.2025",
-        "price": "1065541"
-      },
-      {
-        "date": "14.10.2025",
-        "price": "1071668"
-      },
-      {
-        "date": "21.10.2025",
-        "price": "1102303"
-      }
-    ],
-    "id": 1774028988069
-  },
-  {
     "hotel_id": "eq_kuala_lumpur_5_куала_лумпур",
     "city": "Алматы",
     "meal": "BB",
@@ -6189,64 +5798,6 @@
       }
     ],
     "id": 1774028988070
-  },
-  {
-    "hotel_id": "imperial_lexis_kuala_lumpur_5_куала_лумпур",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "6",
-    "seats": "-",
-    "price": "1163573",
-    "old_price": "1454466",
-    "discount_percent": "20",
-    "price_per_month": "108600",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "28.10.2025",
-        "price": "1163573"
-      },
-      {
-        "date": "07.10.2025",
-        "price": "1163573"
-      },
-      {
-        "date": "14.10.2025",
-        "price": "1169700"
-      },
-      {
-        "date": "21.10.2025",
-        "price": "1200335"
-      }
-    ],
-    "id": 1774028988072
-  },
-  {
-    "hotel_id": "sama_sama_kl_international_airport_5_куала_лумпур",
-    "city": "Алматы",
-    "meal": "BB",
-    "nights": "6",
-    "seats": "-",
-    "price": "1182511",
-    "old_price": "1478139",
-    "discount_percent": "20",
-    "price_per_month": "110368",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "07.10.2025",
-        "price": "1182511"
-      },
-      {
-        "date": "28.10.2025",
-        "price": "1182511"
-      },
-      {
-        "date": "14.10.2025",
-        "price": "1188638"
-      }
-    ],
-    "id": 1774028988074
   },
   {
     "hotel_id": "pan_pacific_serviced_suites_kl_5_куала_лумпур",
@@ -7292,61 +6843,6 @@
     "id": 1774028988160
   },
   {
-    "hotel_id": "shah_palace_hotel_old_city_4_баку",
-    "city": "Астана",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "509978",
-    "old_price": "724981",
-    "discount_percent": "20",
-    "price_per_month": "54132",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "06.02.2026",
-        "price": "509978"
-      },
-      {
-        "date": "09.02.2026",
-        "price": "509978"
-      },
-      {
-        "date": "10.02.2026",
-        "price": "509978"
-      },
-      {
-        "date": "13.02.2026",
-        "price": "509978"
-      },
-      {
-        "date": "16.02.2026",
-        "price": "509978"
-      },
-      {
-        "date": "17.02.2026",
-        "price": "509978"
-      },
-      {
-        "date": "20.02.2026",
-        "price": "509978"
-      },
-      {
-        "date": "23.02.2026",
-        "price": "509978"
-      },
-      {
-        "date": "24.02.2026",
-        "price": "509978"
-      },
-      {
-        "date": "27.02.2026",
-        "price": "509978"
-      }
-    ],
-    "id": 1774028988162
-  },
-  {
     "hotel_id": "sheraton_baku_intourist_5_баку",
     "city": "Астана",
     "meal": "BB",
@@ -8005,61 +7501,6 @@
       }
     ],
     "id": 1774028988184
-  },
-  {
-    "hotel_id": "boutique_19_hotel_4_баку",
-    "city": "Астана",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "556990",
-    "old_price": "778636",
-    "discount_percent": "20",
-    "price_per_month": "58138",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "06.02.2026",
-        "price": "556990"
-      },
-      {
-        "date": "09.02.2026",
-        "price": "556990"
-      },
-      {
-        "date": "10.02.2026",
-        "price": "556990"
-      },
-      {
-        "date": "13.02.2026",
-        "price": "556990"
-      },
-      {
-        "date": "16.02.2026",
-        "price": "556990"
-      },
-      {
-        "date": "17.02.2026",
-        "price": "556990"
-      },
-      {
-        "date": "20.02.2026",
-        "price": "556990"
-      },
-      {
-        "date": "23.02.2026",
-        "price": "556990"
-      },
-      {
-        "date": "24.02.2026",
-        "price": "556990"
-      },
-      {
-        "date": "27.02.2026",
-        "price": "556990"
-      }
-    ],
-    "id": 1774028988186
   },
   {
     "hotel_id": "shabran_wellbeing_resort_5_шабран",
@@ -9941,51 +9382,6 @@
     "id": 1774028988252
   },
   {
-    "hotel_id": "aquasun_hotel_phu_quoc_4_phu_quoc",
-    "hotel": "Aquasun Hotel Phu Quoc 4* (Phu Quoc)",
-    "city": "Астана",
-    "country": "Вьетнам",
-    "meal": "BB",
-    "nights": "6",
-    "seats": "-",
-    "price": "724598",
-    "old_price": "788218",
-    "discount_percent": "20",
-    "price_per_month": "58854",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "01.03.2026",
-        "price": "726642"
-      },
-      {
-        "date": "08.02.2026",
-        "price": "733796"
-      },
-      {
-        "date": "10.02.2026",
-        "price": "724598"
-      },
-      {
-        "date": "15.02.2026",
-        "price": "738395"
-      },
-      {
-        "date": "17.02.2026",
-        "price": "731241"
-      },
-      {
-        "date": "22.02.2026",
-        "price": "726642"
-      },
-      {
-        "date": "24.02.2026",
-        "price": "726642"
-      }
-    ],
-    "id": 1774028988254
-  },
-  {
     "hotel_id": "kingo_retreat_resort_phu_quoc_4_phu_quoc",
     "hotel": "Kingo Retreat Resort Phu Quoc 4* (Phu Quoc)",
     "city": "Астана",
@@ -10119,51 +9515,6 @@
       }
     ],
     "id": 1774028988260
-  },
-  {
-    "hotel_id": "jm_boutique_hotel_phu_quoc_4_phu_quoc",
-    "hotel": "JM Boutique Hotel Phu Quoc 4* (Phu Quoc)",
-    "city": "Астана",
-    "country": "Вьетнам",
-    "meal": "BB",
-    "nights": "6",
-    "seats": "-",
-    "price": "703647",
-    "old_price": "816961",
-    "discount_percent": "20",
-    "price_per_month": "61000",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "01.03.2026",
-        "price": "703647"
-      },
-      {
-        "date": "08.02.2026",
-        "price": "729708"
-      },
-      {
-        "date": "10.02.2026",
-        "price": "738395"
-      },
-      {
-        "date": "15.02.2026",
-        "price": "738395"
-      },
-      {
-        "date": "17.02.2026",
-        "price": "717955"
-      },
-      {
-        "date": "22.02.2026",
-        "price": "727664"
-      },
-      {
-        "date": "24.02.2026",
-        "price": "726642"
-      }
-    ],
-    "id": 1774028988263
   },
   {
     "hotel_id": "soul_boutique_hotel_phu_quoc_4_phu_quoc",
@@ -11064,51 +10415,6 @@
       }
     ],
     "id": 1774028988302
-  },
-  {
-    "hotel_id": "amarin_resort_phu_quoc_4_phu_quoc",
-    "hotel": "Amarin Resort Phu Quoc 4* (Phu Quoc)",
-    "city": "Астана",
-    "country": "Вьетнам",
-    "meal": "HB",
-    "nights": "6",
-    "seats": "-",
-    "price": "872277",
-    "old_price": "939601",
-    "discount_percent": "20",
-    "price_per_month": "70157",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "01.03.2026",
-        "price": "930531"
-      },
-      {
-        "date": "08.02.2026",
-        "price": "872277"
-      },
-      {
-        "date": "10.02.2026",
-        "price": "872277"
-      },
-      {
-        "date": "15.02.2026",
-        "price": "914179"
-      },
-      {
-        "date": "17.02.2026",
-        "price": "924910"
-      },
-      {
-        "date": "22.02.2026",
-        "price": "872277"
-      },
-      {
-        "date": "24.02.2026",
-        "price": "872277"
-      }
-    ],
-    "id": 1774028988303
   },
   {
     "hotel_id": "thien_thanh_phu_quoc_resort_5_phu_quoc",
@@ -13737,27 +13043,6 @@
     "id": 1774028988485
   },
   {
-    "hotel_id": "museum_hotel_orbeliani_4_тбилиси",
-    "hotel": "Museum Hotel Orbeliani 4* (Тбилиси)",
-    "city": "Астана",
-    "country": "Грузия",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "781781",
-    "old_price": "594536",
-    "discount_percent": "20",
-    "price_per_month": "44392",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "27.02.2026",
-        "price": "781781"
-      }
-    ],
-    "id": 1774028988486
-  },
-  {
     "hotel_id": "newport_hotel_kutaisi_4_кутаиси",
     "hotel": "Newport Hotel Kutaisi 4* (Кутаиси)",
     "city": "Астана",
@@ -14659,27 +13944,6 @@
       }
     ],
     "id": 1774028988568
-  },
-  {
-    "hotel_id": "museum_hotel_orbeliani_4_тбилиси",
-    "hotel": "Museum Hotel Orbeliani 4* (Тбилиси)",
-    "city": "Астана",
-    "country": "Грузия",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "736057",
-    "old_price": "701391",
-    "discount_percent": "20",
-    "price_per_month": "52371",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "27.02.2026",
-        "price": "736057"
-      }
-    ],
-    "id": 1774028988570
   },
   {
     "hotel_id": "the_blue_fox_hotel_4_тбилиси",
@@ -15858,27 +15122,6 @@
     "id": 1774028988680
   },
   {
-    "hotel_id": "al_aseel_hotel_4_old_town",
-    "hotel": "Al Aseel Hotel 4* (OLD TOWN)",
-    "city": "Астана",
-    "country": "Катар",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "508431",
-    "old_price": "635539",
-    "discount_percent": "20",
-    "price_per_month": "47454",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "02.03.2026",
-        "price": "508431"
-      }
-    ],
-    "id": 1774028988682
-  },
-  {
     "hotel_id": "the_royal_riviera_hotel_4_corniche_road",
     "hotel": "The Royal Riviera Hotel 4* (Corniche Road)",
     "city": "Астана",
@@ -16131,27 +15374,6 @@
     "id": 1774028988705
   },
   {
-    "hotel_id": "najd_boutique_hotel_by_tivoli_5_al_rayyan",
-    "hotel": "Najd Boutique Hotel by Tivoli 5* (Al Rayyan)",
-    "city": "Астана",
-    "country": "Катар",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "1349355",
-    "old_price": "843036",
-    "discount_percent": "20",
-    "price_per_month": "62947",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "02.03.2026",
-        "price": "1349355"
-      }
-    ],
-    "id": 1774028988707
-  },
-  {
     "hotel_id": "doubletree_by_hilton_doha_old_town_5_old_town",
     "hotel": "Doubletree by Hilton Doha Old Town 5* (OLD TOWN)",
     "city": "Астана",
@@ -16173,27 +15395,6 @@
     "id": 1774028988709
   },
   {
-    "hotel_id": "al_jomrok_boutique_hotel_by_tivoli_5_abu_samra",
-    "hotel": "Al Jomrok Boutique Hotel by Tivoli 5* (ABU SAMRA)",
-    "city": "Астана",
-    "country": "Катар",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "701764",
-    "old_price": "856704",
-    "discount_percent": "20",
-    "price_per_month": "63967",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "02.03.2026",
-        "price": "701764"
-      }
-    ],
-    "id": 1774028988711
-  },
-  {
     "hotel_id": "al_mirqab_boutiq_hotel_by_tivoli_5_katara",
     "hotel": "Al Mirqab Boutiq Hotel by Tivoli 5* (Katara)",
     "city": "Астана",
@@ -16213,27 +15414,6 @@
       }
     ],
     "id": 1774028988713
-  },
-  {
-    "hotel_id": "al_bidda_boutique_hotel_by_tivoli_5_al_rayyan",
-    "hotel": "Al Bidda Boutique Hotel by Tivoli 5* (Al Rayyan)",
-    "city": "Астана",
-    "country": "Катар",
-    "meal": "BB",
-    "nights": "7",
-    "seats": "-",
-    "price": "1266356",
-    "old_price": "876584",
-    "discount_percent": "20",
-    "price_per_month": "65452",
-    "installment_months": "12",
-    "dates_prices": [
-      {
-        "date": "02.03.2026",
-        "price": "1266356"
-      }
-    ],
-    "id": 1774028988715
   },
   {
     "hotel_id": "w_doha_hotel_residences_5_west_bey",

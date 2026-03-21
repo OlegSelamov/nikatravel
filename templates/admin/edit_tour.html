@@ -170,7 +170,7 @@ background:#e74c3c;
 
 <h3>Галерея</h3>
 
-<div class="gallery">
+<div class="gallery" id="gallery">
 
 {% for g in tour.gallery %}
 
@@ -180,12 +180,11 @@ background:#e74c3c;
 
 <div class="photo-actions">
 
-<a href="/admin/set-main-photo/{{ tour.hotel_id }}?url={{ g }}" 
-   class="btn-main">
+<a href="/admin/set-main-photo/{{ tour.hotel_id }}?url={{ g | urlencode }}" class="btn-main">
 На главную
 </a>
 
-<a href="/admin/delete-photo/{{ tour.hotel_id }}?url={{ g }}" 
+<a href="/admin/delete-photo/{{ tour.hotel_id }}?url={{ g | urlencode }}" 
    class="btn-del"
    onclick="return confirm('Удалить фото?')">
 Удалить

@@ -1099,7 +1099,7 @@ def edit_tour(id):
 
         save_offers(offers)
 
-        return redirect('/admin/filter')
+        return redirect(url_for('admin_filter', scroll=id))
 
     # ⭐ ПОДГОТОВКА ДАННЫХ
     hotel = hotels.get(offer.get("hotel_id"))

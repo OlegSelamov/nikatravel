@@ -407,7 +407,7 @@
 
 <table class="tour-table">
 
-<tr>
+</tr>
     <th>Фото</th>
     <th>Отель</th>
     <th>Страна</th>
@@ -421,7 +421,7 @@
 
 {% for tour in tours %}
 
-<tr>
+<tr id="tour{{ tour.id }}">
 
 <td>
 <img src="{{ tour.image }}" class="tour-photo">
@@ -473,5 +473,19 @@
   updateLog();
   setInterval(updateLog, 5000);
 </script>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const scroll = params.get("scroll");
+
+if(scroll){
+    const el = document.getElementById("tour"+scroll);
+    if(el){
+        el.scrollIntoView({behavior:"smooth", block:"center"});
+        el.style.background="#ffeaa7";
+    }
+}
+</script>
+
 </body>
 </html>
