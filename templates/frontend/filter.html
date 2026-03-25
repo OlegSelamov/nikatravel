@@ -28,9 +28,35 @@ let allTours = {{ tours | tojson }};
 let calendarInstance = null;
 
 document.addEventListener("DOMContentLoaded", () => {
+
   document.getElementById('available-tours').style.display = 'none';
+
   populateCountrySelect();
-  restoreFilterState();
+
+  const params = new URLSearchParams(window.location.search);
+
+  const country = params.get('country');
+  const city = params.get('city');
+  const date = params.get('date');
+
+  if (country) {
+
+    document.getElementById('countrySelect').value = country;
+
+    populateCitySelect(country, city);
+
+    setTimeout(() => {
+
+      updateCalendar(date);
+
+    }, 300);
+
+  } else {
+
+    restoreFilterState();
+
+  }
+
 });
 
 function populateCountrySelect() {

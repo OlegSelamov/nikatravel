@@ -901,84 +901,102 @@ section h2.visible {
   line-height: 1.4;
 }
 
-.hero {
-  position: relative;
-  height: 500px;
-  background: url('/static/fon/hero.jpg') center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* HERO */
+
+.hero{
+    position: relative;
+    height: 620px;
+    background: url("/static/fon/hero.jpg") center/cover no-repeat;
 }
 
-.hero-overlay {
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.hero-overlay{
+    position: absolute;
+    inset: 0;
+	background: linear-gradient(
+		180deg,
+		rgba(0,0,0,0.15),
+		rgba(0,0,0,0.35)
+	);
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-.hero-filter {
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(12px);
-  padding: 30px;
-  border-radius: 20px;
-  max-width: 1000px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-}
+/* стеклянный фильтр */
 
-.hero-filter h1 {
-  margin-bottom: 25px;
-  color: #222;
-}
-
-.filter-row {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.filter-row select {
-  padding: 12px 16px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-  font-family: inherit;
-  min-width: 180px;
-}
-
-.hero-btn {
-  padding: 12px 24px;
-  border-radius: 14px;
-  border: none;
-  background: linear-gradient(135deg, #ff7a00, #0066ff);
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.hero-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0,102,255,0.4);
-}
-
-@media (max-width: 768px) {
-  .hero {
-    height: 420px;
-  }
-
-  .filter-row {
-    flex-direction: column;
-  }
-
-  .filter-row select,
-  .hero-btn {
+.hero-filter{
+    backdrop-filter: blur(18px);
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.35);
     width: 100%;
-  }
+    max-width: 900px;
+}
+
+.hero-title{
+    color: white;
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* форма */
+
+.hero-form{
+    display:flex;
+    gap:15px;
+}
+
+.hero-form select,
+.hero-form input{
+    flex:1;
+    height:55px;
+    border-radius:12px;
+    border:none;
+    padding:0 15px;
+    font-size:16px;
+    outline:none;
+}
+
+/* кнопка */
+
+.hero-btn{
+    background: linear-gradient(135deg,#ff7a00,#ffb347);
+    color:white;
+    border:none;
+    padding:0 30px;
+    border-radius:12px;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.hero-btn:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+@media (max-width:900px){
+
+.hero{
+    height:520px;
+}
+
+.hero-filter{
+    padding:25px;
+}
+
+.hero-form{
+    flex-direction:column;
+}
+
+.hero-title{
+    font-size:28px;
+}
+
 }
 
 </style>
@@ -987,29 +1005,29 @@ section h2.visible {
 <section class="hero">
 
   <div class="hero-overlay">
+
     <div class="hero-filter">
 
-      <h1>Найди свой идеальный тур</h1>
+      <h1 class="hero-title">
+        Найди свой идеальный отдых
+      </h1>
 
-      <div class="filter-row">
-        <select>
-          <option>Город вылета</option>
-        </select>
+      <div class="hero-form">
 
-        <select>
-          <option>Страна</option>
-        </select>
+        <select id="heroCountry"></select>
 
-        <select>
-          <option>Ночей</option>
-        </select>
+        <select id="heroCity"></select>
 
-        <button class="hero-btn">
+        <input type="text" id="heroDate" placeholder="Дата вылета" readonly>
+
+        <button class="hero-btn" onclick="goToFilter()">
           Найти тур
         </button>
+
       </div>
 
     </div>
+
   </div>
 
 </section>
@@ -1248,5 +1266,76 @@ section h2.visible {
     </div>
   </div>
 </section>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
+
+<script>
+
+let heroTours = {{ tours | tojson }};
+let heroCalendar = null;
+
+document.addEventListener("DOMContentLoaded", () => {
+  heroPopulateCountries();
+});
+
+function heroPopulateCountries(){
+  const countries = [...new Set(heroTours.map(t => t.country))].sort();
+
+  document.getElementById("heroCountry").innerHTML =
+    '<option disabled selected>Страна</option>' +
+    countries.map(c => `<option value="${c}">${c}</option>`).join("");
+}
+
+document.getElementById("heroCountry").addEventListener("change", e=>{
+  const country = e.target.value;
+
+  const cities = [...new Set(heroTours
+    .filter(t => t.country === country)
+    .map(t => t.city)
+  )].sort();
+
+  document.getElementById("heroCity").innerHTML =
+    '<option disabled selected>Город</option>' +
+    cities.map(c => `<option value="${c}">${c}</option>`).join("");
+});
+
+document.getElementById("heroCity").addEventListener("change", ()=>{
+  const country = document.getElementById("heroCountry").value;
+  const city = document.getElementById("heroCity").value;
+
+  const dates = new Set();
+
+  heroTours.forEach(t=>{
+    if(t.country === country && t.city === city){
+      t.dates_prices.forEach(dp=>{
+        dates.add(dp.date);
+      });
+    }
+  });
+
+  if(heroCalendar){
+    heroCalendar.destroy();
+  }
+
+  heroCalendar = flatpickr("#heroDate",{
+    dateFormat:"d.m.Y",
+    enable:[...dates],
+    locale: flatpickr.l10ns.ru
+  });
+});
+
+function goToFilter(){
+  const country = document.getElementById("heroCountry").value;
+  const city = document.getElementById("heroCity").value;
+  const date = document.getElementById("heroDate").value;
+
+  let url = `/filter?country=${encodeURIComponent(country)}&city=${encodeURIComponent(city)}&date=${encodeURIComponent(date)}`;
+
+  window.location.href = url;
+}
+
+</script>
 
 {% endblock %}

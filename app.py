@@ -268,6 +268,25 @@ def index():
 
     # 🔗 Обогащаем офферы данными отелей
     tours = enrich_offers_with_hotels(offers, hotels_by_id)
+    
+    # ===== СПИСКИ ДЛЯ ФИЛЬТРА НА ГЛАВНОЙ =====
+    countries = sorted(list(set(
+        t.get("country", "").strip()
+        for t in tours
+        if t.get("country")
+    )))
+
+    cities = sorted(list(set(
+        t.get("city", "").strip()
+        for t in tours
+        if t.get("city")
+    )))
+
+    nights_list = sorted(list(set(
+        int(t.get("nights"))
+        for t in tours
+        if str(t.get("nights", "")).isdigit()
+    )))
 
     # 🔐 ОСТАВЛЯЕМ ТОЛЬКО КОРРЕКТНЫЕ ТУРЫ С ID
     # ЭТО КРИТИЧЕСКИ ВАЖНО
@@ -320,6 +339,9 @@ def index():
         news=news,
         hotels=hotels,
         banners=banners,
+        countries=countries,
+        cities=cities,
+        nights_list=nights_list,
         active_page='home'
     )
 
