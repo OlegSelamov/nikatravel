@@ -4,125 +4,64 @@
 <div class="page-section">
   <div class="glass transfer-card">
 
-    <div class="section-head">
-      <h2>Трансфер</h2>
-      <p>Водитель с табличкой • Без доплат • Поддержка 24/7</p>
+    <!-- ВИДЖЕТ KIWITAXI -->
+    <div id="kiwi-widget">
+      <script 
+        src="https://tpwgts.com/content?currency=USD&trs=505826&shmarker=707447&locale=ru&powered_by=true&transfer_options_limit=10&transfer_options=MCR%2CBSN%2CECN&disable_currency_selector=false&hide_form_extras=false&hide_external_links=true&campaign_id=1&promo_id=3879"
+        charset="utf-8">
+      </script>
     </div>
 
-    <form method="POST" class="transfer-form">
-
-      <div class="form-grid">
-        <input type="text" name="country" placeholder="Страна" required>
-        <input type="text" name="city" placeholder="Город" required>
-      </div>
-
-      <input type="text" name="from" placeholder="Откуда (аэропорт / адрес)" required>
-      <input type="text" name="to" placeholder="Куда (отель / адрес)" required>
-
-      <div class="form-grid">
-        <input type="date" name="date" required>
-        <input type="time" name="time" required>
-      </div>
-
-      <div class="form-grid">
-        <input type="number" name="persons" placeholder="Пассажиров" min="1" required>
-
-        <select name="car_type" required>
-          <option value="">Тип автомобиля</option>
-          <option>Эконом</option>
-          <option>Комфорт</option>
-          <option>Минивэн</option>
-          <option>Бизнес</option>
-        </select>
-      </div>
-
-      <button type="submit" class="main-btn">
-        Рассчитать и заказать
-      </button>
-
-    </form>
   </div>
 </div>
 
 <style>
+
+/* ФОН СТРАНИЦЫ */
+body {
+  background: linear-gradient(180deg, #f8f6f2, #f1ede7);
+}
+
+/* ОСНОВНОЙ БЛОК */
 .page-section {
-  max-width: 620px;
+  max-width: 900px;
   margin: 90px auto 120px;
   padding: 0 16px;
+  min-height: 70vh;
 }
 
+/* КАРТОЧКА */
 .transfer-card {
-  padding: 26px 24px;
+  padding: 20px;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
 }
 
-.section-head {
-  text-align: center;
-  margin-bottom: 24px;
+/* ВИДЖЕТ */
+#kiwi-widget {
+  margin-top: 10px;
 }
 
-.section-head h2 {
-  margin: 0;
-  font-size: 1.6rem;
+.hide-mobile-nav .bottom-nav {
+  display: none !important;
 }
 
-.section-head p {
-  margin-top: 6px;
-  font-size: 14px;
-  opacity: 0.75;
-}
-
-.transfer-form input,
-.transfer-form select {
-  width: 100%;
-  padding: 13px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,0.08);
-  background: rgba(255,255,255,0.65);
-  font-size: 14px;
-}
-
-.transfer-form input:focus,
-.transfer-form select:focus {
-  border-color: #d6ae7b;
-  background: #fff;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.transfer-form input,
-.transfer-form select {
-  margin-bottom: 12px;
-}
-
-.main-btn {
-  width: 100%;
-  margin-top: 6px;
-  padding: 15px;
-  border-radius: 16px;
-  background: linear-gradient(135deg,#d6ae7b,#b18b5a);
-  border: none;
-  color: #fff;
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-.main-btn:active {
-  transform: scale(0.96);
-}
-
-/* 📱 мобилка */
+/* 📱 МОБИЛКА */
 @media (max-width: 600px) {
-  .form-grid {
-    grid-template-columns: 1fr;
+  .page-section {
+    margin: 70px auto 100px;
   }
 }
 
 </style>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+
+  if (params.get("app") === "1") {
+    document.body.classList.add("hide-mobile-nav");
+  }
+</script>
 
 {% endblock %}
