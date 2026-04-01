@@ -488,72 +488,10 @@ def logout():
     session.pop('user', None)
     return redirect(url_for('login'))
     
-@app.route('/transfer', methods=['GET', 'POST'])
-def transfer():
-    if 'user' not in session:
-        return redirect('/login')
-
-    if request.method == 'POST':
-        form = request.form
-
-        title = f"Трансфер • {form.get('from')} → {form.get('to')}"
-
-        transfer_request = {
-            "id": f"tr_{int(time.time())}",
-            "type": "transfer",
-            "user_id": session['user']['id'],
-
-            # 🔥 ОБЩИЕ ПОЛЯ
-            "title": title,
-            "image": None,
-            "price": None,
-            "currency": "USD",
-            "status": "Новый",
-            "created_at": datetime.now().strftime('%Y-%m-%d %H:%M'),
-
-            # 🧩 СПЕЦИФИКА
-            "from": form.get('from'),
-            "to": form.get('to'),
-            "date": form.get('date'),
-            "time": form.get('time'),
-            "persons": form.get('persons'),
-            "car_type": form.get('car_type')
-        }
-
-        # === СОХРАНЕНИЕ В JSON ===
-        all_requests = load_requests()
-        all_requests.append(transfer_request)
-        save_requests(all_requests)
-
-        # === ОТПРАВКА В TELEGRAM (КАК В ОСТАЛЬНЫХ МЕСТАХ ПРОЕКТА) ===
-        message = (
-            "🚐 НОВЫЙ ТРАНСФЕР\n\n"
-            f"Откуда: {transfer_request['from']}\n"
-            f"Куда: {transfer_request['to']}\n"
-            f"Дата: {transfer_request['date']}\n"
-            f"Время: {transfer_request['time']}\n"
-            f"Пассажиры: {transfer_request['persons']}\n"
-            f"Авто: {transfer_request['car_type']}\n\n"
-            f"📞 Клиент: {transfer_request['user_id']}"
-        )
-
-        try:
-            requests.post(
-                f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-                data={
-                    "chat_id": TELEGRAM_CHAT_ID,
-                    "text": message
-                },
-                timeout=5
-            )
-        except Exception as e:
-            print("Telegram error:", e)
-
-        return redirect('/my-requests')
-
+@app.route('/transfers')
+def transfers():
     return render_template(
-        'frontend/transfer.html',
-        active_page='transfer'
+        'transfer.html'
     )
   
 # ======== АВИАБИЛЕТЫ ========
