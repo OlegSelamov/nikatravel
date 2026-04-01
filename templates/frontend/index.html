@@ -120,7 +120,6 @@
 /* === СТИЛЬ КАРТОЧЕК === */
 .card, .hotel-card, .news-slide {
   background: rgba(255,255,255,0.4);
-  backdrop-filter: blur(8px);
   border: 1px solid rgba(255,255,255,0.25);
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -145,30 +144,12 @@
 
 /* === ЗАГОЛОВКИ СЕКЦИЙ === */
 section h2 {
-  display: inline-block;
-  position: relative;
-
-  left: 50%;
-  transform: translateX(-50%);
-
-  font-family: 'Poppins', sans-serif;
   font-weight: 700;
   font-size: 1.6rem;
-  letter-spacing: 0.3px;
-
   color: #3b2e20;
 
-  background: rgba(255,255,255,0.65);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-
-  padding: 14px 24px;        /* ⬅ базовый */
-  margin: 30px auto 25px;
-
-  text-align: left;
+  margin: 30px auto 20px;
+  text-align: center;
 }
 
 section h2::before {
@@ -227,134 +208,6 @@ section h2.visible {
   margin: 30px 0;
 }
 
-/* === КНОПКА === */
-
-.service-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  text-decoration: none;
-  color: #3b2e20;
-}
-
-/* === ИКОНКА === */
-
-.service-btn img {
-  width: 72px;
-  height: 72px;
-  object-fit: contain;   /* ❗ НЕ РАСТЯГИВАЕТ */
-  transition: transform 0.2s ease;
-}
-
-/* === ТЕКСТ === */
-
-.service-btn span {
-  margin-top: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-/* === НАЖАТИЕ / ХОВЕР === */
-
-.service-btn:hover img {
-  transform: scale(1.08);
-}
-
-.service-btn:active img {
-  transform: scale(0.95);
-}
-
-@media (max-width: 768px) {
-  .services-cards {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-  }
-
-  .service-btn img {
-    width: 56px;
-    height: 56px;
-  }
-
-  .service-btn span {
-    font-size: 12px;
-  }
-}
-
-.service-btn {
-  background: rgba(255, 255, 255, 0.30);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  border-radius: 16px;
-  padding: 14px 8px;
-
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-
-.service-btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
-}
-
-@media (max-width: 768px) {
-  .service-btn {
-    background: rgba(255,255,255,0.30);
-  }
-}
-
-.service-btn {
-  aspect-ratio: 1 / 1;
-  width: 100%;
-
-  display: grid;
-  grid-template-rows: 1fr auto;   /* 🔥 иконка / текст */
-  align-items: center;
-  justify-items: center;
-
-  background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  border-radius: 18px;
-  padding: 10px;
-
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-  text-decoration: none;
-}
-
-.service-btn img {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-}
-
-.service-btn span {
-  margin-top: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
-  line-height: 1.2;
-
-  max-height: 2.4em;            /* 🔥 максимум 2 строки */
-  overflow: hidden;
-}
-
-@media (max-width: 768px) {
-  .services-cards {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-  }
-}
-
-@media (min-width: 769px) {
-  .services-cards {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
 
 @media (max-width: 768px) {
 
@@ -364,46 +217,6 @@ section h2.visible {
     padding: 0 10px;                                  /* 🔥 уже */
   }
 
-}
-
-.service-btn {
-  border: 1px solid rgba(255,255,255,0.35);
-}
-
-.service-btn:active {
-  transform: scale(0.96);
-}
-
-.service-btn:hover img {
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25));
-}
-
-/* ====== DESKTOP FIX (ПК) ====== */
-@media (min-width: 992px) {
-
-  .services-cards{
-    max-width: 1100px;              /* ограничиваем ширину блока */
-    margin: 30px auto;             /* центрируем */
-    padding: 0 16px;
-
-    grid-template-columns: repeat(6, 1fr);  /* 6 в ряд ок, но в контейнере */
-    gap: 18px;
-  }
-
-  .service-btn{
-    aspect-ratio: 4 / 3;           /* 🔥 главное: не квадрат на ПК */
-    padding: 12px;
-    border-radius: 18px;
-  }
-
-  .service-btn img{
-    width: 56px;
-    height: 56px;
-  }
-
-  .service-btn span{
-    font-size: 13px;
-  }
 }
 
 /* ===== KASPI STYLE BANNER ===== */
@@ -449,10 +262,6 @@ section h2.visible {
     width: 340px;         /* 🔥 фиксированная карточка */
   }
 
-}
-
-.service-btn:active {
-  transform: scale(0.95);
 }
 
 .recent-section {
@@ -999,6 +808,117 @@ section h2.visible {
 
 }
 
+.services-slider {
+  max-width: 1100px;
+  margin: 5px auto;
+  padding: 6px 16px;
+  overflow-x: auto;
+  overflow-y: visible;
+  cursor: grab;
+  scroll-behavior: smooth;
+}
+
+.services-slider:active {
+  cursor: grabbing;
+}
+
+.services-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.services-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  align-items: center;
+
+  padding-left: calc(50vw - 70px);
+  padding-right: calc(50vw - 70px);
+}
+
+.service-btn {
+  -webkit-tap-highlight-color: transparent;
+  flex: 0 0 140px;
+  aspect-ratio: 236 / 289;
+  border-radius: 22px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center center;
+}
+
+.service-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .services-track {
+    padding: 10px 40px;
+    gap: 12px;
+  }
+
+  .service-btn {
+    flex: 0 0 120px;
+  }
+}
+
+/* hover */
+.service-btn:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.services-slider,
+.services-track,
+.service-btn {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.services-wrapper {
+  max-width: 1100px;
+  margin: 20px auto 30px;
+  padding: 20px;
+
+  border-radius: 26px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,120,0,0.15),
+    rgba(0,140,255,0.15),
+    rgba(140,0,255,0.15)
+  );
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.25),
+    inset 0 0 40px rgba(255,255,255,0.05);
+}
+
+/* фон на всю ширину */
+.services-wrapper-full {
+  width: 100%;
+  padding: 16px 0;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,120,0,0.35),
+    rgba(0,140,255,0.35),
+    rgba(140,0,255,0.35)
+  );
+
+  backdrop-filter: blur(18px);
+}
+
+/* контент по центру */
+.services-wrapper-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
 </style>
 
 <!-- ===== KASPI STYLE BANNERS ===== -->
@@ -1032,49 +952,47 @@ section h2.visible {
 
 </section>
 
-<section class="services-cards">
-
-  <a class="service-btn" href="/filter">
-    <img src="{{ url_for('static', filename='knopki/podbor.png') }}">
-    <span>Подбор туров</span>
-  </a>
-
-  <a class="service-btn" href="/flights">
-    <img src="{{ url_for('static', filename='knopki/avia.png') }}">
-    <span>Авиабилеты</span>
-  </a>
-
-  <a class="service-btn" href="/transfer">
-    <img src="{{ url_for('static', filename='knopki/transfer.png') }}">
-    <span>Трансфер</span>
-  </a>
-
-  <a class="service-btn" href="/hotels">
-    <img src="{{ url_for('static', filename='knopki/oteli.png') }}">
-    <span>Отели</span>
-  </a>
-
-  <a class="service-btn" href="/visa">
-    <img src="{{ url_for('static', filename='knopki/visa.png') }}">
-    <span>Оформление визы</span>
-  </a>
-
-  <a class="service-btn" href="/cruises">
-    <img src="{{ url_for('static', filename='knopki/cruiz.png') }}">
-    <span>Круизы</span>
-  </a>
-
-  <a class="service-btn" href="/goods">
-    <img src="{{ url_for('static', filename='knopki/shop.png') }}">
-    <span>Товары для отдыха</span>
-  </a>
-
-  <a class="service-btn" href="/news">
-    <img src="{{ url_for('static', filename='knopki/news.png') }}">
-    <span>Новости</span>
-  </a>
-
-</section>
+<div class="services-wrapper-full">
+  <div class="services-wrapper-inner">
+    <div class="services-slider">
+      <div class="services-track">
+        <a class="service-btn" href="/filter">
+          <img src="{{ url_for('static', filename='knopki/podbor.png') }}">
+        </a>
+        <a class="service-btn" href="/goods">
+          <img src="{{ url_for('static', filename='knopki/shop.png') }}">
+        </a>
+        <a class="service-btn" href="/transfer">
+          <img src="{{ url_for('static', filename='knopki/transfer.png') }}">
+        </a>
+        <a class="service-btn" href="/hotels">
+          <img src="{{ url_for('static', filename='knopki/oteli.png') }}">
+        </a>
+        <a class="service-btn" href="/visa">
+          <img src="{{ url_for('static', filename='knopki/visa.png') }}">
+        </a>
+        <a class="service-btn" href="/cruises">
+          <img src="{{ url_for('static', filename='knopki/cruiz.png') }}">
+        </a>
+		<a class="service-btn" href="/flights">
+          <img src="{{ url_for('static', filename='knopki/avia.png') }}">
+        </a>
+        <a class="service-btn" href="/news">
+          <img src="{{ url_for('static', filename='knopki/news.png') }}">
+        </a>
+        <a class="service-btn" href="/transfer">
+          <img src="{{ url_for('static', filename='knopki/eks.png') }}">
+        </a>
+        <a class="service-btn" href="/transfer">
+          <img src="{{ url_for('static', filename='knopki/avto.png') }}">
+        </a>
+        <a class="service-btn" href="/transfer">
+          <img src="{{ url_for('static', filename='knopki/ai.png') }}">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- 🔹 МЕСТА -->
 <section class="hot-deals-section">
@@ -1335,6 +1253,85 @@ function goToFilter(){
 
   window.location.href = url;
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const slider = document.querySelector('.services-slider');
+  const cards = document.querySelectorAll('.service-btn');
+
+  if (!slider || !cards.length) return;
+
+  function updateCards() {
+    const sliderRect = slider.getBoundingClientRect();
+    const center = sliderRect.left + sliderRect.width / 2;
+
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const cardCenter = rect.left + rect.width / 2;
+      const distance = Math.abs(center - cardCenter);
+
+      const scale = Math.max(0.6, 1 - distance / 400);
+      const opacity = Math.max(0.7, 1 - distance / 700);
+
+      card.style.transform = `scale(${scale})`;
+	  card.style.opacity = opacity;
+    });
+  }
+  
+  // центрируем первую карточку
+  function centerFirstCard() {
+    const firstCard = cards[Math.floor(cards.length / 2)];
+    const sliderRect = slider.getBoundingClientRect();
+    const cardRect = firstCard.getBoundingClientRect();
+
+    const offset = (cardRect.left + slider.scrollLeft)
+                 - (sliderRect.width / 2)
+                 + (cardRect.width / 2);
+
+    slider.scrollLeft = offset;
+  }
+
+  slider.addEventListener('scroll', updateCards);
+
+  slider.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      slider.scrollLeft += e.deltaY;
+    }
+  }, { passive: false });
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener('mouseleave', () => {
+    isDown = false;
+  });
+
+  slider.addEventListener('mouseup', () => {
+    isDown = false;
+  });
+
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 1.2;
+    slider.scrollLeft = scrollLeft - walk;
+  });
+  
+  setTimeout(() => {
+    centerFirstCard();
+    updateCards();
+  }, 100);
+
+  updateCards();
+});
 
 </script>
 
