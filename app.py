@@ -488,10 +488,10 @@ def logout():
     session.pop('user', None)
     return redirect(url_for('login'))
     
-@app.route('/transfers')
+@app.route('/transfer')
 def transfers():
     return render_template(
-        'transfer.html'
+        'frontend/transfer.html'
     )
   
 # ======== АВИАБИЛЕТЫ ========
