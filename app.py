@@ -506,39 +506,9 @@ def build_aviasales_link(origin: str, destination: str, departure_at: str, adult
     url = f"https://www.aviasales.kz/search/{search_hash}"
     return f"{url}?marker={marker}" if marker else url
 
-@app.route("/flights", methods=["GET", "POST"])
+@app.route('/flights')
 def flights():
-    flights = None
-    origin = destination = depart_date = None
-
-    if request.method == "POST":
-        origin = request.form.get("origin")
-        destination = request.form.get("destination")
-        depart_date = request.form.get("depart_date")
-
-        url = "https://api.travelpayouts.com/aviasales/v3/prices_for_dates"
-        params = {
-            "origin": origin,
-            "destination": destination,
-            "departure_at": depart_date,
-            "currency": "rub",
-            "token": API_TOKEN
-        }
-        r = requests.get(url, params=params)
-        data = r.json()
-
-        if data.get("data"):
-            flights = sorted(data["data"], key=lambda x: x["price"])
-
-            # Добавляем ссылку на бронирование
-            for f in flights:
-                f["link"] = f"https://www.aviasales.kz{f['link']}&marker={MARKER}"
-
-    return render_template("frontend/flights.html",
-                           flights=flights,
-                           origin=origin,
-                           destination=destination,
-                           depart_date=depart_date)
+    return render_template('frontend/flights.html')
 
 @app.route("/booking")
 def booking():
